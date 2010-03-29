@@ -1,7 +1,7 @@
 @CHARSET"ISO-8859-1";body{color:#000000;font-family:tahoma,Arial,sans-serif;font-size:0.8em;margin-top:10px;}
 img{border:none;align:center;}
 a{color:#EEEEEE;text-decoration:none;}
-a:hover{color:#FF0000;}
+a:hover{color:#AA0000;}
 div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
 div.row{display:block;padding:7px 0px 0px 7px;min-height:20px;}
@@ -14,4 +14,5 @@ div.middle{width:79px;float:left;}
 div.full{width:133px;float:left;}
 div.clear{float:none;clear:both;height:0px;}
 .stats{color:#2A707B;}
-hr {height: 0; border: none; border-bottom: solid 1px #EEEEEE; }
+hr{height:0; border:none; border-bottom:solid 1px #EEEEEE; }
+select{border:solid 1px #A0312A;-moz-border-radius:3px 3px 3px 3px;color:#EEEEEE;}
