@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010 Cyrille Mahieux/OFM
+ * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * _/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_/\_
+ * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Analysis of stats from memcache server
+ * Sending command to memcache server
  *
- * @author Cyrille Mahieux/OFM
+ * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
-class MemCache_Analysis
+class MemCacheAdmin_Analysis
 {
     /**
-     * Merge two arrays of stats from MemCache_Command::stats()
+     * Merge two arrays of stats from MemCacheAdmin_ServerCommand::stats()
      *
-     * @param $array Statistic from MemCache_Command::stats()
-     * @param $stats Statistic from MemCache_Command::stats()
+     * @param $array Statistic from MemCacheAdmin_ServerCommand::stats()
+     * @param $stats Statistic from MemCacheAdmin_ServerCommand::stats()
      *
      * @return Array
      */
@@ -60,7 +60,7 @@ class MemCache_Analysis
     /**
      * Analyse and return memcache stats command
      *
-     * @param Array $stats Statistic from MemCache_Command::stats()
+     * @param Array $stats Statistic from MemCacheAdmin_ServerCommand::stats()
      *
      * @return Array
      */
@@ -123,7 +123,7 @@ class MemCache_Analysis
     /**
      * Analyse and return memcache slabs command
      *
-     * @param Array $slabs Statistic from MemCache_Command::slabs()
+     * @param Array $slabs Statistic from MemCacheAdmin_ServerCommand::slabs()
      *
      * @return Array
      */

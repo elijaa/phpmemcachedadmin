@@ -143,7 +143,7 @@
         <div class="container rounded">
             <div class="row">
                 <div class="left">Uptime</div>
-                <div class="full"><?php echo MemCache_Analysis::uptime($stats['uptime']); ?></div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::uptime($stats['uptime']); ?></div>
                 <div class="clear"></div>
             </div>
             <div class="row">

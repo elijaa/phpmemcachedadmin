@@ -88,7 +88,7 @@ foreach($slabs as $id => $slab)
                 </div>
                 <div class="row">
                     <div class="left">Evicted Last</div>
-                    <div class="full"><?php echo MemCache_Analysis::uptime($slab['items:evicted_time']); ?></div>
+                    <div class="full"><?php echo MemCacheAdmin_Analysis::uptime($slab['items:evicted_time']); ?></div>
                     <div class="clear"></div>
                 </div>
 <!--                <div class="row">

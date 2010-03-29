@@ -2,11 +2,11 @@
 <html>
 <head>
     <title>phpMemCacheAdmin</title>
-    <link rel="stylesheet" type="text/css" href="resource/style.css"/>
+    <link rel="stylesheet" type="text/css" href="public/styles/style.css"/>
 </head>
 <body>
 <div style="margin: 0 auto; width:788px; position: relative;">
-    <a href="http://memcached.org/"><img src="resource/memcached_banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>             
+    <a href="http://memcached.org/"><img src="public/images/banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>             
     <div class="serverlist rounded" style="padding: 3px 7px 3px 7px; width: 772px;">Select :
         <?php 
         if(!isset($_GET['server'])) 
