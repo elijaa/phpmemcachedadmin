@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2010 Cyrille Mahieux/OFM
+ * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,15 +13,21 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * @author Cyrille Mahieux/OFM
+ * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
+ *
+ * Sending command to memcache server
+ *
+ * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
+
 # Headers
 header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
-require_once 'include/command.php';
-require_once 'include/analysis.php';
+# Require
+require_once 'library/ICommand.php';
+require_once 'library/Analysis.php';
 
 # Loading ini file
 $_ini = parse_ini_file('config/config.ini');
@@ -35,10 +41,21 @@ foreach($_ini['server'] as $key => $server)
 }
 
 # Showing Header
-include 'template/header.tpl';
+include 'view/header.tpl';
 
-# Initializing
-$memCacheAdmin = new MemCache_Command($_ini);
+# Finding API to use
+$memCacheAdmin = null;
+switch($_ini['api'])
+{
+	# Server API (eg communicating directly with the memcache server)
+	case 'Server':
+	default:
+		require_once 'library/ServerCommand.php';
+		$memCacheAdmin = new MemCacheAdmin_ServerCommand($_ini);
+		break;
+}
+
+# Initializing request
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
 # Display by Request Type
@@ -65,12 +82,12 @@ switch($request)
         # Items are well formed
         if($items !== false)
         {
-            include 'template/items.tpl';
+            include 'view/items.tpl';
         }
         # Items are not well formed
         else
         {
-            include 'template/error.tpl';
+            include 'view/error.tpl';
         }
         unset($items);
         break;
@@ -90,13 +107,13 @@ switch($request)
         if($slabs !== false)
         {
             # Analysis
-            $slabs = MemCache_Analysis::slabs($slabs);
-            include 'template/slabs.tpl';
+            $slabs = MemCacheAdmin_Analysis::slabs($slabs);
+            include 'view/slabs.tpl';
         }
         # Stats are not well formed
         else
         {
-            include 'template/error.tpl';
+            include 'view/error.tpl';
         }
         unset($slabs);
         break;
@@ -116,7 +133,7 @@ switch($request)
         {
             foreach($_ini['server'] as $server => $port)
             {
-                $stats = MemCache_Analysis::merge($stats, $memCacheAdmin->stats($server, $port));
+                $stats = MemCacheAdmin_Analysis::merge($stats, $memCacheAdmin->stats($server, $port));
             }
         }
 
@@ -124,16 +141,16 @@ switch($request)
         if($stats !== false)
         {
             # Analysis
-            $stats = MemCache_Analysis::stats($stats);
-            include 'template/stats.tpl';
+            $stats = MemCacheAdmin_Analysis::stats($stats);
+            include 'view/stats.tpl';
         }
         # Stats are not well formed
         else
         {
-            include 'template/error.tpl';
+            include 'view/error.tpl';
         }
         unset($stats);
         break;
 }
 # Showing Footer
-include 'template/footer.tpl';
+include 'view/footer.tpl';

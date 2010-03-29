@@ -14,7 +14,7 @@ foreach($items as $key => $data)
 ?>
         <strong><a style="color:#A0A0A0;" href="<?php echo str_replace('&', '&amp;', preg_replace('/&key=(.)*/', '', $_SERVER['REQUEST_URI'])); ?>&amp;key=<?php echo $key; ?>"><?php echo $key; ?></a>
         Size</strong> : <?php echo number_format($data[0]/1024, 2); ?> KBytes, 
-        <strong>Expiration</strong> : <?php echo MemCache_Analysis::uptime($data[1] - time()); ?>
+        <strong>Expiration</strong> : <?php echo MemCacheAdmin_Analysis::uptime($data[1] - time()); ?>
 <?php
     # Checking for item content
     if((isset($_GET['key'])) && ($_GET['key'] == $key))
