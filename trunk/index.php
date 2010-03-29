@@ -40,6 +40,9 @@ foreach($_ini['server'] as $key => $server)
     $_ini['server'][$server[0]] = $server[1];
 }
 
+# Date 
+date_default_timezone_set($_ini['timezone']);
+
 # Showing Header
 include 'view/header.tpl';
 

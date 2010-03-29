@@ -7,47 +7,34 @@
 <body>
 <div style="margin: 0 auto; width:788px; position: relative;">
     <a href="http://memcached.org/"><img src="public/images/banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>             
-    <div class="serverlist rounded" style="padding: 3px 7px 3px 7px; width: 772px;">Select :
+    <div class="serverlist rounded" style="padding: 3px 7px 3px 7px; width: 772px;">Actually seeing
+        <select class="serverlist">
+        <option value="" <?php if(!isset($_GET['server'])) { echo 'selected="selected"'; } ?>>All Servers</option>
         <?php 
-        if(!isset($_GET['server'])) 
-        { 
-            echo ' [<a href="?">All Servers</a>] &nbsp; ';
-        } 
-        else 
+        foreach($_ini['server'] as $server => $port)
         {
-            echo ' <a href="?">All Servers</a> &nbsp; ';
+        ?>
+		<option value="<?php echo $server; ?>" <?php if((isset($_GET['server'])) && ($_GET['server'] == $server)) { echo 'selected="selected"'; } ?>>
+			<?php echo $server; ?>
+		</option>
+        <?php 
         }
-        foreach($_ini['server'] as $server => $port) 
-        { 
-            if(isset($_GET['server']) && ($_GET['server'] == $server)) 
-            { 
-                echo '[<a href="?server=' . $server . '">' . $server . '</a>]  &nbsp; ';
-            } 
-            else 
-            { 
-                echo '<a href="?server=' . $server . '">' . $server . '</a> &nbsp; ';
-            }
-        } ?>
-        <hr/>
-        Actually seeing 
+        ?>
+        </select>
         <?php
-        if(isset($_GET['server'])) 
-        { 
-            echo $_GET['server'];
-        } 
-        else
-        {
-            echo ' all servers';
-        } 
         if(isset($_GET['show']))
         {
             if($_GET['show'] == 'slabs')
             {
-                echo ' Slabs Stats';
+			?>
+        Slabs Stats
+			<?php
             }
             elseif($_GET['show'] == 'items')
             {
-                echo ', Slab ' . $_GET['slab'] . ', first ' . $_ini['max_item_dump'] . ' Items';
+            ?>
+        Slab <?php echo $_GET['slab']; ?>, first <?php echo $_ini['max_item_dump']; ?> Items';
+            <?php
             }
         }
         if(isset($_GET['server']))
