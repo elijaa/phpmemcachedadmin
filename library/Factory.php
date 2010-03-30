@@ -53,14 +53,12 @@ class MemCacheAdmin_Factory
             switch(self::$_ini[$command])
             {
                 case 'Memcache':
-                    echo 'Using PECL Memcache';
                     # PECL Memcache API
                     require_once 'MemcacheCommand.php';
                     self::$_object['Memcache'] = new MemCacheAdmin_MemcacheCommand(self::$_ini);
                     break;
 
                 case 'Memcached':
-                    echo 'Using PECL Memcached';
                     # PECL Memcached API
                     require_once 'MemcachedCommand.php';
                     self::$_object['Memcached'] = new MemCacheAdmin_MemcachedCommand(self::$_ini);
@@ -68,14 +66,12 @@ class MemCacheAdmin_Factory
 
                 case 'Server':
                 default:
-                    echo 'Using Server API';
                     # Server API (eg communicating directly with the memcache server)
                     require_once 'ServerCommand.php';
                     self::$_object['Server'] = new MemCacheAdmin_ServerCommand(self::$_ini);
                     break;
             }
         }
-
         return self::$_object[self::$_ini[$command]];
     }
 }
