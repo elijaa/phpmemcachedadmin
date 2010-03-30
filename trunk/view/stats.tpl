@@ -136,7 +136,7 @@
              - <a href="http://www.pecl.php.net/package/memcache" target="_blank">PECL memcache</a>
              - <a href="http://www.pecl.php.net/package/memcached" target="_blank">PECL memcached</a>
             <br/>
-            Banner image is Copyright (c) 2009 Dormando
+            Styling & Banner image Copyright (c) 2009 Dormando
         </div>
 
     </div>
