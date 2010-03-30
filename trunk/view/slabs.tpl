@@ -18,7 +18,7 @@
                 <div class="clear"></div>
             </div>
             <div class="row">
-                <div class="left">Memory Wasted</div>
+                <div class="left">Wasted</div>
                 <div class="full"><?php echo number_format(($slabs['total_wasted']/1024/1024), 2); ?> MBytes</div>
                 <div class="clear"></div>
             </div>
@@ -40,14 +40,14 @@ foreach($slabs as $id => $slab)
         if($actual_line > $slab_per_line)
         {
             $actual_line = 0;
-?>  
+?>
     </div>
     <div style="float:left; padding-left:10px;">
         <div style="min-height:147px;">
         </div>
 <?php
     }
-?>      
+?>
         <span class="title rounded">Slab <?php echo $id; ?> <span class="stats">Stats</span>
         <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Items</a></span></span>
             <div class="container rounded">
@@ -72,7 +72,7 @@ foreach($slabs as $id => $slab)
                     <div class="clear"></div>
                 </div>
                 <div class="row">
-                    <div class="left">Memory Wasted</div>
+                    <div class="left">Wasted</div>
                     <div class="full"><?php echo number_format($slab['mem_wasted']/1024/1024, 2); ?> MBytes</div>
                     <div class="clear"></div>
                 </div>
