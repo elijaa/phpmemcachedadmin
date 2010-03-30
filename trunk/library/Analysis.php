@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
+ * ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°>
  *
  * Sending command to memcache server
  *
