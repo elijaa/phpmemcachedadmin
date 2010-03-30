@@ -87,9 +87,9 @@ class MemCacheAdmin_Analysis
 
         # Command cas()
         $stats['cmd_cas'] = $stats['cas_hits'] + $stats['cas_misses'] + $stats['cas_badval'];
-        $stats['cas_hits_percent'] = ($stats['cmd_delete'] == 0) ?' - ':number_format($stats['cas_hits'] / $stats['cmd_cas'] * 100, 1);
-        $stats['cas_misses_percent'] = ($stats['cmd_delete'] == 0) ?' - ':number_format($stats['cas_misses'] / $stats['cmd_cas'] * 100, 1);
-        $stats['cas_badval_percent'] = ($stats['cmd_delete'] == 0) ?' - ':number_format($stats['cas_badval'] / $stats['cmd_cas'] * 100, 1);
+        $stats['cas_hits_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_hits'] / $stats['cmd_cas'] * 100, 1);
+        $stats['cas_misses_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_misses'] / $stats['cmd_cas'] * 100, 1);
+        $stats['cas_badval_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_badval'] / $stats['cmd_cas'] * 100, 1);
         $stats['cas_rate'] = ($stats['cmd_cas'] == 0) ? '0.00':number_format($stats['cmd_cas'] / $stats['uptime'], 1);
 
         # Command increment()
