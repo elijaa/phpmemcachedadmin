@@ -32,18 +32,6 @@ interface MemCacheAdmin_ICommand
     function __construct($ini);
 
     /**
-     * Executing a Command on a MemCache Server
-     * Return the response, or false otherwise
-     *
-     * @param String $command Command
-     * @param String $server Server Hostname
-     * @param Integer $port Server Port
-     *
-     * @return String|Boolean
-     */
-    function exec($command, $server, $port);
-
-    /**
      * Send stats command to server
      * Return the result if successful or false otherwise
      *

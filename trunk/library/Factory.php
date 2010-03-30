@@ -47,32 +47,35 @@ class MemCacheAdmin_Factory
     public static function instance($command)
     {
         # Instance does not exists
-        if(!isset(self::$_object[$command]))
+        if(!isset(self::$_object[self::$_ini[$command]]))
         {
             # Switching by API
             switch(self::$_ini[$command])
             {
                 case 'Memcache':
+                    echo 'Using PECL Memcache';
                     # PECL Memcache API
                     require_once 'MemcacheCommand.php';
-                    self::$_object[$command] = new MemCacheAdmin_MemcacheCommand(self::$_ini);
+                    self::$_object['Memcache'] = new MemCacheAdmin_MemcacheCommand(self::$_ini);
                     break;
 
                 case 'Memcached':
+                    echo 'Using PECL Memcached';
                     # PECL Memcached API
                     require_once 'MemcachedCommand.php';
-                    self::$_object[$command] = new MemCacheAdmin_MemcachedCommand(self::$_ini);
+                    self::$_object['Memcached'] = new MemCacheAdmin_MemcachedCommand(self::$_ini);
                     break;
 
                 case 'Server':
                 default:
+                    echo 'Using Server API';
                     # Server API (eg communicating directly with the memcache server)
                     require_once 'ServerCommand.php';
-                    self::$_object[$command] = new MemCacheAdmin_ServerCommand(self::$_ini);
+                    self::$_object['Server'] = new MemCacheAdmin_ServerCommand(self::$_ini);
                     break;
             }
         }
 
-        return self::$_object[$command];
+        return self::$_object[self::$_ini[$command]];
     }
 }
