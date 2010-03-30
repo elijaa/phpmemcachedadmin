@@ -5,7 +5,7 @@
 $notfirst = false;
 
 # Items
-foreach($items as $key => $data) 
+foreach($items as $key => $data)
 {
     # Checking if first item
     if($notfirst) { echo '<hr/>'; }
@@ -13,14 +13,14 @@ foreach($items as $key => $data)
     # Displaying item line
 ?>
         <strong><a style="color:#A0A0A0;" href="<?php echo str_replace('&', '&amp;', preg_replace('/&key=(.)*/', '', $_SERVER['REQUEST_URI'])); ?>&amp;key=<?php echo $key; ?>"><?php echo $key; ?></a>
-        Size</strong> : <?php echo number_format($data[0]/1024, 2); ?> KBytes, 
+        Size</strong> : <?php echo number_format($data[0]/1024, 2); ?> KBytes,
         <strong>Expiration</strong> : <?php echo MemCacheAdmin_Analysis::uptime($data[1] - time()); ?>
 <?php
     # Checking for item content
     if((isset($_GET['key'])) && ($_GET['key'] == $key))
     {
 ?>
-        <div class="">
+        <div>
         <?php echo htmlentities(chunk_split($item, 150)); ?>
         </div>
 <?php

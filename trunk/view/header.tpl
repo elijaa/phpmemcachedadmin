@@ -8,7 +8,7 @@
 <div style="margin: 0 auto; width:788px; position: relative;">
     <a href="http://memcached.org/"><img src="public/images/banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>
     <div class="serverlist rounded" style="padding: 3px 7px 3px 7px; width: 772px;">Actually seeing
-        <select class="serverlist" onChange="window.location='index.php?server='+this.options[this.selectedIndex].value">
+        <select class="serverlist" onchange="window.location='index.php?server='+this.options[this.selectedIndex].value">
         <option value="all" <?php if(!isset($_GET['server'])) { echo 'selected="selected"'; } ?>>All Servers</option>
 <?php
         # Servers
