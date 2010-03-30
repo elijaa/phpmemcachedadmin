@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
+ * ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°>
  *
  * Sending command to memcache server
  *
@@ -22,272 +22,272 @@
  */
 class MemCacheAdmin_ServerCommand implements MemCacheAdmin_ICommand
 {
-	private static $_ini;
-	 
-	/**
-	 * Constructor
-	 *
-	 * @param Array $ini Array from ini_parse
-	 *
-	 * @return void
-	 */
-	public function __construct($ini)
-	{
-		self::$_ini = $ini;
-	}
+    private static $_ini;
 
-	/**
-	 * Executing a Command on a MemCache Server
-	 * With the help of http://github.com/memcached/memcached/blob/master/doc/protocol.txt
-	 * Return the response, or false otherwise
-	 *
-	 * @param String $command Command
-	 * @param String $server Server Hostname
-	 * @param Integer $port Server Port
-	 *
-	 * @return String|Boolean
-	 */
-	public function exec($command, $server, $port)
-	{
-		# Variables
-		$buffer = '';
-		$handle = null;
+    /**
+     * Constructor
+     *
+     * @param Array $ini Array from ini_parse
+     *
+     * @return void
+     */
+    public function __construct($ini)
+    {
+        self::$_ini = $ini;
+    }
 
-		# Socket Opening
-		if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini['connection_timeout'])))
-		{
-			return false;
-		}
+    /**
+     * Executing a Command on a MemCache Server
+     * With the help of http://github.com/memcached/memcached/blob/master/doc/protocol.txt
+     * Return the response, or false otherwise
+     *
+     * @param String $command Command
+     * @param String $server Server Hostname
+     * @param Integer $port Server Port
+     *
+     * @return String|Boolean
+     */
+    public function exec($command, $server, $port)
+    {
+        # Variables
+        $buffer = '';
+        $handle = null;
 
-		# Sending Command ...
-		fwrite($handle, $command . "\r\n");
+        # Socket Opening
+        if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini['connection_timeout'])))
+        {
+            return false;
+        }
 
-		# Getting first line
-		$buffer = fgets($handle);
+        # Sending Command ...
+        fwrite($handle, $command . "\r\n");
 
-		# Checking if result is valid
-		if(strpos($buffer, 'END') !== false)
-		{
-			return false;
-		}
+        # Getting first line
+        $buffer = fgets($handle);
 
-		# Reading Results
-		while((!feof($handle)))
-		{
-			$buffer .= fgets($handle);
+        # Checking if result is valid
+        if(strpos($buffer, 'END') !== false)
+        {
+            return false;
+        }
 
-			# End of MemCache stats command
-			if(strpos($buffer, 'END') !== false)
-			{
-				break;
-			}
+        # Reading Results
+        while((!feof($handle)))
+        {
+            $buffer .= fgets($handle);
 
-			# End of MemCache delete command
-			if(strpos($buffer, 'DELETED') != false || strpos($buffer,'NOT_FOUND') != false)
-			{
-				break;
-			}
-			if(strpos($buffer, 'OK') != false)
-			{
-				break;
-			}
+            # End of MemCache stats command
+            if(strpos($buffer, 'END') !== false)
+            {
+                break;
+            }
 
-			# End of MemCache error result
-			if(strpos($buffer, 'ERROR') != false)
-			{
-				break;
-			}
-			if(strpos($buffer, 'SERVER_ERROR') != false)
-			{
-				break;
-			}
-			if(strpos($buffer, 'CLIENT_ERROR') != false)
-			{
-				break;
-			}
-		}
-		# Closing socket
-		fclose($handle);
+            # End of MemCache delete command
+            if(strpos($buffer, 'DELETED') != false || strpos($buffer,'NOT_FOUND') != false)
+            {
+                break;
+            }
+            if(strpos($buffer, 'OK') != false)
+            {
+                break;
+            }
 
-		return $buffer;
-	}
+            # End of MemCache error result
+            if(strpos($buffer, 'ERROR') != false)
+            {
+                break;
+            }
+            if(strpos($buffer, 'SERVER_ERROR') != false)
+            {
+                break;
+            }
+            if(strpos($buffer, 'CLIENT_ERROR') != false)
+            {
+                break;
+            }
+        }
+        # Closing socket
+        fclose($handle);
 
-	/**
-	 * Parse result to make an array
-	 *
-	 * @param String $string String to parse
-	 * @param Boolean $string (optionnal) Parsing stats ?
-	 *
-	 * @return Array
-	 */
-	public function parse($string, $stats = true)
-	{
-		# Variable
-		$return = array();
+        return $buffer;
+    }
 
-		# Exploding by \r\n
-		$lines = explode("\r\n", $string);
+    /**
+     * Parse result to make an array
+     *
+     * @param String $string String to parse
+     * @param Boolean $string (optionnal) Parsing stats ?
+     *
+     * @return Array
+     */
+    public function parse($string, $stats = true)
+    {
+        # Variable
+        $return = array();
 
-		# Stats
-		if($stats)
-		{
-			# Browsing each line
-			foreach($lines as $line)
-			{
-				$data = explode(' ', $line);
-				if(isset($data[2]))
-				{
-					$return[$data[1]] = $data[2];
-				}
-			}
-		}
-		# Items
-		else
-		{
-			# Browsing each line
-			foreach($lines as $line)
-			{
-				$data = explode(' ', $line);
-				if(isset($data[1]))
-				{
-					$return[$data[1]] = array(substr($data[2], 1), $data[4]);
-				}
-			}
-		}
-		return $return;
-	}
+        # Exploding by \r\n
+        $lines = explode("\r\n", $string);
 
-	/**
-	 * Send stats command to server
-	 * Return the result if successful or false otherwise
-	 *
-	 * @param String $server Hostname
-	 * @param Integer $port Hostname Port
-	 *
-	 * @return Array|Boolean
-	 */
-	public function stats($server, $port)
-	{
-		# Executing command
-		if(($return = $this->exec('stats', $server, $port)))
-		{
-			return $this->parse($return);
-		}
-		return false;
-	}
+        # Stats
+        if($stats)
+        {
+            # Browsing each line
+            foreach($lines as $line)
+            {
+                $data = explode(' ', $line);
+                if(isset($data[2]))
+                {
+                    $return[$data[1]] = $data[2];
+                }
+            }
+        }
+        # Items
+        else
+        {
+            # Browsing each line
+            foreach($lines as $line)
+            {
+                $data = explode(' ', $line);
+                if(isset($data[1]))
+                {
+                    $return[$data[1]] = array(substr($data[2], 1), $data[4]);
+                }
+            }
+        }
+        return $return;
+    }
 
-	/**
-	 * Send stats items command to server to retrieve slabs stats
-	 * Return the result if successful or false otherwise
-	 *
-	 * @param String $server Hostname
-	 * @param Integer $port Hostname Port
-	 *
-	 * @return Array|Boolean
-	 */
-	public function slabs($server, $port)
-	{
-		# Initializing
-		$slabs = array();
+    /**
+     * Send stats command to server
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     *
+     * @return Array|Boolean
+     */
+    public function stats($server, $port)
+    {
+        # Executing command
+        if(($return = $this->exec('stats', $server, $port)))
+        {
+            return $this->parse($return);
+        }
+        return false;
+    }
 
-		# Finding uptime
-		$stats = $this->stats($server, $port);
-		$slabs['uptime'] = $stats['uptime'];
-		unset($stats);
+    /**
+     * Send stats items command to server to retrieve slabs stats
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     *
+     * @return Array|Boolean
+     */
+    public function slabs($server, $port)
+    {
+        # Initializing
+        $slabs = array();
 
-		# Executing command : slabs stats
-		if(($result = $this->exec('stats slabs', $server, $port)))
-		{
-			# Parsing result
-			$result = $this->parse($result);
-			$slabs['active_slabs'] = $result['active_slabs'];
-			$slabs['total_malloced'] = $result['total_malloced'];
-			unset($result['active_slabs']);
-			unset($result['total_malloced']);
+        # Finding uptime
+        $stats = $this->stats($server, $port);
+        $slabs['uptime'] = $stats['uptime'];
+        unset($stats);
 
-			# Indexing by slabs
-			foreach($result as $key => $value)
-			{
-				$key = explode(':', $key);
-				$slabs[$key[0]][$key[1]] = $value;
-			}
+        # Executing command : slabs stats
+        if(($result = $this->exec('stats slabs', $server, $port)))
+        {
+            # Parsing result
+            $result = $this->parse($result);
+            $slabs['active_slabs'] = $result['active_slabs'];
+            $slabs['total_malloced'] = $result['total_malloced'];
+            unset($result['active_slabs']);
+            unset($result['total_malloced']);
 
-			# Executing command : items stats
-			if(($result = $this->exec('stats items', $server, $port)))
-			{
-				# Parsing result
-				$result = $this->parse($result);
+            # Indexing by slabs
+            foreach($result as $key => $value)
+            {
+                $key = explode(':', $key);
+                $slabs[$key[0]][$key[1]] = $value;
+            }
 
-				# Indexing by slabs
-				foreach($result as $key => $value)
-				{
-					$key = explode(':', $key);
-					$slabs[$key[1]]['items:' . $key[2]] = $value;
-				}
+            # Executing command : items stats
+            if(($result = $this->exec('stats items', $server, $port)))
+            {
+                # Parsing result
+                $result = $this->parse($result);
 
-				return $slabs;
-			}
-		}
-		return false;
-	}
+                # Indexing by slabs
+                foreach($result as $key => $value)
+                {
+                    $key = explode(':', $key);
+                    $slabs[$key[1]]['items:' . $key[2]] = $value;
+                }
 
-	/**
-	 * Send stats cachedump command to server to retrieve slabs items
-	 * Return the result if successful or false otherwise
-	 *
-	 * @param String $server Hostname
-	 * @param Integer $port Hostname Port
-	 * @param Interger $slab Slab ID
-	 *
-	 * @return Array|Boolean
-	 */
-	public function items($server, $port, $slab)
-	{
-		# Initializing
-		$items = false;
+                return $slabs;
+            }
+        }
+        return false;
+    }
 
-		# Executing command : stats cachedump
-		if(($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini['max_item_dump'], $server, $port)))
-		{
-			# Parsing result
-			$items = $this->parse($result, false);
-		}
-		return $items;
-	}
+    /**
+     * Send stats cachedump command to server to retrieve slabs items
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param Interger $slab Slab ID
+     *
+     * @return Array|Boolean
+     */
+    public function items($server, $port, $slab)
+    {
+        # Initializing
+        $items = false;
 
-	/**
-	 * Send get command to server to retrieve an item
-	 * Return the result if successful or false otherwise
-	 *
-	 * @param String $server Hostname
-	 * @param Integer $port Hostname Port
-	 * @param String $key Key to retrieve
-	 *
-	 * @return String|Boolean
-	 */
-	public function get($server, $port, $key)
-	{
-		# Executing command : get
-		if($string = $this->exec('get ' . $key, $server, $port))
-		{
-			# Exploding by \r\n
-			$lines = explode("\r\n", $string);
-			return $lines[1];
-		}
-		return false;
-	}
+        # Executing command : stats cachedump
+        if(($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini['max_item_dump'], $server, $port)))
+        {
+            # Parsing result
+            $items = $this->parse($result, false);
+        }
+        return $items;
+    }
 
-	/**
-	 * Delete an item
-	 * Return true if successful, false otherwise
-	 *
-	 * @param String $server Hostname
-	 * @param Integer $port Hostname Port
-	 * @param String $key Key to delete
-	 *
-	 * @return Boolean
-	 */
-	public function delete($server, $port, $key)
-	{
-	}
+    /**
+     * Send get command to server to retrieve an item
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to retrieve
+     *
+     * @return String|Boolean
+     */
+    public function get($server, $port, $key)
+    {
+        # Executing command : get
+        if($string = $this->exec('get ' . $key, $server, $port))
+        {
+            # Exploding by \r\n
+            $lines = explode("\r\n", $string);
+            return $lines[1];
+        }
+        return false;
+    }
+
+    /**
+     * Delete an item
+     * Return true if successful, false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to delete
+     *
+     * @return Boolean
+     */
+    public function delete($server, $port, $key)
+    {
+    }
 }

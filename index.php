@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
+ * ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°>
  *
  * Sending command to memcache server
  *
@@ -27,6 +27,7 @@ header('Cache-Control: no-cache, must-revalidate');
 
 # Require
 require_once 'library/ICommand.php';
+require_once 'library/Factory.php';
 require_once 'library/Analysis.php';
 
 # Loading ini file
@@ -40,26 +41,21 @@ foreach($_ini['server'] as $key => $server)
     $_ini['server'][$server[0]] = $server[1];
 }
 
-# Date 
+# Date timezone
 date_default_timezone_set($_ini['timezone']);
+
+# Initializing Factory
+new MemCacheAdmin_Factory($_ini);
+
+# Initializing requests
+$request = (isset($_GET['show'])) ? $_GET['show'] : null;
+if(isset($_GET['server']) && ($_GET['server'] == 'all'))
+{
+    unset($_GET['server']);
+}
 
 # Showing Header
 include 'view/header.tpl';
-
-# Finding API to use
-$memCacheAdmin = null;
-switch($_ini['api'])
-{
-	# Server API (eg communicating directly with the memcache server)
-	case 'Server':
-	default:
-		require_once 'library/ServerCommand.php';
-		$memCacheAdmin = new MemCacheAdmin_ServerCommand($_ini);
-		break;
-}
-
-# Initializing request
-$request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
 # Display by Request Type
 switch($request)
@@ -73,13 +69,13 @@ switch($request)
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
         {
-            $items = $memCacheAdmin->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
+            $items = MemCacheAdmin_Factory::instance('items')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
         }
 
         # Cheking if asking an item
         if(isset($_GET['key']))
         {
-            $item = $memCacheAdmin->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['key']);
+            $item = MemCacheAdmin_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['key']);
         }
 
         # Items are well formed
@@ -103,7 +99,7 @@ switch($request)
         # Ask for one server slabs
         if(isset($_GET['server']))
         {
-            $slabs = $memCacheAdmin->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
+            $slabs = MemCacheAdmin_Factory::instance('slabs')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
         }
 
         # Slabs are well formed
@@ -129,14 +125,14 @@ switch($request)
         # Ask for one server stats
         if(isset($_GET['server']))
         {
-            $stats = $memCacheAdmin->stats($_GET['server'], $_ini['server'][$_GET['server']]);
+            $stats = MemCacheAdmin_Factory::instance('stats')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
         }
         # Ask for all servers stats
         else
         {
             foreach($_ini['server'] as $server => $port)
             {
-                $stats = MemCacheAdmin_Analysis::merge($stats, $memCacheAdmin->stats($server, $port));
+                $stats = MemCacheAdmin_Analysis::merge($stats, MemCacheAdmin_Factory::instance('stats')->stats($server, $port));
             }
         }
 

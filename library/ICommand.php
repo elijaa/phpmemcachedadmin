@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and limitations
  * under the License.
  *
- * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
+ * ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°> ><)))Â°>
  *
  * Interface of communication to MemCache Server
  *
@@ -41,7 +41,7 @@ interface MemCacheAdmin_ICommand
      *
      * @return String|Boolean
      */
-	function exec($command, $server, $port);
+    function exec($command, $server, $port);
 
     /**
      * Send stats command to server
@@ -88,7 +88,7 @@ interface MemCacheAdmin_ICommand
      * @return Mixed|Boolean
      */
     function get($server, $port, $key);
-    
+
     /**
      * Delete an item
      * Return true if successful, false otherwise
