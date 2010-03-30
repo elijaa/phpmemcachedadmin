@@ -21,7 +21,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Set <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -36,7 +36,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Delete <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -58,7 +58,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Cas <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -86,7 +86,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Increment <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -108,7 +108,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Decrement <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -130,14 +130,17 @@
             </div>
         </div>
         <br/>
-        
+
         <div class="title rounded" style="width:788px; display:float; position:absolute; text-align:center;">
             <a href="http://memcached.org/" target="_blank">memcached home</a>
              - <a href="http://www.pecl.php.net/package/memcache" target="_blank">PECL memcache</a>
              - <a href="http://www.pecl.php.net/package/memcached" target="_blank">PECL memcached</a>
+            <br/>
+            Banner image is Copyright (c) 2009 Dormando
         </div>
+
     </div>
-    
+
     <div style="float:left; padding-left:10px;">
         <span class="title rounded">Server <span class="stats">Stats</span></span>
         <div class="container rounded">
@@ -153,7 +156,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Connection <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -168,7 +171,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Item <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -188,7 +191,7 @@
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Network <span class="stats">Stats</span></span>
         <div class="container rounded">
             <div class="row">
@@ -203,7 +206,7 @@
             </div>
         </div>
     </div>
-    
+
     <div style="float:left; padding-left:10px;">
         <span class="title rounded">Cache Size <span class="stats">Stats</span></span>
         <div class="container rounded">
@@ -219,15 +222,15 @@
             </div>
          </div>
          <br/>
-         
+
         <span class="title rounded">Cache Size <span class="stats">Graphic</span></span>
         <div class="container rounded">
             <div class="row">
-                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=240x176&amp;chl=Used|Free&amp;chf=bg,s,DBDBDB&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="240" height="176"/>     
+                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=240x176&amp;chl=Used|Free&amp;chf=bg,s,DBDBDB&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="240" height="176"/>
             </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Cache Request <span class="stats">Stats</span></span>
          <div class="container rounded">
             <div class="row">
@@ -239,19 +242,19 @@
                 <div class="left">Hit Rate</div>
                 <div class="full"><?php echo $stats['hit_rate']; ?> Request/sec</div>
                 <div class="clear"></div>
-            </div>        
+            </div>
             <div class="row">
                 <div class="left">Miss Rate</div>
                 <div class="full"><?php echo $stats['miss_rate']; ?> Request/sec</div>
                 <div class="clear"></div>
-            </div>        
+            </div>
         </div>
         <br/>
-        
+
         <span class="title rounded">Hit &amp; Miss Rate <span class="stats">Graphic</span></span>
          <div class="container rounded">
             <div class="row">
             <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=240x176&amp;chl=Hit|Miss&amp;chf=bg,s,DBDBDB&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="240" height="176"/>
-            </div>        
+            </div>
         </div>
     </div>
