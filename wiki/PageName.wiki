@@ -1,18 +1,4 @@
-#summary One-sentence summary of this page.
+#summary FAQ
 
-= Introduction =
-
-Add your content here.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
-
-
-FAQ 
-- Stats does not work with PECL Memcached
-  getStats() from PECL Memcached return very light result, so avoid using it, use Server instead
+- I don't get all value for server stats with PECL Memcached
+  getStats() from PECL Memcached doesn't return delete, increment, decrement and cas statistics, so avoid using it, use Server instead
