@@ -54,20 +54,20 @@ class MemCacheAdmin_Factory
             {
                 case 'Memcache':
                     # PECL Memcache API
-                    require_once 'library/MemcacheCommand.php';
+                    require_once 'MemcacheCommand.php';
                     self::$_object[$command] = new MemCacheAdmin_MemcacheCommand(self::$_ini);
                     break;
 
                 case 'Memcached':
                     # PECL Memcached API
-                    require_once 'library/MemcachedCommand.php';
+                    require_once 'MemcachedCommand.php';
                     self::$_object[$command] = new MemCacheAdmin_MemcachedCommand(self::$_ini);
                     break;
 
                 case 'Server':
                 default:
                     # Server API (eg communicating directly with the memcache server)
-                    require_once 'library/ServerCommand.php';
+                    require_once 'ServerCommand.php';
                     self::$_object[$command] = new MemCacheAdmin_ServerCommand(self::$_ini);
                     break;
             }
