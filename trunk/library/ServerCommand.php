@@ -31,9 +31,11 @@ class MemCacheAdmin_ServerCommand implements MemCacheAdmin_ICommand
      *
      * @return void
      */
-    public function __construct($ini)
+    public function __construct()
     {
-        self::$_ini = $ini;
+        # Importing configuration
+        global $_ini;
+        self::$_ini = $_ini;
     }
 
     /**
