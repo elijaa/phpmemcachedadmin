@@ -14,12 +14,12 @@
             </div>
             <div class="row">
                 <div class="left">Memory Used</div>
-                <div class="full"><?php echo number_format(($slabs['total_malloced']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($slabs['total_malloced']); ?></div>
                 <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Wasted</div>
-                <div class="full"><?php echo number_format(($slabs['total_wasted']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($slabs['total_wasted']); ?></div>
                 <div class="clear"></div>
             </div>
         </div>
@@ -53,7 +53,7 @@ foreach($slabs as $id => $slab)
             <div class="container rounded">
                 <div class="row">
                     <div class="left">Chunk Size</div>
-                    <div class="full"><?php echo number_format(($slab['chunk_size']/1024), 2); ?> KBytes</div>
+                    <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($slab['chunk_size']); ?></div>
                     <div class="clear"></div>
                 </div>
                 <div class="row">
@@ -73,7 +73,7 @@ foreach($slabs as $id => $slab)
                 </div>
                 <div class="row">
                     <div class="left">Wasted</div>
-                    <div class="full"><?php echo number_format($slab['mem_wasted']/1024/1024, 2); ?> MBytes</div>
+                    <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($slab['mem_wasted']); ?></div>
                     <div class="clear"></div>
                 </div>
                 <div class="row">

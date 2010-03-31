@@ -173,4 +173,28 @@ class MemCacheAdmin_Analysis
         }
         return ' - ';
     }
+
+    /**
+     * Resize a byte value
+     *
+     * @param Integer $value Value to resize
+     *
+     * @return String
+     */
+    public static function byteResize($value)
+    {
+        # Unit list
+        $units = array('','K','M','G');
+
+        # Resizing
+        foreach($units as $unit)
+        {
+            if($value < 1024)
+            {
+                break;
+            }
+            $value /= 1024;
+        }
+        return sprintf('%5.1f %sBytes', $value, $unit);
+    }
 }
