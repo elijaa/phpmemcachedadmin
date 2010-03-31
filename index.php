@@ -107,7 +107,7 @@ switch($request)
             $slabs = MemCacheAdmin_Analysis::slabs($slabs);
             include 'view/slabs.tpl';
         }
-        # Stats are not well formed
+        # Slabs are not well formed
         else
         {
             include 'view/error.tpl';
