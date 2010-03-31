@@ -196,12 +196,12 @@
         <div class="container rounded">
             <div class="row">
                 <div class="left">Bytes Read</div>
-                <div class="full"><?php echo number_format(($stats['bytes_read']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($stats['bytes_read']); ?></div>
                 <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Bytes Written</div>
-                <div class="full"><?php echo number_format(($stats['bytes_written']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($stats['bytes_written']); ?></div>
                 <div class="clear"></div>
             </div>
         </div>
@@ -212,12 +212,12 @@
         <div class="container rounded">
             <div class="row">
                 <div class="left">Used</div>
-                <div class="full"><?php echo number_format(($stats['bytes']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($stats['bytes']); ?></div>
                 <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Total</div>
-                <div class="full"><?php echo number_format(($stats['limit_maxbytes']/1024/1024), 2); ?> MBytes</div>
+                <div class="full"><?php echo MemCacheAdmin_Analysis::byteResize($stats['limit_maxbytes']); ?></div>
                 <div class="clear"></div>
             </div>
          </div>
