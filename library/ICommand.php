@@ -29,7 +29,7 @@ interface MemCacheAdmin_ICommand
      *
      * @return void
      */
-    function __construct($ini);
+    function __construct();
 
     /**
      * Send stats command to server

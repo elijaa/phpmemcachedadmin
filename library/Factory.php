@@ -23,19 +23,6 @@
 class MemCacheAdmin_Factory
 {
     private static $_object = array();
-    private static $_ini;
-
-    /**
-     * Constructor
-     *
-     * @param Array $_ini Parsed ini file
-     *
-     * @return void
-     */
-    public function __construct($_ini)
-    {
-        self::$_ini = $_ini;
-    }
 
     /**
      * Accessor to command class instance
@@ -46,32 +33,34 @@ class MemCacheAdmin_Factory
      */
     public static function instance($command)
     {
+        global $_ini;
+
         # Instance does not exists
-        if(!isset(self::$_object[self::$_ini[$command]]))
+        if(!isset(self::$_object[$_ini[$command]]))
         {
             # Switching by API
-            switch(self::$_ini[$command])
+            switch($_ini[$command])
             {
                 case 'Memcache':
                     # PECL Memcache API
                     require_once 'MemcacheCommand.php';
-                    self::$_object['Memcache'] = new MemCacheAdmin_MemcacheCommand(self::$_ini);
+                    self::$_object['Memcache'] = new MemCacheAdmin_MemcacheCommand();
                     break;
 
                 case 'Memcached':
                     # PECL Memcached API
                     require_once 'MemcachedCommand.php';
-                    self::$_object['Memcached'] = new MemCacheAdmin_MemcachedCommand(self::$_ini);
+                    self::$_object['Memcached'] = new MemCacheAdmin_MemcachedCommand();
                     break;
 
                 case 'Server':
                 default:
                     # Server API (eg communicating directly with the memcache server)
                     require_once 'ServerCommand.php';
-                    self::$_object['Server'] = new MemCacheAdmin_ServerCommand(self::$_ini);
+                    self::$_object['Server'] = new MemCacheAdmin_ServerCommand();
                     break;
             }
         }
-        return self::$_object[self::$_ini[$command]];
+        return self::$_object[$_ini[$command]];
     }
 }

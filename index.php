@@ -31,6 +31,7 @@ require_once 'library/Factory.php';
 require_once 'library/Analysis.php';
 
 # Loading ini file
+global $_ini;
 $_ini = parse_ini_file('config/config.ini');
 
 # Initializing Server List
@@ -43,9 +44,6 @@ foreach($_ini['server'] as $key => $server)
 
 # Date timezone
 date_default_timezone_set($_ini['timezone']);
-
-# Initializing Factory
-new MemCacheAdmin_Factory($_ini);
 
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
