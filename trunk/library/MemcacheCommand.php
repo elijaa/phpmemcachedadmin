@@ -36,7 +36,7 @@ class MemCacheAdmin_MemcacheCommand implements MemCacheAdmin_ICommand
     {
         # Importing configuration
         global $_ini;
-        self::$_ini = $ini;
+        self::$_ini = $_ini;
 
         # Initializing
         self::$_memcache = new Memcache();
