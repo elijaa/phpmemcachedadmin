@@ -15,13 +15,13 @@
     * *delete* : Delete an item
   You can use Server, Memcache or Memcached for each one
 
-  Stats from PECL Memcached are very light, so i recommand you to not use it
+  Stats from PECL Memcached are very light, so i recommand you not to use it
 
   PECL Memcached does not support slabs and items command
 
-  PECL Memcached can only read it's own data
+  PECL Memcached can only reads it's own data
 
-  PECL Memcache can read some of PECL Memcached items
+  PECL Memcache can reads some of PECL Memcached items
 
 
   * Under section *servers*
