@@ -131,7 +131,7 @@
         </div>
         <br/>
 
-        <div class="title rounded" style="width:788px; display:float; position:absolute; text-align:center;">
+        <div class="title rounded" style="width:772px; display:float; position:absolute; text-align:center;">
             <a href="http://memcached.org/" target="_blank">memcached home</a>
              - <a href="http://www.pecl.php.net/package/memcache" target="_blank">PECL memcache</a>
              - <a href="http://www.pecl.php.net/package/memcached" target="_blank">PECL memcached</a>
