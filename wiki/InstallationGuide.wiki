@@ -1,0 +1,51 @@
+#summary Read before installing
+
+= Installation Guide =
+
+== 1. Download ==
+
+== 2. Edit /config/config.ini ==
+
+  * Under section *api*
+  There are 5 configuration for api section
+    * *stats* : Server stats
+    * *slabs* : Server slabs
+    * *items* : Slabs items
+    * *get* : Get an item from a key
+    * *delete* : Delete an item
+  You can use Server, Memcache or Memcached for each one
+
+  Stats from PECL Memcached are very light, so i recommand you to not use it
+
+  PECL Memcached does not support slabs and items command
+
+  PECL Memcached can only read it's own data
+
+  PECL Memcache can read some of PECL Memcached items
+
+
+  * Under section *servers*
+  Add your servers from template server[] = server_name:port
+
+  example :
+
+  server[] = localhost:11211
+
+  server[] = server_two:11211
+
+  server[] = server_three:11211
+
+
+  * Under section *connection*
+  You can modify connection timeout to each server
+
+
+  * Under section *items*
+  Max items dump for slabs item dump, don't put a too high value
+
+  * Under section *date*
+  Only to correct a E_STRICT, no use actually
+
+== 3. Use it ==
+
+If you have any issue, or idea you can mail me
