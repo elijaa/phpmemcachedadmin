@@ -1,1 +1,5 @@
 #summary Roadmap, ideas
+
+Version 1.1
+- Configuration of phpMemcacheAdmin via a web page
+- Possibility to search or set a key
