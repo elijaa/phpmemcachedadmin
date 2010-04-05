@@ -15,7 +15,7 @@
  *
  * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Sending command to memcache server
+ * Analysis of memcached command response
  *
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
