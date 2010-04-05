@@ -1,5 +1,9 @@
 #summary Roadmap, ideas
 
 Version 1.1
-- Configuration of phpMemcacheAdmin via a web page
-- Possibility to search or set a key
+
+- Configuration directly from admin
+
+- Adding a page to execute command on servers (get, set, delete, ...)
+
+- Graphic improvement
