@@ -33,7 +33,8 @@ class MemCacheAdmin_Factory
      */
     public static function instance($command)
     {
-        global $_ini;
+        # Importing configuration
+        $_ini = MemCacheAdmin_Configuration::getInstance();
 
         # Instance does not exists
         if(!isset(self::$_object[$_ini[$command]]))

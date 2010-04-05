@@ -29,21 +29,13 @@ header('Cache-Control: no-cache, must-revalidate');
 require_once 'library/ICommand.php';
 require_once 'library/Factory.php';
 require_once 'library/Analysis.php';
-
-# Loading ini file
-global $_ini;
-$_ini = parse_ini_file('config/config.ini');
-
-# Initializing Server List
-foreach($_ini['server'] as $key => $server)
-{
-    $server = explode(':', $server);
-    unset($_ini['server'][$key]);
-    $_ini['server'][$server[0]] = $server[1];
-}
+require_once 'library/Configuration.php';
 
 # Date timezone
-date_default_timezone_set($_ini['timezone']);
+date_default_timezone_set('Europe/Paris');
+
+# Loading ini file
+$_ini = MemCacheAdmin_Configuration::getInstance();
 
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
@@ -58,7 +50,7 @@ include 'view/header.tpl';
 # Display by Request Type
 switch($request)
 {
-        # Items : Display of all items for a single slab for a single server
+    # Items : Display of all items for a single slab for a single server
     case 'items':
         # Initializing items array
         $items = false;

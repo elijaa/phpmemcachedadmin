@@ -22,125 +22,124 @@
  */
 class MemCacheAdmin_MemcachedCommand implements MemCacheAdmin_ICommand
 {
-    private static $_ini;
-    private static $_memcache;
+	private static $_ini;
+	private static $_memcache;
 
-    /**
-     * Constructor
-     *
-     * @param Array $ini Array from ini_parse
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        # Importing configuration
-        global $_ini;
-        self::$_ini = $_ini;
+	/**
+	 * Constructor
+	 *
+	 * @param Array $ini Array from ini_parse
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		# Importing configuration
+		self::$_ini = MemCacheAdmin_Configuration::getInstance();
 
-        # Initializing
-        self::$_memcache = new Memcached();
-    }
+		# Initializing
+		self::$_memcache = new Memcached();
+	}
 
-    /**
-     * Send stats command to server
-     * Return the result if successful or false otherwise
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     *
-     * @return Array|Boolean
-     */
-    public function stats($server, $port)
-    {
-        # Adding server
-        self::$_memcache->addServer($server, $port);
+	/**
+	 * Send stats command to server
+	 * Return the result if successful or false otherwise
+	 *
+	 * @param String $server Hostname
+	 * @param Integer $port Hostname Port
+	 *
+	 * @return Array|Boolean
+	 */
+	public function stats($server, $port)
+	{
+		# Adding server
+		self::$_memcache->addServer($server, $port);
 
-        # Executing command
-        if(($return = self::$_memcache->getStats()))
-        {
-            # Delete server key based
-            $stats = $return[$server.':'.$port];
+		# Executing command
+		if(($return = self::$_memcache->getStats()))
+		{
+			# Delete server key based
+			$stats = $return[$server.':'.$port];
 
-            # Adding value that miss
-            $stats['delete_hits'] = '';
-            $stats['delete_misses'] = '';
-            $stats['incr_hits'] = '';
-            $stats['incr_misses'] = '';
-            $stats['decr_hits'] = '';
-            $stats['decr_misses'] = '';
-            $stats['cas_hits'] = '';
-            $stats['cas_misses'] = '';
-            $stats['cas_badval'] = '';
+			# Adding value that miss
+			$stats['delete_hits'] = '';
+			$stats['delete_misses'] = '';
+			$stats['incr_hits'] = '';
+			$stats['incr_misses'] = '';
+			$stats['decr_hits'] = '';
+			$stats['decr_misses'] = '';
+			$stats['cas_hits'] = '';
+			$stats['cas_misses'] = '';
+			$stats['cas_badval'] = '';
 
-            return $stats;
-        }
-        return false;
-    }
+			return $stats;
+		}
+		return false;
+	}
 
-    /**
-     * Send stats items command to server to retrieve slabs stats
-     * Return the result if successful or false otherwise
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     *
-     * @return Array|Boolean
-     */
-    public function slabs($server, $port)
-    {
-        throw new Exception('PECL Memcache does not support slabs stats, use Server or Memcache instead');
-    }
+	/**
+	 * Send stats items command to server to retrieve slabs stats
+	 * Return the result if successful or false otherwise
+	 *
+	 * @param String $server Hostname
+	 * @param Integer $port Hostname Port
+	 *
+	 * @return Array|Boolean
+	 */
+	public function slabs($server, $port)
+	{
+		throw new Exception('PECL Memcache does not support slabs stats, use Server or Memcache instead');
+	}
 
-    /**
-     * Send stats cachedump command to server to retrieve slabs items
-     * Return the result if successful or false otherwise
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Interger $slab Slab ID
-     *
-     * @return Array|Boolean
-     */
-    public function items($server, $port, $slab)
-    {
-       throw new Exception('PECL Memcache does not support slabs items stats, use Server or Memcache instead');
-    }
+	/**
+	 * Send stats cachedump command to server to retrieve slabs items
+	 * Return the result if successful or false otherwise
+	 *
+	 * @param String $server Hostname
+	 * @param Integer $port Hostname Port
+	 * @param Interger $slab Slab ID
+	 *
+	 * @return Array|Boolean
+	 */
+	public function items($server, $port, $slab)
+	{
+		throw new Exception('PECL Memcache does not support slabs items stats, use Server or Memcache instead');
+	}
 
-    /**
-     * Send get command to server to retrieve an item
-     * Return the result if successful or false otherwise
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to retrieve
-     *
-     * @return String|Boolean
-     */
-    public function get($server, $port, $key)
-    {
-        # Adding server
-        self::$_memcache->addServer($server, $port);
+	/**
+	 * Send get command to server to retrieve an item
+	 * Return the result if successful or false otherwise
+	 *
+	 * @param String $server Hostname
+	 * @param Integer $port Hostname Port
+	 * @param String $key Key to retrieve
+	 *
+	 * @return String|Boolean
+	 */
+	public function get($server, $port, $key)
+	{
+		# Adding server
+		self::$_memcache->addServer($server, $port);
 
-        # Executing command : get
-        if($item = self::$_memcache->get($key))
-        {
-            return print_r($item, true);
-        }
-        return false;
-    }
+		# Executing command : get
+		if($item = self::$_memcache->get($key))
+		{
+			return print_r($item, true);
+		}
+		return false;
+	}
 
-    /**
-     * Delete an item
-     * Return true if successful, false otherwise
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to delete
-     *
-     * @return Boolean
-     */
-    public function delete($server, $port, $key)
-    {
-    }
+	/**
+	 * Delete an item
+	 * Return true if successful, false otherwise
+	 *
+	 * @param String $server Hostname
+	 * @param Integer $port Hostname Port
+	 * @param String $key Key to delete
+	 *
+	 * @return Boolean
+	 */
+	public function delete($server, $port, $key)
+	{
+	}
 }

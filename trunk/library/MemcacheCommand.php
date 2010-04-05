@@ -35,8 +35,7 @@ class MemCacheAdmin_MemcacheCommand implements MemCacheAdmin_ICommand
     public function __construct()
     {
         # Importing configuration
-        global $_ini;
-        self::$_ini = $_ini;
+        self::$_ini = MemCacheAdmin_Configuration::getInstance();
 
         # Initializing
         self::$_memcache = new Memcache();

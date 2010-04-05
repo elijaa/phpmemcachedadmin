@@ -15,27 +15,15 @@
         foreach($_ini['server'] as $server => $port)
         { ?>
 		<option value="<?php echo $server; ?>" <?php if((isset($_GET['server'])) && ($_GET['server'] == $server)) { echo 'selected="selected"'; } ?>>
-			<?php echo $server; ?>
+			<?php echo substr($server, 0, 40); ?>
 		</option>
 <?php   } ?>
         </select>
 <?php
-        # Show menu
-        if(isset($_GET['show']))
-        {
-            if($_GET['show'] == 'slabs')
-            { ?>
-                Slabs Stats
-<?php       }
-            elseif($_GET['show'] == 'items')
-            { ?>
-                Slab <?php echo $_GET['slab']; ?>, first <?php echo $_ini['max_item_dump']; ?> Items
-<?php       }
-        }
         # Viewing a server
         if(isset($_GET['server']))
         {
-            if(!isset($_GET['show']))
+            if(!isset($_GET['show']) || ($_GET['show'] == 'items'))
             { ?>
              | <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats for this Server</a>
 <?php       }
@@ -43,9 +31,6 @@
             { ?>
              | <a href="?server=<?php echo $_GET['server']; ?>">Back to this Server Stats </a>
 <?php       }
-            elseif($_GET['show'] == 'items')
-            { ?>
-             | <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Back to this Server Slabs Stats </a>
-<?php       }
         } ?>
+     | <a href="?ini_file">Edit Configuration</a>
     </div>
