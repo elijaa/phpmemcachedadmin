@@ -7,3 +7,5 @@ Version 1.1
 - Adding a page to execute command on servers (get, set, delete, ...)
 
 - Graphic improvement
+
+- Compatibility with new stat from Memcached 1.4.5
