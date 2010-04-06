@@ -1,6 +1,6 @@
     <br/>
-    <div class="title rounded">Items in Slab <?php echo $_GET['slab']; ?></div>
-    <div class="container rounded" style="width:772px; padding:7px 7px 7px 7px;">
+    <div class="title rounded">Items in Slab <?php echo $_GET['slab']; ?> first @todo fix div</div>
+        <div class="container rounded" style="width:772px; padding:7px 7px 7px 7px;">
 <?php
 $notfirst = false;
 

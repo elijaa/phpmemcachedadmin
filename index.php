@@ -15,7 +15,7 @@
  *
  * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Sending command to memcache server
+ * Stats viewing
  *
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
@@ -26,8 +26,8 @@ header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'library/ICommand.php';
-require_once 'library/Factory.php';
+require_once 'library/commands/ICommands.php';
+require_once 'library/commands/Factory.php';
 require_once 'library/Analysis.php';
 require_once 'library/Configuration.php';
 
@@ -39,13 +39,10 @@ $_ini = MemCacheAdmin_Configuration::getInstance();
 
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
-if(isset($_GET['server']) && ($_GET['server'] == 'all'))
-{
-    unset($_GET['server']);
-}
 
 # Showing Header
 include 'view/header.tpl';
+include 'view/stats/menu.tpl';
 
 # Display by Request Type
 switch($request)
@@ -71,7 +68,7 @@ switch($request)
         # Items are well formed
         if($items !== false)
         {
-            include 'view/items.tpl';
+            include 'view/stats/items.tpl';
         }
         # Items are not well formed
         else
@@ -97,7 +94,7 @@ switch($request)
         {
             # Analysis
             $slabs = MemCacheAdmin_Analysis::slabs($slabs);
-            include 'view/slabs.tpl';
+            include 'view/stats/slabs.tpl';
         }
         # Slabs are not well formed
         else
@@ -131,7 +128,7 @@ switch($request)
         {
             # Analysis
             $stats = MemCacheAdmin_Analysis::stats($stats);
-            include 'view/stats.tpl';
+            include 'view/stats/stats.tpl';
         }
         # Stats are not well formed
         else

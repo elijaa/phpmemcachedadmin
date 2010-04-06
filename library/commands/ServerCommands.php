@@ -20,7 +20,7 @@
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
-class MemCacheAdmin_ServerCommand implements MemCacheAdmin_ICommand
+class MemCacheAdmin_ServerCommands implements MemCacheAdmin_ICommands
 {
     private static $_ini;
 
