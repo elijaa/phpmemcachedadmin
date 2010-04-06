@@ -23,10 +23,10 @@
 class MemCacheAdmin_Analysis
 {
     /**
-     * Merge two arrays of stats from MemCacheAdmin_ServerCommand::stats()
+     * Merge two arrays of stats from MemCacheAdmin_ServerCommands::stats()
      *
-     * @param $array Statistic from MemCacheAdmin_ServerCommand::stats()
-     * @param $stats Statistic from MemCacheAdmin_ServerCommand::stats()
+     * @param $array Statistic from MemCacheAdmin_ServerCommands::stats()
+     * @param $stats Statistic from MemCacheAdmin_ServerCommands::stats()
      *
      * @return Array
      */
@@ -60,7 +60,7 @@ class MemCacheAdmin_Analysis
     /**
      * Analyse and return memcache stats command
      *
-     * @param Array $stats Statistic from MemCacheAdmin_ServerCommand::stats()
+     * @param Array $stats Statistic from MemCacheAdmin_ServerCommands::stats()
      *
      * @return Array
      */
@@ -123,7 +123,7 @@ class MemCacheAdmin_Analysis
     /**
      * Analyse and return memcache slabs command
      *
-     * @param Array $slabs Statistic from MemCacheAdmin_ServerCommand::slabs()
+     * @param Array $slabs Statistic from MemCacheAdmin_ServerCommands::slabs()
      *
      * @return Array
      */

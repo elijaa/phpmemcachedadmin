@@ -20,7 +20,7 @@
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
-interface MemCacheAdmin_ICommand
+interface MemCacheAdmin_ICommands
 {
     /**
      * Constructor
