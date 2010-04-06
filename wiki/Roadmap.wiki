@@ -9,3 +9,5 @@ Version 1.1
 - Graphic improvement
 
 - Compatibility with new stat from Memcached 1.4.5
+
+- Adding a lot of tooltips
