@@ -15,6 +15,5 @@ Version 1.1
 Actually Done :
 
 - Better menu configuration
-
-- Slabs are displayed now 
-||1||2||3|| instead of ||1||5||9||
+- Slabs are displayed now  like ||1||2||3||    instead of    ||1||5||9||
+- Various fix and improvements in php code
