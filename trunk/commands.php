@@ -26,30 +26,30 @@ header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'library/commands/ICommands.php';
-require_once 'library/commands/Factory.php';
-require_once 'library/Configuration.php';
+require_once 'Library/Command/Interface.php';
+require_once 'Library/Command/Factory.php';
+require_once 'Library/Configuration.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = MemCacheAdmin_Configuration::getInstance();
+$_ini = Library_Configuration::getInstance();
 
 # Initializing requests
 $request = null;
 
 # Showing Header
-include 'view/header.tpl';
-include 'view/commands/menu.tpl';
+include 'View/Header.tpl';
+include 'View/Commands/Menu.tpl';
 
 # Display by Request Type
 switch($request)
 {
         # Default : Show all commands available
     default :
-        include 'view/commands/commands.tpl';
+        include 'View/Commands/Commands.tpl';
         break;
 }
 # Showing Footer
-include 'view/footer.tpl';
+include 'View/Footer.tpl';

@@ -26,23 +26,23 @@ header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'library/commands/ICommands.php';
-require_once 'library/commands/Factory.php';
-require_once 'library/Analysis.php';
-require_once 'library/Configuration.php';
+require_once 'Library/Command/Interface.php';
+require_once 'Library/Command/Factory.php';
+require_once 'Library/Analysis.php';
+require_once 'Library/Configuration.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = MemCacheAdmin_Configuration::getInstance();
+$_ini = Library_Configuration::getInstance();
 
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
 # Showing Header
-include 'view/header.tpl';
-include 'view/stats/menu.tpl';
+include 'View/Header.tpl';
+include 'View/Stats/Menu.tpl';
 
 # Display by Request Type
 switch($request)
@@ -56,24 +56,24 @@ switch($request)
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
         {
-            $items = MemCacheAdmin_Factory::instance('items')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
+            $items = Library_Command_Factory::instance('items')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
         }
 
         # Cheking if asking an item
         if(isset($_GET['key']))
         {
-            $item = MemCacheAdmin_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['key']);
+            $item = Library_Command_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['key']);
         }
 
         # Items are well formed
         if($items !== false)
         {
-            include 'view/stats/items.tpl';
+            include 'View/Stats/Items.tpl';
         }
         # Items are not well formed
         else
         {
-            include 'view/error.tpl';
+            include 'View/Error.tpl';
         }
         unset($items);
         break;
@@ -86,20 +86,20 @@ switch($request)
         # Ask for one server slabs
         if(isset($_GET['server']))
         {
-            $slabs = MemCacheAdmin_Factory::instance('slabs')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
+            $slabs = Library_Command_Factory::instance('slabs')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
         }
 
         # Slabs are well formed
         if($slabs !== false)
         {
             # Analysis
-            $slabs = MemCacheAdmin_Analysis::slabs($slabs);
-            include 'view/stats/slabs.tpl';
+            $slabs = Library_Analysis::slabs($slabs);
+            include 'View/Stats/Slabs.tpl';
         }
         # Slabs are not well formed
         else
         {
-            include 'view/error.tpl';
+            include 'View/Error.tpl';
         }
         unset($slabs);
         break;
@@ -112,14 +112,14 @@ switch($request)
         # Ask for one server stats
         if(isset($_GET['server']))
         {
-            $stats = MemCacheAdmin_Factory::instance('stats')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
+            $stats = Library_Command_Factory::instance('stats')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
         }
         # Ask for all servers stats
         else
         {
             foreach($_ini['server'] as $server => $port)
             {
-                $stats = MemCacheAdmin_Analysis::merge($stats, MemCacheAdmin_Factory::instance('stats')->stats($server, $port));
+                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats')->stats($server, $port));
             }
         }
 
@@ -127,16 +127,16 @@ switch($request)
         if($stats !== false)
         {
             # Analysis
-            $stats = MemCacheAdmin_Analysis::stats($stats);
-            include 'view/stats/stats.tpl';
+            $stats = Library_Analysis::stats($stats);
+            include 'View/Stats/Stats.tpl';
         }
         # Stats are not well formed
         else
         {
-            include 'view/error.tpl';
+            include 'View/Error.tpl';
         }
         unset($stats);
         break;
 }
 # Showing Footer
-include 'view/footer.tpl';
+include 'View/Footer.tpl';
