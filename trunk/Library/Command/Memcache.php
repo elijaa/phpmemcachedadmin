@@ -133,13 +133,13 @@ class Library_Command_Memcache implements Library_Command_Interface
 
     /**
      * Send get command to server to retrieve an item
-     * Return the result if successful or false otherwise
+     * Return the result
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to retrieve
      *
-     * @return String|Boolean
+     * @return String
      */
     public function get($server, $port, $key)
     {
@@ -151,20 +151,29 @@ class Library_Command_Memcache implements Library_Command_Interface
         {
             return print_r($item, true);
         }
-        return false;
+        return 'NOT_FOUND';
     }
 
     /**
      * Delete an item
-     * Return true if successful, false otherwise
+     * Return the result
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to delete
      *
-     * @return Boolean
+     * @return String
      */
     public function delete($server, $port, $key)
     {
+        # Adding server
+        self::$_memcache->addServer($server, $port);
+
+        # Executing command : get
+        if($delete = self::$_memcache->delete($key))
+        {
+            return 'DELETED';
+        }
+        return 'NOT_FOUND';
     }
 }

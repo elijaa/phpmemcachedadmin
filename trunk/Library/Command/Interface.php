@@ -67,25 +67,39 @@ interface Library_Command_Interface
 
     /**
      * Send get command to server to retrieve an item
-     * Return the result if successful or false otherwise
+     * Return the result
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to retrieve
      *
-     * @return Mixed|Boolean
+     * @return String
      */
     function get($server, $port, $key);
 
     /**
      * Delete an item
-     * Return true if successful, false otherwise
+     * Return the result
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to delete
      *
-     * @return Boolean
+     * @return String
      */
     function delete($server, $port, $key);
+
+     /**
+     * Set an item
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to store
+     * @param Mixed $data Data to store
+     * @param Integer $duration Duration
+     *
+     * @return String
+     */
+    function set($server, $port, $key, $data, $duration);
 }

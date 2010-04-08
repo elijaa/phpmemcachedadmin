@@ -23,7 +23,7 @@
 class Library_Configuration implements ArrayAccess
 {
     private static $_instance = null;
-    private static $_iniPath = 'config/memcache.ini';
+    private static $_iniPath = 'Config/Memcache.ini';
     private static $_iniKeys = array('stats',
                                      'slabs',
                                      'items',

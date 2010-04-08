@@ -6,18 +6,15 @@
                 <div class="left">Hits</div>
                 <div class="middle"><?php echo $stats['get_hits']; ?></div>
                 <div class="right">[<?php echo $stats['get_hits_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss</div>
                 <div class="middle"><?php echo $stats['get_misses']; ?></div>
                 <div class="right">[<?php echo $stats['get_misses_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['get_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -27,12 +24,10 @@
             <div class="row">
                 <div class="left">Total</div>
                 <div class="middle"><?php echo $stats['cmd_set']; ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['set_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -43,18 +38,15 @@
                 <div class="left">Hits</div>
                 <div class="middle"><?php echo $stats['delete_hits']; ?></div>
                 <div class="right">[<?php echo $stats['delete_hits_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss</div>
                 <div class="middle"><?php echo $stats['delete_misses']; ?></div>
                 <div class="right">[<?php echo $stats['delete_misses_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['delete_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -65,24 +57,20 @@
                 <div class="left">Hits</div>
                 <div class="middle"><?php echo $stats['cas_hits']; ?></div>
                 <div class="right">[<?php echo $stats['cas_hits_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss</div>
                 <div class="middle"><?php echo $stats['cas_misses']; ?></div>
                 <div class="right">[<?php echo $stats['cas_misses_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Bad Value</div>
                 <div class="middle"><?php echo $stats['cas_badval']; ?></div>
                 <div class="right">[<?php echo $stats['cas_badval_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['cas_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -93,18 +81,15 @@
                 <div class="left">Hits</div>
                 <div class="middle"><?php echo $stats['incr_hits']; ?></div>
                 <div class="right">[<?php echo $stats['incr_hits_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss</div>
                 <div class="middle"><?php echo $stats['incr_misses']; ?></div>
                 <div class="right">[<?php echo $stats['incr_misses_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['incr_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -115,18 +100,15 @@
                 <div class="left">Hits</div>
                 <div class="middle"><?php echo $stats['decr_hits']; ?></div>
                 <div class="right">[<?php echo $stats['decr_hits_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss</div>
                 <div class="middle"><?php echo $stats['decr_misses']; ?></div>
                 <div class="right">[<?php echo $stats['decr_misses_percent']; ?>%]</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
                 <div class="full"><?php echo $stats['decr_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -160,12 +142,10 @@ if(isset($_GET['server']))
             <div class="row">
                 <div class="left">Uptime</div>
                 <div class="full"><?php echo Library_Analysis::uptime($stats['uptime']); ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Memcached</div>
                 <div class="full">Version <?php echo $stats['version']; ?></div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -175,12 +155,10 @@ if(isset($_GET['server']))
             <div class="row">
                 <div class="left">Current</div>
                 <div class="full"><?php echo $stats['curr_connections']; ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Total</div>
                 <div class="full"><?php echo $stats['total_connections']; ?></div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -189,18 +167,15 @@ if(isset($_GET['server']))
         <div class="container rounded">
             <div class="row">
                 <div class="left">Current Items</div>
-                <div class="middle"><?php echo $stats['curr_items']; ?></div>
-                <div class="clear"></div>
+                <div class="full"><?php echo $stats['curr_items']; ?></div>
             </div>
             <div class="row">
                 <div class="left">Total Items</div>
-                <div class="right"><?php echo $stats['total_items']; ?></div>
-                <div class="clear"></div>
+                <div class="full"><?php echo $stats['total_items']; ?></div>
             </div>
             <div class="row">
                 <div class="left">Garbage Items</div>
-                <div class="middle"><?php echo $stats['evictions']; ?></div>
-                <div class="clear"></div>
+                <div class="full"><?php echo $stats['evictions']; ?></div>
             </div>
         </div>
         <br/>
@@ -210,12 +185,10 @@ if(isset($_GET['server']))
             <div class="row">
                 <div class="left">Bytes Read</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_read']); ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Bytes Written</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_written']); ?></div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -227,12 +200,10 @@ if(isset($_GET['server']))
             <div class="row">
                 <div class="left">Used</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes']); ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Total</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?></div>
-                <div class="clear"></div>
             </div>
          </div>
          <br/>
@@ -250,17 +221,14 @@ if(isset($_GET['server']))
             <div class="row">
                 <div class="left">Request Rate</div>
                 <div class="full"><?php echo $stats['request_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Hit Rate</div>
                 <div class="full"><?php echo $stats['hit_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Miss Rate</div>
                 <div class="full"><?php echo $stats['miss_rate']; ?> Request/sec</div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>

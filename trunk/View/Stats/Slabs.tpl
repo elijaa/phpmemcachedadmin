@@ -5,22 +5,18 @@
             <div class="row">
                 <div class="left">Slabs Allocated</div>
                 <div class="full"><?php echo $slabs['active_slabs']; ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Slabs Used</div>
                 <div class="full"><?php echo $slabs['used_slabs']; ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Memory Used</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?></div>
-                <div class="clear"></div>
             </div>
             <div class="row">
                 <div class="left">Wasted</div>
                 <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?></div>
-                <div class="clear"></div>
             </div>
         </div>
         <br/>
@@ -47,7 +43,7 @@ foreach($slabs as $id => $slab)
     if(is_numeric($id) && ($slab['used_chunks'] > 0))
     {
         # Making a new line
-        if($actualSlab > 3)
+        if($actualSlab >= 3)
         {
 ?>
         </tr>
@@ -60,58 +56,50 @@ foreach($slabs as $id => $slab)
         {
 ?>
         <td <?php if($actualSlab > 0) { echo 'style="padding-left:10px;"'; } ?>>
-            <span class="title rounded">Slab <?php echo $id; ?> <span class="stats">Stats</span>
-            <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Items</a></span></span>
+            <span class="title rounded">
+                Slab <?php echo $id; ?> <span class="stats">Stats</span>
+                <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
+            </span>
                 <div class="container rounded">
                     <div class="row">
                         <div class="left">Chunk Size</div>
                         <div class="full"><?php echo Library_Analysis::byteResize($slab['chunk_size']); ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Used Chunk</div>
                         <div class="full"><?php echo $slab['used_chunks']; ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Total Chunk</div>
                         <div class="full"><?php echo $slab['total_chunks']; ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Total Page</div>
                         <div class="full"><?php echo $slab['total_pages']; ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Wasted</div>
                         <div class="full"><?php echo Library_Analysis::byteResize($slab['mem_wasted']); ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Hits</div>
                         <div class="full"><?php echo $slab['request_rate']; ?> Request/sec</div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Evicted</div>
                         <div class="full"><?php echo $slab['items:evicted']; ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Evicted Last</div>
                         <div class="full"><?php echo Library_Analysis::uptime($slab['items:evicted_time']); ?></div>
-                        <div class="clear"></div>
                     </div>
                 <!--<div class="row">
                         <div class="left">Out of Memory</div>
                         <div class="full"><?php echo $slab['items:outofmemory']; ?></div>
-                        <div class="clear"></div>
                     </div>
                     <div class="row">
                         <div class="left">Tail Repairs</div>
                         <div class="full"><?php echo $slab['items:tailrepairs']; ?></div>
-                        <div class="clear"></div>
                     </div>-->
                 </div>
                 <br/>
@@ -122,6 +110,10 @@ foreach($slabs as $id => $slab)
     }
 ?>
 <?php
+}
+for(true; $actualSlab < 3 ; $actualSlab++)
+{
+    echo '<td style="width:260px;"></td>';
 }
 ?>
         </tr>
