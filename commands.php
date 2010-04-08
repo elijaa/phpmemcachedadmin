@@ -22,7 +22,7 @@
  */
 
 # Headers
-header('Content-type: text/html; charset=UTF-8');
+header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
@@ -37,19 +37,76 @@ date_default_timezone_set('Europe/Paris');
 $_ini = Library_Configuration::getInstance();
 
 # Initializing requests
-$request = null;
+$request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
+$response = array();
 
-# Showing Header
+# Showing header
 include 'View/Header.tpl';
 include 'View/Commands/Menu.tpl';
 
-# Display by Request Type
+# Display by request rype
 switch($request)
 {
-        # Default : Show all commands available
+    # Memcache::get command
+    case 'get':
+        # Ask for delete on one server
+        if($_GET['request_server'] != '')
+        {
+            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->get($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key']);
+        }
+        # Ask for delete on all servers
+        else
+        {
+            foreach($_ini['server'] as $server => $port)
+            {
+                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->get($server, $_ini['server'][$server], $_GET['request_key']);
+            }
+        }
+        break;
+
+    # Memcache::set command
+    case 'set':
+        # Ask for delete on one server
+        if($_GET['request_server'] != '')
+        {
+            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->set($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']);
+        }
+        # Ask for delete on all servers
+        else
+        {
+            foreach($_ini['server'] as $server => $port)
+            {
+                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->set($server, $_ini['server'][$server], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']);
+            }
+        }
+        break;
+
+        # Memcache::delete command
+    case 'delete':
+        # Ask for delete on one server
+        if($_GET['request_server'] != '')
+        {
+            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->delete($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key']);
+        }
+        # Ask for delete on all servers
+        else
+        {
+            foreach($_ini['server'] as $server => $port)
+            {
+                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->delete($server, $_ini['server'][$server], $_GET['request_key']);
+            }
+        }
+        break;
+
+        # Default : No command
     default :
-        include 'View/Commands/Commands.tpl';
         break;
 }
-# Showing Footer
+# Showing results
+    include 'View/Response.tpl';
+
+# Showing formulary
+include 'View/Commands/Commands.tpl';
+
+# Showing footer
 include 'View/Footer.tpl';

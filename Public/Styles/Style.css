@@ -1,20 +1,20 @@
-@CHARSET"ISO-8859-1";body{color:#000000;font-family:tahoma,Arial,sans-serif;font-size:0.8em;margin-top:10px;}
-img{border:none;align:center;}
+body{color:#000000;font-family:tahoma,Arial,sans-serif;font-size:0.8em;margin-top:10px;}
+img{border:none;}
 a{color:#EEEEEE;text-decoration:none;}
 a:hover{color:#AA0000;}
+pre{overflow: auto;}
 div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
-div.row{display:block;padding:3px 0px 2px 7px;min-height:18px;}
 .container{width:254px;background:#DBDBDB;margin-top:1px;}
 .serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
 .rounded{-moz-border-radius:8px 8px 8px 8px;}
+div.row{padding:3px 0px 2px 7px;min-height:18px;}
 div.left{width:100px;float:left;font-weight:bold;}
 div.right{width:52px;float:left;}
 div.middle{width:86px;float:left;}
 div.full{width:140px;float:left;}
-div.clear{float:none;clear:both;height:0px;}
 .stats{color:#2A707B;}
 hr{height:0; border:none; border-bottom:solid 1px #EEEEEE;}
-input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px 3px 3px 3px;width:160px;margin-top:1px;}
+input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px 3px 3px 3px;width:200px;margin-top:1px;}
 .menu{border:solid 1px #A0312A;color:#EEEEEE;width:198px;}
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}

@@ -40,18 +40,18 @@ $_ini = Library_Configuration::getInstance();
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
-# Showing Header
+# Showing header
 include 'View/Header.tpl';
 include 'View/Stats/Menu.tpl';
 
-# Display by Request Type
+# Display by request type
 switch($request)
 {
     # Items : Display of all items for a single slab for a single server
     case 'items':
         # Initializing items array
         $items = false;
-        $item = null;
+        $response = array();
 
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
@@ -60,14 +60,18 @@ switch($request)
         }
 
         # Cheking if asking an item
-        if(isset($_GET['key']))
+        if(isset($_GET['request_key']))
         {
-            $item = Library_Command_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['key']);
+            $response[$_GET['server'] . ':' . $_ini['server'][$_GET['server']]] = Library_Command_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['request_key']);
         }
 
         # Items are well formed
         if($items !== false)
         {
+            # Showing results
+            include 'View/Response.tpl';
+
+            # Showing items
             include 'View/Stats/Items.tpl';
         }
         # Items are not well formed
@@ -138,5 +142,5 @@ switch($request)
         unset($stats);
         break;
 }
-# Showing Footer
+# Showing footer
 include 'View/Footer.tpl';

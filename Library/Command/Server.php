@@ -23,6 +23,7 @@
 class Library_Command_Server implements Library_Command_Interface
 {
     private static $_ini;
+    private static $_log;
 
     /**
      * Constructor
@@ -67,8 +68,14 @@ class Library_Command_Server implements Library_Command_Interface
         $buffer = fgets($handle);
 
         # Checking if result is valid
-        if(strpos($buffer, 'END') !== false)
+        if($this->end($buffer))
         {
+            # Closing socket
+            fclose($handle);
+
+            # Adding error to log
+            self::$_log = $buffer;
+
             return false;
         }
 
@@ -77,22 +84,34 @@ class Library_Command_Server implements Library_Command_Interface
         {
             $buffer .= fgets($handle);
 
-            # End of MemCache stats command
-            if((strpos($buffer, 'END')) || (strpos($buffer, 'DELETED') != false) || (strpos($buffer, 'OK') != false))
-            {
-                break;
-            }
-
-            # End of MemCache error result
-            if((strpos($buffer,'NOT_FOUND') != false) || (strpos($buffer, 'ERROR') != false)
-            || (strpos($buffer, 'SERVER_ERROR') != false) || (strpos($buffer, 'CLIENT_ERROR') != false))
+            # Checking for end of MemCache command
+            if($this->end($buffer))
             {
                 break;
             }
         }
         # Closing socket
         fclose($handle);
+
         return $buffer;
+    }
+
+    /**
+     * Check if response is at the end from memcache server
+     * Return true if response end, true otherwise
+     *
+     * @param String $buffer Buffer received from memcache server
+     *
+     * @return Boolean
+     */
+    private function end($buffer)
+    {
+        # Checking command response end
+        if(preg_match('/(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED)\r\n$/', $buffer, $mathc))
+        {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -109,7 +128,7 @@ class Library_Command_Server implements Library_Command_Interface
         $return = array();
 
         # Exploding by \r\n
-        $lines = explode("\r\n", $string);
+        $lines = preg_split('/\r\n/', $string);
 
         # Stats
         if($stats)
@@ -117,7 +136,7 @@ class Library_Command_Server implements Library_Command_Interface
             # Browsing each line
             foreach($lines as $line)
             {
-                $data = explode(' ', $line);
+                $data = preg_split('/ /', $line);
                 if(isset($data[2]))
                 {
                     $return[$data[1]] = $data[2];
@@ -130,7 +149,7 @@ class Library_Command_Server implements Library_Command_Interface
             # Browsing each line
             foreach($lines as $line)
             {
-                $data = explode(' ', $line);
+                $data = preg_split('/ /', $line);
                 if(isset($data[1]))
                 {
                     $return[$data[1]] = array(substr($data[2], 1), $data[4]);
@@ -191,7 +210,7 @@ class Library_Command_Server implements Library_Command_Interface
             # Indexing by slabs
             foreach($result as $key => $value)
             {
-                $key = explode(':', $key);
+                $key = preg_split('/:/', $key);
                 $slabs[$key[0]][$key[1]] = $value;
             }
 
@@ -204,7 +223,7 @@ class Library_Command_Server implements Library_Command_Interface
                 # Indexing by slabs
                 foreach($result as $key => $value)
                 {
-                    $key = explode(':', $key);
+                    $key = preg_split('/:/', $key);
                     $slabs[$key[1]]['items:' . $key[2]] = $value;
                 }
 
@@ -246,18 +265,16 @@ class Library_Command_Server implements Library_Command_Interface
      * @param Integer $port Hostname Port
      * @param String $key Key to retrieve
      *
-     * @return String|Boolean
+     * @return String
      */
     public function get($server, $port, $key)
     {
         # Executing command : get
-        if($string = $this->exec('get ' . $key, $server, $port))
+        if(($string = $this->exec('get ' . $key, $server, $port)))
         {
-            # Exploding by \r\n
-            $lines = explode("\r\n", $string);
-            return $lines[1];
+            return preg_replace('/^VALUE ' . $key . '[0-9 ]*\r\n/', '', $string);
         }
-        return false;
+        return self::$_log;
     }
 
     /**
@@ -268,9 +285,40 @@ class Library_Command_Server implements Library_Command_Interface
      * @param Integer $port Hostname Port
      * @param String $key Key to delete
      *
-     * @return Boolean
+     * @return String
      */
     public function delete($server, $port, $key)
     {
+        # Executing command : delete
+        if(($result = $this->exec('delete ' . $key, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
+    }
+
+     /**
+     * Set an item
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to store
+     * @param Mixed $data Data to store
+     * @param Integer $duration Duration
+     *
+     * @return String
+     */
+    function set($server, $port, $key, $data, $duration)
+    {
+        # Formatting data
+        $data = preg_replace('/\r/', '', $data);
+
+        # Executing command : delete
+        if(($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
     }
 }

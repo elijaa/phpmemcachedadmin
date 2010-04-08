@@ -25,7 +25,7 @@ class Library_Command_Factory
     private static $_object = array();
 
     /**
-     * Accessor to command class instance
+     * Accessor to command class instance by command type
      *
      * @param String $command Type of command
      *
@@ -63,5 +63,46 @@ class Library_Command_Factory
             }
         }
         return self::$_object[$_ini[$command]];
+    }
+
+    /**
+     * Accessor to command class instance by type
+     *
+     * @param String $command Type of command
+     *
+     * @return void
+     */
+    public static function api($api)
+    {
+        # Importing configuration
+        $_ini = Library_Configuration::getInstance();
+
+        # Instance does not exists
+        if(!isset(self::$_object[$api]))
+        {
+            # Switching by API
+            switch($api)
+            {
+                case 'Memcache':
+                    # PECL Memcache API
+                    require_once 'Memcache.php';
+                    self::$_object['Memcache'] = new Library_Command_Memcache();
+                    break;
+
+                case 'Memcached':
+                    # PECL Memcached API
+                    require_once 'Memcached.php';
+                    self::$_object['Memcached'] = new Library_Command_Memcached();
+                    break;
+
+                case 'Server':
+                default:
+                    # Server API (eg communicating directly with the memcache server)
+                    require_once 'Server.php';
+                    self::$_object['Server'] = new Library_Command_Server();
+                    break;
+            }
+        }
+        return self::$_object[$api];
     }
 }
