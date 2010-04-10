@@ -8,12 +8,6 @@ Version 1.1
 
 - Graphic improvement
 
-- Compatibility with new stat from Memcached 1.4.5
-
-- Adding a lot of tooltips
-
-Actually Done :
-
 - Better menu configuration
 
 - Slabs are displayed now  like ||1||2||3||    instead of    ||1||5||9||
