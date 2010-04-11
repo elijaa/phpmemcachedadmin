@@ -205,7 +205,7 @@ class Library_Analysis
      *
      * @return String
      */
-    public static function valueResize($value)
+    public static function statResize($value)
     {
         # Unit list
         $units = array('','K','M','G');

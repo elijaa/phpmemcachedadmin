@@ -22,7 +22,11 @@
  */
 class Library_HTML
 {
-
+    /**
+     * Dump server list in HTML select
+     *
+     * @return String
+     */
     public static function serverList()
     {
         # Loading ini file
@@ -38,7 +42,14 @@ class Library_HTML
         return $serverList;
     }
 
-
+    /**
+     * Dump api list un HTML select with select name
+     *
+     * @param String $iniAPI API Name from ini file
+     * @param String $id Select ID
+     *
+     * @return String
+     */
     public static function apiList($iniAPI = '', $id)
     {
         return '<select class="commands" name="' . $id . '">
@@ -48,6 +59,14 @@ class Library_HTML
         </select>';
     }
 
+    /**
+     * Used to see if an option is selected
+     *
+     * @param String $actual Actual value
+     * @param String $selected Selected value
+     *
+     * @return String
+     */
     private static function selected($actual, $selected)
     {
         if($actual == $selected)
@@ -55,5 +74,4 @@ class Library_HTML
             return 'selected="selected"';
         }
     }
-
 }
