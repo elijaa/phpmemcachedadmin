@@ -78,18 +78,6 @@ interface Library_Command_Interface
     function get($server, $port, $key);
 
     /**
-     * Delete an item
-     * Return the result
-     *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to delete
-     *
-     * @return String
-     */
-    function delete($server, $port, $key);
-
-     /**
      * Set an item
      * Return the result
      *
@@ -102,4 +90,28 @@ interface Library_Command_Interface
      * @return String
      */
     function set($server, $port, $key, $data, $duration);
+
+    /**
+     * Delete an item
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to delete
+     *
+     * @return String
+     */
+    function delete($server, $port, $key);
+
+    /**
+     * Flush all items on a server after delay
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param Integer $delay Delay before flushing server
+     *
+     * @return String
+     */
+    function flush_all($server, $port, $delay);
 }

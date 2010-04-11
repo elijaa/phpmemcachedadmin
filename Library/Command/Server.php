@@ -278,6 +278,31 @@ class Library_Command_Server implements Library_Command_Interface
     }
 
     /**
+     * Set an item
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to store
+     * @param Mixed $data Data to store
+     * @param Integer $duration Duration
+     *
+     * @return String
+     */
+    function set($server, $port, $key, $data, $duration)
+    {
+        # Formatting data
+        $data = preg_replace('/\r/', '', $data);
+
+        # Executing command : set
+        if(($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
+    }
+
+    /**
      * Delete an item
      * Return true if successful, false otherwise
      *
@@ -297,25 +322,20 @@ class Library_Command_Server implements Library_Command_Interface
         return self::$_log;
     }
 
-     /**
-     * Set an item
+    /**
+     * Flush all items on a server
      * Return the result
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
-     * @param String $key Key to store
-     * @param Mixed $data Data to store
-     * @param Integer $duration Duration
+     * @param Integer $delay Delay before flushing server
      *
      * @return String
      */
-    function set($server, $port, $key, $data, $duration)
+    function flush_all($server, $port, $delay)
     {
-        # Formatting data
-        $data = preg_replace('/\r/', '', $data);
-
         # Executing command : delete
-        if(($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port)))
+        if(($result = $this->exec('flush_all ' . $delay, $server, $port)))
         {
             return $result;
         }

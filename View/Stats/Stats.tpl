@@ -1,6 +1,6 @@
     <br/>
     <div style="float:left;">
-        <span class="title rounded">Get <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Get <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Hits</div>
@@ -19,7 +19,7 @@
         </div>
         <br/>
 
-        <span class="title rounded">Set <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Set <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Total</div>
@@ -32,7 +32,7 @@
         </div>
         <br/>
 
-        <span class="title rounded">Delete <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Delete <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Hits</div>
@@ -51,7 +51,7 @@
         </div>
         <br/>
 
-        <span class="title rounded">Cas <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Cas <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Hits</div>
@@ -75,7 +75,7 @@
         </div>
         <br/>
 
-        <span class="title rounded">Increment <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Increment <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Hits</div>
@@ -94,7 +94,7 @@
         </div>
         <br/>
 
-        <span class="title rounded">Decrement <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Decrement <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Hits</div>
@@ -111,17 +111,6 @@
                 <div class="full"><?php echo $stats['decr_rate']; ?> Request/sec</div>
             </div>
         </div>
-        <br/>
-
-        <div class="title rounded" style="width:772px; display:float; position:absolute; text-align:center;">
-            <a href="http://code.google.com/p/phpmemcacheadmin/" target="_blank">phpMemCacheAdmin on GoogleCode</a>
-             - <a href="http://memcached.org/" target="_blank">Memcached.org</a>
-             - <a href="http://www.pecl.php.net/package/memcache" target="_blank">PECL Memcache</a>
-             - <a href="http://www.pecl.php.net/package/memcached" target="_blank">PECL Memcached</a>
-            <br/>
-            Styling &amp; Banner image Copyright (c) 2009 Dormando
-        </div>
-
     </div>
 
     <div style="float:left; padding-left:10px;">
@@ -129,15 +118,19 @@
 # Viewing a server
 if(isset($_GET['server']))
 { ?>
-        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px; height: 18px; margin: 0px;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a>
-            |
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Flush this Server</a>
+        <form method="get" id="flushForm" action="commands.php">
+        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;">
+            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
+            <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
+            <input type="hidden" name="request_api" value="<?php echo $_ini['flush_all_api']; ?>"/>
+            <input type="hidden" name="request_command" value="flush_all"/>
+            <a href="#" onclick="document.getElementById('flushForm').submit();">Flush this Server</a>
         </div>
+        </form>
         <br/>
 <?php
 } ?>
-        <span class="title rounded">Server <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Server <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Uptime</div>
@@ -150,7 +143,7 @@ if(isset($_GET['server']))
         </div>
         <br/>
 
-        <span class="title rounded">Connection <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Connection <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Current</div>
@@ -163,7 +156,7 @@ if(isset($_GET['server']))
         </div>
         <br/>
 
-        <span class="title rounded">Item <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Item <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Current Items</div>
@@ -180,7 +173,7 @@ if(isset($_GET['server']))
         </div>
         <br/>
 
-        <span class="title rounded">Network <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Network <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Bytes Read</div>
@@ -194,8 +187,8 @@ if(isset($_GET['server']))
         <br/>
     </div>
 
-    <div style="float:left; padding-left:10px;">
-        <span class="title rounded">Cache Size <span class="stats">Stats</span></span>
+    <div style="float:left; padding-left:10px;clear:right;">
+        <span class="title grey rounded">Cache Size <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Used</div>
@@ -208,7 +201,7 @@ if(isset($_GET['server']))
          </div>
          <br/>
 
-        <span class="title rounded">Cache Size <span class="stats">Graphic</span></span>
+        <span class="title grey rounded">Cache Size <span class="green">Graphic</span></span>
         <div class="container rounded">
             <div class="row">
                 <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=240x176&amp;chl=Used|Free&amp;chf=bg,s,DBDBDB&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="240" height="176"/>
@@ -216,7 +209,7 @@ if(isset($_GET['server']))
         </div>
         <br/>
 
-        <span class="title rounded">Cache Request <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Cache Request <span class="green">Stats</span></span>
          <div class="container rounded">
             <div class="row">
                 <div class="left">Request Rate</div>
@@ -233,7 +226,7 @@ if(isset($_GET['server']))
         </div>
         <br/>
 
-        <span class="title rounded">Hit &amp; Miss Rate <span class="stats">Graphic</span></span>
+        <span class="title grey rounded">Hit &amp; Miss Rate <span class="green">Graphic</span></span>
          <div class="container rounded">
             <div class="row">
             <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=240x176&amp;chl=Hit|Miss&amp;chf=bg,s,DBDBDB&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="240" height="176"/>
