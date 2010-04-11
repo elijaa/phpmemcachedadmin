@@ -10,7 +10,7 @@
     <div style="margin: 0 auto;width:788px;clear:both;float:left;">
         <a href="http://memcached.org/"><img src="Public/Images/Banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>
 
-        <div class="serverlist rounded" style="padding: 3px 7px 3px 7px; width: 772px;">
+        <div class="serverlist rounded" style="padding:3px 7px 3px 7px; width:772px;">
 <?php
 # Stats view
 if ($_SERVER['PHP_SELF'] == '/index.php')
@@ -27,7 +27,7 @@ else
         <option value="" <?php if(!isset($_GET['server']) || ($_GET['server'] == '')) { echo 'selected="selected"'; } ?>>All Servers</option>
 <?php
 # Servers
-foreach($_ini['server'] as $server => $port)
+foreach($_ini['server'] as $server)
 { ?>
         <option value="<?php echo $server; ?>" <?php if((isset($_GET['server'])) && ($_GET['server'] == $server)) { echo 'selected="selected"'; } ?>>
             <?php echo $server; ?>

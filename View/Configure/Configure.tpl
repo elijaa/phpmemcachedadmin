@@ -4,9 +4,7 @@
         <div class="container rounded" style="width:374px;padding:7px;">
             <form method="post" action="configure.php?request_write=commands">
             <div class="row">
-                Memcached commands used by phpMemCacheAdmin<br/><br/>
-                <?php if(!class_exists('Memcache')) { ?><strong>Warning</strong> : It seem that PECL Memcache is not installed<br/><?php } ?>
-                <?php if(!class_exists('Memcached')) { ?><strong>Warning</strong> : It seem that PECL Memcached is not installed<br/><?php } ?>
+                Memcached commands API used by phpMemCacheAdmin<br/><br/>
                 <strong>Recommendations :</strong><br/>
                 - Use Server for stats, slabs, items<br/>
                 - PECL Memcached does not support the slabs and items commands<br/>
@@ -63,14 +61,14 @@
             </div>
             <div id="server_form">
             <?php
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             { ?>
-            <div id="server_<?php echo $server . $port; ?>">
+            <div id="server_<?php echo $server; ?>">
                 <div class="row">
                     <div class="left">Server</div>
                     <div>
-                        <input type="text" name="server[]" value="<?php echo $server . ':' . $port; ?>" onfocus="serverOnFocus(this)" onblur="serverOnBlur(this)"/>
-                        <a class="menu grey serverlist" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServer('server_<?php echo $server . $port; ?>')">Delete</a>
+                        <input type="text" name="server[]" value="<?php echo $server; ?>" onfocus="serverOnFocus(this)" onblur="serverOnBlur(this)"/>
+                        <a class="menu grey serverlist" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServer('server_<?php echo $server; ?>')">Delete</a>
                     </div>
                 </div>
             </div>

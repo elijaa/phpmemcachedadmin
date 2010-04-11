@@ -52,16 +52,19 @@ switch($request)
         $items = false;
         $response = array();
 
+        # Spliting server in hostname:port
+        $server = preg_split('/:/', $server);
+
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
         {
-            $items = Library_Command_Factory::instance('items_api')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
+            $items = Library_Command_Factory::instance('items_api')->items($server[0], $server[1], $_GET['slab']);
         }
 
         # Cheking if asking an item
         if(isset($_GET['request_key']))
         {
-            $response[$_GET['server'] . ':' . $_ini['server'][$_GET['server']]] = Library_Command_Factory::instance('get_api')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['request_key']);
+            $response[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('get_api')->get($server[0], $server[1], $_GET['request_key']);
         }
 
         # Items are well formed
@@ -89,7 +92,9 @@ switch($request)
         # Ask for one server slabs
         if(isset($_GET['server']))
         {
-            $slabs = Library_Command_Factory::instance('slabs_api')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $server);
+            $slabs = Library_Command_Factory::instance('slabs_api')->slabs($server[0], $server[1]);
         }
 
         # Slabs are well formed
@@ -115,14 +120,18 @@ switch($request)
         # Ask for one server stats
         if(isset($_GET['server']))
         {
-            $stats = Library_Command_Factory::instance('stats_api')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $_GET['server']);
+            $stats = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
         # Ask for all servers stats
         else
         {
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             {
-                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server, $port));
+                # Spliting server in hostname:port
+                $server = preg_split('/:/', $server);
+                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]));
             }
         }
 

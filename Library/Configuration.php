@@ -47,14 +47,8 @@ class Library_Configuration implements ArrayAccess
         # Opening ini file
         self::$_ini = parse_ini_file(self::$_iniPath);
 
-        # Initializing server list
-        foreach(self::$_ini['server'] as $key => $server)
-        {
-            # Exploding by server:port
-            $server = explode(':', $server);
-            unset(self::$_ini['server'][$key]);
-            self::$_ini['server'][$server[0]] = $server[1];
-        }
+        # Ordering server list
+        sort(self::$_ini['server']);
     }
 
     /**
@@ -163,9 +157,9 @@ class Library_Configuration implements ArrayAccess
                 $iniContent[] = '[' . $iniKey . ']';
                 if(is_array($iniValue))
                 {
-                    foreach($iniValue as $subIniKey => $subIniValue)
+                    foreach($iniValue as $subIniValue)
                     {
-                        $iniContent[] = $iniKey . '[] = "' . $subIniKey . ':' . $subIniValue . '"';
+                        $iniContent[] = $iniKey . '[] = "' . $subIniValue . '"';
                     }
                 }
                 else

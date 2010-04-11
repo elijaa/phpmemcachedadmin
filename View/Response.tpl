@@ -3,7 +3,9 @@ if((isset($response)) && ($response != array()))
 { ?>
     <br/>
     <span class="title grey rounded" style="width:772px;">
-        Result of <span class="green"><?php echo ucfirst($_GET['request_command']); ?></span> Command with <?php echo $_GET['request_api']; ?> API
+        Result of <span class="green">
+        <?php echo isset($_POST['request_command']) ? ucfirst($_POST['request_command']) : ucfirst($_GET['request_command']); ?></span>
+        Command with <?php echo isset($_POST['request_api']) ? $_POST['request_api'] : $_GET['request_api']; ?> API
     </span>
     <div class="container rounded" style="width:772px;padding:7px;">
     <?php

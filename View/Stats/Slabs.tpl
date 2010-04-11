@@ -102,11 +102,11 @@ foreach($slabs as $id => $slab)
                         <div class="left">Evicted Last</div>
                         <div class="full"><?php echo Library_Analysis::uptime($slab['items:evicted_time']); ?></div>
                     </div>
-                <!--<div class="row">
+                    <div class="row">
                         <div class="left">Out of Memory</div>
                         <div class="full"><?php echo $slab['items:outofmemory']; ?></div>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="left">Tail Repairs</div>
                         <div class="full"><?php echo $slab['items:tailrepairs']; ?></div>
                     </div>-->

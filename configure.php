@@ -66,13 +66,7 @@ switch($request)
     case 'servers':
         # Updating configuration
         $array = array();
-        $servers = $_POST['server'];
-        foreach($_POST['server'] as $server)
-        {
-            $server = preg_split('/:/', $server);
-            $array[$server[0]] = $server[1];
-        }
-        $_ini['server'] = $array;
+        $_ini['server'] = $_POST['server'];
 
         # Writing configuration file
         $write = Library_Configuration::write();
