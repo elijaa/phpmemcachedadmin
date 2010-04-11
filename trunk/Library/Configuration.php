@@ -24,12 +24,14 @@ class Library_Configuration implements ArrayAccess
 {
     private static $_instance = null;
     private static $_iniPath = 'Config/Memcache.ini';
-    private static $_iniKeys = array('stats',
-                                     'slabs',
-                                     'items',
-                                     'get',
-                                     'delete',
-                                     'serverd',
+    private static $_iniKeys = array('stats_api',
+                                     'slabs_api',
+                                     'items_api',
+                                     'get_api',
+                                     'set_api',
+                                     'delete_api',
+                                     'flush_all_api',
+                                     'server',
                                      'connection_timeout',
                                      'max_item_dump');
     private static $_ini;
@@ -142,6 +144,7 @@ class Library_Configuration implements ArrayAccess
                 return false;
             }
         }
+        return true;
     }
 
     /**
@@ -160,9 +163,9 @@ class Library_Configuration implements ArrayAccess
                 $iniContent[] = '[' . $iniKey . ']';
                 if(is_array($iniValue))
                 {
-                    foreach($iniValue as $subIniValue)
+                    foreach($iniValue as $subIniKey => $subIniValue)
                     {
-                        $iniContent[] = $iniKey . '[] = "' . $subIniValue . '"';
+                        $iniContent[] = $iniKey . '[] = "' . $subIniKey . ':' . $subIniValue . '"';
                     }
                 }
                 else

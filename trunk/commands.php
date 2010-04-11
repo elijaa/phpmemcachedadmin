@@ -29,6 +29,7 @@ header('Cache-Control: no-cache, must-revalidate');
 require_once 'Library/Command/Interface.php';
 require_once 'Library/Command/Factory.php';
 require_once 'Library/Configuration.php';
+require_once 'Library/HTML.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -42,7 +43,6 @@ $response = array();
 
 # Showing header
 include 'View/Header.tpl';
-include 'View/Commands/Menu.tpl';
 
 # Display by request rype
 switch($request)
@@ -64,7 +64,7 @@ switch($request)
         }
         break;
 
-    # Memcache::set command
+        # Memcache::set command
     case 'set':
         # Ask for delete on one server
         if($_GET['request_server'] != '')
@@ -98,12 +98,34 @@ switch($request)
         }
         break;
 
+    # Memcache::flush_all command
+    case 'flush_all':
+        # Checking delay
+        if(!isset($_GET['request_delay']) || !is_numeric($_GET['request_delay']))
+        {
+            $_GET['request_delay'] = 0;
+        }
+
+        # Ask for delete on one server
+        if($_GET['request_server'] != '')
+        {
+            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->flush_all($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_delay']);
+        }
+        # Ask for delete on all servers
+        else
+        {
+            foreach($_ini['server'] as $server => $port)
+            {
+                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->flush_all($server, $_ini['server'][$server], $_GET['request_delay']);
+            }
+        }
+        break;
         # Default : No command
     default :
         break;
 }
 # Showing results
-    include 'View/Response.tpl';
+include 'View/Response.tpl';
 
 # Showing formulary
 include 'View/Commands/Commands.tpl';

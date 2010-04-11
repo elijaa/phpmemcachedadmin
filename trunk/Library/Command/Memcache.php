@@ -155,6 +155,31 @@ class Library_Command_Memcache implements Library_Command_Interface
     }
 
     /**
+     * Set an item
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to store
+     * @param Mixed $data Data to store
+     * @param Integer $duration Duration
+     *
+     * @return String
+     */
+    function set($server, $port, $key, $data, $duration)
+    {
+        # Adding server
+        self::$_memcache->addServer($server, $port);
+
+        # Executing command : set
+        if(self::$_memcache->set($key, $data, 0, $duration))
+        {
+            return 'STORED';
+        }
+        return 'ERROR';
+    }
+
+    /**
      * Delete an item
      * Return the result
      *
@@ -169,11 +194,32 @@ class Library_Command_Memcache implements Library_Command_Interface
         # Adding server
         self::$_memcache->addServer($server, $port);
 
-        # Executing command : get
-        if($delete = self::$_memcache->delete($key))
+        # Executing command : delete
+        if(self::$_memcache->delete($key))
         {
             return 'DELETED';
         }
         return 'NOT_FOUND';
+    }
+
+    /**
+     * Flush all items on a server
+     * Warning, delay won't work with Memcache API
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param Integer $delay Delay before flushing server
+     *
+     * @return String
+     */
+    function flush_all($server, $port, $delay)
+    {
+        # Adding server
+        self::$_memcache->addServer($server, $port);
+
+        # Executing command : flush_all
+        self::$_memcache->flush();
+        return 'OK';
     }
 }

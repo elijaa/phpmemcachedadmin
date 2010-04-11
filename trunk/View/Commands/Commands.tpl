@@ -1,71 +1,74 @@
-<?php
-# Making Servers Select
-$serverSelect = '<select class="commands" name="request_server"><option value="">All Servers</option>';
-foreach($_ini['server'] as $server => $port)
-{
-    $serverSelect .= '<option value="' . $server . '">' . $server . '</option>';
-}
-$serverSelect .= '</select>';
-
-# Making API Select
-$apiSelect = '
-<select class="commands" name="request_api">
-    <option value="Server">Server API</option>
-    <option value="Memcache">Memcache API</option>
-    <option value="Memcached">Memcached API</option>
-</select>';
-?>
     <br/>
     <div style="float:left;">
-        <span class="title rounded" style="width:374px;">Get <span class="stats">Command</span></span>
-        <div class="container rounded" style="width:374px; padding:7px 7px 7px 7px;">
+        <span class="title grey rounded" style="width:374px;">Get <span class="green">Command</span></span>
+        <div class="container rounded" style="width:374px;padding:7px">
             <form method="get" action="commands.php">
+               <div class="row">
+                    Execute get command on one or all memcached servers<br/>
+                    <hr/>
+                </div>
                 <div class="row">
                     <div class="left">Key</div>
                     <div><input class="commands" name="request_key"/></div>
                 </div>
                 <div class="row">
                     <div class="left">Server</div>
-                    <div><?php echo $serverSelect; ?></div>
+                    <div><?php echo Library_HTML::serverList(); ?></div>
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo $apiSelect; ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini['get_api'], 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
+                    <hr/>
                     <input type="hidden" name="request_command" value="get"/>
                     <input class="menu serverlist" type="submit" value="Execute Get"/>
                 </div>
             </form>
         </div>
         <br/>
-        <span class="title rounded" style="width:374px;">Delete <span class="stats">Command</span></span>
-        <div class="container rounded" style="width:374px; padding:7px 7px 7px 7px;">
+        <span class="title grey rounded" style="width:374px;">Delete <span class="green">Command</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="get" action="commands.php">
+                <div class="row">
+                    Execute delete command on one or all memcached servers<br/>
+                    <hr/>
+                </div>
                 <div class="row">
                     <div class="left">Key</div>
                     <div><input class="commands" name="request_key"/></div>
                 </div>
                 <div class="row">
                     <div class="left">Server</div>
-                    <div><?php echo $serverSelect; ?></div>
+                    <div><?php echo Library_HTML::serverList(); ?></div>
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo $apiSelect; ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini['delete_api'], 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
+                    <hr/>
                     <input type="hidden" name="request_command" value="delete"/>
                     <input class="menu serverlist" type="submit" value="Execute Delete"/>
                 </div>
             </form>
         </div>
+        <div class="container rounded" style="width:374px;padding:7px;margin-top:46px;">
+            <div class="row">
+                For more informations about memcached commands, see memcached protocol
+                <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
+            </div>
+        </div>
     </div>
 
     <div style="float:left; padding-left:10px;">
-        <span class="title rounded" style="width:374px;">Set <span class="stats">Command</span></span>
-        <div class="container rounded" style="width:374px; padding:7px 7px 7px 7px;">
+        <span class="title grey rounded" style="width:374px;">Set <span class="green">Command</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="get" action="commands.php">
+                <div class="row">
+                    Execute set command on one or all memcached servers<br/>
+                    <hr/>
+                </div>
                 <div class="row">
                     <div class="left">Key</div>
                     <div><input class="commands" name="request_key"/></div>
@@ -76,19 +79,49 @@ $apiSelect = '
                 </div>
                 <div class="row">
                     <div class="left">Data</div>
-                    <div><textarea name="request_data" rows="5" cols="5"></textarea></div>
+                    <div><textarea name="request_data" rows="4" cols="5"></textarea></div>
                 </div>
                 <div class="row">
                     <div class="left">Server</div>
-                    <div><?php echo $serverSelect; ?></div>
+                    <div><?php echo Library_HTML::serverList(); ?></div>
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo $apiSelect; ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini['set_api'], 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
+                    <hr/>
                     <input type="hidden" name="request_command" value="set"/>
                     <input class="menu serverlist" type="submit" value="Execute Set"/>
+                </div>
+            </form>
+        </div>
+
+        <br/>
+        <span class="title grey rounded" style="width:374px;">Flush Server <span class="green">Command</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
+            <form method="get" action="commands.php">
+                <div class="row">
+                    Execute flush_all command on one or all memcached servers<br/>
+                    Delay in second before flushing is optional<br/>
+                    <hr/>
+                </div>
+                <div class="row">
+                    <div class="left">Delay</div>
+                    <div><input class="commands" name="request_key"/></div>
+                </div>
+                <div class="row">
+                    <div class="left">Server</div>
+                    <div><?php echo Library_HTML::serverList(); ?></div>
+                </div>
+                <div class="row">
+                    <div class="left">API</div>
+                    <div><?php echo Library_HTML::apiList($_ini['flush_all_api'], 'request_api'); ?></div>
+                </div>
+                <div class="row" style="text-align:center;">
+                    <hr/>
+                    <input type="hidden" name="request_command" value="flush_all"/>
+                    <input class="menu serverlist" type="submit" value="Execute Flush All"/>
                 </div>
             </form>
         </div>

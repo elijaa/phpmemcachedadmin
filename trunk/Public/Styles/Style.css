@@ -1,20 +1,23 @@
-body{color:#000000;font-family:tahoma,Arial,sans-serif;font-size:0.8em;margin-top:10px;}
+body{color:#000000;font-family:tahoma,Arial;font-size:0.8em;margin-top:10px;}
 img{border:none;}
 a{color:#EEEEEE;text-decoration:none;}
 a:hover{color:#AA0000;}
 pre{overflow: auto;}
-div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
-span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;color:#EEEEEE;}
-.container{width:254px;background:#DBDBDB;margin-top:1px;}
-.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
-.rounded{-moz-border-radius:8px 8px 8px 8px;}
-div.row{padding:3px 0px 2px 7px;min-height:18px;}
-div.left{width:100px;float:left;font-weight:bold;}
-div.right{width:52px;float:left;}
-div.middle{width:86px;float:left;}
-div.full{width:140px;float:left;}
-.stats{color:#2A707B;}
 hr{height:0; border:none; border-bottom:solid 1px #EEEEEE;}
-input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px 3px 3px 3px;width:200px;margin-top:1px;}
-.menu{border:solid 1px #A0312A;color:#EEEEEE;width:198px;}
+input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px;-webkit-border-radius: 3px;width:200px;font-family:tahoma;font-size:1em}
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}
+input:hover{color:#AA0000;}
+select{width:201px;}
+div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
+span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
+.container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;}
+.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
+.rounded{-moz-border-radius:8px;-webkit-border-radius: 8px;}
+div.row{padding:3px 0px 2px 7px;min-height:18px;}
+div.left{width:100px;float:left;font-weight:bold;padding-top:2px;}
+div.right{width:52px;float:left;padding-top:2px;}
+div.middle{width:86px;float:left;padding-top:2px;}
+div.full{width:140px;float:left;padding-top:2px;}
+.menu{border:solid 1px #A0312A;color:#EEEEEE;width:198px;}
+.green{color:#2A707B;}
+.grey{color:#EEEEEE;}

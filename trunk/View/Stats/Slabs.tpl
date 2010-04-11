@@ -1,6 +1,6 @@
     <br/>
     <div style="float:left;">
-        <span class="title rounded">Slabs <span class="stats">Stats</span></span>
+        <span class="title grey rounded">Slabs <span class="green">Stats</span></span>
         <div class="container rounded">
             <div class="row">
                 <div class="left">Slabs Allocated</div>
@@ -19,16 +19,24 @@
                 <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?></div>
             </div>
         </div>
-        <br/>
 
     </div>
     <div style="float:left; padding-left:10px;">
-        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px; height: 18px; margin:0px;">
-            <a href="?server=<?php echo $_GET['server']; ?>">See Server Stats</a>
-            |
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Flush this Server</a>
+        <form method="get" id="flushForm" action="commands.php">
+        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;width:241px;">
+            <a href="?server=<?php echo $_GET['server']; ?>">See Server Stats</a> |
+            <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
+            <input type="hidden" name="request_api" value="<?php echo $_ini['flush_all_api']; ?>"/>
+            <input type="hidden" name="request_command" value="flush_all"/>
+            <a href="#" onclick="document.getElementById('flushForm').submit();">Flush this Server</a>
         </div>
-        <br/>
+        </form>
+        <div class="container rounded" style="width:506px;padding:7px;margin-top:20px;">
+            <div class="row">
+                For more informations about memcached slabs stats, see memcached protocol
+                <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt#L470" target="_blank"><span class="green">here</span></a>
+            </div>
+        </div>
     </div>
 
     <table style="width:772px;" cellspacing="0" cellpadding="0">
@@ -56,8 +64,9 @@ foreach($slabs as $id => $slab)
         {
 ?>
         <td <?php if($actualSlab > 0) { echo 'style="padding-left:10px;"'; } ?>>
-            <span class="title rounded">
-                Slab <?php echo $id; ?> <span class="stats">Stats</span>
+            <br/>
+            <span class="title grey rounded">
+                Slab <?php echo $id; ?> <span class="green">Stats</span>
                 <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
             </span>
                 <div class="container rounded">
@@ -102,7 +111,6 @@ foreach($slabs as $id => $slab)
                         <div class="full"><?php echo $slab['items:tailrepairs']; ?></div>
                     </div>-->
                 </div>
-                <br/>
             </td>
 <?php
             $actualSlab++;

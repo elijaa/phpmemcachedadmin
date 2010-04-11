@@ -42,7 +42,6 @@ $request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
 # Showing header
 include 'View/Header.tpl';
-include 'View/Stats/Menu.tpl';
 
 # Display by request type
 switch($request)
@@ -56,13 +55,13 @@ switch($request)
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
         {
-            $items = Library_Command_Factory::instance('items')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
+            $items = Library_Command_Factory::instance('items_api')->items($_GET['server'], $_ini['server'][$_GET['server']], $_GET['slab']);
         }
 
         # Cheking if asking an item
         if(isset($_GET['request_key']))
         {
-            $response[$_GET['server'] . ':' . $_ini['server'][$_GET['server']]] = Library_Command_Factory::instance('get')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['request_key']);
+            $response[$_GET['server'] . ':' . $_ini['server'][$_GET['server']]] = Library_Command_Factory::instance('get_api')->get($_GET['server'], $_ini['server'][$_GET['server']], $_GET['request_key']);
         }
 
         # Items are well formed
@@ -90,7 +89,7 @@ switch($request)
         # Ask for one server slabs
         if(isset($_GET['server']))
         {
-            $slabs = Library_Command_Factory::instance('slabs')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
+            $slabs = Library_Command_Factory::instance('slabs_api')->slabs($_GET['server'], $_ini['server'][$_GET['server']]);
         }
 
         # Slabs are well formed
@@ -116,14 +115,14 @@ switch($request)
         # Ask for one server stats
         if(isset($_GET['server']))
         {
-            $stats = Library_Command_Factory::instance('stats')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
+            $stats = Library_Command_Factory::instance('stats_api')->stats($_GET['server'], $_ini['server'][$_GET['server']]);
         }
         # Ask for all servers stats
         else
         {
             foreach($_ini['server'] as $server => $port)
             {
-                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats')->stats($server, $port));
+                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server, $port));
             }
         }
 
