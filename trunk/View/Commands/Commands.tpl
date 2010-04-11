@@ -2,7 +2,7 @@
     <div style="float:left;">
         <span class="title grey rounded" style="width:374px;">Get <span class="green">Command</span></span>
         <div class="container rounded" style="width:374px;padding:7px">
-            <form method="get" action="commands.php">
+            <form method="post" action="commands.php">
                <div class="row">
                     Execute get command on one or all memcached servers<br/>
                     <hr/>
@@ -29,7 +29,7 @@
         <br/>
         <span class="title grey rounded" style="width:374px;">Delete <span class="green">Command</span></span>
         <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="get" action="commands.php">
+            <form method="post" action="commands.php">
                 <div class="row">
                     Execute delete command on one or all memcached servers<br/>
                     <hr/>
@@ -64,7 +64,7 @@
     <div style="float:left; padding-left:10px;">
         <span class="title grey rounded" style="width:374px;">Set <span class="green">Command</span></span>
         <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="get" action="commands.php">
+            <form method="post" action="commands.php">
                 <div class="row">
                     Execute set command on one or all memcached servers<br/>
                     <hr/>
@@ -100,7 +100,7 @@
         <br/>
         <span class="title grey rounded" style="width:374px;">Flush Server <span class="green">Command</span></span>
         <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="get" action="commands.php">
+            <form method="post" action="commands.php">
                 <div class="row">
                     Execute flush_all command on one or all memcached servers<br/>
                     Delay in second before flushing is optional<br/>

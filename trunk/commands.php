@@ -38,7 +38,7 @@ date_default_timezone_set('Europe/Paris');
 $_ini = Library_Configuration::getInstance();
 
 # Initializing requests
-$request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
+$request = (isset($_POST['request_command'])) ? $_POST['request_command'] : null;
 $response = array();
 
 # Showing header
@@ -50,16 +50,20 @@ switch($request)
     # Memcache::get command
     case 'get':
         # Ask for delete on one server
-        if($_GET['request_server'] != '')
+        if($_POST['request_server'] != '')
         {
-            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->get($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key']);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $_GET['request_server']);
+            $response[$_POST['request_server']] = Library_Command_Factory::api($_POST['request_api'])->get($server[0], $server[1], $_POST['request_key']);
         }
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             {
-                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->get($server, $_ini['server'][$server], $_GET['request_key']);
+                # Spliting server in hostname:port
+                $server = preg_split('/:/', $server);
+                $response[$server[0] . ':' . $server[1]] = Library_Command_Factory::api($_POST['request_api'])->get($server[0], $server[1], $_POST['request_key']);
             }
         }
         break;
@@ -67,16 +71,20 @@ switch($request)
         # Memcache::set command
     case 'set':
         # Ask for delete on one server
-        if($_GET['request_server'] != '')
+        if($_POST['request_server'] != '')
         {
-            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->set($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $_POST['request_server']);
+            $response[$_POST['request_server']] = Library_Command_Factory::api($_POST['request_api'])->set($server[0], $server[1], $_POST['request_key'], $_POST['request_data'], $_POST['request_duration']);
         }
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             {
-                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->set($server, $_ini['server'][$server], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']);
+                # Spliting server in hostname:port
+                $server = preg_split('/:/', $server);
+                $response[$server[0] . ':' . $server[1]] = Library_Command_Factory::api($_POST['request_api'])->set($server[0], $server[1], $_POST['request_key'], $_POST['request_data'], $_POST['request_duration']);
             }
         }
         break;
@@ -84,39 +92,47 @@ switch($request)
         # Memcache::delete command
     case 'delete':
         # Ask for delete on one server
-        if($_GET['request_server'] != '')
+        if($_POST['request_server'] != '')
         {
-            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->delete($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_key']);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $_POST['request_server']);
+            $response[$_POST['request_server']] = Library_Command_Factory::api($_POST['request_api'])->delete($server[0], $server[1], $_POST['request_key']);
         }
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             {
-                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->delete($server, $_ini['server'][$server], $_GET['request_key']);
+                # Spliting server in hostname:port
+                $server = preg_split('/:/', $server);
+                $response[$server[0] . ':' . $server[1]] = Library_Command_Factory::api($_POST['request_api'])->delete($server[0], $server[1], $_POST['request_key']);
             }
         }
         break;
 
-    # Memcache::flush_all command
+        # Memcache::flush_all command
     case 'flush_all':
         # Checking delay
-        if(!isset($_GET['request_delay']) || !is_numeric($_GET['request_delay']))
+        if(!isset($_POST['request_delay']) || !is_numeric($_POST['request_delay']))
         {
-            $_GET['request_delay'] = 0;
+            $_POST['request_delay'] = 0;
         }
 
         # Ask for delete on one server
-        if($_GET['request_server'] != '')
+        if($_POST['request_server'] != '')
         {
-            $response[$_GET['request_server'] . ':' . $_ini['server'][$_GET['request_server']]] = Library_Command_Factory::api($_GET['request_api'])->flush_all($_GET['request_server'], $_ini['server'][$_GET['request_server']], $_GET['request_delay']);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $_POST['request_server']);
+            $response[$_POST['request_server']] = Library_Command_Factory::api($_POST['request_api'])->flush_all($server[0], $server[1], $_POST['request_delay']);
         }
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server => $port)
+            foreach($_ini['server'] as $server)
             {
-                $response[$server . ':' . $_ini['server'][$server]] = Library_Command_Factory::api($_GET['request_api'])->flush_all($server, $_ini['server'][$server], $_GET['request_delay']);
+                # Spliting server in hostname:port
+                $server = preg_split('/:/', $server);
+                $response[$server[0] . ':' . $server[1]] = Library_Command_Factory::api($_POST['request_api'])->flush_all($server[0], $server[1], $_POST['request_delay']);
             }
         }
         break;
