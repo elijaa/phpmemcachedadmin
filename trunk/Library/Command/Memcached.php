@@ -146,6 +146,9 @@ class Library_Command_Memcached implements Library_Command_Interface
         # Adding server
         self::$_memcache->addServer($server, $port);
 
+        # Checking duration
+        if($duration == '') { $duration = 0; }
+
         # Executing command : set
         self::$_memcache->set($key, $data, $duration);
         return self::$_memcache->getResultMessage();

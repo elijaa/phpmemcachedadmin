@@ -23,15 +23,15 @@
     </div>
     <div style="float:left; padding-left:10px;">
         <form method="get" id="flushForm" action="commands.php">
-        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;width:241px;">
-            <a href="?server=<?php echo $_GET['server']; ?>">See Server Stats</a> |
+        <div class="serverlist rounded" style="padding: 5px 12px 4px 32px;height:18px;margin:0px;width:211px;">
+            <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini['flush_all_api']; ?>"/>
             <input type="hidden" name="request_command" value="flush_all"/>
             <a href="#" onclick="document.getElementById('flushForm').submit();">Flush this Server</a>
         </div>
         </form>
-        <div class="container rounded" style="width:506px;padding:7px;margin-top:20px;">
+        <div class="container rounded" style="width:506px;padding:7px;margin-top:34px;">
             <div class="row">
                 For more informations about memcached slabs stats, see memcached protocol
                 <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt#L470" target="_blank"><span class="green">here</span></a>
