@@ -20,7 +20,7 @@
  * @author c.mahieux@of2m.fr
  * @since 05/04/2010
  */
-class Library_Configuration implements ArrayAccess
+class Library_Configuration
 {
     private static $_instance = null;
     private static $_iniPath = 'Config/Memcache.ini';
@@ -40,7 +40,7 @@ class Library_Configuration implements ArrayAccess
      * Constructor of MemCacheAdmin_Configuration class
      * Load ini file
      *
-     * @return void
+     * @return Void
      */
     private function __construct()
     {
@@ -66,66 +66,35 @@ class Library_Configuration implements ArrayAccess
     }
 
     /**
-     * Offset to retrieve
+     * Config key to retrieve
      *
-     * @param mixed $offset Offset to get
+     * @param Mixed $key Key to get
      *
-     * @return boolean
+     * @return Boolean
      */
-    public function offsetGet($offset)
+    public static function get($key)
     {
-        if(isset(self::$_ini[$offset]))
-        {
-            return self::$_ini[$offset];
-        }
-        else
-        {
-            return null;
-        }
+        return self::$_ini[$key];
     }
 
     /**
-     * Offset to set
+     * Config key to set
      *
-     * @param mixed $offset Offset to set
-     * @param mixed $value Value to set
+     * @param String $key Key to set
+     * @param Mixed $value Value to set
      *
-     * @return boolean
+     * @return Boolean
      */
-    public function offsetSet($offset, $value)
+    public static function set($key, $value)
     {
-        self::$_ini[$offset] = $value;
-    }
-
-    /**
-     * Whether a offset exists
-     *
-     * @param mixed $offset An offset to check for
-     *
-     * @return boolean
-     */
-    public function offsetExists($offset)
-    {
-        return isset(self::$_ini[$offset]);
-    }
-
-    /**
-     * Whether a offset exists
-     *
-     * @param mixed $offset An offset to unset
-     *
-     * @return boolean
-     */
-    public function offsetUnset($offset)
-    {
-        unset(self::$_ini[$offset]);
+        self::$_ini[$key] = $value;
     }
 
     /**
      * Check if every ini keys are set
      * Return true if ini is correct, false otherwise
      *
-     * @return boolean
+     * @return Boolean
      */
     public static function check()
     {
@@ -145,7 +114,7 @@ class Library_Configuration implements ArrayAccess
      * Write ini file
      * Return true if written, false otherwise
      *
-     * @return boolean
+     * @return Boolean
      */
     public static function write()
     {

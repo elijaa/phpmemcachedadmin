@@ -37,10 +37,10 @@ class Library_Command_Factory
         $_ini = Library_Configuration::getInstance();
 
         # Instance does not exists
-        if(!isset(self::$_object[$_ini[$command]]))
+        if(!isset(self::$_object[$_ini->get($command)]))
         {
             # Switching by API
-            switch($_ini[$command])
+            switch($_ini->get($command))
             {
                 case 'Memcache':
                     # PECL Memcache API
@@ -62,7 +62,7 @@ class Library_Command_Factory
                     break;
             }
         }
-        return self::$_object[$_ini[$command]];
+        return self::$_object[$_ini->get($command)];
     }
 
     /**
@@ -74,9 +74,6 @@ class Library_Command_Factory
      */
     public static function api($api)
     {
-        # Importing configuration
-        $_ini = Library_Configuration::getInstance();
-
         # Instance does not exists
         if(!isset(self::$_object[$api]))
         {

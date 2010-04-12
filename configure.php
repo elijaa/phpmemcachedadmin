@@ -50,13 +50,13 @@ switch($request)
     # Commands configuration save
     case 'commands':
         # Updating configuration
-        $_ini['stats_api'] = $_POST['stats_api'];
-        $_ini['slabs_api'] = $_POST['slabs_api'];
-        $_ini['items_api'] = $_POST['items_api'];
-        $_ini['get_api'] = $_POST['get_api'];
-        $_ini['set_api'] = $_POST['set_api'];
-        $_ini['delete_api'] = $_POST['delete_api'];
-        $_ini['flush_all_api'] = $_POST['flush_all_api'];
+        $_ini->get('stats_api', $_POST['stats_api']);
+        $_ini->get('slabs_api', $_POST['slabs_api']);
+        $_ini->get('items_api', $_POST['items_api']);
+        $_ini->get('get_api', $_POST['get_api']);
+        $_ini->get('set_api', $_POST['set_api']);
+        $_ini->get('delete_api', $_POST['delete_api']);
+        $_ini->get('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
         $write = Library_Configuration::write();
@@ -65,7 +65,7 @@ switch($request)
         # Server configuration save
     case 'servers':
         # Updating configuration
-        $_ini['server'] = $_POST['server'];
+        $_ini->get('server', $_POST['server']);
 
         # Writing configuration file
         $write = Library_Configuration::write();
@@ -74,8 +74,8 @@ switch($request)
         # Miscellaneous configuration save
     case 'miscellaneous':
         # Updating configuration
-        $_ini['connection_timeout'] = $_POST['connection_timeout'];
-        $_ini['max_item_dump'] = $_POST['max_item_dump'];
+        $_ini->get('connection_timeout', $_POST['connection_timeout']);
+        $_ini->get('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
         $write = Library_Configuration::write();

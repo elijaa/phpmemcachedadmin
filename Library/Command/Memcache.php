@@ -124,7 +124,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : slabs stats
-        if(($items = self::$_memcache->getStats('cachedump', $slab, self::$_ini['max_item_dump'])))
+        if(($items = self::$_memcache->getStats('cachedump', $slab, self::$_ini->get('max_item_dump'))))
         {
             return $items;
         }

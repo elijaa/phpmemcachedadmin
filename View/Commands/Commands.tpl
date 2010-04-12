@@ -17,7 +17,7 @@
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini['get_api'], 'request_api'); ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini->get('get_api'), 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
                     <hr/>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini['delete_api'], 'request_api'); ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini->get('delete_api'), 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
                     <hr/>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini['set_api'], 'request_api'); ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini->get('set_api'), 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
                     <hr/>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="row">
                     <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini['flush_all_api'], 'request_api'); ?></div>
+                    <div><?php echo Library_HTML::apiList($_ini->get('flush_all_api'), 'request_api'); ?></div>
                 </div>
                 <div class="row" style="text-align:center;">
                     <hr/>

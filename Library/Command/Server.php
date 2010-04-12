@@ -56,7 +56,7 @@ class Library_Command_Server implements Library_Command_Interface
         $handle = null;
 
         # Socket Opening
-        if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini['connection_timeout'])))
+        if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
         {
             return false;
         }
@@ -249,7 +249,7 @@ class Library_Command_Server implements Library_Command_Interface
         $items = false;
 
         # Executing command : stats cachedump
-        if(($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini['max_item_dump'], $server, $port)))
+        if(($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini->get('max_item_dump'), $server, $port)))
         {
             # Parsing result
             $items = $this->parse($result, false);
