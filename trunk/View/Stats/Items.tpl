@@ -18,7 +18,7 @@ foreach($items as $key => $data)
         <form>
         <a class="green" href="index.php?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $_GET['slab']; ?>&amp;request_key=<?php echo $key; ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get"><?php echo $key; ?></a>
         <br/>
-        <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>,
+        <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>Bytes,
         <strong>Expiration</strong> : <?php echo Library_Analysis::uptime($data[1] - time()); ?>
         <span style="float:right;"><a href="#">delete</a></span></form>
 <?php

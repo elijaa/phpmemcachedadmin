@@ -58,6 +58,38 @@ class Library_Analysis
     }
 
     /**
+     * Diff two arrays of stats from MemCacheAdmin_ServerCommands::stats()
+     *
+     * @param Array $array Statistic from MemCacheAdmin_ServerCommands::stats()
+     * @param Array $stats Statistic from MemCacheAdmin_ServerCommands::stats()
+     *
+     * @return Array
+     */
+    public static function diff($array, $stats)
+    {
+        # Checking input
+        if(!is_array($array))
+        {
+            return $stats;
+        }
+        elseif(!is_array($stats))
+        {
+            return $array;
+        }
+
+        # Diff for each key
+        foreach($stats as $key => $value)
+        {
+            if(isset($array[$key]))
+            {
+                $stats[$key] = $value - $array[$key];
+            }
+        }
+
+        return $stats;
+    }
+
+    /**
      * Analyse and return memcache stats command
      *
      * @param Array $stats Statistic from MemCacheAdmin_ServerCommands::stats()
@@ -72,45 +104,45 @@ class Library_Analysis
         }
 
         # Command set()
-        $stats['set_rate'] = ($stats['cmd_set'] == 0) ? '0.00':number_format($stats['cmd_set'] / $stats['uptime'], 1);
+        $stats['set_rate'] = ($stats['cmd_set'] == 0) ? '0.0':number_format($stats['cmd_set'] / $stats['uptime'], 1);
 
         # Command get()
         $stats['get_hits_percent'] = ($stats['cmd_get'] == 0) ? ' - ':number_format($stats['get_hits'] / $stats['cmd_get'] * 100, 1);
         $stats['get_misses_percent'] = ($stats['cmd_get'] == 0) ? ' - ':number_format($stats['get_misses'] / $stats['cmd_get'] * 100, 1);
-        $stats['get_rate'] = ($stats['cmd_get'] == 0) ? '0.00':number_format($stats['cmd_get'] / $stats['uptime'], 1);
+        $stats['get_rate'] = ($stats['cmd_get'] == 0) ? '0.0':number_format($stats['cmd_get'] / $stats['uptime'], 1);
 
         # Command delete()
         $stats['cmd_delete'] = $stats['delete_hits'] + $stats['delete_misses'];
         $stats['delete_hits_percent'] = ($stats['cmd_delete'] == 0) ?' - ':number_format($stats['delete_hits'] / $stats['cmd_delete'] * 100, 1);
         $stats['delete_misses_percent'] = ($stats['cmd_delete'] == 0) ?' - ':number_format($stats['delete_misses'] / $stats['cmd_delete'] * 100, 1);
-        $stats['delete_rate'] = ($stats['cmd_delete'] == 0) ? '0.00':number_format($stats['cmd_delete'] / $stats['uptime'], 1);
+        $stats['delete_rate'] = ($stats['cmd_delete'] == 0) ? '0.0':number_format($stats['cmd_delete'] / $stats['uptime'], 1);
 
         # Command cas()
         $stats['cmd_cas'] = $stats['cas_hits'] + $stats['cas_misses'] + $stats['cas_badval'];
         $stats['cas_hits_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_hits'] / $stats['cmd_cas'] * 100, 1);
         $stats['cas_misses_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_misses'] / $stats['cmd_cas'] * 100, 1);
         $stats['cas_badval_percent'] = ($stats['cmd_cas'] == 0) ?' - ':number_format($stats['cas_badval'] / $stats['cmd_cas'] * 100, 1);
-        $stats['cas_rate'] = ($stats['cmd_cas'] == 0) ? '0.00':number_format($stats['cmd_cas'] / $stats['uptime'], 1);
+        $stats['cas_rate'] = ($stats['cmd_cas'] == 0) ? '0.0':number_format($stats['cmd_cas'] / $stats['uptime'], 1);
 
         # Command increment()
         $stats['cmd_incr'] = $stats['incr_hits'] + $stats['incr_misses'];
         $stats['incr_hits_percent'] = ($stats['cmd_incr'] == 0) ?' - ':number_format($stats['incr_hits'] / $stats['cmd_incr'] * 100, 1);
         $stats['incr_misses_percent'] = ($stats['cmd_incr'] == 0) ?' - ':number_format($stats['incr_misses'] / $stats['cmd_incr'] * 100, 1);
-        $stats['incr_rate'] = ($stats['cmd_incr'] == 0) ? '0.00':number_format($stats['cmd_incr'] / $stats['uptime'], 1);
+        $stats['incr_rate'] = ($stats['cmd_incr'] == 0) ? '0.0':number_format($stats['cmd_incr'] / $stats['uptime'], 1);
 
         # Command decrement()
         $stats['cmd_decr'] = $stats['decr_hits'] + $stats['decr_misses'];
         $stats['decr_hits_percent'] = ($stats['cmd_decr'] == 0) ?' - ':number_format($stats['decr_hits'] / $stats['cmd_decr'] * 100, 1);
         $stats['decr_misses_percent'] = ($stats['cmd_decr'] == 0) ?' - ':number_format($stats['decr_misses'] / $stats['cmd_decr'] * 100, 1);
-        $stats['decr_rate'] = ($stats['cmd_decr'] == 0) ? '0.00':number_format($stats['cmd_decr'] / $stats['uptime'], 1);
+        $stats['decr_rate'] = ($stats['cmd_decr'] == 0) ? '0.0':number_format($stats['cmd_decr'] / $stats['uptime'], 1);
 
         # Total hit & miss
         $stats['cmd_total'] = $stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr'];
-        $stats['hit_percent'] = ($stats['cmd_total'] == 0) ? '0.00':number_format(($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['cmd_total'] * 100, 1);
-        $stats['miss_percent'] = ($stats['cmd_total'] == 0) ? '0.00':number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['cmd_total'] * 100, 1);
+        $stats['hit_percent'] = ($stats['cmd_total'] == 0) ? '0.0':number_format(($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['cmd_total'] * 100, 1);
+        $stats['miss_percent'] = ($stats['cmd_total'] == 0) ? '0.0':number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['cmd_total'] * 100, 1);
 
         # Cache size
-        $stats['bytes_percent'] = ($stats['limit_maxbytes'] == 0) ? '0' : number_format($stats['bytes'] / $stats['limit_maxbytes'] * 100, 1);
+        $stats['bytes_percent'] = ($stats['limit_maxbytes'] == 0) ? '0.0' : number_format($stats['bytes'] / $stats['limit_maxbytes'] * 100, 1);
 
         # Request rate
         $stats['request_rate'] = number_format(($stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr']) / $stats['uptime'], 1);
@@ -118,18 +150,6 @@ class Library_Analysis
         $stats['miss_rate'] = number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['uptime'], 1);
 
         return $stats;
-    }
-
-    public static function diff($snapshot, $stats)
-    {
-        $array = array();
-
-        foreach($stats as $key => $value)
-        {
-            $array[$key] = $value - $snapshot[$key];
-        }
-
-        return $array;
     }
 
     /**
@@ -207,7 +227,7 @@ class Library_Analysis
             }
             $value /= 1024;
         }
-        return sprintf('%5.1f %sBytes', $value, $unit);
+        return sprintf('%.1f %s', $value, $unit);
     }
 
     /**
@@ -231,6 +251,6 @@ class Library_Analysis
             }
             $value /= 1000;
         }
-        return sprintf('%5.2f %s', $value, $unit);
+        return sprintf('%.1f%s', $value, $unit);
     }
 }

@@ -47,16 +47,29 @@ include 'View/Header.tpl';
 # Display by request rype
 switch($request)
 {
+        # Live stats configuration save
+    case 'live_stats':
+        # Updating configuration
+        $_ini->set('refresh_rate', $_POST['refresh_rate']);
+        $_ini->set('memory_alert', $_POST['memory_alert']);
+        $_ini->set('hit_rate_alert', $_POST['hit_rate_alert']);
+        $_ini->set('eviction_alert', $_POST['eviction_alert']);
+        $_ini->set('file_path', $_POST['file_path']);
+
+        # Writing configuration file
+        $write = Library_Configuration::write();
+        break;
+
     # Commands configuration save
     case 'commands':
         # Updating configuration
-        $_ini->get('stats_api', $_POST['stats_api']);
-        $_ini->get('slabs_api', $_POST['slabs_api']);
-        $_ini->get('items_api', $_POST['items_api']);
-        $_ini->get('get_api', $_POST['get_api']);
-        $_ini->get('set_api', $_POST['set_api']);
-        $_ini->get('delete_api', $_POST['delete_api']);
-        $_ini->get('flush_all_api', $_POST['flush_all_api']);
+        $_ini->set('stats_api', $_POST['stats_api']);
+        $_ini->set('slabs_api', $_POST['slabs_api']);
+        $_ini->set('items_api', $_POST['items_api']);
+        $_ini->set('get_api', $_POST['get_api']);
+        $_ini->set('set_api', $_POST['set_api']);
+        $_ini->set('delete_api', $_POST['delete_api']);
+        $_ini->set('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
         $write = Library_Configuration::write();
@@ -65,7 +78,7 @@ switch($request)
         # Server configuration save
     case 'servers':
         # Updating configuration
-        $_ini->get('server', $_POST['server']);
+        $_ini->set('server', $_POST['server']);
 
         # Writing configuration file
         $write = Library_Configuration::write();
@@ -74,8 +87,8 @@ switch($request)
         # Miscellaneous configuration save
     case 'miscellaneous':
         # Updating configuration
-        $_ini->get('connection_timeout', $_POST['connection_timeout']);
-        $_ini->get('max_item_dump', $_POST['max_item_dump']);
+        $_ini->set('connection_timeout', $_POST['connection_timeout']);
+        $_ini->set('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
         $write = Library_Configuration::write();

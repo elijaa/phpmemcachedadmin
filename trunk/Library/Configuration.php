@@ -33,7 +33,13 @@ class Library_Configuration
                                      'flush_all_api',
                                      'server',
                                      'connection_timeout',
-                                     'max_item_dump');
+                                     'max_item_dump',
+                                     'refresh_rate',
+                                     'memory_alert',
+                                     'hit_rate_alert',
+                                     'eviction_alert',
+                                     'file_path'
+                                     );
     private static $_ini;
 
     /**
