@@ -59,7 +59,7 @@ switch($request)
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server)
+            foreach($_ini->get('server') as $server)
             {
                 # Spliting server in hostname:port
                 $server = preg_split('/:/', $server);
@@ -80,7 +80,7 @@ switch($request)
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server)
+            foreach($_ini->get('server') as $server)
             {
                 # Spliting server in hostname:port
                 $server = preg_split('/:/', $server);
@@ -101,7 +101,7 @@ switch($request)
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server)
+            foreach($_ini->get('server') as $server)
             {
                 # Spliting server in hostname:port
                 $server = preg_split('/:/', $server);
@@ -128,7 +128,7 @@ switch($request)
         # Ask for delete on all servers
         else
         {
-            foreach($_ini['server'] as $server)
+            foreach($_ini->get('server') as $server)
             {
                 # Spliting server in hostname:port
                 $server = preg_split('/:/', $server);

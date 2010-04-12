@@ -15,31 +15,31 @@
             </div>
             <div class="row">
                 <div class="left">Stats</div>
-                <div><?php echo Library_HTML::apiList($_ini['stats_api'], 'stats_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('stats_api'), 'stats_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Slabs</div>
-                <div><?php echo Library_HTML::apiList($_ini['slabs_api'], 'slabs_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('slabs_api'), 'slabs_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Items</div>
-                <div><?php echo Library_HTML::apiList($_ini['items_api'], 'items_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('items_api'), 'items_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Get</div>
-                <div><?php echo Library_HTML::apiList($_ini['get_api'], 'get_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('get_api'), 'get_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Set</div>
-                <div><?php echo Library_HTML::apiList($_ini['set_api'], 'set_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('set_api'), 'set_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Delete</div>
-                <div><?php echo Library_HTML::apiList($_ini['delete_api'], 'delete_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('delete_api'), 'delete_api'); ?></div>
             </div>
             <div class="row">
                 <div class="left">Flush All</div>
-                <div><?php echo Library_HTML::apiList($_ini['flush_all_api'], 'flush_all_api'); ?></div>
+                <div><?php echo Library_HTML::apiList($_ini->get('flush_all_api'), 'flush_all_api'); ?></div>
             </div>
             <div class="row" style="text-align:center;">
                 <hr/>
@@ -61,7 +61,7 @@
             </div>
             <div id="server_form">
             <?php
-            foreach($_ini['server'] as $server)
+            foreach($_ini->get('server') as $server)
             { ?>
             <div id="server_<?php echo $server; ?>">
                 <div class="row">
@@ -94,11 +94,11 @@
             </div>
             <div class="row">
                 <div class="left">Timeout</div>
-                <div><input type="text" name="connection_timeout" value="<?php echo $_ini['connection_timeout']; ?>"/></div>
+                <div><input type="text" name="connection_timeout" value="<?php echo $_ini->get('connection_timeout'); ?>"/></div>
             </div>
             <div class="row">
                 <div class="left">Max Items</div>
-                <div><input type="text" name="max_item_dump" value="<?php echo $_ini['max_item_dump']; ?>"/></div>
+                <div><input type="text" name="max_item_dump" value="<?php echo $_ini->get('max_item_dump'); ?>"/></div>
             </div>
             <div class="row" style="text-align:center;">
                 <hr/>

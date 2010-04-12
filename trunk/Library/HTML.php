@@ -34,7 +34,7 @@ class Library_HTML
 
         # Making Servers Select
         $serverList = '<select class="commands" name="request_server"><option value="">All Servers</option>';
-        foreach($_ini['server'] as $server)
+        foreach($_ini->get('server') as $server)
         {
             $serverList .= '<option value="' . $server . '">' . $server . '</option>';
         }
