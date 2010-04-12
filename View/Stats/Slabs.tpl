@@ -12,11 +12,11 @@
             </div>
             <div class="row">
                 <div class="left">Memory Used</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes</div>
             </div>
             <div class="row">
                 <div class="left">Wasted</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?>Bytes</div>
             </div>
         </div>
 
@@ -72,7 +72,7 @@ foreach($slabs as $id => $slab)
                 <div class="container rounded">
                     <div class="row">
                         <div class="left">Chunk Size</div>
-                        <div class="full"><?php echo Library_Analysis::byteResize($slab['chunk_size']); ?></div>
+                        <div class="full"><?php echo Library_Analysis::byteResize($slab['chunk_size']); ?>Bytes</div>
                     </div>
                     <div class="row">
                         <div class="left">Used Chunk</div>
@@ -88,7 +88,7 @@ foreach($slabs as $id => $slab)
                     </div>
                     <div class="row">
                         <div class="left">Wasted</div>
-                        <div class="full"><?php echo Library_Analysis::byteResize($slab['mem_wasted']); ?></div>
+                        <div class="full"><?php echo Library_Analysis::byteResize($slab['mem_wasted']); ?>Bytes</div>
                     </div>
                     <div class="row">
                         <div class="left">Hits</div>

@@ -11,6 +11,17 @@
         <a href="http://memcached.org/"><img src="Public/Images/Banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a>
         <div class="serverlist rounded" style="padding:3px 7px 3px 7px; width:772px;">
 <?php
+# Live Stats view
+if ($_SERVER['PHP_SELF'] == '/stats.php')
+{ ?>
+        Live Stats |
+<?php
+}
+else
+{ ?>
+        <a href="stats.php">See Live Stats </a> |
+<?php
+}
 # Stats view
 if ($_SERVER['PHP_SELF'] == '/index.php')
 { ?>
@@ -52,7 +63,7 @@ else
 # Configure view
 if($_SERVER['PHP_SELF'] == '/configure.php')
 { ?>
-        Editing Configuration File
+        Editing Configuration
 <?php
 }
 else

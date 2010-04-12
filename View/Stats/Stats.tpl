@@ -177,11 +177,11 @@ if(isset($_GET['server']))
         <div class="container rounded">
             <div class="row">
                 <div class="left">Bytes Read</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_read']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_read']); ?>Bytes</div>
             </div>
             <div class="row">
                 <div class="left">Bytes Written</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_written']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes_written']); ?>Bytes</div>
             </div>
         </div>
         <br/>
@@ -192,11 +192,11 @@ if(isset($_GET['server']))
         <div class="container rounded">
             <div class="row">
                 <div class="left">Used</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($stats['bytes']); ?>Bytes</div>
             </div>
             <div class="row">
                 <div class="left">Total</div>
-                <div class="full"><?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?></div>
+                <div class="full"><?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes</div>
             </div>
          </div>
          <br/>
