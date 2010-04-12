@@ -110,7 +110,7 @@ class Library_Analysis
         $stats['miss_percent'] = ($stats['cmd_total'] == 0) ? '0.00':number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['cmd_total'] * 100, 1);
 
         # Cache size
-        $stats['bytes_percent'] = number_format($stats['bytes'] / $stats['limit_maxbytes'] * 100, 1);
+        $stats['bytes_percent'] = ($stats['limit_maxbytes'] == 0) ? '0' : number_format($stats['bytes'] / $stats['limit_maxbytes'] * 100, 1);
 
         # Request rate
         $stats['request_rate'] = number_format(($stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr']) / $stats['uptime'], 1);
@@ -118,6 +118,18 @@ class Library_Analysis
         $stats['miss_rate'] = number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['uptime'], 1);
 
         return $stats;
+    }
+
+    public static function diff($snapshot, $stats)
+    {
+        $array = array();
+
+        foreach($stats as $key => $value)
+        {
+            $array[$key] = $value - $snapshot[$key];
+        }
+
+        return $array;
     }
 
     /**
@@ -184,7 +196,7 @@ class Library_Analysis
     public static function byteResize($value)
     {
         # Unit list
-        $units = array('','K','M','G');
+        $units = array('', 'K', 'M', 'G', 'T');
 
         # Resizing
         foreach($units as $unit)
@@ -205,10 +217,10 @@ class Library_Analysis
      *
      * @return String
      */
-    public static function statResize($value)
+    public static function valueResize($value)
     {
         # Unit list
-        $units = array('','K','M','G');
+        $units = array('', 'K', 'M', 'G', 'T');
 
         # Resizing
         foreach($units as $unit)
@@ -219,6 +231,6 @@ class Library_Analysis
             }
             $value /= 1000;
         }
-        return sprintf('%5.1f %s', $value, $unit);
+        return sprintf('%5.2f %s', $value, $unit);
     }
 }

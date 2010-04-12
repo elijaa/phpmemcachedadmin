@@ -53,7 +53,7 @@ switch($request)
         $response = array();
 
         # Spliting server in hostname:port
-        $server = preg_split('/:/', $server);
+        $server = preg_split('/:/', $_GET['server']);
 
         # Ask for one server and one slabs items
         if((isset($_GET['server'])) && (isset($_GET['slab'])))
@@ -93,7 +93,7 @@ switch($request)
         if(isset($_GET['server']))
         {
             # Spliting server in hostname:port
-            $server = preg_split('/:/', $server);
+            $server = preg_split('/:/', $_GET['server']);
             $slabs = Library_Command_Factory::instance('slabs_api')->slabs($server[0], $server[1]);
         }
 

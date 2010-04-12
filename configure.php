@@ -65,7 +65,6 @@ switch($request)
         # Server configuration save
     case 'servers':
         # Updating configuration
-        $array = array();
         $_ini['server'] = $_POST['server'];
 
         # Writing configuration file

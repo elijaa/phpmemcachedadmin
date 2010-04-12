@@ -118,7 +118,7 @@
 # Viewing a server
 if(isset($_GET['server']))
 { ?>
-        <form method="get" id="flushForm" action="commands.php">
+        <form method="post" id="flushForm" action="commands.php">
         <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;">
             <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>

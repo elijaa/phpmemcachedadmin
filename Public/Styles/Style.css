@@ -8,11 +8,12 @@ input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px;-webkit-bo
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}
 input:hover{color:#AA0000;}
 select{width:201px;}
+tr.title{color:FFFFFF;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 .container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;}
 .serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
-.rounded{-moz-border-radius:8px;-webkit-border-radius: 8px;}
+.rounded{-moz-border-radius:8px;-webkit-border-radius:8px;}
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
 div.left{width:100px;float:left;font-weight:bold;padding-top:2px;}
 div.right{width:52px;float:left;padding-top:2px;}

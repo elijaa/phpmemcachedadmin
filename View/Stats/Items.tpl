@@ -24,8 +24,7 @@ foreach($items as $key => $data)
 <?php
     # Checking for item content @TODO : Fix API Used
     if((isset($_GET['key'])) && ($_GET['key'] == $key))
-    {
-?>
+    { ?>
         <br/>
         <code>
 <?php echo htmlentities(chunk_split($item, 150)); ?>
@@ -34,6 +33,5 @@ foreach($items as $key => $data)
     }
     # First item done
     $notFirst = true;
-}
-?>
+} ?>
     </div>
