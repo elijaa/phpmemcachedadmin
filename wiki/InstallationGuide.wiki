@@ -34,13 +34,13 @@ If you don't use any of the PECL Package, stay with "Server" for each configurat
 
 Some more information about configuration keys :
 
- * Stats : Used to extract stats from server
- * Slabs : Used to extract slabs stats from server
- * Items : Used to extract slabs items from server
- * Get : Used to extract an item by his key
- * Set : Used to set an item
- * Delete : Used to delete an item
- * Flush All : Used to flush a server
+ * *Stats* : Used to extract stats from server
+ * *Slabs* : Used to extract slabs stats from server
+ * *Items* : Used to extract slabs items from server
+ * *Get* : Used to extract an item by his key
+ * *Set* : Used to set an item
+ * *Delete* : Used to delete an item
+ * *Flush All* : Used to flush a server
 
 
 === Server List ===
@@ -52,15 +52,15 @@ By default there is only a localhost:11211, you can add your server or instance 
 
 You can define here :
 
- * Timeout : Timeout when trying to connect to a memcache server
- * Max Items : Max items to dump when showing a slab items list
+ * *Timeout* : Timeout when trying to connect to a memcache server
+ * *Max Items* : Max items to dump when showing a slab items list
 
 
 === Live Stats Configuration ===
 Live stats is a top like application, to show your servers stats in real-time
 
- * Refresh Rate : Stats refresh rate in second
- * Memory Alert : Memory % for alert
- * Hit Rate Alert : Hit Rate alert in %
- * Eviction Alert : Eviction Alert in %
- * Temp Path : Path for cache file, must be writable by apache
+ * *Refresh Rate* : Stats refresh rate in second
+ * *Memory Alert* : Memory % for alert
+ * *Hit Rate Alert* : Hit Rate alert in %
+ * *Eviction Alert* : Eviction Alert in %
+ * *Temp Path* : Path for cache file, must be writable by apache
