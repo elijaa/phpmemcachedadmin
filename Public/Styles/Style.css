@@ -2,7 +2,7 @@ body{color:#000000;font-family:tahoma,Arial;font-size:0.8em;margin-top:10px;}
 img{border:none;}
 a{color:#EEEEEE;text-decoration:none;}
 a:hover{color:#AA0000;}
-pre{white-space:pre-wrap;}
+pre{overflow:auto;white-space:pre-wrap;}
 hr{height:0; border:none; border-bottom:solid 1px #EEEEEE;}
 input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px;-webkit-border-radius: 3px;width:200px;font-family:tahoma;font-size:1em}
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}

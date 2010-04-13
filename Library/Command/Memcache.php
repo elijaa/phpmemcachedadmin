@@ -56,9 +56,11 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command
-        if(($return = self::$_memcache->getStats()))
+        if(($return = self::$_memcache->getExtendedStats()))
         {
-            return $return;
+            # Delete server key based
+            $stats = $return[$server.':'.$port];
+            return $stats;
         }
         return false;
     }

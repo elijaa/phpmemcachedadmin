@@ -20,7 +20,7 @@ foreach($items as $key => $data)
         <br/>
         <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>Bytes,
         <strong>Expiration</strong> : <?php echo Library_Analysis::uptime($data[1] - time()); ?>
-        <span style="float:right;"><a href="#">delete</a></span></form>
+        </form>
 <?php
     # Checking for item content
     if((isset($_GET['key'])) && ($_GET['key'] == $key))
