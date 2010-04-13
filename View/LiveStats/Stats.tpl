@@ -45,7 +45,7 @@ foreach($stats as $server => $data)
     }
 
     # Hit rate
-    echo sprintf('%7s', Library_Analysis::valueResize($data['hit_rate']));
+    echo sprintf('%7s', Library_Analysis::valueResize($data['hit_rate'] / $time));
 
     # Current connection
     echo sprintf('%6s', $data['curr_connections']);
@@ -62,8 +62,8 @@ foreach($stats as $server => $data)
     # Evication rate
     if($data['evictions'] > $_ini->get('eviction_alert'))
     {
-        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['evictions'])), ' ') .
-         '<span class="alert">' . Library_Analysis::valueResize($data['evictions']) . '</span>';
+        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['evictions'] / $time)), ' ') .
+         '<span class="alert">' . Library_Analysis::valueResize($data['evictions'] / $time) . '</span>';
     }
     else
     {
