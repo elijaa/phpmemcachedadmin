@@ -4,8 +4,6 @@
                  - <a href="http://memcached.org/" target="_blank">Memcached.org</a>
                  - <a href="http://www.pecl.php.net/package/memcache" target="_blank">PECL Memcache</a>
                  - <a href="http://www.pecl.php.net/package/memcached" target="_blank">PECL Memcached</a>
-                <br/>
-                Styling &amp; Banner image Copyright (c) 2009 Dormando
             </div>
         </div>
     </body>
