@@ -12,7 +12,7 @@
         <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:772px;">
 <?php
 # Live Stats view
-if ($_SERVER['PHP_SELF'] == '/stats.php')
+if(basename($_SERVER['PHP_SELF']) == 'stats.php')
 { ?>
         Live Stats |
 <?php
@@ -23,7 +23,7 @@ else
 <?php
 }
 # Stats view
-if ($_SERVER['PHP_SELF'] == '/index.php')
+if(basename($_SERVER['PHP_SELF']) == 'index.php')
 { ?>
         Actually seeing
 <?php
@@ -48,7 +48,7 @@ foreach($_ini->get('server') as $server)
         |
 <?php
 # Commands view
-if($_SERVER['PHP_SELF'] == '/commands.php')
+if(basename($_SERVER['PHP_SELF']) == 'commands.php')
 { ?>
         Executing Commands on Servers
 <?php
@@ -61,7 +61,7 @@ else
         |
 <?php
 # Configure view
-if($_SERVER['PHP_SELF'] == '/configure.php')
+if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 { ?>
         Editing Configuration
 <?php
