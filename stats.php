@@ -60,7 +60,7 @@ switch($request)
         {
             # Spliting server in hostname:port
             $server = preg_split('/:/', $server);
-            $newStats[$server[0] . ':' . $server[1]] = Library_Analysis::stats(Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]));
+            $newStats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
 
         # Analysing stats
