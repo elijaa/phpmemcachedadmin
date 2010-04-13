@@ -48,10 +48,10 @@ switch($request)
 {
     case 'live_stats':
         # Opening old stats dump
-        $oldStats = unserialize(file_get_contents($file_path));
+        $old_stats = unserialize(file_get_contents($file_path));
 
         # Initializing variables
-        $newStats = array();
+        $new_stats = array();
         $stats = array();
         $time = 0;
 
@@ -60,27 +60,26 @@ switch($request)
         {
             # Spliting server in hostname:port
             $server = preg_split('/:/', $server);
-            $newStats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            $new_stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
 
         # Analysing stats
         foreach($_ini->get('server') as $server)
         {
             # Diff between old and new dump
-            $stats[$server] = Library_Analysis::diff($oldStats[$server], $newStats[$server]);
-            $time = $stats[$server]['uptime'];
+            $stats[$server] = Library_Analysis::diff($old_stats[$server], $new_stats[$server]);
 
             # Making stats for each server
             foreach($stats as $server => $array)
             {
                 $stats[$server] = Library_Analysis::stats($stats[$server]);
-                $stats[$server]['bytes_percent'] = $newStats[$server]['bytes_percent'];
-                $stats[$server]['curr_connections'] = $newStats[$server]['curr_connections'];
+                $stats[$server]['bytes_percent'] = number_format($new_stats[$server]['bytes'] / $new_stats[$server]['limit_maxbytes'] * 100, 1);
+                $stats[$server]['curr_connections'] = $new_stats[$server]['curr_connections'];
             }
         }
 
         # Saving new stats dump
-        file_put_contents($file_path, serialize($newStats));
+        file_put_contents($file_path, serialize($new_stats));
 
         # Showing stats
         include 'View/LiveStats/Stats.tpl';
@@ -103,7 +102,7 @@ switch($request)
         {
             # Spliting server in hostname:port
             $server = preg_split('/:/', $server);
-            $stats[$server[0] . ':' . $server[1]] = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]));
+            $stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
 
         # Saving stats dump

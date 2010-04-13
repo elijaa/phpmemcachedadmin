@@ -253,4 +253,28 @@ class Library_Analysis
         }
         return sprintf('%.1f%s', $value, $unit);
     }
+
+    /**
+     * Resize a hit value
+     *
+     * @param Integer $value Hit value to resize
+     *
+     * @return String
+     */
+    public static function hitResize($value)
+    {
+        # Unit list
+        $units = array('', 'K', 'M', 'G', 'T');
+
+        # Resizing
+        foreach($units as $unit)
+        {
+            if($value < 10000000)
+            {
+                break;
+            }
+            $value /= 1000;
+        }
+        return sprintf('%.0f%s', $value, $unit);
+    }
 }

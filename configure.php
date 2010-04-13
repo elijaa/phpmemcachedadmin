@@ -50,7 +50,7 @@ switch($request)
         # Live stats configuration save
     case 'live_stats':
         # Updating configuration
-        $_ini->set('refresh_rate', max(2, $_POST['refresh_rate']));
+        $_ini->set('refresh_rate', round(max(2, $_POST['refresh_rate'])));
         $_ini->set('memory_alert', $_POST['memory_alert']);
         $_ini->set('hit_rate_alert', $_POST['hit_rate_alert']);
         $_ini->set('eviction_alert', $_POST['eviction_alert']);
