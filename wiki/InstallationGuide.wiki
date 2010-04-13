@@ -18,7 +18,7 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
-Remember to Save after each part configuration
+*Remember to Save after each part configuration*
 
 === Commands Configuration ===
 Each command executed by phpMemCacheAdmin will use an API, you can choose it here
