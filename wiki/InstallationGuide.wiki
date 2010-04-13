@@ -1,7 +1,7 @@
 #summary Read before installing
 
 == For Version 1.0.0 : ==
-Install, and Open Config/Config.ini
+Install, and edit Config/Config.ini to add servers
 
 = Installation Guide Version 1.1.0 =
 
@@ -11,14 +11,14 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 == 2. Install it on an Apache/PHP server ==
 
-*Make sure that Apache have the right to read and write in the temp file folder Temp/*
+*Make sure that Apache have rw right in the temp file folder (default : Temp/)*
 
 
 == 3. Go to Menu > Edit Configuration ==
 
 http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
-*Remember to Save after each part configuration*
+*Remember to save after each configuration part*
 
 === Commands Configuration ===
 Each command executed by phpMemCacheAdmin will use an API, you can choose it here
@@ -30,9 +30,9 @@ Some recommendations :
  * If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached
  * PECL Memcache can't use delay with flush_all
 
-If you don't use any of the PECL Package, simply let "Server" for every configuration key
+If you don't use any of the PECL Package, stay with "Server" for each configuration key
 
-Some more informations about configuration keys
+Some more information about configuration keys :
 
  * Stats : Used to extract stats from server
  * Slabs : Used to extract slabs stats from server
@@ -57,7 +57,7 @@ You can define here :
 
 
 === Live Stats Configuration ===
-Live stats is a top like application, to show your servers stats
+Live stats is a top like application, to show your servers stats in real-time
 
  * Refresh Rate : Stats refresh rate in second
  * Memory Alert : Memory % for alert
