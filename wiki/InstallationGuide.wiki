@@ -12,8 +12,10 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 Configuration is in four parts :
  # Commands Configuration : Each command executed by phpMemCacheAdmin will use an API, you can choose it here
+
 Some recommendations :
-- Use Server for stats, slabs, items
-- PECL Memcached does not support the slabs and items commands
-- If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached
-- PECL Memcache can't use delay with flush_all
+
+ * Use Server for stats, slabs, items
+ * PECL Memcached does not support the slabs and items commands
+ * If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached
+ * PECL Memcache can't use delay with flush_all
