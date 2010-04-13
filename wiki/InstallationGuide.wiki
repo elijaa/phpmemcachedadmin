@@ -11,8 +11,8 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 == 3. Go to Menu > Edit Configuration ==
 
 Configuration is in four parts :
- # Commands Configuration : Each command executed by phpMemCacheAdmin will use an API, you can choose it here
-
+ === Commands Configuration ===
+Each command executed by phpMemCacheAdmin will use an API, you can choose it here
 Some recommendations :
 
  * Use Server for stats, slabs, items
