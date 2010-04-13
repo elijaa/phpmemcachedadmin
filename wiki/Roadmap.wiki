@@ -1,9 +1,9 @@
 #summary Roadmap, ideas, release notes
 
 *Version 1.0.0*
- - Stats for get, set, delete, increment, decrement, cas command, as well as server stats (network, items, server version) with some googlecharts
- - Each server slabs, occupation, memory wasted and items (key & value) in it.
- - Direct communication with servers, PECL Memcache or PECL Memcached API as you wish.
+ * Stats for get, set, delete, increment, decrement, cas command, as well as server stats (network, items, server version) with some googlecharts
+ * Each server slabs, occupation, memory wasted and items (key & value) in it.
+ * Direct communication with servers, PECL Memcache or PECL Memcached API as you wish.
 
 
 *Version 1.1.0*
