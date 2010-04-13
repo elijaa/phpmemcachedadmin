@@ -1,5 +1,11 @@
 #summary Read before installing
 
+For Version 1.0.0 :
+Install, and Open Config/Config.ini
+
+
+For Version 1.1.1 :
+
 = Installation Guide =
 
 == 1. Download ==
@@ -8,14 +14,56 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 == 2. Install it on an Apache/PHP server ==
 
+*Make sure that Apache have the right to read and write in the temp file folder Temp/*
+
+
 == 3. Go to Menu > Edit Configuration ==
 
+http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
+
+Remember to Save after each part configuration
 
 === Commands Configuration ===
 Each command executed by phpMemCacheAdmin will use an API, you can choose it here
+
 Some recommendations :
 
  * Use Server for stats, slabs, items
  * PECL Memcached does not support the slabs and items commands
  * If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached
  * PECL Memcache can't use delay with flush_all
+
+If you don't use any of the PECL Package, simply let "Server" for every configuration key
+
+Some more informations about configuration keys
+
+ * Stats : Used to extract stats from server
+ * Slabs : Used to extract slabs stats from server
+ * Items : Used to extract slabs items from server
+ * Get : Used to extract an item by his key
+ * Set : Used to set an item
+ * Delete : Used to delete an item
+ * Flush All : Used to flush a server
+
+
+=== Server List ===
+
+By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
+
+
+=== Miscellaneous Configuration ===
+
+You can define here :
+
+ * Timeout : Timeout when trying to connect to a memcache server
+ * Max Items : Max items to dump when showing a slab items list
+
+
+=== Live Stats Configuration ===
+Live stats is a top like application, to show your servers stats
+
+ * Refresh Rate : Stats refresh rate in second
+ * Memory Alert : Memory % for alert
+ * Hit Rate Alert : Hit Rate alert in %
+ * Eviction Alert : Eviction Alert in %
+ * Temp Path : Path for cache file, must be writable by apache
