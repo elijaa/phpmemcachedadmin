@@ -108,6 +108,6 @@ switch($request)
 
         # Saving stats dump
         file_put_contents($file_path, serialize($stats));
-        chmod($file_path , '0777');
+        chmod($file_path , 0777);
         break;
 }
