@@ -59,7 +59,7 @@ You can define here :
 === Live Stats Configuration ===
 Live stats is a top like application, to show your servers stats in real-time
 
- * *Refresh Rate* : Stats refresh rate in second
+ * *Refresh Rate* : Stats refresh rate in second, minimum 2 sec
  * *Memory Alert* : Memory % for alert
  * *Hit Rate Alert* : Hit Rate alert in %
  * *Eviction Alert* : Eviction Alert in %
