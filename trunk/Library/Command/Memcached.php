@@ -121,6 +121,7 @@ class Library_Command_Memcached implements Library_Command_Interface
         # Adding server
         self::$_memcache->addServer($server, $port);
 
+        var_dump(self::$_memcache->get($key));
         # Executing command : get
         if($item = self::$_memcache->get($key))
         {

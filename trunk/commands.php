@@ -53,7 +53,7 @@ switch($request)
         if($_POST['request_server'] != '')
         {
             # Spliting server in hostname:port
-            $server = preg_split('/:/', $_GET['request_server']);
+            $server = preg_split('/:/', $_POST['request_server']);
             $response[$_POST['request_server']] = Library_Command_Factory::api($_POST['request_api'])->get($server[0], $server[1], $_POST['request_key']);
         }
         # Ask for delete on all servers
