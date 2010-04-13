@@ -1,13 +1,14 @@
 #summary Roadmap, ideas, release notes
 
-===Version 1.0.0===
+===Version 1.0.0 : 01/04/2010===
  * First public release
 
-===Version 1.1.0===
+===Version 1.1.0 : XX/04/2010===
  * Support of multiple instance of memcached on same server
  * Page to execute get, set, delete or flush_all on one or all servers
  * Live stats : a top-like stats tools
  * Configuration page to update your configuration without editing an ini file
  * Various improvements and fixes
 
-===Version 1.2.0===
+===Version 1.2.0 : XX/XX/2010===
+ * Average and total in live stats
