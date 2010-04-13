@@ -1,5 +1,8 @@
 #summary FAQ
 
+*- Configuration file doeasn't seem to work*
+  Your php include_path must have the .(dot) in it and the file must be in read and write mod for Apache
+
 *- I don't get all value for server stats with PECL Memcached*
   getStats() from PECL Memcached doesn't return delete, increment, decrement and cas statistics, so avoid using it, use Server instead
 
