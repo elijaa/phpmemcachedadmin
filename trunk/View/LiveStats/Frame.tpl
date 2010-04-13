@@ -9,8 +9,6 @@ setTimeout("ajax(page,'stats')", timeout);
     <div style="width:772px;">
         <br/>
         <pre id="stats" style="font-size:12px;overflow:visible;">
-
-        Loading live stats, please wait ...
-        </pre>
+        Loading live stats, please wait ...        </pre>
     </div>
 </div>

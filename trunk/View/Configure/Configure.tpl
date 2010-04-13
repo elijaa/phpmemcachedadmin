@@ -145,7 +145,7 @@
         <br/>
         <div class="container rounded" style="width:374px;padding:7px;">
             <div class="row">
-                For more informations about configuring phpMemCacheAdmin, see installation guide
+                For more information about configuring phpMemCacheAdmin, see installation guide
                 <a href="http://code.google.com/p/phpmemcacheadmin/wiki/InstallationGuide" target="_blank"><span class="green">here</span></a>
             </div>
         </div>
