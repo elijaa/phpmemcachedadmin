@@ -5,3 +5,6 @@
 
 *- PECL Memcached only return SUCCESS when getting key*
   You're reading a PECL Memcache stored key with PECl Memcached, you must use in admin what your scripts are using
+
+*- Live stats didn't refresh or doesn't work*
+  Check if Apache have the right to read and write in the temp folder (default : Temp/)
