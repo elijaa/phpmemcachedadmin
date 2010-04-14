@@ -41,7 +41,15 @@ $_ini = Library_Configuration::getInstance();
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
 
 # Live stats dump file
-$file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $_SERVER['REMOTE_ADDR'];
+if(isset($_SERVER['X_HTTP_FORWARDED_FOR']))
+{
+    $ip = explode(',', $_SERVER['X_HTTP_FORWARDED_FOR']);
+    $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $ip[0];
+}
+else
+{
+    $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $_SERVER['REMOTE_ADDR'];
+}
 
 # Display by request type
 switch($request)
