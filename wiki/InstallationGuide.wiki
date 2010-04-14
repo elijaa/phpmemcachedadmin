@@ -1,13 +1,14 @@
 #summary Read before installing
+#labels m
 = Installation Guide Version 1.1.0 =
 
 == 1. Download ==
 
 Download latest release from Google Code : http://code.google.com/p/phpmemcacheadmin/downloads/list
 
-== 2. Install it on an Apache/PHP server ==
+== 2. Install the program on an Apache/PHP server ==
 
-*Make sure that Apache have rw right in the temp file folder (default : Temp/)*
+*Make sure that Apache has rw right in the temp file folder (default : Temp/)*
 
 
 == 3. Go to Menu > Edit Configuration ==
@@ -21,7 +22,7 @@ http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
 By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
 
-=You can use it now and use the default configuration for the rest=
+=You can use phpMemCacheAdmin now and use the default configuration for the rest=
 
 
 
@@ -32,17 +33,17 @@ Some recommendations :
 
  * Use Server for stats, slabs, items
  * PECL Memcached does not support the slabs and items commands
- * If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached
+ * If you're using PECL Memcache in your scripts, don't use PECL Memcache, it is the same for PECL Memcached
  * PECL Memcache can't use delay with flush_all
 
 If you don't use any of the PECL Package, stay with "Server" for each configuration key
 
-Some more information about configuration keys :
+More informations about configuration keys :
 
- * *Stats* : Used to extract stats from server
- * *Slabs* : Used to extract slabs stats from server
- * *Items* : Used to extract slabs items from server
- * *Get* : Used to extract an item by his key
+ * *Stats* : Used for extraction of stats from server
+ * *Slabs* : Used for extraction of slabs stats from server
+ * *Items* : Used for extraction of slabs items from server
+ * *Get* : Used for extraction of an item by his key
  * *Set* : Used to set an item
  * *Delete* : Used to delete an item
  * *Flush All* : Used to flush a server
