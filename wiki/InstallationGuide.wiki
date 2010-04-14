@@ -21,9 +21,10 @@ http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
 By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
 
-====You can use it now and use the default configuration for the rest====
+==You can use it now and use the default configuration for the rest==
 
-=== Commands Configuration ===
+
+=== Advanced : Commands Configuration ===
 Each command executed by phpMemCacheAdmin will use an API, you can choose it here
 
 Some recommendations :
@@ -46,7 +47,7 @@ Some more information about configuration keys :
  * *Flush All* : Used to flush a server
 
 
-=== Miscellaneous Configuration ===
+=== Advanced : Miscellaneous Configuration ===
 
 You can define here :
 
@@ -54,7 +55,7 @@ You can define here :
  * *Max Items* : Max items to dump when showing a slab items list
 
 
-=== Live Stats Configuration ===
+=== Advanced : Live Stats Configuration ===
 Live stats is a top like application, to show your servers stats in real-time
 
  * *Refresh Rate* : Stats refresh rate in second, minimum 2 sec
