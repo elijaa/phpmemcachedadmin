@@ -1,4 +1,5 @@
 <?php
+# @TODO : Make this compatible with command line
 # Header
 echo 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('refresh_rate') . ' sec)';
 echo "\r\n\r\n<strong>";

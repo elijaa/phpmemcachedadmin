@@ -107,7 +107,7 @@ class Library_Configuration
         # Checking configuration keys
         foreach(self::$_iniKeys as $iniKey)
         {
-            # Ini file key not set or server not an array @todo Fix the method
+            # Ini file key not set or server not an array
             if((!isset(self::$_ini[$iniKey])) || (($iniKey == 'server') && (!is_array(self::$_ini['server']))))
             {
                 return false;
