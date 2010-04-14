@@ -113,7 +113,7 @@ function ajaxDone(target) {
 			results = req.responseText;
 			document.getElementById(target).innerHTML = results;
 		} else {
-			document.getElementById(target).innerHTML = "Loading stats erro : "
+			document.getElementById(target).innerHTML = "Loading stats error : "
 					+ req.statusText;
 		}
 	}
