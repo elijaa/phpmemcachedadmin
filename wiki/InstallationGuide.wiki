@@ -21,7 +21,8 @@ http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
 By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
 
-==You can use it now and use the default configuration for the rest==
+=You can use it now and use the default configuration for the rest=
+
 
 
 === Advanced : Commands Configuration ===
