@@ -10,8 +10,6 @@
     <div style="margin: 0 auto;width:788px;clear:both;float:left;">
 
         <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin</div>
-
-        <!-- <a href="http://memcached.org/"><img src="Public/Images/Banner.jpg" alt="Memcache.org banner" width="785" height="145"/></a> -->
         <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:772px;">
 <?php
 # Live Stats view
