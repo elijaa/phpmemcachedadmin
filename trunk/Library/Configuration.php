@@ -23,7 +23,7 @@
 class Library_Configuration
 {
     private static $_instance = null;
-    private static $_iniPath = 'Config/Memcache.ini';
+    private static $_iniPath = './Config/Memcache.ini';
     private static $_iniKeys = array('stats_api',
                                      'slabs_api',
                                      'items_api',
