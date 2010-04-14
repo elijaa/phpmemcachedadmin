@@ -11,5 +11,12 @@
  * Various improvements and fixes
 
 ===Version 1.2.0 : XX/XX/2010===
+====Configuration====
+ * Remove unavailable API
+
+====Live Stats====
  * Average and total in live stats
  * Add an alert for connections
+
+====Items View====
+ * Add a "delete this key" option
