@@ -12,3 +12,4 @@
 
 ===Version 1.2.0 : XX/XX/2010===
  * Average and total in live stats
+ * Add an alert for connections
