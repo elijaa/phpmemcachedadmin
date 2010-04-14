@@ -1,8 +1,4 @@
 #summary Read before installing
-
-== For Version 1.0.0 : ==
-Install, and edit Config/Config.ini to add servers
-
 = Installation Guide Version 1.1.0 =
 
 == 1. Download ==
