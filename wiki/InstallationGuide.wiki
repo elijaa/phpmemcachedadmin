@@ -10,11 +10,18 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 *Make sure that Apache have rw right in the temp file folder (default : Temp/)*
 
 
-== 3. You can use it, for advanced configuration Go to Menu > Edit Configuration ==
+== 3. Go to Menu > Edit Configuration ==
 
 http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
 *Remember to save after each configuration part*
+
+
+=== Server List ===
+
+By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
+
+====You can use it now and use the default configuration for the rest====
 
 === Commands Configuration ===
 Each command executed by phpMemCacheAdmin will use an API, you can choose it here
@@ -37,11 +44,6 @@ Some more information about configuration keys :
  * *Set* : Used to set an item
  * *Delete* : Used to delete an item
  * *Flush All* : Used to flush a server
-
-
-=== Server List ===
-
-By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
 
 
 === Miscellaneous Configuration ===
