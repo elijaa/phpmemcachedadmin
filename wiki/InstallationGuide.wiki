@@ -10,7 +10,7 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 *Make sure that Apache have rw right in the temp file folder (default : Temp/)*
 
 
-== 3. Go to Menu > Edit Configuration ==
+== 3. You can use it, for advanced configuration Go to Menu > Edit Configuration ==
 
 http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
