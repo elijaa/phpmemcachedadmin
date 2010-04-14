@@ -46,7 +46,7 @@ if(!isset($_COOKIE['live_stats_id']))
     $live_stats_id = rand();
 
     # Cookie set failed : usin remote_addr
-    if(!setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*30))
+    if(!setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*365))
     {
         $live_stats_id = $_SERVER['REMOTE_ADDR'];
     }
@@ -124,6 +124,5 @@ switch($request)
 
         # Saving stats dump
         file_put_contents($file_path, serialize($stats));
-        chmod($file_path , 0777);
         break;
 }
