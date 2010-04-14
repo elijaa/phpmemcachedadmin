@@ -40,16 +40,25 @@ $_ini = Library_Configuration::getInstance();
 # Initializing requests
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
 
-# Live stats dump file
-if(isset($_SERVER['X_HTTP_FORWARDED_FOR']))
+# Cookie
+if(!isset($_COOKIE['live_stats_id']))
 {
-    $ip = explode(',', $_SERVER['X_HTTP_FORWARDED_FOR']);
-    $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $ip[0];
+    $live_stats_id = rand();
+
+    # Cookie set failed : usin remote_addr
+    if(!setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*30))
+    {
+        $live_stats_id = $_SERVER['REMOTE_ADDR'];
+    }
 }
 else
 {
-    $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $_SERVER['REMOTE_ADDR'];
+    # Backup from a previous request
+    $live_stats_id = $_COOKIE['live_stats_id'];
 }
+
+# Live stats dump file
+$file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
 
 # Display by request type
 switch($request)
