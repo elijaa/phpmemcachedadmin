@@ -20,6 +20,7 @@
 
 ====Stats View====
  * Add the reclaimed stats
+ * Maybe add the server own memcached configuration
 
 ====Items View====
  * Add a "delete this key" option
