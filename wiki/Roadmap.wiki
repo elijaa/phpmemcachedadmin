@@ -18,5 +18,8 @@
  * Average and total in live stats
  * Add an alert for connections
 
+====Stats View====
+ * Add the reclaimed stats
+
 ====Items View====
  * Add a "delete this key" option
