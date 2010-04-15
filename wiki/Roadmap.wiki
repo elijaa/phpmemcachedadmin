@@ -11,12 +11,17 @@
  * Various improvements and fixes
 
 ===Version 1.2.0 : XX/XX/2010===
+====General====
+ * Clean the whole thing a little
+
 ====Configuration====
  * Remove unavailable API
 
 ====Live Stats====
  * Average and total in live stats
  * Add an alert for connections
+ * Customize stats
+ * Command line
 
 ====Stats View====
  * Add the reclaimed stats
