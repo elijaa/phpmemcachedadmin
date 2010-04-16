@@ -10,6 +10,17 @@
  * Configuration page to update your configuration without editing an ini file
  * Various improvements and fixes
 
+===Version 1.1.0 : 14/04/2010===
+ * Support of multiple instance of memcached on same server
+ * Page to execute get, set, delete or flush_all on one or all servers
+ * Live stats : a top-like stats tools
+ * Configuration page to update your configuration without editing an ini file
+ * Various improvements and fixes
+
+===Version 1.1.1 : XX/04/2010===
+ * Fixed the eviction rate bug on live stats
+ * Fixed the Memcache API bug with commands
+
 ===Version 1.2.0 : XX/XX/2010===
 ====General====
  * Clean the whole thing a little
@@ -33,5 +44,3 @@
 
 ====Fix====
  * _PECL Memcache and get command produced a bug_
-
-_Items_ are done
