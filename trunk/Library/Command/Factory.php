@@ -37,7 +37,7 @@ class Library_Command_Factory
         $_ini = Library_Configuration::getInstance();
 
         # Instance does not exists
-        if(!isset(self::$_object[$_ini->get($command)]))
+        if(!isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) == 'Memcache'))
         {
             # Switching by API
             switch($_ini->get($command))
@@ -75,7 +75,7 @@ class Library_Command_Factory
     public static function api($api)
     {
         # Instance does not exists
-        if(!isset(self::$_object[$api]))
+        if(!isset(self::$_object[$api]) || ($api == 'Memcache'))
         {
             # Switching by API
             switch($api)

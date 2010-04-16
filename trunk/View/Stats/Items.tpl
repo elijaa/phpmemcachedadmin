@@ -27,7 +27,9 @@ foreach($items as $key => $data)
     { ?>
         <br/>
         <code>
-<?php echo htmlentities(chunk_split($item, 150)); ?>
+<?php
+        # Showing item content
+        echo htmlentities(trim($item)); ?>
         </code>
 <?php
     }
