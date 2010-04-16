@@ -25,11 +25,13 @@
  * Use memcached to store data
 
 ====Stats View====
- * Add the reclaimed stats
+ * _Add the reclaimed stats_
  * Maybe add the server own memcached configuration
 
 ====Items View====
  * Add a "delete this key" option
 
 ====Fix====
- * PECL Memcache and get command produced a bug
+ * _PECL Memcache and get command produced a bug_
+
+_Items_ are done
