@@ -22,6 +22,7 @@
  * Add an alert for connections
  * Customize stats
  * Command line
+ * Use memcached to store data
 
 ====Stats View====
  * Add the reclaimed stats
