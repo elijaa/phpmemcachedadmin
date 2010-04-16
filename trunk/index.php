@@ -38,7 +38,7 @@ date_default_timezone_set('Europe/Paris');
 $_ini = Library_Configuration::getInstance();
 
 # Initializing requests
-$request = (isset($_GET['show'])) ? $_GET['show'] : null;
+$request = (isset($_GET['request_show'])) ? $_GET['request_show'] : null;
 
 # Showing header
 include 'View/Header.tpl';

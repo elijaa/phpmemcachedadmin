@@ -120,7 +120,7 @@ if(isset($_GET['server']))
 { ?>
         <form method="post" id="flushForm" action="commands.php">
         <div class="serverlist rounded submenu">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
+            <a href="?server=<?php echo $_GET['server']; ?>&amp;request_show=slabs">See Slabs Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
             <input type="hidden" name="request_command" value="flush_all"/>

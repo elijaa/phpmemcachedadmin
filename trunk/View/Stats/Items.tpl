@@ -1,7 +1,7 @@
     <br/>
     <span class="title grey rounded" style="width:810px;">
         Items in Slab <?php echo $_GET['slab']; ?>, only showing first <?php echo $_ini->get('max_item_dump'); ?> items
-        <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Back to Server Slabs</a></span>
+        <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;request_show=slabs">Back to Server Slabs</a></span>
     </span>
     <div class="container rounded" style="width:810px;padding:7px;">
 <?php
@@ -16,7 +16,7 @@ foreach($items as $key => $data)
     # Displaying item line
 ?>
         <form>
-        <a class="green" href="index.php?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $_GET['slab']; ?>&amp;request_key=<?php echo $key; ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get"><?php echo $key; ?></a>
+        <a class="green" href="index.php?server=<?php echo $_GET['server']; ?>&amp;request_show=items&amp;slab=<?php echo $_GET['slab']; ?>&amp;request_key=<?php echo $key; ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get"><?php echo $key; ?></a>
         <br/>
         <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>Bytes,
         <strong>Expiration</strong> : <?php echo Library_Analysis::uptime($data[1] - time()); ?>

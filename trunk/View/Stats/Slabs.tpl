@@ -67,7 +67,7 @@ foreach($slabs as $id => $slab)
             <br/>
             <span class="title grey rounded">
                 Slab <?php echo $id; ?> <span class="green">Stats</span>
-                <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
+                <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;request_show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
             </span>
                 <div class="container rounded">
                     <div class="row">
