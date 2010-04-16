@@ -23,7 +23,7 @@
         <div class="container rounded">
             <div class="row">
                 <div class="left">Total</div>
-                <div class="middle"><?php echo Library_Analysis::hitResize($stats['cmd_set']); ?></div>
+                <div class="full"><?php echo Library_Analysis::hitResize($stats['cmd_set']); ?></div>
             </div>
             <div class="row">
                 <div class="left">Rate</div>
@@ -113,13 +113,13 @@
         </div>
     </div>
 
-    <div style="float:left; padding-left:10px;">
+    <div style="float:left;padding-left:10px;">
 <?php
 # Viewing a server
 if(isset($_GET['server']))
 { ?>
         <form method="post" id="flushForm" action="commands.php">
-        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;">
+        <div class="serverlist rounded submenu">
             <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
@@ -170,6 +170,16 @@ if(isset($_GET['server']))
                 <div class="left">Garbage Items</div>
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['evictions']); ?></div>
             </div>
+            <?php
+            # Memcached 1.4.5 new stats
+            if(isset($stats['reclaimed']))
+            { ?>
+            <div class="row">
+                <div class="left">Reclaimed Items</div>
+                <div class="full"><?php echo Library_Analysis::hitResize($stats['reclaimed']); ?></div>
+            </div>
+            <?php
+            } ?>
         </div>
         <br/>
 
@@ -204,7 +214,7 @@ if(isset($_GET['server']))
         <span class="title grey rounded">Cache Size <span class="green">Graphic</span></span>
         <div class="container rounded">
             <div class="row">
-                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=240x176&amp;chl=Used|Free&amp;chf=bg,s,DBDBDB&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="240" height="176"/>
+                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=248x176&amp;chl=Used|Free&amp;chf=bg,s,DBDBDB&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="248" height="176"/>
             </div>
         </div>
         <br/>
@@ -228,8 +238,8 @@ if(isset($_GET['server']))
 
         <span class="title grey rounded">Hit &amp; Miss Rate <span class="green">Graphic</span></span>
          <div class="container rounded">
-            <div class="row">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=240x176&amp;chl=Hit|Miss&amp;chf=bg,s,DBDBDB&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="240" height="176"/>
+            <div class="row" style="text-align:center;">
+            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=248x176&amp;chl=Hit|Miss&amp;chf=bg,s,DBDBDB&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="248" height="176"/>
             </div>
         </div>
     </div>
