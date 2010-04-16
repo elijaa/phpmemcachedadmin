@@ -97,6 +97,7 @@
             </div>
             <div id="server_form">
             <?php
+            # Adding input for every server
             foreach($_ini->get('server') as $server)
             { ?>
             <div id="server_<?php echo $server; ?>">
