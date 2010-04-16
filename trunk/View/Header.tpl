@@ -6,11 +6,11 @@
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
 </head>
 <body>
-<div style="margin: 0 auto;width:800px;">
-    <div style="margin: 0 auto;width:788px;clear:both;float:left;">
+<div style="margin: 0 auto;width:824px;">
+    <div style="margin: 0 auto;width:824px;clear:both;float:left;">
 
         <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin</div>
-        <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:772px;">
+        <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:810px;text-align:center;">
 <?php
 # Live Stats view
 if(basename($_SERVER['PHP_SELF']) == 'stats.php')
@@ -76,7 +76,7 @@ else
 
 <!--[if IE]>
 <br/>
-<div class="serverlist rounded" style="text-align:center;padding:3px 7px;width:772px;">
+<div class="serverlist rounded" style="text-align:center;padding:3px 7px;width:800px;">
 Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
 </div>
 <![endif]-->

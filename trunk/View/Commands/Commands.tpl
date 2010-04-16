@@ -1,7 +1,7 @@
     <br/>
     <div style="float:left;">
-        <span class="title grey rounded" style="width:374px;">Get <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px">
+        <span class="title grey rounded" style="width:393px;">Get <span class="green">Command</span></span>
+        <div class="container rounded" style="width:393px;padding:7px">
             <form method="post" action="commands.php">
                <div class="row">
                     Execute get command on one or all memcached servers<br/>
@@ -27,8 +27,8 @@
             </form>
         </div>
         <br/>
-        <span class="title grey rounded" style="width:374px;">Delete <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
+        <span class="title grey rounded" style="width:393px;">Delete <span class="green">Command</span></span>
+        <div class="container rounded" style="width:393px;padding:7px;">
             <form method="post" action="commands.php">
                 <div class="row">
                     Execute delete command on one or all memcached servers<br/>
@@ -53,7 +53,7 @@
                 </div>
             </form>
         </div>
-        <div class="container rounded" style="width:374px;padding:7px;margin-top:46px;">
+        <div class="container rounded" style="width:393px;padding:7px;margin-top:46px;">
             <div class="row">
                 For more informations about memcached commands, see memcached protocol
                 <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
@@ -62,8 +62,8 @@
     </div>
 
     <div style="float:left; padding-left:10px;">
-        <span class="title grey rounded" style="width:374px;">Set <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
+        <span class="title grey rounded" style="width:393px;">Set <span class="green">Command</span></span>
+        <div class="container rounded" style="width:393px;padding:7px;">
             <form method="post" action="commands.php">
                 <div class="row">
                     Execute set command on one or all memcached servers<br/>
@@ -98,8 +98,8 @@
         </div>
 
         <br/>
-        <span class="title grey rounded" style="width:374px;">Flush Server <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
+        <span class="title grey rounded" style="width:393px;">Flush Server <span class="green">Command</span></span>
+        <div class="container rounded" style="width:393px;padding:7px;">
             <form method="post" action="commands.php">
                 <div class="row">
                     Execute flush_all command on one or all memcached servers<br/>
