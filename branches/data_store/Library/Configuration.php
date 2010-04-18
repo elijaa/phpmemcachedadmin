@@ -41,6 +41,7 @@ class Library_Configuration
                                      'file_path'
                                      );
     private static $_ini;
+    private static $_servers = array();
 
     /**
      * Constructor of MemCacheAdmin_Configuration class
@@ -55,6 +56,13 @@ class Library_Configuration
 
         # Ordering server list
         sort(self::$_ini['server']);
+
+        # Spliting server in hostname:port
+        foreach(self::$_ini['server'] as $server)
+        {
+            $array = preg_split('/:/', $server);
+            self::$_servers[$server] = array('hostname' => $array[0], 'port' => $array[1]);
+        }
     }
 
     /**
@@ -74,13 +82,30 @@ class Library_Configuration
     /**
      * Config key to retrieve
      *
-     * @param Mixed $key Key to get
+     * @param String $key Key to get
      *
-     * @return Boolean
+     * @return Mixed
      */
     public static function get($key)
     {
         return self::$_ini[$key];
+    }
+
+    /**
+     * Server to retrieve (One or the whole cluster)
+     * Return the cluster or the server
+     *
+     * @param String $server Server to get
+     *
+     * @return Mixed
+     */
+    public static function cluster($server = 'whole')
+    {
+        if($server == 'whole')
+        {
+            return self::$_servers;
+        }
+        return self::$_servers[$server];
     }
 
     /**

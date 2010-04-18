@@ -173,7 +173,7 @@ class Library_Command_Server implements Library_Command_Interface
         # Executing command
         if(($return = $this->exec('stats', $server, $port)))
         {
-            return $this->parse($return);
+            return new Library_Data_Stats($this->parse($return), time(), $server, $port);
         }
         return false;
     }

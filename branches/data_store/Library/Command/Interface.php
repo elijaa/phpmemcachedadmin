@@ -25,8 +25,6 @@ interface Library_Command_Interface
     /**
      * Constructor
      *
-     * @param Array $ini Array from ini_parse
-     *
      * @return void
      */
     function __construct();

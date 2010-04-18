@@ -26,19 +26,10 @@ header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'Library/Loader.php';
-
-Library_Data_Builder::instance()->create(Library_Data_Builder::TYPE_STATS);
-$objects = Library_Data_Builder::instance()->get(Library_Data_Builder::TYPE_STATS);
-$database = new Library_Database_SQLite();
-$database->create();
-foreach($objects as $object)
-{
-    foreach($object as $time => $data)
-    Library_Data_Builder::instance()->save(Library_Data_Builder::TYPE_STATS, $data);
-}
-
-Library_Data_Builder::instance()->retreive(Library_Data_Builder::TYPE_STATS);
+require_once 'Library/Command/Interface.php';
+require_once 'Library/Command/Factory.php';
+require_once 'Library/Configuration.php';
+require_once 'Library/Analysis.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -82,16 +73,18 @@ switch($request)
         $time = 0;
 
         # Requesting stats for each server
-        foreach($_ini->cluster() as $server)
+        foreach($_ini->get('server') as $server)
         {
-            $new_stats[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            # Spliting server in hostname:port
+            $server = preg_split('/:/', $server);
+            $new_stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
 
         # Analysing stats
-        foreach($_ini->cluster() as $server)
+        foreach($_ini->get('server') as $server)
         {
             # Diff between old and new dump
-            $stats[$server['hostname'] . ':' . $server['port']] = Library_Analysis::diff($old_stats[$server['hostname'] . ':' . $server['port']], $new_stats[$server['hostname'] . ':' . $server['port']]);
+            $stats[$server] = Library_Analysis::diff($old_stats[$server], $new_stats[$server]);
 
             # Making stats for each server
             foreach($stats as $server => $array)

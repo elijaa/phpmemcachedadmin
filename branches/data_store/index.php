@@ -26,10 +26,7 @@ header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'Library/Command/Interface.php';
-require_once 'Library/Command/Factory.php';
-require_once 'Library/Analysis.php';
-require_once 'Library/Configuration.php';
+require_once 'Library/Loader.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -120,18 +117,17 @@ switch($request)
         # Ask for one server stats
         if(isset($_GET['server']))
         {
-            # Spliting server in hostname:port
-            $server = preg_split('/:/', $_GET['server']);
-            $stats = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            # Retreiving stats
+            $server = $_ini->cluster($_GET['server']);
+            $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         }
         # Ask for all servers stats
         else
         {
-            foreach($_ini->get('server') as $server)
+            foreach($_ini->cluster() as $server)
             {
-                # Spliting server in hostname:port
-                $server = preg_split('/:/', $server);
-                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]));
+                # Retreiving stats
+                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']));
             }
         }
 

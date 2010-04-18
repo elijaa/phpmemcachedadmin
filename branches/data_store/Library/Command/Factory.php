@@ -15,7 +15,7 @@
  *
  * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Factory for comunication with Memcache Server
+ * Factory for communication with Memcache Server
  *
  * @author c.mahieux@of2m.fr
  * @since 30/03/2010
@@ -23,6 +23,12 @@
 class Library_Command_Factory
 {
     private static $_object = array();
+
+    # No explicit call of constructor
+    private function __construct() {}
+
+    # No explicit call of clone()
+    private function __clone() {}
 
     /**
      * Accessor to command class instance by command type
