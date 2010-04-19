@@ -10,13 +10,6 @@
  * Configuration page to update your configuration without editing an ini file
  * Various improvements and fixes
 
-===Version 1.1.0 : 14/04/2010===
- * Support of multiple instance of memcached on same server
- * Page to execute get, set, delete or flush_all on one or all servers
- * Live stats : a top-like stats tools
- * Configuration page to update your configuration without editing an ini file
- * Various improvements and fixes
-
 ===Version 1.1.1 : XX/04/2010===
  * Added the reclaimed stats and reclaimed rate (Memcached 1.4.5)
  * Added the eviction rate
