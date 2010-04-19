@@ -18,6 +18,9 @@
  * Various improvements and fixes
 
 ===Version 1.1.1 : XX/04/2010===
+ * Added the reclaimed stats and reclaimed rate (Memcached 1.4.5)
+ * Added the eviction rate
+ * Fixed a CSS bug
  * Fixed the eviction rate bug on live stats
  * Fixed the Memcache API bug with commands
 
