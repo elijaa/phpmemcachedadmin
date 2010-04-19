@@ -89,6 +89,7 @@ switch($request)
             # Making stats for each server
             foreach($stats as $server => $array)
             {
+                if($stats[$server]['uptime'] == 0) { $stats[$server]['uptime'] = $_ini->get('refresh_rate'); }
                 $stats[$server] = Library_Analysis::stats($stats[$server]);
                 $stats[$server]['bytes_percent'] = number_format($new_stats[$server]['bytes'] / $new_stats[$server]['limit_maxbytes'] * 100, 1);
                 $stats[$server]['curr_connections'] = $new_stats[$server]['curr_connections'];
