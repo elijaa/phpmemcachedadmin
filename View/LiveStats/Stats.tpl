@@ -53,13 +53,13 @@ foreach($stats as $server => $data)
     # Delete rate
     echo sprintf('%8s', Library_Analysis::valueResize($data['delete_rate']));
     # Eviction rate
-    if($data['evictions'] > $_ini->get('eviction_alert'))
+    if($data['eviction_rate'] > $_ini->get('eviction_alert'))
     {
-        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['evictions'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['evictions']) . '</span>';
+        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
     }
     else
     {
-        echo sprintf('%9s', Library_Analysis::valueResize($data['evictions']));
+        echo sprintf('%9s', Library_Analysis::valueResize($data['eviction_rate']));
     }
     # Bytes read
     echo sprintf('%10s', Library_Analysis::byteResize($data['bytes_read'] / $data['time']) . 'b');
