@@ -22,7 +22,8 @@
  * Added the eviction rate
  * Fixed a CSS bug
  * Fixed the eviction rate bug on live stats
- * Fixed the Memcache API bug with commands
+ * Fixed the PECL Memcache/Memcached API bug with get commands
+ * Fixed the flush_all link not working from slabs stats
 
 ===Version 1.2.0 : XX/XX/2010===
 ====General====
