@@ -167,8 +167,12 @@ if(isset($_GET['server']))
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['total_items']); ?></div>
             </div>
             <div class="row">
-                <div class="left">Garbage Items</div>
+                <div class="left">Items Eviction</div>
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['evictions']); ?></div>
+            </div>
+            <div class="row">
+                <div class="left">Eviction Rate</div>
+                <div class="full"><?php echo $stats['eviction_rate']; ?> Request/sec</div>
             </div>
         </div>
         <br/>
