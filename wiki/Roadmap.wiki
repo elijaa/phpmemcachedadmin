@@ -10,7 +10,7 @@
  * Configuration page to update your configuration without editing an ini file
  * Various improvements and fixes
 
-===Version 1.1.1 : XX/04/2010===
+===Version 1.1.1 : 19/04/2010===
  * Added the reclaimed stats and reclaimed rate (Memcached 1.4.5)
  * Added the eviction rate
  * Fixed a CSS bug
