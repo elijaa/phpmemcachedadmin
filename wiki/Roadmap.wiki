@@ -13,7 +13,6 @@
 ===Version 1.1.1 : 19/04/2010===
  * Added the reclaimed stats and reclaimed rate (Memcached 1.4.5)
  * Added the eviction rate
- * Fixed a CSS bug
  * Fixed the eviction rate bug on live stats
  * Fixed the PECL Memcache/Memcached API bug with get commands
  * Fixed the flush_all link not working from slabs stats
