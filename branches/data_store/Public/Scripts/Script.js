@@ -1,6 +1,7 @@
 function changeServer(obj){if(obj.options[obj.selectedIndex].value!=''){window.location='index.php?server='+obj.options[obj.selectedIndex].value;}else{window.location='index.php';}}
 function serverOnFocus(obj){if(obj.value=='hostname:port'){obj.value='';}}
 function serverOnBlur(obj){if(obj.value==''){obj.value='hostname:port';}}
+function flushServer(obj){if(confirm('Are you sure you want to execute flush_all on server')==true){obj.submit();}return false;}
 var server=0;function addServer(){var serverDiv=document.createElement('div');var serverID=server++;serverDiv.innerHTML='<div class="row"><div class="left">Server</div>'
 +'<div><input type="text" name="server[]" value="hostname:port" onfocus="serverOnFocus(this)" onblur="serverOnBlur(this)">'
 +' <a class="menu grey serverlist" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServer(\'server_'

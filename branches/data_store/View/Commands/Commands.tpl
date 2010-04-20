@@ -100,7 +100,7 @@
         <br/>
         <span class="title grey rounded" style="width:393px;">Flush Server <span class="green">Command</span></span>
         <div class="container rounded" style="width:393px;padding:7px;">
-            <form method="post" action="commands.php">
+            <form method="post" id="flushForm" action="commands.php">
                 <div class="row">
                     Execute flush_all command on one or all memcached servers<br/>
                     Delay in second before flushing is optional<br/>
@@ -121,7 +121,7 @@
                 <div class="row" style="text-align:center;">
                     <hr/>
                     <input type="hidden" name="request_command" value="flush_all"/>
-                    <input class="menu serverlist" type="submit" value="Execute Flush All"/>
+                    <input class="menu serverlist" type="submit" onclick="return flushServer(document.getElementById('flushForm'))" value="Execute Flush All"/>
                 </div>
             </form>
         </div>

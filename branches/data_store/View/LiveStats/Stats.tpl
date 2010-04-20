@@ -55,7 +55,7 @@ foreach($stats as $server => $data)
     # Eviction rate
     if($data['eviction_rate'] > $_ini->get('eviction_alert'))
     {
-        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['evictions'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['evictions']) . '</span>';
+        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
     }
     else
     {
