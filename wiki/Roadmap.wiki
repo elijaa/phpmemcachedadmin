@@ -31,13 +31,10 @@
  * Customize stats
  * Command line
  * Use memcached to store data
+ * *Graphics view with stats storage (SQLite or MySQL)*
 
 ====Stats View====
- * _Add the reclaimed stats_
  * Maybe add the server own memcached configuration
 
 ====Items View====
  * Add a "delete this key" option
-
-====Fix====
- * _PECL Memcache and get command produced a bug_
