@@ -124,7 +124,7 @@ if(isset($_GET['server']))
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
             <input type="hidden" name="request_command" value="flush_all"/>
-            <a href="#" onclick="document.getElementById('flushForm').submit();">Flush this Server</a>
+            <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
         </div>
         </form>
         <br/>
@@ -166,20 +166,32 @@ if(isset($_GET['server']))
                 <div class="left">Total Items</div>
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['total_items']); ?></div>
             </div>
+        </div>
+        <br/>
+        <span class="title grey rounded">Eviction <?php if(isset($stats['reclaimed'])) { echo ' &amp; Reclaimed'; } ?> <span class="green">Stats</span></span>
+        <div class="container rounded">
             <div class="row">
-                <div class="left">Garbage Items</div>
+                <div class="left">Items Eviction</div>
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['evictions']); ?></div>
             </div>
-            <?php
-            # Memcached 1.4.5 new stats
-            if(isset($stats['reclaimed']))
-            { ?>
             <div class="row">
-                <div class="left">Reclaimed Items</div>
+                <div class="left">Rate</div>
+                <div class="full"><?php echo $stats['eviction_rate']; ?> Eviction/sec</div>
+            </div>
+<?php
+# Memcached version 1.4.5 and above
+if(isset($stats['reclaimed']))
+{ ?>
+            <div class="row">
+                <div class="left">Reclaimed</div>
                 <div class="full"><?php echo Library_Analysis::hitResize($stats['reclaimed']); ?></div>
             </div>
-            <?php
-            } ?>
+            <div class="row">
+                <div class="left">Rate</div>
+                <div class="full"><?php echo $stats['reclaimed_rate']; ?> Reclaimed/sec</div>
+            </div>
+<?php
+} ?>
         </div>
         <br/>
 

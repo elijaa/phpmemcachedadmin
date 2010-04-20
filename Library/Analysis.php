@@ -149,6 +149,10 @@ class Library_Analysis
         $stats['hit_rate'] = number_format(($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['uptime'], 1);
         $stats['miss_rate'] = number_format(($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['uptime'], 1);
 
+        # Eviction & reclaimed rate
+        $stats['eviction_rate'] = ($stats['evictions'] == 0) ? '0.0':number_format($stats['evictions'] / $stats['uptime'], 1);
+        $stats['reclaimed_rate'] = (!isset($stats['reclaimed']) || ($stats['reclaimed'] == 0)) ? '0.0':number_format($stats['reclaimed'] / $stats['uptime'], 1);
+
         return $stats;
     }
 

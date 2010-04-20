@@ -22,13 +22,13 @@
 
     </div>
     <div style="float:left;padding-left:10px;">
-        <form method="get" id="flushForm" action="commands.php">
+        <form method="post" id="flushForm" action="commands.php">
         <div class="serverlist rounded submenu" style="width:268px;">
             <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
             <input type="hidden" name="request_command" value="flush_all"/>
-            <a href="#" onclick="document.getElementById('flushForm').submit();">Flush this Server</a>
+            <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
         </div>
         </form>
         <div class="container rounded" style="width:538px;padding:4px;text-align:center;margin-top:34px;">
