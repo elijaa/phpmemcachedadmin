@@ -35,17 +35,41 @@ class Library_Database_SQLite implements Library_Database_Interface
         # Importing configuration
         self::$_ini = Library_Configuration::getInstance();
 
-        # Creating connection
-        self::$_handle = new SQLiteDatabase(self::$_ini->get('file_path') . DIRECTORY_SEPARATOR . 'phpMemCacheAdmin.db');
+        # Database path
+        $dbPath = self::$_ini->get('file_path') . DIRECTORY_SEPARATOR . 'phpMemCacheAdmin_SQLite2.db';
+
+        # Checking first call of database : creation
+        if(!file_exists($dbPath))
+        {
+            $dbCreate = true;
+        }
+
+        # Creating connection and databse if not exists
+        self::$_handle = new SQLiteDatabase($dbPath);
+
+        # Creating tables
+        if(isset($dbCreate))
+        {
+            $this->create();
+        }
     }
 
+    /**
+     * Save an object into database
+     * Return true if sucessfull, false otherwise
+     *
+     * @param Library_Data_Stats $object Stats object
+     * @param Integer $type Type of data
+     *
+     * @return Boolean
+     */
     public function save($object, $type)
     {
         # Switch by type of request
         switch($type)
         {
             # Saving stats
-            case Library_Data_Builder::TYPE_STATS :
+            case MEMCACHE_STATS :
                 self::$_handle->queryExec('INSERT INTO stats VALUES(\'' . $object->getServer() . '\',' . $object->getRequestTime() .
                 ',' . $object->get('uptime') . ',' . $object->get('curr_connections') . ',' . $object->get('total_connections') .
                 ',' . $object->get('connection_structures') . ',' . $object->get('cmd_total') . ',' . $object->get('cmd_set') .
@@ -61,30 +85,105 @@ class Library_Database_SQLite implements Library_Database_Interface
                 ',' . $object->get('total_items') . ',' . $object->get('evictions') . ',' . $object->get('reclaimed') . ')');
                 break;
         }
+
+        # Return result
+        return (self::$_handle->lastError() === 0);
     }
 
-    public function retreive($type)
+     /**
+     * Retreive objects from database with options
+     * Return objects
+     *
+     * @param Integer $type Type of data
+     * @param Array $opts Options of retreival
+     *
+     * @return Array
+     */
+    public function retreive($type, $opts = array())
     {
+        $opts = $this->parseOptions($opts);
+
         # Switch by type of request
         switch($type)
         {
-            # Saving stats
-            case Library_Data_Builder::TYPE_STATS :
-                $result = self::$_handle->arrayQuery('SELECT count(*) FROM stats', SQLITE_ASSOC);
-                var_dump($result);
-                //@XXX sqlite_array_query() est plus convenable pour les requêtes retournant 45 lignes ou moins. Si vous attendez plus de données que cela, il est recommandé d'écrire les scripts avec la fonction sqlite_unbuffered_query() pour des performances optimales.
+            # Retreiving stats
+            case MEMCACHE_STATS :
+                # Initializing return array
+                $objects = array();
+
+                # Executing unbuffered query
+                $query = self::$_handle->unbufferedQuery('SELECT ' . $opts['columns'] . ' FROM stats ' . $opts['where'] . ' ORDER BY time ASC', SQLITE_ASSOC);
+
+                # Parsing each result row
+                foreach($query as $row)
+                {
+                    # Calculing time and server hostname:port
+                    $time = $row['time'];
+                    $server = preg_split('/:/', $row['server']);
+                    unset($row['time'], $row['server']);
+
+                    # Creating new Data_Stats object
+                    $objects[] = new Library_Data_Stats($row, $time, $server[0], $server[1]);
+                }
+                return $objects;
                 break;
         }
     }
+
     /**
-     * Create tables
+     * Parse query options and return the result
+     *
+     * @param Array $opts Options
+     *
+     * @return Array
+     */
+    private function parseOptions($opts)
+    {
+        # Analysing options
+        $options = array();
+
+        # WHERE start time
+        if(array_key_exists(QUERY_START, $opts))
+        {
+            $options['where'][] = ' time >= ' . $opts[QUERY_START];
+        }
+
+        # WHERE end time
+        if(array_key_exists(QUERY_END, $opts))
+        {
+            $options['where'][] = ' time <= ' . $opts[QUERY_END];
+        }
+
+        # WHERE computing
+        if(count($options['where']) > 0)
+        {
+            $options['where'] = ' WHERE ' . implode(' AND ', $options['where']);
+        }
+        else
+        {
+            $options['where'] = '';
+        }
+
+        # COLUMNS computing
+        if(array_key_exists(QUERY_COLUMNS, $opts))
+        {
+            $options['columns'] = 'time, server, ' . $opts[QUERY_COLUMNS];
+        }
+        else
+        {
+            $options['columns'] = '*';
+        }
+        return $options;
+    }
+
+    /**
+     * Create the complete database structure
      *
      * @return void
      */
     public function create()
     {
-        self::$_handle->query('BEGIN;
-                            CREATE TABLE stats (
+        self::$_handle->query('CREATE TABLE stats(
                             server TEXT,
                             time UNSIGNED INTEGER(8),
                             uptime UNSIGNED INTEGER(8),
@@ -122,8 +221,6 @@ class Library_Database_SQLite implements Library_Database_Interface
                             curr_items UNSIGNED INTEGER(8),
                             total_items UNSIGNED INTEGER(8),
                             evictions UNSIGNED INTEGER(8),
-                            reclaimed UNSIGNED INTEGER(8));
-                            COMMIT;');
+                            reclaimed UNSIGNED INTEGER(8))');
     }
-
 }

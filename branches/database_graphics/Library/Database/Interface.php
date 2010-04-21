@@ -36,4 +36,25 @@ interface Library_Database_Interface
      */
     function create();
 
+    /**
+     * Save an object into database
+     * Return true if sucessfull, false otherwise
+     *
+     * @param Library_Data_Stats $object Stats object
+     * @param Integer $type Type of data
+     *
+     * @return Boolean
+     */
+    function save($object, $type);
+
+    /**
+     * Retreive objects from database with options
+     * Return objects
+     *
+     * @param Integer $type Type of data
+     * @param Array $opts Options of retreival
+     *
+     * @return Array
+     */
+    function retreive($type, $opts = array());
 }

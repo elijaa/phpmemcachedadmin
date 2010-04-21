@@ -50,17 +50,14 @@ class Library_Database_Factory
             {
                 # SQLite
                 case 'SQLite':
-                    require_once 'SQLite.php';
                     self::$_object['SQLite'] = new Library_Database_SQLite();
                     break;
                 # MySQL
                 case 'MySQL':
-                    require_once 'MySQL.php';
                     self::$_object['MySQL'] = new Library_Database_MySQL();
                     break;
                 # Memcached
                 case 'Memcached':
-                    require_once 'Memcached.php';
                     self::$_object['Memcached'] = new Library_Database_Memcached();
                     break;
                 # FileSystem

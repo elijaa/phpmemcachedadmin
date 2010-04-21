@@ -78,6 +78,11 @@ abstract class Library_Data_Abstract
         return 0;
     }
 
+    public function set($data)
+    {
+        $this->_data = $data;
+    }
+
     /**
      * Return the timestamp when stats were extracted
      *

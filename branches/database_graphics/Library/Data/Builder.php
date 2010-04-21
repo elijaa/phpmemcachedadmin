@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Copyright 2010 Cyrille Mahieux
@@ -22,17 +23,9 @@
  */
 class Library_Data_Builder
 {
-    const TYPE_STATS = 0;
-    const TYPE_SLABS = 1;
-
     private static $_ini;
     private static $_instance;
-    private static $_stats = array();
 
-    public static function get($type)
-    {
-        return self::$_stats;
-    }
     /**
      * Get Library_Data_Builder singleton
      *
@@ -60,19 +53,22 @@ class Library_Data_Builder
 
     /**
      * Create data objects of type $type
+     * Return the array
      *
      * @param String $type Type of data
      * @param String $server Server to ask or all if null
      *
-     * @return
+     * @return Array
      */
     public function create($type, $server = null)
     {
+        $array = array();
+
         # Switch by type of request
         switch($type)
         {
             # Asking for stats
-            case Library_Data_Builder::TYPE_STATS :
+            case MEMCACHE_STATS :
                 # Whole cluster
                 if(is_null($server))
                 {
@@ -82,7 +78,7 @@ class Library_Data_Builder
                         $object = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
                         # Assigning in container
-                        self::$_stats[$object->getServer()][$object->getRequestTime()] = $object;
+                        $array[$object->getServer()][$object->getRequestTime()] = $object;
                     }
                 }
                 # Single server
@@ -94,38 +90,76 @@ class Library_Data_Builder
                     $object = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
                     # Assigning in container
-                    self::$_stats[$object->getServer()][$object->getRequestTime()] = $object;
+                    $array[$object->getServer()][$object->getRequestTime()] = $object;
                 }
                 break;
         }
+
+        return $array;
     }
 
     /**
      * Retreive data objects of type $type with time options
+     * Return an array
      *
      * @param String $type Type of data
      * @param Array $opts Time options
      * @param String $server Server to ask or all if null
      *
-     * @return
+     * @return Array
      */
     public function retreive($type, $opts, $server = null)
     {
+        $array = array();
+
         # Switch by type of request
         switch($type)
         {
             # Asking for stats
-            case Library_Data_Builder::TYPE_STATS :
+            case MEMCACHE_STATS :
                 # Retreiving stats
-                $stats = Library_Database_Factory::instance('storage')->retreive(Library_Data_Builder::TYPE_STATS);
+                $objects = Library_Database_Factory::instance('storage')->retreive(MEMCACHE_STATS, $opts);
 
                 # Indexing results
-                foreach($stats as $object)
+                foreach($objects as $object)
                 {
-                    self::$_stats[$object->getServer()][$object->getRequestTime()] = $object;
+                    $array[$object->getServer()][$object->getRequestTime()] = $object;
+                }
+
+                # Diff option
+                if(isset($opts[MEMCACHE_DIFF]))
+                {
+                    # Analysing for each server
+                    foreach($array as $server => $data)
+                    {
+                        # Initializing time - 1 values
+                        $oldTime = null;
+                        $oldStats = null;
+
+                        //@TODO Comment and renamming
+                        foreach($data as $time => $object)
+                        {
+                            if($oldTime != null)
+                            {
+                                //var_dump($data[$oldTime]->get());
+                                $diff = Library_Analysis::diff($data[$oldTime]->get(), $data[$time]->get());
+                                $array[$server][$oldTime]->set(Library_Analysis::stats($oldStats));
+                                $oldStats = $diff;
+                                $oldTime = $time;
+                            }
+                            else
+                            {
+                                $oldTime = $time;
+                            }
+                        }
+
+                        $array[$server][$oldTime]->set(Library_Analysis::stats($oldStats));
+                    }
                 }
                 break;
         }
+
+        return $array;
     }
 
     /**
@@ -142,9 +176,9 @@ class Library_Data_Builder
         switch($type)
         {
             # Asking for stats
-            case Library_Data_Builder::TYPE_STATS :
+            case MEMCACHE_STATS :
                 # Retreiving stats
-                Library_Database_Factory::instance('storage')->save($object, Library_Data_Builder::TYPE_STATS);
+                Library_Database_Factory::instance('storage')->save($object, MEMCACHE_STATS);
                 break;
         }
     }

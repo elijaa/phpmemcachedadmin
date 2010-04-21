@@ -28,17 +28,15 @@ header('Cache-Control: no-cache, must-revalidate');
 # Require
 require_once 'Library/Loader.php';
 
-Library_Data_Builder::instance()->create(Library_Data_Builder::TYPE_STATS);
-$objects = Library_Data_Builder::instance()->get(Library_Data_Builder::TYPE_STATS);
-$database = new Library_Database_SQLite();
-$database->create();
+$objects = Library_Data_Builder::instance()->create(MEMCACHE_STATS);
+
 foreach($objects as $object)
 {
     foreach($object as $time => $data)
-    Library_Data_Builder::instance()->save(Library_Data_Builder::TYPE_STATS, $data);
+    {
+        Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data);
+    }
 }
-
-Library_Data_Builder::instance()->retreive(Library_Data_Builder::TYPE_STATS);
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -72,10 +70,40 @@ $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $li
 # Display by request type
 switch($request)
 {
-    case 'live_stats':
+    case 'ajax':
+        //$return = '{';
+        $return = '[';
+        #Creating new stats objects
+        //$objects = Library_Data_Builder::instance()->create(MEMCACHE_STATS);
+        $opts = array(QUERY_START => time() - 3600, QUERY_END => time());
+        $objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
+
+        //@todo : json_encode > 5.2.0
+        foreach($objects as $server => $object)
+        {
+            $return .= '{label: \'' . $server . '\',';
+            $return .= 'data:[';
+
+            # Ordering
+            foreach($object as $time => $data)
+            {
+                $var = $data->get('set_rate'); // $data->get('cmd_total')
+                if($server == '127.0.0.1:11211')
+                {
+                    break;
+                }
+                $return .= '[' . $time * 1000 . ', ' . round($var) . '],';
+            }
+
+            $return .= ']},';
+        }
+        $return .= ']';
+        echo $return;
+
+
+        /**
         # Opening old stats dump
         $old_stats = unserialize(file_get_contents($file_path));
-
         # Initializing variables
         $new_stats = array();
         $stats = array();
@@ -106,8 +134,9 @@ switch($request)
         # Saving new stats dump
         file_put_contents($file_path, serialize($new_stats));
 var_dump($new_stats);
+*/
         # Showing stats
-        include 'View/LiveStats/Stats.tpl';
+       // include 'View/Graphics/Stats.tpl';
         break;
 
         # Default : No command
@@ -116,7 +145,7 @@ var_dump($new_stats);
         include 'View/Header.tpl';
 
         # Showing live stats frame
-        include 'View/LiveStats/Frame.tpl';
+        include 'View/Graphics/Frame.tpl';
 
         # Showing footer
         include 'View/Footer.tpl';

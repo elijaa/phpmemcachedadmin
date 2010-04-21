@@ -4,6 +4,8 @@
     <title>phpMemCacheAdmin</title>
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery.flot.min.js"></script>
 </head>
 <body>
     <div style="margin: 0 auto;width:824px;clear:both;">
