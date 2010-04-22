@@ -16,7 +16,7 @@
  *
  * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Factory for Stats Objects
+ * Builder of Stats Objects
  *
  * @author c.mahieux@of2m.fr
  * @since 16/04/2010
@@ -133,27 +133,34 @@ class Library_Data_Builder
                     foreach($array as $server => $data)
                     {
                         # Initializing time - 1 values
-                        $oldTime = null;
-                        $oldStats = null;
+                        $previousTime = null;
+                        $previousStats = null;
 
-                        //@TODO Comment and renamming
+                        # Analysing for each stat object
                         foreach($data as $time => $object)
                         {
-                            if($oldTime != null)
+                            # Not first pass
+                            if($previousTime != null)
                             {
-                                //var_dump($data[$oldTime]->get());
-                                $diff = Library_Analysis::diff($data[$oldTime]->get(), $data[$time]->get());
-                                $array[$server][$oldTime]->set(Library_Analysis::stats($oldStats));
-                                $oldStats = $diff;
-                                $oldTime = $time;
+                                # Calculing difference between previous and actual stats
+                                $diff = Library_Analysis::diff($data[$previousTime]->get(), $data[$time]->get());
+
+                                # Adding previous statistic diff to previous stats object
+                                $array[$server][$previousTime]->set($previousStats);
+
+                                # Moving previous stats with actual diff
+                                $previousStats = $diff;
+                                $previousTime = $time;
                             }
+                            # First pass, initializing previous stats
                             else
                             {
-                                $oldTime = $time;
+                                $previousTime = $time;
                             }
                         }
 
-                        $array[$server][$oldTime]->set(Library_Analysis::stats($oldStats));
+                        # Last object
+                        $array[$server][$previousTime]->set($previousStats);
                     }
                 }
                 break;
@@ -182,5 +189,4 @@ class Library_Data_Builder
                 break;
         }
     }
-
 }

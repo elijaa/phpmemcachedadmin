@@ -112,7 +112,7 @@ class Library_Database_SQLite implements Library_Database_Interface
                 $objects = array();
 
                 # Executing unbuffered query
-                $query = self::$_handle->unbufferedQuery('SELECT ' . $opts['columns'] . ' FROM stats ' . $opts['where'] . ' ORDER BY time ASC', SQLITE_ASSOC);
+                $query = self::$_handle->unbufferedQuery('SELECT ' . $opts['columns'] . ' FROM stats ' . $opts['where'] . ' ' . $opts['order'], SQLITE_ASSOC);
 
                 # Parsing each result row
                 foreach($query as $row)
@@ -173,6 +173,10 @@ class Library_Database_SQLite implements Library_Database_Interface
         {
             $options['columns'] = '*';
         }
+
+        # ORDER computing
+        $options['order'] = 'ORDER BY time ASC';
+
         return $options;
     }
 

@@ -17,7 +17,7 @@ $(function () {
             shadowSize: 0
           },
 
-        points: { show: true },
+        //points: { show: true },
         //xaxis: { tickDecimals: 0, tickSize: 1 }
     };
     var data = [];

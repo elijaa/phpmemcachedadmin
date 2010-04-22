@@ -71,11 +71,12 @@ $file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $li
 switch($request)
 {
     case 'ajax':
-        //$return = '{';
         $return = '[';
-        #Creating new stats objects
-        //$objects = Library_Data_Builder::instance()->create(MEMCACHE_STATS);
-        $opts = array(QUERY_START => time() - 3600, QUERY_END => time());
+
+        $opts = array(QUERY_START => time() - 3600,
+                      QUERY_END => time(),
+                      MEMCACHE_DIFF => true);
+
         $objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
 
         //@todo : json_encode > 5.2.0
@@ -87,7 +88,7 @@ switch($request)
             # Ordering
             foreach($object as $time => $data)
             {
-                $var = $data->get('set_rate'); // $data->get('cmd_total')
+                $var = $data->get('cmd_total'); // $data->get('cmd_total')
                 if($server == '127.0.0.1:11211')
                 {
                     break;
