@@ -127,7 +127,7 @@ class Library_Data_Builder
                 }
 
                 # Diff option
-                if(isset($opts[MEMCACHE_DIFF]))
+                if(isset($opts[STATS_DIFF]))
                 {
                     # Analysing for each server
                     foreach($array as $server => $data)
@@ -156,11 +156,13 @@ class Library_Data_Builder
                             else
                             {
                                 $previousTime = $time;
+                                $previousStats = $object->get();
                             }
                         }
 
                         # Last object
                         $array[$server][$previousTime]->set($previousStats);
+                        array_shift($array[$server]); # @FIXME
                     }
                 }
                 break;

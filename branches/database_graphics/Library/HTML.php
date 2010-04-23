@@ -25,15 +25,17 @@ class Library_HTML
     /**
      * Dump server list in HTML select
      *
+     * @param String $class HTML class
+     *
      * @return String
      */
-    public static function serverList()
+    public static function serverList($class = '')
     {
         # Loading ini file
         $_ini = Library_Configuration::getInstance();
 
         # Making Servers Select
-        $serverList = '<select class="commands" name="request_server"><option value="">All Servers</option>';
+        $serverList = '<select class="commands ' . $class . '" name="request_server"><option value="">All Servers</option>';
         foreach($_ini->get('server') as $server)
         {
             $serverList .= '<option value="' . $server . '">' . $server . '</option>';

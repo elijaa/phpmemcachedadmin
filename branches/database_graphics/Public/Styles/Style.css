@@ -31,3 +31,8 @@ div.full{width:142px;float:left;padding-top:2px;}
 .green{color:#2A707B;}
 .grey{color:#EEEEEE;}
 .alert{background:#B5463F;color:#FFFFFF;}
+
+.ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.ui-widget-overlay { background: #666666 url(../Images/ui-bg_diagonals-thick_20_666666_40x40.png) 50% 50% repeat; opacity: .50;filter:Alpha(Opacity=50); }
+.ui-dialog { position: absolute; padding: .2em; width: 393px; overflow: hidden; }
+.ui-dialog-buttonpane{background:#DBDBDB;width:393px;padding:3px 7px 3px 7px;}

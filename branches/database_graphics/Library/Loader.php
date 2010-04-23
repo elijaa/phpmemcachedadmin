@@ -1,8 +1,13 @@
 <?php
-# Constants
+# Stats type (Server stats, slabs stats)
 define('MEMCACHE_STATS', 0);
 define('MEMCACHE_SLABS', 1);
-define('MEMCACHE_DIFF', 2);
+
+# Diff for stats
+define('STATS_DIFF', 2);
+
+# Type of stats requested
+define('STAT_TYPE', 3);
 
 # Stats Query Options
 define('QUERY_START', 20);
