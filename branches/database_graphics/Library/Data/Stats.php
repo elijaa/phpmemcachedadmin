@@ -55,7 +55,10 @@ class Library_Data_Stats
      */
     public function analyse($opts)
     {
-        //var_dump($this->_data);
+        if($this->_data['uptime'] == 0)
+        {
+        	$this->_data['uptime'] = 1;
+        }
         switch($opts)
         {
             case 'cmd_set':

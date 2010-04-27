@@ -7,7 +7,7 @@ define('MEMCACHE_SLABS', 1);
 define('STATS_DIFF', 2);
 
 # Type of stats requested
-define('STAT_TYPE', 3);
+define('STATS_TYPE', 3);
 
 # Stats Query Options
 define('QUERY_START', 20);

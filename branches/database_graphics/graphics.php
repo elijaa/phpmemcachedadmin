@@ -32,10 +32,10 @@ $objects = Library_Data_Builder::instance()->create(MEMCACHE_STATS);
 
 foreach($objects as $object)
 {
-    foreach($object as $time => $data)
-    {
-        Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data);
-    }
+	foreach($object as $time => $data)
+	{
+		Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data);
+	}
 }
 
 # Date timezone
@@ -50,67 +50,75 @@ $request = (isset($_GET['request_method'])) ? $_GET['request_method'] : null;
 # Display by request type
 switch($request)
 {
-    case 'ajax':
-        $return = '[';
+	case 'ajax':
+		$return = '[';
 
-        $opts = array(QUERY_START => time() - 3600,
-                      QUERY_END => time(),
-                      STATS_DIFF => true);
+		$opts = array(QUERY_START => time() - 3600,
+		QUERY_END => time(),
+		STATS_DIFF => true,
+		STATS_TYPE => 'request_rate');
 
-        # Checking stats type request
-        if(isset($_GET['request_stats']) && ($_GET['request_stats'] != ''))
-        {
-            $opts[STAT_TYPE] = $_GET['request_stats'];
-            switch($_GET['request_stats'])
-            {
-                case 'cmd_total':
-                    $opts[QUERY_COLUMNS] = '';
-                    break;
-                default:
-                    break;
-            }
-        }
-        # Default stats :
-        else
-        {
-            $opts[STAT_TYPE] = 'cmd_total';
-        }
+		# Checking stats type request
+		if(isset($_GET['request_stats']) && ($_GET['request_stats'] != ''))
+		{
+			switch($_GET['request_stats'])
+			{
+				case '':
+					$opts[STATS_TYPE] = 'cmd_set';
+					break;
+					$opts[STATS_TYPE] = 'cmd_get';
+					break;
+					$opts[STATS_TYPE] = 'cmd_delete';
+					break;
+					$opts[STATS_TYPE] = 'cmd_cas';
+					break;
+					$opts[STATS_TYPE] = 'cmd_incr';
+					break;
+					$opts[STATS_TYPE] = 'cmd_decr';
+					break;
+					$opts[STATS_TYPE] = 'cmd_total';
+					break;
+					$opts[STATS_TYPE] = 'bytes_percent';
+					break;
+					$opts[STATS_TYPE] = 'request_rate';
+					break;
+					$opts[STATS_TYPE] = 'eviction_rate';
+					break;
+					$opts[STATS_TYPE] = 'reclaimed_rate';
+					break;
+			}
+		}
+		$objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
 
-        $objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
+		//@todo : json_encode > 5.2.0
+		foreach($objects as $server => $object)
+		{
+			$return .= '{label: \'' . $server . '\',';
+			$return .= 'data:[';
 
-        //@todo : json_encode > 5.2.0
-        foreach($objects as $server => $object)
-        {
-            $return .= '{label: \'' . $server . '\',';
-            $return .= 'data:[';
+			# Ordering
+			foreach($object as $time => $data)
+			{
+				$data->analyse($opts[STATS_TYPE]);
+				$var = $data->get($opts[STATS_TYPE]); // $data->get('cmd_total')
+				$return .= '[' . $time * 1000 . ', ' . round($var) . '],';
+			}
 
-            # Ordering
-            foreach($object as $time => $data)
-            {
-                $data->analyse($opts[STAT_TYPE]);
-                $var = $data->get('cmd_total'); // $data->get('cmd_total')
-                if($server == '127.0.0.1:11211')
-                {
-                    $var -= rand(20,200);
-                }
-                $return .= '[' . $time * 1000 . ', ' . round($var) . '],';
-            }
+			$return .= ']},';
+		}
+		$return .= ']';
+		echo $return;
+		break;
 
-            $return .= ']},';
-        }
-        $return .= ']';
-        echo $return;
-        break;
+		# Default : No command
+	default :
+		# Showing header
+		include 'View/Header.tpl';
 
-        # Default : No command
-    default :
-        # Showing header
-        include 'View/Header.tpl';
+		# Showing live stats frame
+		include 'View/Graphics/Frame.tpl';
 
-        # Showing live stats frame
-        include 'View/Graphics/Frame.tpl';
-
-        # Showing footer
-        include 'View/Footer.tpl';
-        break;
+		# Showing footer
+		include 'View/Footer.tpl';
+		break;
 }

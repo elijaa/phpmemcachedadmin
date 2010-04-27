@@ -27,8 +27,8 @@ $(function () {
         xaxis: { mode: "time" },
         legend: {
             show: true,
-            position: "nw",
-            backgroundOpacity: 0,
+            //position: "nw",
+            //backgroundOpacity: 0,
             container: $("#legend")
           },
         series: {
@@ -82,33 +82,26 @@ $(function () {
         <span class="title grey" style="width:393px;">Get <span class="green">Command</span></span>
         <div class="container" style="width:393px;padding:7px">
                <div class="row">
-                    Execute get command on one or all memcached servers<br/>
+                    Select stats to display<br/>
                     <hr/>
                 </div>
                 <div class="row">
                     <div class="left">Server</div>
-                    <div><?php echo Library_HTML::serverList(); ?></div>
+                    <div class="full"><?php echo Library_HTML::serverList(); ?></div>
                 </div>
                 <div class="row">
                     <div class="left">Stats</div>
-                    <div>
+                    <div class="full">
                     <select id="stats">
                         <option value="" style="background:#514845;">Commands</option>
-                        <option value="cmd_total">- All</option>
+                        <option value="cmd_total">- Hit rate</option>
                         <option value="cmd_get">- Get</option>
                         <option value="cmd_set">- Set</option>
                         <option value="cmd_delete">- Delete</option>
                         <option value="cmd_cas">- Cas</option>
                         <option value="cmd_incr">- Increment</option>
                         <option value="cmd_decr">- Decrement</option>
-                        <option value="" style="background:#514845;">Rate</option>
-                        <option value="request_rate">- Global Hit & Miss Rate</option>
-                        <option value="get_rate">- Get Rate</option>
-                        <option value="set_rate">- Set Rate</option>
-                        <option value="delete_rate">- Delete Rate</option>
-                        <option value="cas_rate">- Cas Rate</option>
-                        <option value="incr_rate">- Increment Rate</option>
-                        <option value="decr_rate">- Decrement Rate</option>
+						<option value="">- Cache size</option>
                     </select>
                     </div>
                 </div>
