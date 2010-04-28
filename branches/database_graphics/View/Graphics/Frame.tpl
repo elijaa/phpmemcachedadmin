@@ -25,6 +25,7 @@ $(function () {
      var options = {
         lines: { show: true },
         xaxis: { mode: "time" },
+        yaxis: { min: 0 },
         legend: {
             show: true,
             //position: "nw",
@@ -101,7 +102,7 @@ $(function () {
                         <option value="cmd_cas">- Cas</option>
                         <option value="cmd_incr">- Increment</option>
                         <option value="cmd_decr">- Decrement</option>
-						<option value="">- Cache size</option>
+						<option value="bytes_percent">- Cache size</option>
                     </select>
                     </div>
                 </div>

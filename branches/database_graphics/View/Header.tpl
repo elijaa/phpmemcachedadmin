@@ -9,9 +9,9 @@
     <script type="text/javascript" src="Public/Scripts/jquery.flot.min.js"></script>
 </head>
 <body>
-    <div style="margin: 0 auto;width:824px;clear:both;">
+    <div style="margin: 0 auto;width:1012px;clear:both;">
         <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin</div>
-        <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:810px;text-align:center;">
+        <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:998px;text-align:center;">
 <?php
 # Live Stats view
 if(basename($_SERVER['PHP_SELF']) == 'stats.php')
@@ -35,7 +35,7 @@ else
         <a href="index.php">See Stats for </a>
 <?php
 } ?>
-        <select class="serverlist menu" onchange="changeServer(this)">
+        <select class="serverlist" onchange="changeServer(this)">
         <option value="" <?php if(!isset($_GET['server']) || ($_GET['server'] == '')) { echo 'selected="selected"'; } ?>>All Servers</option>
 <?php
 # Servers
@@ -81,3 +81,19 @@ else
 Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
 </div>
 <![endif]-->
+
+<div style="float:left;margin-right:10px;margin-top:16px;" class="menu rounded">
+<div class="menu_item"># Menu</div>
+<div class="menu_item"># Menu 2</div>
+    <div style="margin-left:5px">
+
+        Item 1<br/>
+        Item 2<br/>
+        Item 3<br/>
+        Item 4<br/>
+    </div>
+
+<div class="menu_item"># Menu 3</div>
+
+</div>
+<div style="float:left;">

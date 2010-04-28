@@ -13,12 +13,19 @@ input:hover{color:#AA0000;}
 
 select{width:210px;}
 
-div.title{display:block;width:810px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
+div.title{display:block;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 span.title{display:block;width:254px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 .container{width:268px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;}
-.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
-.rounded{-moz-border-radius:8px;-webkit-border-radius:8px;}
-.menu{border:solid 1px #A0312A;color:#EEEEEE;width:198px;}
+.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;color:#EEEEEE;width:198px;}
+
+.rounded{-moz-border-radius:5px;-webkit-border-radius:5px;}
+
+/* Left Menu */
+.menu{width:162px;padding:7px;background:#B5463F;color:#EEEEEE;}
+.menu_item{font-weight:bold;margin-left:3px;padding-top:4px;border-bottom:solid 1px #AAAAAA;height:24px}
+
+
+
 .submenu{padding: 5px 0px 3px 0px;text-align:center;height:18px;margin:0px;}
 
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
@@ -27,7 +34,13 @@ div.right{width:52px;float:left;padding-top:2px;}
 div.middle{width:88px;float:left;padding-top:2px;}
 div.full{width:142px;float:left;padding-top:2px;}
 
+/* Size */
+.fullsize{width:998px;}
+.size1{width:810px;}
+.size2{width:1012px;}
+.size3{width:1012px;}
 
+/* Colors */
 .green{color:#2A707B;}
 .grey{color:#EEEEEE;}
 .alert{background:#B5463F;color:#FFFFFF;}

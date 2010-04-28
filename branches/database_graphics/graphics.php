@@ -34,7 +34,7 @@ foreach($objects as $object)
 {
 	foreach($object as $time => $data)
 	{
-		Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data);
+		Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data); # @130ms
 	}
 }
 
@@ -72,12 +72,14 @@ switch($request)
 					break;
 					$opts[STATS_TYPE] = 'cmd_cas';
 					break;
+				case 'cmd_incr':
 					$opts[STATS_TYPE] = 'cmd_incr';
 					break;
 					$opts[STATS_TYPE] = 'cmd_decr';
 					break;
 					$opts[STATS_TYPE] = 'cmd_total';
 					break;
+				case 'bytes_percent':
 					$opts[STATS_TYPE] = 'bytes_percent';
 					break;
 					$opts[STATS_TYPE] = 'request_rate';
