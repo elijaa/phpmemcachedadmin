@@ -5,7 +5,7 @@ a:hover{color:#AA0000;}
 
 pre{overflow:auto;white-space:pre-wrap;}
 
-hr{height:0;border:none;border-bottom:solid 1px #EEEEEE;}
+hr{height:0;border:none;border-bottom:solid 1px #CCCCCC;margin:2px;}
 
 input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px;-webkit-border-radius:3px;width:208px;font-family:tahoma;font-size:1em}
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}
@@ -21,12 +21,11 @@ span.title{display:block;width:254px;padding:3px 7px 3px 7px;background:#514845;
 .rounded{-moz-border-radius:5px;-webkit-border-radius:5px;}
 
 /* Left Menu */
-.menu{width:162px;padding:7px;background:#B5463F;color:#EEEEEE;}
-.menu_item{font-weight:bold;margin-left:3px;padding-top:4px;border-bottom:solid 1px #AAAAAA;height:24px}
+.menu{width:162px;padding:3px 7px 3px 7px;background:#514845;color:#EEEEEE;margin-top:3px;font-weight:bold;}
+.menu_items{width:141px;padding:3px 7px 3px 14px;background:#DBDBDB;margin-top:1px;font-weight:bold;}
 
-
-
-.submenu{padding: 5px 0px 3px 0px;text-align:center;height:18px;margin:0px;}
+.menu:a{color:#000000;}
+/*.submenu{padding: 5px 0px 3px 0px;text-align:center;height:18px;margin:0px;}*/
 
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
 div.left{width:112px;float:left;font-weight:bold;padding-top:2px;}

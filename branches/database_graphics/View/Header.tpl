@@ -82,18 +82,84 @@ Support browsers that contribute to open source, try <a href="http://www.firefox
 </div>
 <![endif]-->
 
-<div style="float:left;margin-right:10px;margin-top:16px;" class="menu rounded">
-<div class="menu_item"># Menu</div>
-<div class="menu_item"># Menu 2</div>
-    <div style="margin-left:5px">
+<div style="float:left">
+<?php
+# Stats view
+if((basename($_SERVER['PHP_SELF']) == 'graphics.php') || (basename($_SERVER['PHP_SELF']) == 'stats.php'))
+{ ?>
+   <div style="margin-right:10px;margin-top:16px;" class="menu rounded alert">
+        <a href="graphics.php">Live Stats</a>
+        <div class="menu_items rounded">
+            <a href="stats.php">Top Like</a><br/>
+            <a href="graphics.php">Graphic View</a>
+        </div>
+   </div>
+<?php
+}
+else
+{
+?>
+   <div style="margin-right:10px;margin-top:16px;" class="menu rounded">
+        <a href="graphics.php">Live Stats</a>
+   </div>
+<?php
+}
 
-        Item 1<br/>
-        Item 2<br/>
-        Item 3<br/>
-        Item 4<br/>
+# Servers
+if(basename($_SERVER['PHP_SELF']) == 'index.php')
+{ ?>
+   <div style="margin-right:10px;" class="menu rounded alert">
+        <a href="index.php">Server Stats</a>
+   </div>
+<?php
+}
+else
+{
+?>
+   <div style="margin-right:10px;" class="menu rounded">
+        <a href="index.php">Server Stats</a>
+   </div>
+<?php
+}
+
+# Commands view
+if(basename($_SERVER['PHP_SELF']) == 'commands.php')
+{ ?>
+   <div style="margin-right:10px;" class="menu rounded alert">
+        <a href="commands.php">Execute Commands</a>
+   </div>
+<?php
+}
+else
+{
+?>
+   <div style="margin-right:10px;" class="menu rounded">
+        <a href="commands.php">Execute Commands</a>
+   </div>
+<?php
+}
+
+# Configure view
+if(basename($_SERVER['PHP_SELF']) == 'configure.php')
+{ ?>
+    <div style="margin-right:10px;" class="menu rounded alert">
+        <a href="configure.php">Configuration</a>
     </div>
-
-<div class="menu_item"># Menu 3</div>
-
+    <div class="menu_items rounded">
+        <a class="green" href="#">Servers</a><br/>
+        <a class="green" href="#">Commands</a><br/>
+        <a class="green" href="#">Live Stats</a>
+    </div>
+<?php
+}
+else
+{
+?>
+   <div style="margin-right:10px;" class="menu rounded">
+        <a href="configure.php">Configuration</a>
+   </div>
+<?php
+}
+?>
 </div>
 <div style="float:left;">
