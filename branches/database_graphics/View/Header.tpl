@@ -85,22 +85,49 @@ Support browsers that contribute to open source, try <a href="http://www.firefox
 <div style="float:left">
 <?php
 # Stats view
-if((basename($_SERVER['PHP_SELF']) == 'graphics.php') || (basename($_SERVER['PHP_SELF']) == 'stats.php'))
+if(basename($_SERVER['PHP_SELF']) == 'stats.php')
 { ?>
-   <div style="margin-right:10px;margin-top:16px;" class="menu rounded alert">
+    <div style="margin-right:10px;margin-top:16px;" class="menu rounded alert">
         <a href="graphics.php">Live Stats</a>
-        <div class="menu_items rounded">
-            <a href="stats.php">Top Like</a><br/>
-            <a href="graphics.php">Graphic View</a>
-        </div>
-   </div>
+    </div>
+<?php
+}
+else
+{ ?>
+    <div style="margin-right:10px;margin-top:16px;" class="menu rounded">
+        <a href="graphics.php">Live Stats</a>
+    </div>
+<?php
+}
+
+# Stats view
+if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
+{ ?>
+    <div style="margin-right:10px;" class="menu rounded alert">
+        <a href="graphics.php">Graphics Stats</a>
+    </div>
+    <div class="menu_items rounded">
+        &rsaquo; <a href="graphics.php">Cache Hit &amp; Miss</a>
+        <br/>
+        &rsaquo; <a href="graphics.php">Requests/Seconds</a>
+        <br/>
+        &rsaquo; <a href="graphics.php?request_stats=network_traffic">Network Traffic</a>
+        <br/>
+        &rsaquo; <a href="graphics.php?request_stats=memory_usage">Memory Usage</a>
+        <br/>
+        &rsaquo; <a href="graphics.php">Current Connections</a>
+        <br/>
+        &rsaquo; <a href="graphics.php?request_stats=eviction_rate">Eviction Rate</a>
+        <br/>
+        &rsaquo; <a href="graphics.php?request_stats=items">Items Cached</a>
+    </div>
 <?php
 }
 else
 {
 ?>
-   <div style="margin-right:10px;margin-top:16px;" class="menu rounded">
-        <a href="graphics.php">Live Stats</a>
+   <div style="margin-right:10px;" class="menu rounded">
+        <a href="graphics.php">Graphics Stats</a>
    </div>
 <?php
 }
@@ -146,9 +173,11 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
         <a href="configure.php">Configuration</a>
     </div>
     <div class="menu_items rounded">
-        <a class="green" href="#">Servers</a><br/>
-        <a class="green" href="#">Commands</a><br/>
-        <a class="green" href="#">Live Stats</a>
+        &rsaquo; <a href="#">Edit Servers List</a>
+        <br/>
+        &rsaquo; <a href="#">Edit Commands API</a>
+        <br/>
+        &rsaquo; <a href="#">Edit Live Stats</a>
     </div>
 <?php
 }

@@ -25,7 +25,7 @@ $(function () {
           }
     };
     var data = [];
-    var request = '';
+    var request = '<?php echo (isset($_GET['request_stats'])) ? $_GET['request_stats']:''; ?>';
     var placeholder = $("#placeholder");
 
  $.plot(placeholder, data, options);

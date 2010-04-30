@@ -55,7 +55,6 @@ switch($request)
 
 		$opts = array(QUERY_START => time() - 3600,
 		QUERY_END => time(),
-		STATS_DIFF => true,
 		STATS_TYPE => 'request_rate');
 
 		# Checking stats type request
@@ -64,32 +63,26 @@ switch($request)
 			switch($_GET['request_stats'])
 			{
 				case '':
-					$opts[STATS_TYPE] = 'cmd_set';
+					$opts[STATS_TYPE] = 'hit_rate';
+					$opts[STATS_DIFF] = true;
 					break;
-					$opts[STATS_TYPE] = 'cmd_get';
-					break;
-					$opts[STATS_TYPE] = 'cmd_delete';
-					break;
-					$opts[STATS_TYPE] = 'cmd_cas';
-					break;
-				case 'cmd_incr':
-					$opts[STATS_TYPE] = 'cmd_incr';
-					break;
-					$opts[STATS_TYPE] = 'cmd_decr';
-					break;
-					$opts[STATS_TYPE] = 'cmd_total';
-					break;
-				case 'bytes_percent':
+				case 'memory_usage':
 					$opts[STATS_TYPE] = 'bytes_percent';
 					break;
-					$opts[STATS_TYPE] = 'request_rate';
-					break;
+				case 'network_traffic': # TODO : Dual Stats !
+                    $opts[STATS_TYPE] = 'bytes_written';
+                    $opts[STATS_DIFF] = true;
+                    break;
+				case 'eviction_rate';
 					$opts[STATS_TYPE] = 'eviction_rate';
+					$opts[STATS_DIFF] = true;
 					break;
-					$opts[STATS_TYPE] = 'reclaimed_rate';
-					break;
+				case 'items';
+                    $opts[STATS_TYPE] = 'curr_items';
+                    break;
 			}
 		}
+
 		$objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
 
 		//@todo : json_encode > 5.2.0
@@ -102,7 +95,7 @@ switch($request)
 			foreach($object as $time => $data)
 			{
 				$data->analyse($opts[STATS_TYPE]);
-				$var = $data->get($opts[STATS_TYPE]); // $data->get('cmd_total')
+				$var = $data->get($opts[STATS_TYPE]);
 				$return .= '[' . $time * 1000 . ', ' . round($var) . '],';
 			}
 

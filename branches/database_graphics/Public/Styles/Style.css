@@ -21,10 +21,8 @@ span.title{display:block;width:254px;padding:3px 7px 3px 7px;background:#514845;
 .rounded{-moz-border-radius:5px;-webkit-border-radius:5px;}
 
 /* Left Menu */
-.menu{width:162px;padding:3px 7px 3px 7px;background:#514845;color:#EEEEEE;margin-top:3px;font-weight:bold;}
-.menu_items{width:141px;padding:3px 7px 3px 14px;background:#DBDBDB;margin-top:1px;font-weight:bold;}
-
-.menu:a{color:#000000;}
+.menu{width:162px;padding:3px 7px 3px 7px;background:#514845;color:#EEEEEE;margin-top:10px;font-weight:bold;}
+.menu_items{width:162px;padding:3px 7px 3px 7px;background:#B5463F;margin-top:1px;font-weight:bold;}
 /*.submenu{padding: 5px 0px 3px 0px;text-align:center;height:18px;margin:0px;}*/
 
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
