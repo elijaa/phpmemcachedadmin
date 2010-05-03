@@ -161,7 +161,7 @@ class Library_Data_Builder
 
                         # Last object
                         $array[$server][$previousTime]->set($previousStats);
-                        //array_shift($array[$server]); # @FIXME
+                        array_shift($array[$server]); # @FIXME
                     }
                 }
                 break;

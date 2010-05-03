@@ -32,10 +32,10 @@ $objects = Library_Data_Builder::instance()->create(MEMCACHE_STATS);
 
 foreach($objects as $object)
 {
-	foreach($object as $time => $data)
-	{
-		Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data); # @130ms
-	}
+    foreach($object as $time => $data)
+    {
+        Library_Data_Builder::instance()->save(MEMCACHE_STATS, $data); # @130ms
+    }
 }
 
 # Date timezone
@@ -50,70 +50,77 @@ $request = (isset($_GET['request_method'])) ? $_GET['request_method'] : null;
 # Display by request type
 switch($request)
 {
-	case 'ajax':
-		$return = '[';
+    case 'ajax':
+        $return = '[';
 
-		$opts = array(QUERY_START => time() - 3600,
-		QUERY_END => time(),
-		STATS_TYPE => 'request_rate');
+        $opts = array(QUERY_START => time() - 3600,
+                      QUERY_END => time(),
+                      STATS_TYPE => 'hit_rate');
 
-		# Checking stats type request
-		if(isset($_GET['request_stats']) && ($_GET['request_stats'] != ''))
-		{
-			switch($_GET['request_stats'])
-			{
-				case '':
-					$opts[STATS_TYPE] = 'hit_rate';
-					$opts[STATS_DIFF] = true;
-					break;
-				case 'memory_usage':
-					$opts[STATS_TYPE] = 'bytes_percent';
-					break;
-				case 'network_traffic': # TODO : Dual Stats !
-                    $opts[STATS_TYPE] = 'bytes_written';
+        # Checking stats type request
+        if(isset($_GET['stats']) && ($_GET['stats'] != ''))
+        {
+            switch($_GET['stats'])
+            {
+                case 'hit_rate':
+                    $opts[STATS_TYPE] = 'hit_rate';
                     $opts[STATS_DIFF] = true;
                     break;
-				case 'eviction_rate';
-					$opts[STATS_TYPE] = 'eviction_rate';
-					$opts[STATS_DIFF] = true;
-					break;
-				case 'items';
-                    $opts[STATS_TYPE] = 'curr_items';
+                case 'request_seconds':
+                    $opts[STATS_TYPE] = 'request_seconds';
+                    $opts[STATS_DIFF] = true;
                     break;
-			}
-		}
+                case 'memory_usage':
+                    $opts[STATS_TYPE] = 'memory_usage';
+                    break;
+                case 'network_traffic':
+                    $opts[STATS_TYPE] = 'network_traffic';
+                    $opts[STATS_DIFF] = true;
+                    break;
+                case 'current_connections':
+                    $opts[STATS_TYPE] = 'current_connections';
+                    break;
+                case 'eviction_rate';
+                    $opts[STATS_TYPE] = 'eviction_rate';
+                    $opts[STATS_DIFF] = true;
+                    break;
+                case 'items_cached';
+                    $opts[STATS_TYPE] = 'items_cached';
+                    break;
+            }
+        }
 
-		$objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
+        $objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
 
-		//@todo : json_encode > 5.2.0
-		foreach($objects as $server => $object)
-		{
-			$return .= '{label: \'' . $server . '\',';
-			$return .= 'data:[';
+        //@todo : json_encode > 5.2.0
+        foreach($objects as $server => $object)
+        {
+            $return .= '{label: \'' . $server . '\',';
+            $return .= 'data:[';
 
-			# Ordering
-			foreach($object as $time => $data)
-			{
-				$data->analyse($opts[STATS_TYPE]);
-				$var = $data->get($opts[STATS_TYPE]);
-				$return .= '[' . $time * 1000 . ', ' . round($var) . '],';
-			}
+            # Ordering
+            foreach($object as $time => $data)
+            {
+                $data->analyse($opts[STATS_TYPE]);
+                $var = $data->get($opts[STATS_TYPE]);
+                $return .= '[' . $time * 1000 . ', ' . round($var) . '],';
+            }
 
-			$return .= ']},';
-		}
-		$return .= ']';
-		echo $return;
-		break;
+            $return .= ']},';
+        }
+        $return .= ']';
+        echo $return;
+        break;
 
-		# Default : No command
-	default :
-		# Showing header
-		include 'View/Header.tpl';
+        # Default : No command
+    default :
+        # Showing header
+        include 'View/Header.tpl';
 
-		# Showing live stats frame
-		include 'View/Graphics/Frame.tpl';
+        # Showing live stats frame
+        include 'View/Graphics/Frame.tpl';
 
-		# Showing footer
-		include 'View/Footer.tpl';
-		break;
+        # Showing footer
+        include 'View/Footer.tpl';
+        break;
 }

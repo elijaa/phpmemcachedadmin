@@ -59,26 +59,39 @@ class Library_Data_Stats
         {
         	$this->_data['uptime'] = 1;
         }
+        /*
+                case 'hit_rate':
+                case 'request_seconds':
+                case 'memory_usage':
+                case 'network_traffic':
+                case 'current_connections':
+                case 'eviction_rate';
+                case 'items_cached'; */
         switch($opts)
         {
+            case 'network_traffic':
+            case 'current_connections':
+            case 'items_cached':
+                break;
+/**
             case 'cmd_set':
                 # Command set()
-                $this->_data['set_rate'] = ($this->_data['cmd_set'] == 0) ? '0.0':number_format($this->_data['cmd_set'] / $this->_data['uptime'], 1);
+                $this->_data['set_rate'] = ($this->_data['cmd_set'] == 0) ? '0.0' : number_format($this->_data['cmd_set'] / $this->_data['uptime'], 1);
                 break;
 
             case 'cmd_get':
                 # Command get()
-                $this->_data['get_hits_percent'] = ($this->_data['cmd_get'] == 0) ? ' - ':number_format($this->_data['get_hits'] / $this->_data['cmd_get'] * 100, 1);
-                $this->_data['get_misses_percent'] = ($this->_data['cmd_get'] == 0) ? ' - ':number_format($this->_data['get_misses'] / $this->_data['cmd_get'] * 100, 1);
-                $this->_data['get_rate'] = ($this->_data['cmd_get'] == 0) ? '0.0':number_format($this->_data['cmd_get'] / $this->_data['uptime'], 1);
+                $this->_data['get_hits_percent'] = ($this->_data['cmd_get'] == 0) ? ' - ' : number_format($this->_data['get_hits'] / $this->_data['cmd_get'] * 100, 1);
+                $this->_data['get_misses_percent'] = ($this->_data['cmd_get'] == 0) ? ' - ' : number_format($this->_data['get_misses'] / $this->_data['cmd_get'] * 100, 1);
+                $this->_data['get_rate'] = ($this->_data['cmd_get'] == 0) ? 0 : number_format($this->_data['cmd_get'] / $this->_data['uptime'], 1);
                 break;
 
             case 'cmd_delete':
                 # Command delete()
                 $this->_data['cmd_delete'] = $this->_data['delete_hits'] + $this->_data['delete_misses'];
-                $this->_data['delete_hits_percent'] = ($this->_data['cmd_delete'] == 0) ?' - ':number_format($this->_data['delete_hits'] / $this->_data['cmd_delete'] * 100, 1);
-                $this->_data['delete_misses_percent'] = ($this->_data['cmd_delete'] == 0) ?' - ':number_format($this->_data['delete_misses'] / $this->_data['cmd_delete'] * 100, 1);
-                $this->_data['delete_rate'] = ($this->_data['cmd_delete'] == 0) ? '0.0':number_format($this->_data['cmd_delete'] / $this->_data['uptime'], 1);
+                $this->_data['delete_hits_percent'] = ($this->_data['cmd_delete'] == 0) ? ' - ' : number_format($this->_data['delete_hits'] / $this->_data['cmd_delete'] * 100, 1);
+                $this->_data['delete_misses_percent'] = ($this->_data['cmd_delete'] == 0) ? ' - ' : number_format($this->_data['delete_misses'] / $this->_data['cmd_delete'] * 100, 1);
+                $this->_data['delete_rate'] = ($this->_data['cmd_delete'] == 0) ? 0 : number_format($this->_data['cmd_delete'] / $this->_data['uptime'], 1);
                 break;
 
             case 'cmd_cas':
@@ -93,36 +106,36 @@ class Library_Data_Stats
             case 'cmd_incr':
                 # Command increment()
                 $this->_data['cmd_incr'] = $this->_data['incr_hits'] + $this->_data['incr_misses'];
-                $this->_data['incr_hits_percent'] = ($this->_data['cmd_incr'] == 0) ?' - ':number_format($this->_data['incr_hits'] / $this->_data['cmd_incr'] * 100, 1);
-                $this->_data['incr_misses_percent'] = ($this->_data['cmd_incr'] == 0) ?' - ':number_format($this->_data['incr_misses'] / $this->_data['cmd_incr'] * 100, 1);
-                $this->_data['incr_rate'] = ($this->_data['cmd_incr'] == 0) ? '0.0':number_format($this->_data['cmd_incr'] / $this->_data['uptime'], 1);
+                $this->_data['incr_hits_percent'] = ($this->_data['cmd_incr'] == 0) ? ' - ' : number_format($this->_data['incr_hits'] / $this->_data['cmd_incr'] * 100, 1);
+                $this->_data['incr_misses_percent'] = ($this->_data['cmd_incr'] == 0) ? ' - ' : number_format($this->_data['incr_misses'] / $this->_data['cmd_incr'] * 100, 1);
+                $this->_data['incr_rate'] = ($this->_data['cmd_incr'] == 0) ? 0 : number_format($this->_data['cmd_incr'] / $this->_data['uptime'], 1);
                 break;
 
             case 'cmd_decr':
                 # Command decrement()
                 $this->_data['cmd_decr'] = $this->_data['decr_hits'] + $this->_data['decr_misses'];
-                $this->_data['decr_hits_percent'] = ($this->_data['cmd_decr'] == 0) ?' - ':number_format($this->_data['decr_hits'] / $this->_data['cmd_decr'] * 100, 1);
-                $this->_data['decr_misses_percent'] = ($this->_data['cmd_decr'] == 0) ?' - ':number_format($this->_data['decr_misses'] / $this->_data['cmd_decr'] * 100, 1);
-                $this->_data['decr_rate'] = ($this->_data['cmd_decr'] == 0) ? '0.0':number_format($this->_data['cmd_decr'] / $this->_data['uptime'], 1);
+                $this->_data['decr_hits_percent'] = ($this->_data['cmd_decr'] == 0) ? ' - ' : number_format($this->_data['decr_hits'] / $this->_data['cmd_decr'] * 100, 1);
+                $this->_data['decr_misses_percent'] = ($this->_data['cmd_decr'] == 0) ? ' - ' : number_format($this->_data['decr_misses'] / $this->_data['cmd_decr'] * 100, 1);
+                $this->_data['decr_rate'] = ($this->_data['cmd_decr'] == 0) ? 0 : number_format($this->_data['cmd_decr'] / $this->_data['uptime'], 1);
+                break;
+*/
+            case 'memory_usage':
+                # Cache size
+                $this->_data['bytes_percent'] = ($this->_data['limit_maxbytes'] == 0) ? 0 : number_format($this->_data['bytes'] / $this->_data['limit_maxbytes'] * 100, 1);
                 break;
 
-            case 'cmd_total':
+            case 'hit_rate':
+            case 'request_seconds':
+                # Request rate
                 $this->_data['cmd_delete'] = $this->_data['delete_hits'] + $this->_data['delete_misses'];
                 $this->_data['cmd_cas'] = $this->_data['cas_hits'] + $this->_data['cas_misses'] + $this->_data['cas_badval'];
                 $this->_data['cmd_incr'] = $this->_data['incr_hits'] + $this->_data['incr_misses'];
                 $this->_data['cmd_decr'] = $this->_data['decr_hits'] + $this->_data['decr_misses'];
                 $this->_data['cmd_total'] = $this->_data['cmd_get'] + $this->_data['cmd_set'] + $this->_data['cmd_delete'] + $this->_data['cmd_cas'] + $this->_data['cmd_incr'] + $this->_data['cmd_decr'];
-                $this->_data['hit_percent'] = ($this->_data['cmd_total'] == 0) ? '0.0':number_format(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['cmd_total'] * 100, 1);
-                $this->_data['miss_percent'] = ($this->_data['cmd_total'] == 0) ? '0.0':number_format(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['cmd_total'] * 100, 1);
-                break;
 
-            case 'bytes_percent':
-                # Cache size
-                $this->_data['bytes_percent'] = ($this->_data['limit_maxbytes'] == 0) ? '0.0' : number_format($this->_data['bytes'] / $this->_data['limit_maxbytes'] * 100, 1);
-                break;
+                $this->_data['hit_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : number_format(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['cmd_total'] * 100, 1);
+                $this->_data['miss_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : number_format(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['cmd_total'] * 100, 1);
 
-            case 'request_rate':
-                # Request rate
                 $this->_data['request_rate'] = number_format(($this->_data['cmd_get'] + $this->_data['cmd_set'] + $this->_data['cmd_delete'] + $this->_data['cmd_cas'] + $this->_data['cmd_incr'] + $this->_data['cmd_decr']) / $this->_data['uptime'], 1);
                 $this->_data['hit_rate'] = number_format(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['uptime'], 1);
                 $this->_data['miss_rate'] = number_format(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['uptime'], 1);
@@ -130,11 +143,8 @@ class Library_Data_Stats
 
             case 'eviction_rate':
                 # Eviction & reclaimed rate
-                $this->_data['eviction_rate'] = ($this->_data['evictions'] == 0) ? '0.0':number_format($this->_data['evictions'] / $this->_data['uptime'], 1);
-                break;
-
-            case 'reclaimed_rate':
-                $this->_data['reclaimed_rate'] = (!isset($this->_data['reclaimed']) || ($this->_data['reclaimed'] == 0)) ? '0.0':number_format($this->_data['reclaimed'] / $this->_data['uptime'], 1);
+                $this->_data['eviction_rate'] = ($this->_data['evictions'] == 0) ? 0 : number_format($this->_data['evictions'] / $this->_data['uptime'], 1);
+                $this->_data['reclaimed_rate'] = (!isset($this->_data['reclaimed']) || ($this->_data['reclaimed'] == 0)) ? 0 : number_format($this->_data['reclaimed'] / $this->_data['uptime'], 1);
                 break;
         }
     }
@@ -161,6 +171,13 @@ class Library_Data_Stats
         return 0;
     }
 
+    /**
+     * Set stats values
+     *
+     * @param Array $data Stats
+     *
+     * @return void
+     */
     public function set($data)
     {
         $this->_data = $data;

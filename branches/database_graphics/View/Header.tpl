@@ -5,8 +5,8 @@
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.min.js"></script>
-    <script type="text/javascript" src="Public/Scripts/jquery-ui.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.min.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery.flot.crosshair.min.js"></script>
 </head>
 <body>
     <div style="margin: 0 auto;width:1012px;clear:both;">
@@ -107,19 +107,19 @@ if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
         <a href="graphics.php">Graphics Stats</a>
     </div>
     <div class="menu_items rounded">
-        &rsaquo; <a href="graphics.php">Cache Hit &amp; Miss</a>
+        &rsaquo; <a href="graphics.php?stats=hit_rate">Cache Hit &amp; Miss</a>
         <br/>
-        &rsaquo; <a href="graphics.php">Requests/Seconds</a>
+        &rsaquo; <a href="graphics.php?stats=request_seconds">Requests/Seconds</a>
         <br/>
-        &rsaquo; <a href="graphics.php?request_stats=network_traffic">Network Traffic</a>
+        &rsaquo; <a href="graphics.php?stats=network_traffic">Network Traffic</a>
         <br/>
-        &rsaquo; <a href="graphics.php?request_stats=memory_usage">Memory Usage</a>
+        &rsaquo; <a href="graphics.php?stats=memory_usage">Memory Usage</a>
         <br/>
-        &rsaquo; <a href="graphics.php">Current Connections</a>
+        &rsaquo; <a href="graphics.php?stats=current_connections">Current Connections</a>
         <br/>
-        &rsaquo; <a href="graphics.php?request_stats=eviction_rate">Eviction Rate</a>
+        &rsaquo; <a href="graphics.php?stats=eviction_rate">Eviction Rate</a>
         <br/>
-        &rsaquo; <a href="graphics.php?request_stats=items">Items Cached</a>
+        &rsaquo; <a href="graphics.php?stats=items_cached">Items Cached</a>
     </div>
 <?php
 }

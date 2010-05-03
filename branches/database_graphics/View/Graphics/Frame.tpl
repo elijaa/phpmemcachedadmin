@@ -1,9 +1,15 @@
-<br/>
+<br />
 <script type="text/javascript">
 //initiate a recurring data update
 $(function () {
-     var options = {
-        lines: { show: true },
+     var options =
+         {
+        lines: {
+         show: true,
+          lineWidth: 1,
+           fill: true,
+            fillColor: false
+             },
         xaxis: { mode: "time" },
         yaxis: { min: 0,
         	tickFormatter: function suffixFormatter(val, axis) {
@@ -18,17 +24,29 @@ $(function () {
             show: true,
             container: $("#legend")
           },
+        crosshair: {
+              mode: "x"
+          },
         series: {
             lines: { show: true},
             shadowSize: 0,
             lineHeight: 1
-          }
+          },
+        grid: {
+                backgroundColor: "#B5463F",
+                borderWidth: 1,
+                hoverable: true,
+                autoHighlight: true
+            }
     };
     var data = [];
-    var request = '<?php echo (isset($_GET['request_stats'])) ? $_GET['request_stats']:''; ?>';
+    var request = '<?php echo (isset($_GET['stats'])) ? $_GET['stats']:''; ?>';
     var placeholder = $("#placeholder");
+    var choiceContainer = $("#choices");
+    var i = 0;
+    var checkboxMade = false;
 
- $.plot(placeholder, data, options);
+    $.plot(placeholder, data, options);
 
  function fetchData() {
      $.ajax({
@@ -36,7 +54,7 @@ $(function () {
          // connected to a database, but in this case we only
          // have static example files so we need to modify the
          // URL
-         url: "graphics.php?request_method=ajax&request_stats=" + request,
+         url: "graphics.php?request_method=ajax&stats=" + request,
          method: 'GET',
          dataType: 'json',
          success: onDataReceived
@@ -50,13 +68,53 @@ $(function () {
 
      $.each(series, function(key, val)
      {
-         data.push(series[key]);
-         //data = [val];
-         $.plot($("#placeholder"), data, options);
-     });
+         /*
+    	 choiceContainer.find("input:checked").each(function () {
+             var keyName = $(this).attr("name");
+             if(key == keyName)
+             {
+                 alert('toto');
+                 */
+                 data.push(series[key]);
+      /*       }
+    	 });
 
-     data = [];
+         /* Checkbox */
+         if(checkboxMade == false)
+         {
+             /* Color switching */
+             val.color = i;
+             ++i;
+
+             $.plot(placeholder, data, options);
+             choiceContainer.append('<br/><input type="checkbox" name="' + key +
+                     '" checked="checked" id="' + key + '">' +
+                     '<label for="' + key + '">'
+                      + val.label + '</label>');
+             checkboxMade = true;
+         }
+
+
+     });
+/*
+     choiceContainer.find("input:checked").each(function () {
+         var key = $(this).attr("name");
+         if(series[key])
+         {
+             data.push(series[key]);
+         }
+     });*/
+     //data = [];
  }
+
+ /* Bind hover */
+ $("#placeholder").bind("plothover",  function (event, pos, item) {
+
+     if (item) {
+         //item.datapoint;
+
+       }
+ });
 
  setTimeout(fetchData, 0);
 });
@@ -64,10 +122,12 @@ $(function () {
 </script>
 
 <div style="float: left;">
-    <div class="title grey rounded">Live <span class="green">Stats</span></div>
-    <div style="padding-left:4px;">
-        <br/>
-        <div id="placeholder" style="width:820px;height:400px;position:relative;"></div>
-    </div>
-    <div id="legend"></div>
+<div class="title grey rounded size1">Graphics <span class="green">Stats</span></div>
+<div class="container rounded" style="padding-left: 4px;"><br />
+<div id="placeholder"
+	style="width: 810px; height: 400px; position: relative; background: #FFFFFF;"></div>
+</div>
+<br />
+<p id="choices">Show:</p>
+<div class="container rounded" id="legend"></div>
 </div>

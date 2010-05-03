@@ -15,7 +15,7 @@ select{width:210px;}
 
 div.title{display:block;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 span.title{display:block;width:254px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
-.container{width:268px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;}
+.container{background:#DBDBDB;margin-top:1px;padding-bottom:3px;} /*removed width:268px; */
 .serverlist{background:#B5463F;margin-top:1px;font-weight:bold;color:#EEEEEE;width:198px;}
 
 .rounded{-moz-border-radius:5px;-webkit-border-radius:5px;}
@@ -35,7 +35,7 @@ div.full{width:142px;float:left;padding-top:2px;}
 .fullsize{width:998px;}
 .size1{width:810px;}
 .size2{width:1012px;}
-.size3{width:1012px;}
+.size3{width:268px;}
 
 /* Colors */
 .green{color:#2A707B;}
