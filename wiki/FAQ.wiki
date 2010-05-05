@@ -6,7 +6,7 @@
 *- Configuration file is broken*
   Copy the memcache.example.ini to memcache.ini to have a fresh and clean configuration file
 
-*- Some rate in Live Stats chow 1.0 sometimes
+*- Some commands rates in live stats show 1.0 sometimes*
   It's an issue that will be solved in the next version, if you want to patch it, open Library/Analysis.php, find all occurences of "number_format(" and replace it with "sprintf('%.1f',"
 
 *- I don't get all values for server stats with PECL Memcached*
