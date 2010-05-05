@@ -19,7 +19,7 @@
  * Fixed the flush_all link not working from slabs stats
 
 ===Version 1.1.2 : XX/05/2010===
- * Fixed the 1.0 instead of 1.0K in live statgs
+ * Fixed the 1.0 instead of 1.0K in live stats
 
 
 ===Version 1.2.0 : XX/XX/2010===
