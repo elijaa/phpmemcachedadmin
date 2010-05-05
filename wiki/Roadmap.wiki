@@ -18,23 +18,16 @@
  * Fixed the PECL Memcache/Memcached API bug with get commands
  * Fixed the flush_all link not working from slabs stats
 
+===Version 1.1.1 : 19/04/2010===
+ * Added the reclaimed stats and reclaimed rate (New in Memcached 1.4.5)
+ * Added the eviction rate
+ * Added a "Are you sure ?" for flush_all command
+ * Fixed the eviction rate bug on live stats
+ * Fixed the PECL Memcache/Memcached API bug with get commands
+ * Fixed the flush_all link not working from slabs stats
+
+===Version 1.1.2 : XX/05/2010===
+ * Fixed the 1.0 instead of 1.0K in live statgs
+
+
 ===Version 1.2.0 : XX/XX/2010===
-====General====
- * Clean the whole thing a little
-
-====Configuration====
- * Remove unavailable API
-
-====Live Stats====
- * Average and total in live stats
- * Add an alert for connections
- * Customize stats
- * Command line
- * Use memcached to store data
- * *Graphics view with stats storage (SQLite or MySQL)*
-
-====Stats View====
- * Maybe add the server own memcached configuration
-
-====Items View====
- * Add a "delete this key" option
