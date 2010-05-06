@@ -7,11 +7,7 @@
   Copy the memcache.example.ini to memcache.ini to have a fresh and clean configuration file
 
 *- Some commands rates in live stats show 1.0 sometimes*
-  It's an issue that will be solved in the next version
-  If you want to patch it
-  # open Library/Analysis.php
-  # find all occurences of _number_format(_
-  # replace them with _sprintf('%.1f',_
+  It's an issue that is fixed in version 1.1.2
 
 *- I don't get all values for server stats with PECL Memcached*
   getStats() from PECL Memcached doesn't return delete, increment, decrement and cas statistics, so avoid using it, use Server instead
