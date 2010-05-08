@@ -154,6 +154,12 @@ class Library_Database_SQLite implements Library_Database_Interface
             $options['where'][] = ' time <= ' . $opts[QUERY_END];
         }
 
+        # WHERE server
+        if(array_key_exists(QUERY_SERVER, $opts))
+        {
+            $options['where'][] = ' server = \'' . $opts[QUERY_SERVER] . '\'';
+        }
+
         # WHERE computing
         if(count($options['where']) > 0)
         {

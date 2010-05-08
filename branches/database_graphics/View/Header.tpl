@@ -7,6 +7,7 @@
     <script type="text/javascript" src="Public/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.crosshair.min.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery.flot.stack.min.js"></script>
 </head>
 <body>
     <div style="margin: 0 auto;width:1012px;clear:both;">

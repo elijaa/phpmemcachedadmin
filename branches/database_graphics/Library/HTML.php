@@ -35,7 +35,7 @@ class Library_HTML
         $_ini = Library_Configuration::getInstance();
 
         # Making Servers Select
-        $serverList = '<select class="commands ' . $class . '" name="request_server"><option value="">All Servers</option>';
+        $serverList = '<select class="commands ' . $class . '" name="server"><option value="">All Servers</option>';
         foreach($_ini->get('server') as $server)
         {
             $serverList .= '<option value="' . $server . '">' . $server . '</option>';

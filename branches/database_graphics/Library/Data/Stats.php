@@ -121,7 +121,7 @@ class Library_Data_Stats
 */
             case 'memory_usage':
                 # Cache size
-                $this->_data['bytes_percent'] = ($this->_data['limit_maxbytes'] == 0) ? 0 : number_format($this->_data['bytes'] / $this->_data['limit_maxbytes'] * 100, 1);
+                $this->_data['bytes_percent'] = ($this->_data['limit_maxbytes'] == 0) ? 0 : round($this->_data['bytes'] / $this->_data['limit_maxbytes'] * 100, 1);
                 break;
 
             case 'hit_rate':
@@ -133,18 +133,18 @@ class Library_Data_Stats
                 $this->_data['cmd_decr'] = $this->_data['decr_hits'] + $this->_data['decr_misses'];
                 $this->_data['cmd_total'] = $this->_data['cmd_get'] + $this->_data['cmd_set'] + $this->_data['cmd_delete'] + $this->_data['cmd_cas'] + $this->_data['cmd_incr'] + $this->_data['cmd_decr'];
 
-                $this->_data['hit_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : number_format(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['cmd_total'] * 100, 1);
-                $this->_data['miss_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : number_format(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['cmd_total'] * 100, 1);
+                $this->_data['hit_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : round(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['cmd_total'] * 100, 1);
+                $this->_data['miss_percent'] = ($this->_data['cmd_total'] == 0) ? 0 : round(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['cmd_total'] * 100, 1);
 
-                $this->_data['request_rate'] = number_format(($this->_data['cmd_get'] + $this->_data['cmd_set'] + $this->_data['cmd_delete'] + $this->_data['cmd_cas'] + $this->_data['cmd_incr'] + $this->_data['cmd_decr']) / $this->_data['uptime'], 1);
-                $this->_data['hit_rate'] = number_format(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['uptime'], 1);
-                $this->_data['miss_rate'] = number_format(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['uptime'], 1);
+                $this->_data['request_rate'] = round(($this->_data['cmd_get'] + $this->_data['cmd_set'] + $this->_data['cmd_delete'] + $this->_data['cmd_cas'] + $this->_data['cmd_incr'] + $this->_data['cmd_decr']) / $this->_data['uptime'], 1);
+                $this->_data['hit_rate'] = round(($this->_data['cmd_set'] + $this->_data['get_hits'] + $this->_data['delete_hits'] + $this->_data['cas_hits'] + $this->_data['incr_hits'] + $this->_data['decr_hits']) / $this->_data['uptime'], 1);
+                $this->_data['miss_rate'] = round(($this->_data['get_misses'] + $this->_data['delete_misses'] + $this->_data['cas_misses'] + $this->_data['cas_badval'] + $this->_data['incr_misses'] + $this->_data['decr_misses']) / $this->_data['uptime'], 1);
                 break;
 
             case 'eviction_rate':
                 # Eviction & reclaimed rate
-                $this->_data['eviction_rate'] = ($this->_data['evictions'] == 0) ? 0 : number_format($this->_data['evictions'] / $this->_data['uptime'], 1);
-                $this->_data['reclaimed_rate'] = (!isset($this->_data['reclaimed']) || ($this->_data['reclaimed'] == 0)) ? 0 : number_format($this->_data['reclaimed'] / $this->_data['uptime'], 1);
+                $this->_data['eviction_rate'] = ($this->_data['evictions'] == 0) ? 0 : round($this->_data['evictions'] / $this->_data['uptime'], 1);
+                $this->_data['reclaimed_rate'] = (!isset($this->_data['reclaimed']) || ($this->_data['reclaimed'] == 0)) ? 0 : round($this->_data['reclaimed'] / $this->_data['uptime'], 1);
                 break;
         }
     }

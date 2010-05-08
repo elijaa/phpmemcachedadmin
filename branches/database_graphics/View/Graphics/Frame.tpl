@@ -4,21 +4,16 @@
 $(function () {
      var options =
          {
-        lines: {
-         show: true,
-          lineWidth: 1,
-           fill: true,
-            fillColor: false
-             },
+        lines: { show: true, lineWidth: 2, fill: true},
         xaxis: { mode: "time" },
         yaxis: { min: 0,
         	tickFormatter: function suffixFormatter(val, axis) {
                 if (val > 1000000)
-                    return (val / 1000000).toFixed(axis.tickDecimals) + "MB";
+                    return (val / 1000000).toFixed(axis.tickDecimals) + "M";
                   else if (val > 1000)
-                    return (val / 1000).toFixed(axis.tickDecimals) + "kB";
+                    return (val / 1000).toFixed(axis.tickDecimals) + "k";
                   else
-                    return val.toFixed(axis.tickDecimals) + "B";
+                    return val.toFixed(axis.tickDecimals);
                 } },
         legend: {
             show: true,
@@ -28,12 +23,13 @@ $(function () {
               mode: "x"
           },
         series: {
-            lines: { show: true},
+            //stack: true,
             shadowSize: 0,
             lineHeight: 1
           },
         grid: {
-                backgroundColor: "#B5463F",
+               // backgroundColor: "#B5463F",
+               // color: "#444444",
                 borderWidth: 1,
                 hoverable: true,
                 autoHighlight: true
@@ -41,10 +37,8 @@ $(function () {
     };
     var data = [];
     var request = '<?php echo (isset($_GET['stats'])) ? $_GET['stats']:''; ?>';
+    var server = '<?php echo (isset($_GET['server'])) ? $_GET['server']:''; ?>';
     var placeholder = $("#placeholder");
-    var choiceContainer = $("#choices");
-    var i = 0;
-    var checkboxMade = false;
 
     $.plot(placeholder, data, options);
 
@@ -54,7 +48,7 @@ $(function () {
          // connected to a database, but in this case we only
          // have static example files so we need to modify the
          // URL
-         url: "graphics.php?request_method=ajax&stats=" + request,
+         url: "graphics.php?request_method=ajax&stats=" + request + "&server=" + server,
          method: 'GET',
          dataType: 'json',
          success: onDataReceived
@@ -63,48 +57,14 @@ $(function () {
  }
 
  function onDataReceived(series) {
-     // we get all the data in one go, if we only got partial
-     // data, we could merge it with what we already got
-
+     //No reset : Append
+     data = [];
      $.each(series, function(key, val)
      {
-         /*
-    	 choiceContainer.find("input:checked").each(function () {
-             var keyName = $(this).attr("name");
-             if(key == keyName)
-             {
-                 alert('toto');
-                 */
-                 data.push(series[key]);
-      /*       }
-    	 });
-
-         /* Checkbox */
-         if(checkboxMade == false)
-         {
-             /* Color switching */
-             val.color = i;
-             ++i;
-
-             $.plot(placeholder, data, options);
-             choiceContainer.append('<br/><input type="checkbox" name="' + key +
-                     '" checked="checked" id="' + key + '">' +
-                     '<label for="' + key + '">'
-                      + val.label + '</label>');
-             checkboxMade = true;
-         }
-
-
+         data.push(series[key]);
      });
-/*
-     choiceContainer.find("input:checked").each(function () {
-         var key = $(this).attr("name");
-         if(series[key])
-         {
-             data.push(series[key]);
-         }
-     });*/
-     //data = [];
+
+     $.plot($("#placeholder"), data, options);
  }
 
  /* Bind hover */
@@ -112,7 +72,6 @@ $(function () {
 
      if (item) {
          //item.datapoint;
-
        }
  });
 
@@ -123,11 +82,23 @@ $(function () {
 
 <div style="float: left;">
 <div class="title grey rounded size1">Graphics <span class="green">Stats</span></div>
-<div class="container rounded" style="padding-left: 4px;"><br />
-<div id="placeholder"
-	style="width: 810px; height: 400px; position: relative; background: #FFFFFF;"></div>
+<div class="container rounded" style="padding-left: 4px;"><br/>
+Switch to :
+        <select class="" onchange="changeGraphic(this, '<?php echo (isset($_GET['stats'])) ? $_GET['stats']:''; ?>')">
+        <option value="" <?php if(!isset($_GET['server']) || ($_GET['server'] == '')) { echo 'selected="selected"'; } ?>>All Servers</option>
+<?php
+# Servers
+foreach($_ini->get('server') as $server)
+{ ?>
+        <option value="<?php echo $server; ?>" <?php if((isset($_GET['server'])) && ($_GET['server'] == $server)) { echo 'selected="selected"'; } ?>>
+            <?php echo $server; ?>
+        </option>
+<?php
+} ?>
+        </select>
+<div id="placeholder" style="width: 810px; height: 400px; position: relative; background: #FFFFFF;"></div>
 </div>
 <br />
-<p id="choices">Show:</p>
+
 <div class="container rounded" id="legend"></div>
 </div>

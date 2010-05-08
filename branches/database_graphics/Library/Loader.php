@@ -13,6 +13,7 @@ define('STATS_TYPE', 3);
 define('QUERY_START', 20);
 define('QUERY_END', 21);
 define('QUERY_COLUMNS', 22);
+define('QUERY_SERVER', 23);
 
 function __autoload($class)
 {

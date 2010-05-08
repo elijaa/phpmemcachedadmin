@@ -51,11 +51,15 @@ $request = (isset($_GET['request_method'])) ? $_GET['request_method'] : null;
 switch($request)
 {
     case 'ajax':
-        $return = '[';
-
         $opts = array(QUERY_START => time() - 3600,
-                      QUERY_END => time(),
-                      STATS_TYPE => 'hit_rate');
+        QUERY_END => time(),
+        STATS_TYPE => 'hit_rate');
+
+        # Checking whole cluster or single server
+        if(isset($_GET['server']) && ($_GET['server'] != ''))
+        {
+            $opts[QUERY_SERVER] = $_GET['server'];
+        }
 
         # Checking stats type request
         if(isset($_GET['stats']) && ($_GET['stats'] != ''))
@@ -65,49 +69,87 @@ switch($request)
                 case 'hit_rate':
                     $opts[STATS_TYPE] = 'hit_rate';
                     $opts[STATS_DIFF] = true;
+                    $key = 'hit_percent';
                     break;
                 case 'request_seconds':
                     $opts[STATS_TYPE] = 'request_seconds';
                     $opts[STATS_DIFF] = true;
+                    $key = 'request_rate';
                     break;
                 case 'memory_usage':
                     $opts[STATS_TYPE] = 'memory_usage';
+                    $key = 'bytes_percent';
                     break;
                 case 'network_traffic':
                     $opts[STATS_TYPE] = 'network_traffic';
                     $opts[STATS_DIFF] = true;
+                    $key = 'bytes_read';
                     break;
                 case 'current_connections':
                     $opts[STATS_TYPE] = 'current_connections';
+                    $key = 'curr_connections';
                     break;
                 case 'eviction_rate';
                     $opts[STATS_TYPE] = 'eviction_rate';
                     $opts[STATS_DIFF] = true;
+                    $key = 'eviciton_rate';
                     break;
                 case 'items_cached';
                     $opts[STATS_TYPE] = 'items_cached';
+                    $key = 'curr_items';
                     break;
             }
         }
 
+        # Retrieving data
         $objects = Library_Data_Builder::instance()->retreive(MEMCACHE_STATS, $opts);
+        ksort($objects);
+
+        # Launching analysis
+        if(($opts[STATS_TYPE] != 'network_traffic') &&
+        ($opts[STATS_TYPE] != 'current_connections') &&
+        ($opts[STATS_TYPE] != 'items_cached'))
+        {
+            foreach($objects as $data)
+            {
+                foreach($data as $object)
+                {
+                    $object->analyse($opts[STATS_TYPE]);
+                }
+            }
+        }
+
+        # Grouping by timestamp
+        /*
+        $array = array();
+        foreach($objects as $data)
+        {
+        foreach($data as $time => $object)
+        {
+        $array[$time] = $object;
+        }
+        }
+        $objects = $array;
+        */
 
         //@todo : json_encode > 5.2.0
+        $return = '[';
+
         foreach($objects as $server => $object)
         {
-            $return .= '{label: \'' . $server . '\',';
+            $return .= '{label:"' . $server . '",';
             $return .= 'data:[';
 
             # Ordering
             foreach($object as $time => $data)
             {
-                $data->analyse($opts[STATS_TYPE]);
-                $var = $data->get($opts[STATS_TYPE]);
+                $var = $data->get($key);
                 $return .= '[' . $time * 1000 . ', ' . round($var) . '],';
             }
 
             $return .= ']},';
         }
+
         $return .= ']';
         echo $return;
         break;
