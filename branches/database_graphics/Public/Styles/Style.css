@@ -1,13 +1,13 @@
 body {
 	color: #FFFFFF;
 	background: #000000; font-family : tahoma, Arial;
-	font-size: 0.8em;
+	font-size: 11px;
 	margin-top: 10px;
 	font-family: tahoma, Arial;
 }
 
 full-size {
-	width: 986px;
+	width: 980px;
 }
 .size3 {
     width: 256px;

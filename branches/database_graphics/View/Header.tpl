@@ -13,8 +13,8 @@
 </head>
 <body>
     <div style="margin: 0 auto;width:1000px;clear:both;">
-        <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin <sup>1.2.0</sup></div>
-        <div class="ui-corner-all ui-widget-header full-size" style="padding:3px 7px 3px 7px;text-align:center;">
+        <div style="font-weight:bold;font-size:1.2em;">phpMemCacheAdmin <sup>1.2.0</sup></div>
+        <div class="ui-corner-all ui-widget-header full-size padding" style="text-align:center;">
 <?php
 # Live Stats view
 if(basename($_SERVER['PHP_SELF']) == 'stats.php')
@@ -84,32 +84,43 @@ else
 Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
 </div>
 <![endif]-->
+<?php
+$active = 1;
+# Live Stats
+switch(basename($_SERVER['PHP_SELF']))
+{
+	case 'stats.php':
+		$active = 1;
+		break;
+	case 'graphics.php':
+		$active = 2;
+		break;
+	case 'index.php':
+		$active = 3;
+		break;
+	case 'commands.php':
+		$active = 4;
+		break;
+	case 'configure.php':
+		$active = 5;
+		break;
+}
+?>
+<script type="text/javascript">
+	$(function() {
+		$("#accordion").accordion({
+			autoHeight: false,
+			collapsible: true,
+			active: <?php echo $active; ?> });
+	});
+	</script>
 
 <div style="float:left">
-<?php
-# Stats view
-if(basename($_SERVER['PHP_SELF']) == 'stats.php')
-{ ?>
-    <div style="margin-right:10px;margin-top:16px;" class="menu rounded alert">
-        <a href="graphics.php">Live Stats</a>
-    </div>
-<?php
-}
-else
-{ ?>
-    <div style="margin-right:10px;margin-top:16px;" class="menu rounded">
-        <a href="graphics.php">Live Stats</a>
-    </div>
-<?php
-}
-
-# Stats view
-if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
-{ ?>
-    <div style="margin-right:10px;margin-top: 10px;" class="ui-corner-all ui-widget-header">
-        <a href="graphics.php">Graphics Stats</a>
-    </div>
-    <div class="menu_items rounded">
+<div id="accordion" style="max-width:170px;margin-top:16px;">
+    <h3><a href="#">Live Stats</a></h3>
+    <div>AAA</div>
+	<h3><a href="#">Graphics</a></h3>
+    <div>
         &rsaquo; <a href="graphics.php?stats=hit_rate">Cache Hit &amp; Miss</a>
         <br/>
         &rsaquo; <a href="graphics.php?stats=request_seconds">Requests/Seconds</a>
@@ -124,74 +135,18 @@ if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
         <br/>
         &rsaquo; <a href="graphics.php?stats=items_cached">Items Cached</a>
     </div>
-<?php
-}
-else
-{
-?>
-   <div style="margin-right:10px;margin-top: 10px;" class="ui-corner-all ui-widget-header padding">
-        <a href="graphics.php">Graphics Stats</a>
-   </div>
-<?php
-}
-
-# Servers
-if(basename($_SERVER['PHP_SELF']) == 'index.php')
-{ ?>
-   <div style="margin-right:10px;margin-top:10px;" class="ui-state-active ui-corner-all ui-widget-header padding">
-        <a href="index.php">Server Stats</a>
-   </div>
-<?php
-}
-else
-{
-?>
-   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
-        <a href="index.php">Server Stats</a>
-   </div>
-<?php
-}
-
-# Commands view
-if(basename($_SERVER['PHP_SELF']) == 'commands.php')
-{ ?>
-   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded alert">
-        <a href="commands.php">Execute Commands</a>
-   </div>
-<?php
-}
-else
-{
-?>
-   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
-        <a href="commands.php">Execute Commands</a>
-   </div>
-<?php
-}
-
-# Configure view
-if(basename($_SERVER['PHP_SELF']) == 'configure.php')
-{ ?>
-    <div style="margin-right:10px;margin-top: 10px;" class="menu rounded alert">
-        <a href="configure.php">Configuration</a>
-    </div>
-    <div class="menu_items rounded">
+	<h3><a href="#">Server Stats</a></h3>
+	<div>AAA</div>
+	<h3><a href="#">Execute Commands</a></h3>
+	<div>AAA</div>
+    <h3><a href="#">Configuration</a></h3>
+    <div>
         &rsaquo; <a href="#">Edit Servers List</a>
         <br/>
         &rsaquo; <a href="#">Edit Commands API</a>
         <br/>
         &rsaquo; <a href="#">Edit Live Stats</a>
     </div>
-<?php
-}
-else
-{
-?>
-   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
-        <a href="configure.php">Configuration</a>
-   </div>
-<?php
-}
-?>
+    </div>
 </div>
 <div style="float:left;">
