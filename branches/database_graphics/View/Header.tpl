@@ -3,16 +3,18 @@
 <head>
     <title>phpMemCacheAdmin</title>
     <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
+    <link rel="stylesheet" type="text/css" href="Public/Styles/jquery-ui-1.8.1.custom.css"/>
     <script type="text/javascript" src="Public/Scripts/Script.js"></script>
-    <script type="text/javascript" src="Public/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="Public/Scripts/jquery-ui-1.8.1.custom.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.crosshair.min.js"></script>
     <script type="text/javascript" src="Public/Scripts/jquery.flot.stack.min.js"></script>
 </head>
 <body>
-    <div style="margin: 0 auto;width:1012px;clear:both;">
-        <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin</div>
-        <div class="serverlist rounded" style="padding:3px 7px 3px 7px;width:998px;text-align:center;">
+    <div style="margin: 0 auto;width:1000px;clear:both;">
+        <div style="margin:-4px 0px 6px 6px;font-weight:bold;font-size:1.2em;">phpMemCacheAdmin <sup>1.2.0</sup></div>
+        <div class="ui-corner-all ui-widget-header full-size" style="padding:3px 7px 3px 7px;text-align:center;">
 <?php
 # Live Stats view
 if(basename($_SERVER['PHP_SELF']) == 'stats.php')
@@ -36,7 +38,7 @@ else
         <a href="index.php">See Stats for </a>
 <?php
 } ?>
-        <select class="serverlist" onchange="changeServer(this)">
+        <select class="ui-state-default ui-corner-all" onchange="changeServer(this)">
         <option value="" <?php if(!isset($_GET['server']) || ($_GET['server'] == '')) { echo 'selected="selected"'; } ?>>All Servers</option>
 <?php
 # Servers
@@ -104,7 +106,7 @@ else
 # Stats view
 if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
 { ?>
-    <div style="margin-right:10px;" class="menu rounded alert">
+    <div style="margin-right:10px;margin-top: 10px;" class="ui-corner-all ui-widget-header">
         <a href="graphics.php">Graphics Stats</a>
     </div>
     <div class="menu_items rounded">
@@ -127,7 +129,7 @@ if(basename($_SERVER['PHP_SELF']) == 'graphics.php')
 else
 {
 ?>
-   <div style="margin-right:10px;" class="menu rounded">
+   <div style="margin-right:10px;margin-top: 10px;" class="ui-corner-all ui-widget-header padding">
         <a href="graphics.php">Graphics Stats</a>
    </div>
 <?php
@@ -136,7 +138,7 @@ else
 # Servers
 if(basename($_SERVER['PHP_SELF']) == 'index.php')
 { ?>
-   <div style="margin-right:10px;" class="menu rounded alert">
+   <div style="margin-right:10px;margin-top:10px;" class="ui-state-active ui-corner-all ui-widget-header padding">
         <a href="index.php">Server Stats</a>
    </div>
 <?php
@@ -144,7 +146,7 @@ if(basename($_SERVER['PHP_SELF']) == 'index.php')
 else
 {
 ?>
-   <div style="margin-right:10px;" class="menu rounded">
+   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
         <a href="index.php">Server Stats</a>
    </div>
 <?php
@@ -153,7 +155,7 @@ else
 # Commands view
 if(basename($_SERVER['PHP_SELF']) == 'commands.php')
 { ?>
-   <div style="margin-right:10px;" class="menu rounded alert">
+   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded alert">
         <a href="commands.php">Execute Commands</a>
    </div>
 <?php
@@ -161,7 +163,7 @@ if(basename($_SERVER['PHP_SELF']) == 'commands.php')
 else
 {
 ?>
-   <div style="margin-right:10px;" class="menu rounded">
+   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
         <a href="commands.php">Execute Commands</a>
    </div>
 <?php
@@ -170,7 +172,7 @@ else
 # Configure view
 if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 { ?>
-    <div style="margin-right:10px;" class="menu rounded alert">
+    <div style="margin-right:10px;margin-top: 10px;" class="menu rounded alert">
         <a href="configure.php">Configuration</a>
     </div>
     <div class="menu_items rounded">
@@ -185,7 +187,7 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 else
 {
 ?>
-   <div style="margin-right:10px;" class="menu rounded">
+   <div style="margin-right:10px;margin-top: 10px;" class="menu rounded">
         <a href="configure.php">Configuration</a>
    </div>
 <?php
