@@ -1,25 +1,35 @@
 body {
 	color: #FFFFFF;
-	background: #000000; font-family : tahoma, Arial;
-	font-size: 11px;
+	background: #FFFFFF; font-family : Tahoma, Segoe UI, Arial;
+	font-size: 11.5px;
 	margin-top: 10px;
 	font-family: tahoma, Arial;
 }
 
-full-size {
+.full-size {
 	width: 980px;
 }
-.size3 {
+.size-1col {
+    width: 805px;
+}
+.size-2cols {
+    width: 387px;
+}
+.size-3cols {
     width: 256px;
 }
 .padding {
 	padding: 3px 7px 3px 7px;
 }
 
-
 img {
 	border: none;
 }
+
+
+
+
+
 
 a {
 	color: #EEEEEE;
@@ -135,10 +145,6 @@ div.full {
 
 .size1 {
 	width: 812px;
-}
-
-.size2 {
-	width: 1012px;
 }
 /*
 .size3 {

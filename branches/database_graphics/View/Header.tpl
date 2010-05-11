@@ -80,7 +80,7 @@ else
 
 <!--[if IE]>
 <br/>
-<div class="serverlist rounded" style="text-align:center;padding:3px 7px;width:800px;">
+<div class="ui-state-error ui-corner-all full-size padding" style="text-align:center;">
 Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
 </div>
 <![endif]-->
@@ -116,7 +116,7 @@ switch(basename($_SERVER['PHP_SELF']))
 	</script>
 
 <div style="float:left">
-<div id="accordion" style="max-width:170px;margin-top:16px;">
+<div id="accordion" style="width:180px;margin-top:12px;">
     <h3><a href="#">Live Stats</a></h3>
     <div>AAA</div>
 	<h3><a href="#">Graphics</a></h3>
@@ -141,12 +141,12 @@ switch(basename($_SERVER['PHP_SELF']))
 	<div>AAA</div>
     <h3><a href="#">Configuration</a></h3>
     <div>
-        &rsaquo; <a href="#">Edit Servers List</a>
+        &rsaquo; <a href="configure.php?type=clusters">Edit Servers List</a>
         <br/>
-        &rsaquo; <a href="#">Edit Commands API</a>
+        &rsaquo; <a href="configure.php?type=commands">Edit Commands API</a>
         <br/>
-        &rsaquo; <a href="#">Edit Live Stats</a>
+        &rsaquo; <a href="configure.php?type=live_stats">Edit Live Stats</a>
     </div>
     </div>
 </div>
-<div style="float:left;">
+<div style="float:left;margin-left:4px;margin-top:12px;">

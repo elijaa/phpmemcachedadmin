@@ -1,7 +1,6 @@
 <?php
 if((isset($response)) && ($response != array()))
 { ?>
-    <br/>
     <span class="title grey rounded" style="width:810px;">
         Result of <span class="green">
         <?php echo isset($_POST['request_command']) ? ucfirst($_POST['request_command']) : ucfirst($_GET['request_command']); ?></span>
@@ -24,15 +23,14 @@ if(isset($write))
 {
     if($write = true)
     { ?>
-    <br/>
-    <span class="title grey rounded" style="width:810px;text-align:center;">
-        Configuration saved
-    </span>
+    <div class="ui-state-highlight ui-corner-all size-1col padding" style="margin-bottom:12px;">
+        <span class="ui-icon ui-icon-check" style="float:left;margin-right:0.3em;">Sucess</span>Configuration saved
+    </div>
 <?php
     }
     else
     { ?>
-    <span class="title grey rounded" style="width:810px;text-align:center;">
+    <span class="ui-state-error" style="margin-bottom:12px;">
         Save failed
     </span>
 <?php
