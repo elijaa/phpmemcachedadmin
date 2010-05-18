@@ -1,7 +1,8 @@
 <br/>
 <script type="text/javascript">
+var initTimeout = 5000;
 var timeout = <?php echo $_ini->get('refresh_rate') * 1000; ?>;
-setTimeout("ajax(page,'stats')", timeout);
+setTimeout("ajax(page,'stats')", 5000);
 </script>
 
 <div style="float: left;">
@@ -9,6 +10,6 @@ setTimeout("ajax(page,'stats')", timeout);
     <div style="width:772px;padding-left:4px;">
         <br/>
         <pre id="stats" style="font-size:12px;overflow:visible;">
-        Loading live stats, please wait ...</pre>
+        Loading live stats, please wait 5 seconds ...</pre>
     </div>
 </div>
