@@ -21,9 +21,9 @@
         </div>
 
     </div>
-    <div style="float:left;padding-left:10px;">
+    <div style="float:left; padding-left:10px;">
         <form method="post" id="flushForm" action="commands.php">
-        <div class="serverlist rounded submenu" style="width:268px;">
+        <div class="serverlist rounded" style="padding: 5px 12px 4px 32px;height:18px;margin:0px;width:211px;">
             <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
@@ -31,7 +31,7 @@
             <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
         </div>
         </form>
-        <div class="container rounded" style="width:538px;padding:4px;text-align:center;margin-top:34px;">
+        <div class="container rounded" style="width:506px;padding:7px;margin-top:34px;">
             <div class="row">
                 For more informations about memcached slabs stats, see memcached protocol
                 <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt#L470" target="_blank"><span class="green">here</span></a>
@@ -59,15 +59,12 @@ foreach($slabs as $id => $slab)
 <?php
             $actualSlab = 0;
         }
-        # Making a new cell
-        else
-        {
 ?>
         <td <?php if($actualSlab > 0) { echo 'style="padding-left:10px;"'; } ?>>
             <br/>
             <span class="title grey rounded">
                 Slab <?php echo $id; ?> <span class="green">Stats</span>
-                <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;request_show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
+                <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $id; ?>">See Slab Items</a></span>
             </span>
                 <div class="container rounded">
                     <div class="row">
@@ -114,14 +111,13 @@ foreach($slabs as $id => $slab)
             </td>
 <?php
             $actualSlab++;
-        }
     }
 ?>
 <?php
 }
 for(true; $actualSlab < 3 ; $actualSlab++)
 {
-    echo '<td style="width:268px;"></td>';
+    echo '<td style="width:260px;"></td>';
 }
 ?>
         </tr>

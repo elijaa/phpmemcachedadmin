@@ -1,7 +1,7 @@
     <br/>
     <div style="float:left;">
-        <span class="title grey rounded" style="width:393px;">Commands <span class="green">Configuration</span></span>
-        <div class="container rounded" style="width:393px;padding:7px;">
+        <span class="title grey rounded" style="width:374px;">Commands <span class="green">Configuration</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="post" action="configure.php?request_write=commands">
             <div class="row">
                 Memcached commands API used by phpMemCacheAdmin<br/><br/>
@@ -48,8 +48,8 @@
         </div>
         <br/>
 
-        <span class="title grey rounded" style="width:393px;">Live Stats <span class="green">Configuration</span></span>
-        <div class="container rounded" style="width:393px;padding:7px;">
+        <span class="title grey rounded" style="width:374px;">Live Stats <span class="green">Configuration</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="post" action="configure.php?request_write=live_stats">
             <div class="row">
                 Configuration for Live Stats<br/>
@@ -84,8 +84,8 @@
     </div>
 
     <div style="float:left; padding-left:10px;">
-        <span class="title grey rounded" style="width:393px;">Server <span class="green">List</span></span>
-        <div class="container rounded" style="width:393px;padding:7px;">
+        <span class="title grey rounded" style="width:374px;">Server <span class="green">List</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="post" action="configure.php?request_write=servers">
             <div class="row">
                 Servers list used by phpMemCacheAdmin<br/><br/>
@@ -97,7 +97,6 @@
             </div>
             <div id="server_form">
             <?php
-            # Adding input for every server
             foreach($_ini->get('server') as $server)
             { ?>
             <div id="server_<?php echo $server; ?>">
@@ -120,8 +119,8 @@
             </form>
         </div>
         <br/>
-        <span class="title grey rounded" style="width:393px;">Miscellaneous <span class="green">Configuration</span></span>
-        <div class="container rounded" style="width:393px;padding:7px;">
+        <span class="title grey rounded" style="width:374px;">Miscellaneous <span class="green">Configuration</span></span>
+        <div class="container rounded" style="width:374px;padding:7px;">
             <form method="post" action="configure.php?request_write=miscellaneous">
             <div class="row">
                 Miscellaneous configuration used by phpMemCacheAdmin<br/><br/>
@@ -144,7 +143,7 @@
             </form>
         </div>
         <br/>
-        <div class="container rounded" style="width:393px;padding:7px;">
+        <div class="container rounded" style="width:374px;padding:7px;">
             <div class="row">
                 For more information about configuring phpMemCacheAdmin, see installation guide
                 <a href="http://code.google.com/p/phpmemcacheadmin/wiki/InstallationGuide" target="_blank"><span class="green">here</span></a>
