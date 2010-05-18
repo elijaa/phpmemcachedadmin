@@ -8,7 +8,7 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 == 2. Install the program on an Apache/PHP server ==
 
-*Make sure that Apache has rw right in the temp file folder (default : Temp/) and the the config directory (Config/)*
+*Make sure that Apache has rw right in the temp file folder (default : Temp/) and the entire config directory (Config/)*
 
 
 == 3. Go to Menu > Edit Configuration ==
