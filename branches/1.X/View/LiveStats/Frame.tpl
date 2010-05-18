@@ -1,6 +1,5 @@
 <br/>
 <script type="text/javascript">
-var initTimeout = 5000;
 var timeout = <?php echo $_ini->get('refresh_rate') * 1000; ?>;
 setTimeout("ajax(page,'stats')", 5000);
 </script>
