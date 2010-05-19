@@ -26,10 +26,11 @@ header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'Library/Command/Interface.php';
-require_once 'Library/Command/Factory.php';
-require_once 'Library/Configuration.php';
-require_once 'Library/HTML.php';
+require_once 'Library/Loader.php';
+
+Library_Configuration_Loader::getInstance()->write();
+var_dump(Library_Configuration_Loader::getInstance()->servers());
+var_dump(Library_Configuration_Loader::getInstance()->clusters());
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');

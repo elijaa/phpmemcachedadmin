@@ -24,6 +24,7 @@ class Library_Configuration
 {
     private static $_instance = null;
     private static $_iniPath = './Config/Memcache.ini';
+    private static $_iniClusterPath = './Config/Cluster.ini';
     private static $_iniKeys = array('stats_api',
                                      'slabs_api',
                                      'items_api',
@@ -31,7 +32,6 @@ class Library_Configuration
                                      'set_api',
                                      'delete_api',
                                      'flush_all_api',
-                                     'server',
                                      'connection_timeout',
                                      'max_item_dump',
                                      'refresh_rate',
@@ -52,7 +52,7 @@ class Library_Configuration
     private function __construct()
     {
         # Opening ini file
-        self::$_ini = parse_ini_file(self::$_iniPath);
+        self::$_ini = parse_ini_file(self::$_iniPath, true);
 
         # Ordering server list
         sort(self::$_ini['server']);
@@ -154,9 +154,9 @@ class Library_Configuration
             $iniContent = array();
             foreach(self::$_ini as $iniKey => $iniValue)
             {
-                $iniContent[] = '[' . $iniKey . ']';
                 if(is_array($iniValue))
                 {
+                    $iniContent[] = '[' . $iniKey . ']';
                     foreach($iniValue as $subIniValue)
                     {
                         $iniContent[] = $iniKey . '[] = "' . $subIniValue . '"';
