@@ -15,23 +15,43 @@
  *
  * ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°> ><)))°>
  *
- * Abstract configuration class for editing, saving, ...
+ * Configuration class for editing, saving, ...
  *
  * @author c.mahieux@of2m.fr
  * @since 19/05/2010
  */
 class Library_Configuration_Loader
 {
+    # Singleton
     protected static $_instance = null;
+
+    # Configuration file
     protected static $_iniPath = './Config/Memcache.php';
-    protected static $_iniKeys = array();
+
+    # Configuration needed keys
+    protected static $_iniKeys = array('stats_api',
+                                       'slabs_api',
+                                       'items_api',
+                                       'get_api',
+                                       'set_api',
+                                       'delete_api',
+                                       'flush_all_api',
+                                       'connection_timeout',
+                                       'max_item_dump',
+                                       'refresh_rate',
+                                       'memory_alert',
+                                       'hit_rate_alert',
+                                       'eviction_alert',
+                                       'file_path',
+                                       'clusters');
+
+    # Storage
     protected static $_ini = array();
     protected static $_clusters = array();
     protected static $_servers = array();
 
     /**
-     * Constructor of MemCacheAdmin_Configuration class
-     * Load ini file
+     * Constructor, load configuration file and parse server list
      *
      * @return Void
      */
@@ -40,7 +60,7 @@ class Library_Configuration_Loader
         # Opening ini file
         self::$_ini = require self::$_iniPath;
 
-        # Spliting server in hostname:port
+        # Spliting server in hostname:port foreach clusters
         foreach(self::$_ini['clusters'] as $cluster => $servers)
         {
             foreach($servers as $server)
@@ -52,9 +72,9 @@ class Library_Configuration_Loader
     }
 
     /**
-     * Get MemCacheAdmin_Configuration singleton
+     * Get Library_Configuration_Loader singleton
      *
-     * @return MemCacheAdmin_Configuration
+     * @return Library_Configuration_Loader
      */
     public static function getInstance()
     {
@@ -77,17 +97,32 @@ class Library_Configuration_Loader
         return self::$_ini[$key];
     }
 
+    /**
+     * Retreive all clusters
+     *
+     * @return Array
+     */
     public function clusters()
     {
         return array_keys(self::$_clusters);
     }
 
+    /**
+     * Retreive all servers or by cluster
+     *
+     * @param String $cluster Cluster (Optionnal)
+     *
+     * @return Array
+     */
     public function servers($cluster = null)
     {
+        # No cluster provided
         if($cluster == null)
         {
+            # Lazy initialisation of server list
             if(self::$_servers == array())
             {
+                # Walking through clusters, then clusters's servers
                 foreach(self::$_clusters as $servers)
                 {
                     foreach($servers as $server => $data)
@@ -98,6 +133,8 @@ class Library_Configuration_Loader
             }
             return self::$_servers;
         }
+
+        # Servers name for cluster
         return array_values(self::$_clusters[$cluster]);
     }
 

@@ -13,7 +13,7 @@ body {
     width: 805px;
 }
 .size-2cols {
-    width: 387px;
+    width: 388px;
 }
 .size-3cols {
     width: 256px;
@@ -25,11 +25,16 @@ body {
 img {
 	border: none;
 }
-
-
-
-
-
+input,select,textarea {
+    border: solid 1px #AAAAAA;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    width: 240px;
+    font-size: 1em
+}
+input:focus,textarea:focus {
+    border: solid 1px #EEEEEE;
+}
 
 a {
 	color: #EEEEEE;
@@ -51,6 +56,7 @@ hr {
 	border-bottom: solid 1px #CCCCCC;
 	margin: 2px;
 }
+
 /*
 input,select,textarea {
 	border: solid 1px #AAAAAA;
@@ -67,10 +73,6 @@ input:focus,textarea:focus {
 */
 input:hover {
 	color: #AA0000;
-}
-
-select {
-	width: 210px;
 }
 
 div.title {
@@ -93,13 +95,6 @@ span.title {
 	margin-top: 1px;
 	padding-bottom: 3px;
 }  /*removed width:268px; */
-.serverlist {
-	background: #B5463F;
-	margin-top: 1px;
-	font-weight: bold;
-	color: #EEEEEE;
-	width: 198px;
-}
 
 .rounded {
 	-moz-border-radius: 3px;
@@ -110,7 +105,7 @@ span.title {
 /*.submenu{padding: 5px 0px 3px 0px;text-align:center;height:18px;margin:0px;}*/
 div.row {
 	padding: 3px 0px 2px 7px;
-	min-height: 18px;
+	min-height: 24px;
 }
 
 div.left {

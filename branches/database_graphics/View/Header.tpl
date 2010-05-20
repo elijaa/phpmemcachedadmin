@@ -90,19 +90,19 @@ $active = 1;
 switch(basename($_SERVER['PHP_SELF']))
 {
 	case 'stats.php':
-		$active = 1;
+		$active = 0;
 		break;
 	case 'graphics.php':
-		$active = 2;
+		$active = 1;
 		break;
 	case 'index.php':
-		$active = 3;
+		$active = 2;
 		break;
 	case 'commands.php':
-		$active = 4;
+		$active = 3;
 		break;
 	case 'configure.php':
-		$active = 5;
+		$active = 4;
 		break;
 }
 ?>
@@ -112,6 +112,7 @@ switch(basename($_SERVER['PHP_SELF']))
 			autoHeight: false,
 			collapsible: true,
 			active: <?php echo $active; ?> });
+	        $("input:submit").button();
 	});
 	</script>
 
@@ -138,7 +139,7 @@ switch(basename($_SERVER['PHP_SELF']))
 	<h3><a href="#">Server Stats</a></h3>
 	<div>AAA</div>
 	<h3><a href="#">Execute Commands</a></h3>
-	<div>AAA</div>
+	<div>&rsaquo; <a href="commands.php">Execute Commands</a></div>
     <h3><a href="#">Configuration</a></h3>
     <div>
         &rsaquo; <a href="configure.php?type=clusters">Edit Servers List</a>

@@ -57,11 +57,7 @@ foreach($slabs as $id => $slab)
         </tr>
         <tr>
 <?php
-            $actualSlab = 0;
-        }
-        # Making a new cell
-        else
-        {
+        $actualSlab = 0;
 ?>
         <td <?php if($actualSlab > 0) { echo 'style="padding-left:10px;"'; } ?>>
             <br/>
@@ -114,10 +110,7 @@ foreach($slabs as $id => $slab)
             </td>
 <?php
             $actualSlab++;
-        }
     }
-?>
-<?php
 }
 for(true; $actualSlab < 3 ; $actualSlab++)
 {

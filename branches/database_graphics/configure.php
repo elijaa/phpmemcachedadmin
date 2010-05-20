@@ -28,15 +28,11 @@ header('Cache-Control: no-cache, must-revalidate');
 # Require
 require_once 'Library/Loader.php';
 
-Library_Configuration_Loader::getInstance()->write();
-var_dump(Library_Configuration_Loader::getInstance()->servers());
-var_dump(Library_Configuration_Loader::getInstance()->clusters());
-
 # Date timezone
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = Library_Configuration::getInstance();
+$_ini = Library_Configuration_Loader::getInstance();
 
 # Initializing requests
 $request = (isset($_GET['request_write'])) ? $_GET['request_write'] : null;
@@ -58,7 +54,7 @@ switch($request)
         $_ini->set('file_path', $_POST['file_path']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = $_ini->write();
         break;
 
     # Commands configuration save
@@ -73,7 +69,7 @@ switch($request)
         $_ini->set('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = $_ini->write();
         break;
 
         # Server configuration save
@@ -82,7 +78,7 @@ switch($request)
         $_ini->set('server', $_POST['server']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = $_ini->write();
         break;
 
         # Miscellaneous configuration save
@@ -92,7 +88,7 @@ switch($request)
         $_ini->set('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = $_ini->write();
         break;
 
         # Default : No command

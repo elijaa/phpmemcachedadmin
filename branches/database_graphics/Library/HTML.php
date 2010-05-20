@@ -35,7 +35,7 @@ class Library_HTML
         $_ini = Library_Configuration::getInstance();
 
         # Making Servers Select
-        $serverList = '<select class="commands ' . $class . '" name="server"><option value="">All Servers</option>';
+        $serverList = '<select class="ui-state-default ui-corner-all" name="server"><option value="">All Servers</option>';
         foreach($_ini->get('server') as $server)
         {
             $serverList .= '<option value="' . $server . '">' . $server . '</option>';
@@ -54,7 +54,7 @@ class Library_HTML
      */
     public static function apiList($iniAPI = '', $id)
     {
-        return '<select class="commands" name="' . $id . '">
+        return '<select class="ui-state-default ui-corner-all" name="' . $id . '">
         <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
         <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
         <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
