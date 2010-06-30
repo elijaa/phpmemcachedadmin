@@ -27,3 +27,10 @@
  * Fixed some slabs not displayed
 
 ===Version 1.2.0 : XX/XX/2010===
+ * Ping & average on Live Stats
+ * Cluster handling
+ * HTML Cleaning
+ * "Check for new version" button
+ * Server configuration
+ * Delete on item
+ * Better handling of read/write on configuration file
