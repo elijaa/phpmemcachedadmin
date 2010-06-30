@@ -5,7 +5,7 @@ setTimeout("ajax(page,'stats')", timeout);
 </script>
 
 <div style="float: left;">
-    <span class="title grey rounded" style="width:772px;">Live <span class="green">Stats</span></span>
+    <div class="sub-header corner full-size padding">Live <span class="green">Stats</span></div>
     <div style="width:772px;padding-left:4px;">
         <br/>
         <pre id="stats" style="font-size:12px;overflow:visible;">
