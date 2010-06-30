@@ -9,7 +9,7 @@ input:hover{color:#AA0000;}
 select{width:201px;}
 div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
-.container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;}
+/** .container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;} */
 .serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
 .rounded{-moz-border-radius:8px;-webkit-border-radius:8px;}
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
@@ -54,8 +54,17 @@ img {
     -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
 }
 .header {
-    border: 1px solid #83332d; background: #b5463f; font-weight: bold;
+    border: 1px solid #9c3c36; 
+    background: url("../Images/ui-bg_gloss-wave_15_b5463f_500x100.png") repeat-x scroll 50% 50% #B5463F;
+    font-weight: bold; color: #ffffff;
 }
 .sub-header {
-    border: 1px solid #35302e; background: #514845; font-weight: bold;
+    border: 1px solid #514845;
+    background: url("../Images/ui-bg_gloss-wave_15_635855_500x100.png") repeat-x scroll 50% 50% #635855;
+    font-weight: bold; color: #ffffff;
+}
+.container {
+	border: 1px solid #d3d3d3; 
+	background: #f2f2f2;
+	font-weight: none; color: #000000; margin-top: 1px;
 }
