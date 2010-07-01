@@ -1,8 +1,6 @@
 img{border:none;}
 a{color:#EEEEEE;text-decoration:none;}
 a:hover{color:#AA0000;}
-pre{overflow:auto;white-space:pre-wrap;}
-hr{height:0;border:none;border-bottom:solid 1px #EEEEEE;}
 input,select,textarea{border:solid 1px #AAAAAA;-moz-border-radius:3px;-webkit-border-radius:3px;width:200px;font-family:tahoma;font-size:1em}
 input:focus,textarea:focus{border:solid 1px #EEEEEE;}
 input:hover{color:#AA0000;}
@@ -11,7 +9,7 @@ div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;f
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 /** .container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;} */
 .serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
-.rounded{-moz-border-radius:8px;-webkit-border-radius:8px;}
+
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
 div.left{width:100px;float:left;font-weight:bold;padding-top:2px;}
 div.right{width:52px;float:left;padding-top:2px;}
@@ -42,7 +40,7 @@ body {
     width: 388px;
 }
 .size-3cols {
-    width: 256px;
+    width: 310px;
 }
 .padding {
     padding: 3px 7px 3px 7px;
@@ -50,21 +48,60 @@ body {
 img {
     border: none;
 }
+
+/** Headers and container */
 .corner {
-    -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+    -moz-border-radius: 3px; 
+    -webkit-border-radius: 3px; 
+    border-radius: 3px;
 }
 .header {
     border: 1px solid #9c3c36; 
     background: url("../Images/ui-bg_gloss-wave_15_b5463f_500x100.png") repeat-x scroll 50% 50% #B5463F;
-    font-weight: bold; color: #ffffff;
+    font-weight: bold; 
+    color: #ffffff;
 }
 .sub-header {
     border: 1px solid #514845;
     background: url("../Images/ui-bg_gloss-wave_15_635855_500x100.png") repeat-x scroll 50% 50% #635855;
-    font-weight: bold; color: #ffffff;
+    font-weight: bold; 
+    color: #ffffff;
 }
 .container {
 	border: 1px solid #d3d3d3; 
 	background: #f2f2f2;
-	font-weight: none; color: #000000; margin-top: 1px;
+	font-weight: none; 
+	color: #000000; 
+	margin-top: 1px;
+}
+
+/** Line and formatting */
+.line {
+	min-height:18px;
+}
+
+.left {
+	float: left;
+	min-width: 120px;
+	font-weight: bold;
+}
+
+.right {
+	float: right;
+}
+
+/** Live Stats */
+hr {
+	height:0;
+	border:none;
+	border-bottom:solid 1px #FFFFFF;
+}
+pre {
+	overflow:auto;
+	white-space:pre-wrap;
+}
+
+/** Color */
+.green {
+	color:#40aaba;
 }
