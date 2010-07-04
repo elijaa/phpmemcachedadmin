@@ -1,125 +1,138 @@
     <br/>
-    <div style="float:left;">
-        <div class="sub-header corner padding size-3cols">Get <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+    <div class="size-4" style="float:left;">
+        <div class="sub-header corner padding">Get <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Hits</span>
                 <?php echo Library_Analysis::hitResize($stats['get_hits']); ?>
                 <span class="right">[<?php echo $stats['get_hits_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss</span>
                 <?php echo Library_Analysis::hitResize($stats['get_misses']); ?>
                 <span class="right">[<?php echo $stats['get_misses_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['get_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Set <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Set <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Total</span>
                 <?php echo Library_Analysis::hitResize($stats['cmd_set']); ?>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['set_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Delete <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Delete <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Hits</span>
                 <?php echo Library_Analysis::hitResize($stats['delete_hits']); ?>
                 <span class="right">[<?php echo $stats['delete_hits_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss</span>
                 <?php echo Library_Analysis::hitResize($stats['delete_misses']); ?>
                 <span class="right">[<?php echo $stats['delete_misses_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['delete_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Cas <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Cas <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Hits</span>
                 <?php echo Library_Analysis::hitResize($stats['cas_hits']); ?>
                 <span class="right">[<?php echo $stats['cas_hits_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss</span>
                 <?php echo Library_Analysis::hitResize($stats['cas_misses']); ?>
                 <span class="right">[<?php echo $stats['cas_misses_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Bad Value</span>
                 <?php echo Library_Analysis::hitResize($stats['cas_badval']); ?>
                 <span class="right">[<?php echo $stats['cas_badval_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['cas_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Increment <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Increment <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Hits</span>
                 <?php echo Library_Analysis::hitResize($stats['incr_hits']); ?>
                 <span class="right">[<?php echo $stats['incr_hits_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss</span>
                 <?php echo Library_Analysis::hitResize($stats['incr_misses']); ?>
                 <span class="right">[<?php echo $stats['incr_misses_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['incr_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Decrement <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Decrement <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Hits</span>
                 <?php echo Library_Analysis::hitResize($stats['decr_hits']); ?>
                 <span class="right">[<?php echo $stats['decr_hits_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss</span>
                 <?php echo Library_Analysis::hitResize($stats['decr_misses']); ?>
                 <span class="right">[<?php echo $stats['decr_misses_percent']; ?>%]</span>
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Rate</span>
                 <?php echo $stats['decr_rate']; ?> Request/sec
             </div>
         </div>
+        <br/>
+
+        <div class="sub-header corner padding">Flush <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left">Total</span>
+                <?php echo Library_Analysis::hitResize($stats['cmd_flush']); ?>
+            </div>
+            <div class="line">
+                <span class="left">Rate</span>
+                <?php echo $stats['flush_rate']; ?> Request/sec
+            </div>
+        </div>
     </div>
 
-    <div style="float:left; padding-left:9px;">
+    <div class="size-2" style="float:left; padding-left:9px;">
 <?php
 # Viewing a server
 if(isset($_GET['server']))
 { ?>
         <form method="post" id="flushForm" action="commands.php">
-        <div class="serverlist rounded" style="padding: 5px 12px 4px 12px;height:18px;margin:0px;">
+        <div class="header corner padding size-3cols" style="text-align:center;">
             <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
@@ -130,129 +143,214 @@ if(isset($_GET['server']))
         <br/>
 <?php
 } ?>
-        <div class="sub-header corner padding size-3cols">Server <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
-                <span class="left">Uptime</span>
+        <div class="sub-header corner padding">Server <span class="green">Stats</span></div>
+        <div class="container corner padding size-3cols">
+            <div class="line">
+                <span class="left setting">Uptime</span>
                 <?php echo Library_Analysis::uptime($stats['uptime']); ?>
             </div>
-            <div class="line padding">
-                <span class="left">Memcached</span>
+            <div class="line">
+                <span class="left setting">Memcached</span>
                 Version <?php echo $stats['version']; ?>
             </div>
-
-        <!--</div>
-        <br/>
-
-        <div class="sub-header corner padding size-3cols">Connection <span class="green">Stats</span></div>
-        <div class="container corner">-->
-            <div class="line padding" style="margin-top:6px;">
-                <span class="left">Curr Connections</span>
+            <div class="line" style="margin-top:4px;">
+                <span class="left setting">Curr Connections</span>
                 <?php echo $stats['curr_connections']; ?>
             </div>
-            <div class="line padding">
-                <span class="left">Total Connections</span>
+            <div class="line">
+                <span class="left setting">Total Connections</span>
                 <?php echo Library_Analysis::hitResize($stats['total_connections']); ?>
             </div>
-        <!--</div>
-        <br/>
-
-        <div class="sub-header corner padding size-3cols">Item <span class="green">Stats</span></div>
-        <div class="container corner">-->
-            <div class="line padding" style="margin-top:6px;">
-                <span class="left">Current Items</span>
+            <div class="line" style="margin-top:4px;">
+                <span class="left setting">Current Items</span>
                 <?php echo Library_Analysis::hitResize($stats['curr_items']); ?>
             </div>
-            <div class="line padding">
-                <span class="left">Total Items</span>
+            <div class="line">
+                <span class="left setting">Total Items</span>
                 <?php echo Library_Analysis::hitResize($stats['total_items']); ?>
             </div>
         </div>
         <br/>
-        <div class="sub-header corner padding size-3cols">Eviction <?php if(isset($stats['reclaimed'])) { echo ' &amp; Reclaimed'; } ?> <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
-                <span class="left">Items Eviction</span>
+        <div class="sub-header corner padding">Eviction <?php if(isset($stats['reclaimed'])) { echo ' &amp; Reclaimed'; } ?> <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left setting">Items Eviction</span>
                 <?php echo Library_Analysis::hitResize($stats['evictions']); ?>
             </div>
-            <div class="line padding">
-                <span class="left">Rate</span>
+            <div class="line">
+                <span class="left setting">Rate</span>
                 <?php echo $stats['eviction_rate']; ?> Eviction/sec
             </div>
 <?php
 # Memcached version 1.4.5 and above
 if(isset($stats['reclaimed']))
 { ?>
-            <div class="line padding">
-                <span class="left">Reclaimed</span>
+            <div class="line">
+                <span class="left setting">Reclaimed</span>
                 <?php echo Library_Analysis::hitResize($stats['reclaimed']); ?>
             </div>
-            <div class="line padding">
-                <span class="left">Rate</span>
+            <div class="line">
+                <span class="left setting">Rate</span>
                 <?php echo $stats['reclaimed_rate']; ?> Reclaimed/sec
             </div>
 <?php
 } ?>
         </div>
         <br/>
-
-        <div class="sub-header corner padding size-3cols">Network <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
-                <span class="left">Bytes Read</span>
-                <?php echo Library_Analysis::byteResize($stats['bytes_read']); ?>Bytes
+<?php
+# Viewing a server
+if(isset($_GET['server']))
+{ ?>
+        <div class="sub-header corner padding">Server <span class="green">Settings</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left setting">Accepting Connections</span>
+                <?php if($stats['accepting_conns']) { echo 'Yes'; } else { echo 'No'; } ?>
             </div>
-            <div class="line padding">
-                <span class="left">Bytes Written</span>
-                <?php echo Library_Analysis::byteResize($stats['bytes_written']); ?>Bytes
+            <div class="line">
+                <span class="left setting">Max Bytes</span>
+                <?php echo Library_Analysis::byteResize($settings['maxbytes']); ?>Bytes
+            </div>
+            <div class="line">
+                <span class="left setting">Max Connection</span>
+                <?php echo $settings['maxconns']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">TCP/UDP Port</span>
+                TCP : <?php echo $settings['tcpport'] . ' | UDP : ' . $settings['udpport']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Listen Interface</span>
+                <?php echo $settings['inter']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Verbosity</span>
+                <?php echo $settings['verbosity']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Oldest Item</span>
+                <?php echo Library_Analysis::uptime($settings['oldest']); ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Evictions</span>
+                <?php echo ucfirst($settings['evictions']); ?>
+            </div>
+            <div class="line" style="margin-top:6px;">
+                <span class="left setting">Path to Domain Socket</span>
+                <?php echo $settings['domain_socket']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Domain Socket Umask</span>
+                <?php echo $settings['umask']; ?>
+            </div>
+            <div class="line" style="margin-top:6px;">
+                <span class="left setting">Chunk Size Growth Factor</span>
+                <?php echo $settings['growth_factor']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Minimum space allocated for key+value+flags</span>
+                <?php echo $settings['chunk_size']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Max Threads</span>
+                <?php echo $settings['num_threads']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Detail Enabled</span>
+                <?php echo ucfirst($settings['detail_enabled']); ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Max IO Ops/Event</span>
+                <?php echo $settings['reqs_per_event']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">CAS Enabled</span>
+                <?php echo ucfirst($settings['cas_enabled']); ?>
+            </div>
+            <div class="line">
+                <span class="left setting">TCP Listen Backlog</span>
+                <?php echo $settings['tcp_backlog']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">SASL Auth</span>
+                <?php echo ucfirst($settings['auth_enabled_sasl']); ?>
             </div>
         </div>
-        <br/>
-    </div>
-
-    <div style="float:left; padding-left:9px;clear:right;">
-        <div class="sub-header corner padding size-3cols">Cache Size <span class="green">Stats</span></div>
-        <div class="container corner">
-            <div class="line padding">
+<?php
+}
+else
+{ ?>
+        <div class="sub-header corner padding">Servers in Cluster <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
                 <span class="left">Used</span>
                 <?php echo Library_Analysis::byteResize($stats['bytes']); ?>Bytes
             </div>
-            <div class="line padding">
+            <div class="line">
+                <span class="left">Total</span>
+                <?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes
+            </div>
+         </div>
+<?php
+}?>
+    </div>
+
+    <div class="size-4" style="float:left; padding-left:9px;clear:right;">
+        <div class="sub-header corner padding">Cache Size <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left">Used</span>
+                <?php echo Library_Analysis::byteResize($stats['bytes']); ?>Bytes
+            </div>
+            <div class="line">
                 <span class="left">Total</span>
                 <?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes
             </div>
          </div>
          <br/>
 
-        <div class="sub-header corner padding size-3cols">Cache Size <span class="green">Graphic</span></div>
-        <div class="container corner">
-            <div class="line padding">
-                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=300x220&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="300" height="220"/>
-            </div>
+        <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
+        <div class="container corner padding">
+
+                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="270" height="200"/>
+
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Cache Request <span class="green">Stats</span></div>
-         <div class="container corner">
-            <div class="line padding">
+        <div class="sub-header corner padding">Cache Request <span class="green">Stats</span></div>
+         <div class="container corner padding">
+            <div class="line">
                 <span class="left">Request Rate</span>
                 <?php echo $stats['request_rate']; ?> Request/sec
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Hit Rate</span>
                 <?php echo $stats['hit_rate']; ?> Request/sec
             </div>
-            <div class="line padding">
+            <div class="line">
                 <span class="left">Miss Rate</span>
                 <?php echo $stats['miss_rate']; ?> Request/sec
             </div>
         </div>
         <br/>
 
-        <div class="sub-header corner padding size-3cols">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
-         <div class="container corner">
-            <div class="line padding">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=300x180&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="300" height="180"/>
+        <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
+         <div class="container corner padding">
+            <div class="line">
+            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=270x174&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="270" height="174"/>
+            </div>
+        </div>
+        <br/>
+
+        <div class="sub-header corner padding">Network <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left">Bytes Read</span>
+                <?php echo Library_Analysis::byteResize($stats['bytes_read']); ?>Bytes
+            </div>
+            <div class="line">
+                <span class="left">Bytes Written</span>
+                <?php echo Library_Analysis::byteResize($stats['bytes_written']); ?>Bytes
             </div>
         </div>
     </div>

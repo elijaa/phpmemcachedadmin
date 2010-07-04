@@ -1,21 +1,22 @@
 <?php
 # @TODO : Make this compatible with command line
 # Header
-echo 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('refresh_rate') . ' sec)';
+print 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('refresh_rate') . ' sec)';
 echo "\r\n\r\n<strong>";
 
 # Table header
-echo sprintf('%-30s', 'SERVER:PORT');
-echo sprintf('%7s', '%MEM');
-echo sprintf('%7s', '%HIT');
-echo sprintf('%7s', 'HIT/s');
-echo sprintf('%6s', 'CONN');
-echo sprintf('%8s', 'GET/s');
-echo sprintf('%8s', 'SET/s');
-echo sprintf('%8s', 'DEL/s');
-echo sprintf('%9s', 'EVI/s');
-echo sprintf('%10s', 'READ/s');
-echo sprintf('%10s', 'WRITE/s');
+echo sprintf('%-30s', 'SERVER:PORT'),
+sprintf('%7s', '%MEM'),
+sprintf('%7s', '%HIT'),
+sprintf('%8s', 'TIME'),
+sprintf('%8s', 'HIT/s'),
+sprintf('%6s', 'CONN'),
+sprintf('%8s', 'GET/s'),
+sprintf('%8s', 'SET/s'),
+sprintf('%8s', 'DEL/s'),
+sprintf('%8s', 'EVI/s'),
+sprintf('%9s', 'READ/s'),
+sprintf('%10s', 'WRITE/s');
 echo "</strong>\r\n<hr>";
 
 # Showing stats for every server
@@ -42,8 +43,10 @@ foreach($stats as $server => $data)
     {
         echo sprintf('%7.1f', $data['hit_percent']);
     }
+    # Ping
+    echo sprintf('%5.0f', Library_Analysis::valueResize($data['query_time'])) . ' ms';
     # Hit rate
-    echo sprintf('%7s', Library_Analysis::valueResize($data['hit_rate'] + $data['miss_rate']));
+    echo sprintf('%8s', Library_Analysis::valueResize($data['hit_rate'] + $data['miss_rate']));
     # Current connection
     echo sprintf('%6s', $data['curr_connections']);
     # Get rate
@@ -55,14 +58,14 @@ foreach($stats as $server => $data)
     # Eviction rate
     if($data['eviction_rate'] > $_ini->get('eviction_alert'))
     {
-        echo str_pad('', 9 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
+        echo str_pad('', 8 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
     }
     else
     {
-        echo sprintf('%9s', Library_Analysis::valueResize($data['eviction_rate']));
+        echo sprintf('%8s', Library_Analysis::valueResize($data['eviction_rate']));
     }
     # Bytes read
-    echo sprintf('%10s', Library_Analysis::byteResize($data['bytes_read'] / $data['time']) . 'b');
+    echo sprintf('%9s', Library_Analysis::byteResize($data['bytes_read'] / $data['time']) . 'b');
     # Bytes written
     echo sprintf('%10s', Library_Analysis::byteResize($data['bytes_written'] / $data['time']) . 'b');
     # End of Line

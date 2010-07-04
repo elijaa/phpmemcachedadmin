@@ -26,10 +26,7 @@ header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'Library/Command/Interface.php';
-require_once 'Library/Command/Factory.php';
-require_once 'Library/Analysis.php';
-require_once 'Library/Configuration.php';
+require_once 'Library/Loader.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -114,8 +111,9 @@ switch($request)
 
         # Default : Stats for all or specific single server
     default :
-        # Initializing stats array
+        # Initializing stats & settings array
         $stats = array();
+        $settings = array();
 
         # Ask for one server stats
         if(isset($_GET['server']))
@@ -123,6 +121,7 @@ switch($request)
             # Spliting server in hostname:port
             $server = preg_split('/:/', $_GET['server']);
             $stats = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            $settings = Library_Command_Factory::instance('stats_api')->settings($server[0], $server[1]);
         }
         # Ask for all servers stats
         else

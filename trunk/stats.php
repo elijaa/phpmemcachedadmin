@@ -26,10 +26,7 @@ header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Require
-require_once 'Library/Command/Interface.php';
-require_once 'Library/Command/Factory.php';
-require_once 'Library/Configuration.php';
-require_once 'Library/Analysis.php';
+require_once 'Library/Loader.php';
 
 # Date timezone
 date_default_timezone_set('Europe/Paris');
@@ -77,7 +74,15 @@ switch($request)
         {
             # Spliting server in hostname:port
             $server = preg_split('/:/', $server);
+
+            # Start query time calculation
+            $time = microtime(true);
+
+            # Asking server for stats
             $new_stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+
+            # Calculating query time length
+            $new_stats[$server[0] . ':' . $server[1]]['query_time'] = (microtime(true) - $time) * 1000;
         }
 
         # Analysing stats
@@ -93,6 +98,7 @@ switch($request)
                 $stats[$server] = Library_Analysis::stats($stats[$server]);
                 $stats[$server]['bytes_percent'] = number_format($new_stats[$server]['bytes'] / $new_stats[$server]['limit_maxbytes'] * 100, 1);
                 $stats[$server]['curr_connections'] = $new_stats[$server]['curr_connections'];
+                $stats[$server]['query_time'] = $new_stats[$server]['query_time'];
             }
         }
 
