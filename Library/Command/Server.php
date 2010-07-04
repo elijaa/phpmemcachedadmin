@@ -179,6 +179,25 @@ class Library_Command_Server implements Library_Command_Interface
     }
 
     /**
+     * Send stats settings command to server
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     *
+     * @return Array|Boolean
+     */
+    public function settings($server, $port)
+    {
+        # Executing command
+        if(($return = $this->exec('stats settings', $server, $port)))
+        {
+            return $this->parse($return);
+        }
+        return false;
+    }
+
+    /**
      * Send stats items command to server to retrieve slabs stats
      * Return the result if successful or false otherwise
      *

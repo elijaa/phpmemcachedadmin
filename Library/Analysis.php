@@ -141,12 +141,15 @@ class Library_Analysis
         $stats['hit_percent'] = ($stats['cmd_total'] == 0) ? '0.0':sprintf('%.1f', ($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['cmd_total'] * 100, 1);
         $stats['miss_percent'] = ($stats['cmd_total'] == 0) ? '0.0':sprintf('%.1f', ($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['cmd_total'] * 100, 1);
 
+        # Command flush_all
+        $stats['flush_rate'] = ($stats['cmd_flush'] == 0) ? '0.0':sprintf('%.1f', $stats['cmd_flush'] / $stats['uptime'], 1);
+
         # Cache size
         $stats['bytes_percent'] = ($stats['limit_maxbytes'] == 0) ? '0.0' : sprintf('%.1f', $stats['bytes'] / $stats['limit_maxbytes'] * 100, 1);
 
         # Request rate
         $stats['request_rate'] = sprintf('%.1f', ($stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr']) / $stats['uptime'], 1);
-        $stats['hit_rate'] = sprintf('%.1f', ($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['uptime'], 1);
+        $stats['hit_rate'] = sprintf('%.1f', ($stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['uptime'], 1);
         $stats['miss_rate'] = sprintf('%.1f', ($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['uptime'], 1);
 
         # Eviction & reclaimed rate

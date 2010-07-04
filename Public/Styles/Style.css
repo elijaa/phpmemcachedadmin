@@ -33,14 +33,20 @@ body {
 .full-size {
     width: 980px;
 }
-.size-1col {
+.size-1 {
     width: 805px;
 }
-.size-2cols {
-    width: 388px;
+.size-2 {
+    width: 398px;
 }
-.size-3cols {
+.size-3 {
     width: 310px;
+}
+.size-4 {
+    width: 290px;
+}
+.size-5 {
+    width: 31px;
 }
 .padding {
     padding: 3px 7px 3px 7px;
@@ -78,16 +84,20 @@ img {
 /** Line and formatting */
 .line {
 	min-height:18px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 
 .left {
 	float: left;
-	min-width: 120px;
+	min-width: 126px;
 	font-weight: bold;
 }
-
 .right {
 	float: right;
+}
+.setting {
+    min-width: 180px;
 }
 
 /** Live Stats */
@@ -104,4 +114,9 @@ pre {
 /** Color */
 .green {
 	color:#40aaba;
+}
+.alert {
+	background:#B5463F;
+	color:#FFFFFF;
+	font-weight: bold; 
 }
