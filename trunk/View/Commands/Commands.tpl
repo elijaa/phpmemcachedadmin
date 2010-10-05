@@ -1,128 +1,150 @@
-    <br/>
     <div style="float:left;">
-        <span class="title grey rounded" style="width:374px;">Get <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px">
-            <form method="post" action="commands.php">
-               <div class="row">
-                    Execute get command on one or all memcached servers<br/>
-                    <hr/>
-                </div>
-                <div class="row">
-                    <div class="left">Key</div>
-                    <div><input class="commands" name="request_key"/></div>
-                </div>
-                <div class="row">
-                    <div class="left">Server</div>
-                    <div><?php echo Library_HTML::serverList(); ?></div>
-                </div>
-                <div class="row">
-                    <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini->get('get_api'), 'request_api'); ?></div>
-                </div>
-                <div class="row" style="text-align:center;">
-                    <hr/>
-                    <input type="hidden" name="request_command" value="get"/>
-                    <input class="menu serverlist" type="submit" value="Execute Get"/>
-                </div>
-            </form>
+        <div class="sub-header corner full-size padding">Console</div>
+        <div class="container corner full-size padding">
+            <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size"></pre>
+        </div>
+        <div class="container corner full-size padding" style="text-align:right;">
+            <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
         </div>
         <br/>
-        <span class="title grey rounded" style="width:374px;">Delete <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="post" action="commands.php">
-                <div class="row">
-                    Execute delete command on one or all memcached servers<br/>
-                    <hr/>
-                </div>
-                <div class="row">
-                    <div class="left">Key</div>
-                    <div><input class="commands" name="request_key"/></div>
-                </div>
-                <div class="row">
-                    <div class="left">Server</div>
-                    <div><?php echo Library_HTML::serverList(); ?></div>
-                </div>
-                <div class="row">
-                    <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini->get('delete_api'), 'request_api'); ?></div>
-                </div>
-                <div class="row" style="text-align:center;">
-                    <hr/>
-                    <input type="hidden" name="request_command" value="delete"/>
-                    <input class="menu serverlist" type="submit" value="Execute Delete"/>
-                </div>
-            </form>
-        </div>
-        <div class="container rounded" style="width:374px;padding:7px;margin-top:46px;">
-            <div class="row">
-                For more informations about memcached commands, see memcached protocol
-                <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
-            </div>
-        </div>
-    </div>
 
-    <div style="float:left; padding-left:10px;">
-        <span class="title grey rounded" style="width:374px;">Set <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="post" action="commands.php">
-                <div class="row">
-                    Execute set command on one or all memcached servers<br/>
-                    <hr/>
-                </div>
-                <div class="row">
-                    <div class="left">Key</div>
-                    <div><input class="commands" name="request_key"/></div>
-                </div>
-                <div class="row">
-                    <div class="left">Duration</div>
-                    <div><input class="commands" name="request_duration"/></div>
-                </div>
-                <div class="row">
-                    <div class="left">Data</div>
-                    <div><textarea name="request_data" rows="4" cols="5"></textarea></div>
-                </div>
-                <div class="row">
-                    <div class="left">Server</div>
-                    <div><?php echo Library_HTML::serverList(); ?></div>
-                </div>
-                <div class="row">
-                    <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini->get('set_api'), 'request_api'); ?></div>
-                </div>
-                <div class="row" style="text-align:center;">
-                    <hr/>
-                    <input type="hidden" name="request_command" value="set"/>
-                    <input class="menu serverlist" type="submit" value="Execute Set"/>
-                </div>
-            </form>
+        <div class="sub-header corner full-size padding">Execute predefined <span class="green">Command</span></div>
+        <div class="container corner full-size padding">
+            <table>
+                <tr valign="top">
+                    <td class="size-0 padding" style="padding-right:14px;">
+                    <form action="commands.php" onsubmit="return false">
+                    <div class="line" style="text-align:center;">
+                        Execute command on one or all memcached servers<br/>
+                        <hr/>
+                    </div>
+                    <div class="line">
+                        <span class="left">Command</span>
+                        <span class="right">
+                            <select id="request_command" onchange="javascript:changeCommand(this);">
+                                <option value="">Choose a Command</option>
+                                <option value="get">Get</option>
+                                <option value="set">Set</option>
+                                <option value="delete">Delete</option>
+                                <option value="flush_all">Flush All</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div id="div_key" class="line" style="display:none;">
+                        <span class="left">Key</span>
+                        <span class="right">
+                            <input id="request_key"/>
+                        </span>
+                    </div>
+                    <div id="div_duration" class="line" style="display:none;">
+                        <span class="left">Duration</span>
+                        <span class="right">
+                            <input id="request_duration"/>
+                        </span>
+                    </div>
+                    <div id="div_data" class="line" style="display:none;">
+                        <span class="left">Data</span>
+                        <span class="right">
+                            <textarea id="request_data" rows="2" cols="2"></textarea>
+                        </span>
+                    </div>
+                    <div id="div_delay" class="line" style="display:none;">
+                        <span class="left">Delay</span>
+                        <span class="right">
+                            <input id="request_delay"/>
+                        </span>
+                    </div>
+                    <div class="line">
+                        <span class="left">Server</span>
+                        <span class="right">
+                            <?php echo Library_HTML_Components::serverSelect('request_server'); ?>
+                        </span>
+                    </div>
+                    <div class="line">
+                        <span class="left">API</span>
+                        <span class="right">
+                            <?php echo Library_HTML::apiList($_ini->get('get_api'), 'request_api'); ?>
+                        </span>
+                    </div>
+                    <div class="line" style="text-align:center;">
+                        <hr/>
+                        <input class="header" type="submit"
+                            onclick="javascript:executeCommand('container');javascript:this.blur();" value="Execute Command"/>
+                    </div>
+                    </form>
+                    </td>
+                    <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
+                        For more informations about memcached commands, see memcached protocol
+                        <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
+                    <br/>
+                    </td>
+                </tr>
+            </table>
         </div>
-
         <br/>
-        <span class="title grey rounded" style="width:374px;">Flush Server <span class="green">Command</span></span>
-        <div class="container rounded" style="width:374px;padding:7px;">
-            <form method="post" id="flushForm" action="commands.php">
-                <div class="row">
-                    Execute flush_all command on one or all memcached servers<br/>
-                    Delay in second before flushing is optional<br/>
-                    <hr/>
-                </div>
-                <div class="row">
-                    <div class="left">Delay</div>
-                    <div><input class="commands" name="request_key"/></div>
-                </div>
-                <div class="row">
-                    <div class="left">Server</div>
-                    <div><?php echo Library_HTML::serverList(); ?></div>
-                </div>
-                <div class="row">
-                    <div class="left">API</div>
-                    <div><?php echo Library_HTML::apiList($_ini->get('flush_all_api'), 'request_api'); ?></div>
-                </div>
-                <div class="row" style="text-align:center;">
-                    <hr/>
-                    <input type="hidden" name="request_command" value="flush_all"/>
-                    <input class="menu serverlist" type="submit" onclick="return flushServer(document.getElementById('flushForm'))" value="Execute Flush All"/>
-                </div>
-            </form>
+
+        <div class="sub-header corner full-size padding">Execute Telnet <span class="green">Commands</span></div>
+        <div class="container corner padding">
+            <table>
+                <tr valign="top">
+                    <td class="size-0 padding" style="padding-right:14px;">
+                    <div class="line" style="text-align:center;">
+                        Execute command on one or all memcached servers<br/>
+                        <hr/>
+                    </div>
+                    <div class="line" style="text-align:center;">
+                        <textarea name="script_data" class="size-0" rows="2" cols="2"></textarea>
+                    </div>
+                    <div class="line">
+                        <span class="left">Server</span>
+                        <span class="right">
+                            <?php echo Library_HTML_Components::serverSelect('script_server'); ?>
+                        </span>
+                    </div>
+                    <div class="line" style="text-align:center;">
+                        <hr/>
+                        <input class="header" type="submit" value="Execute Script"/>
+                    </div>
+                    </td>
+                    <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
+                    Texte
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br/>
+
+        <div class="sub-header corner full-size padding">Search <span class="green">Key</span></div>
+        <div class="container corner padding">
+            <table>
+                <tr valign="top">
+                    <td class="size-0 padding" style="padding-right:14px;">
+                    <div class="line" style="text-align:center;">
+                        Search for a key on one or all memcached servers<br/>
+                        <hr/>
+                    </div>
+                    <div class="line">
+                        <span class="left">Key</span>
+                        <span class="right">
+                            <input id="search_key" name="search_key"/>
+                        </span>
+                    </div>
+                    <div class="line">
+                        <span class="left">Server</span>
+                        <span class="right">
+                            <?php echo Library_HTML_Components::serverSelect('search_server'); ?>
+                        </span>
+                    </div>
+                    <div class="line" style="text-align:center;">
+                        <hr/>
+                        <input class="header" type="submit"
+                            onclick="javascript:searchKey('container');javascript:this.blur();" value="Search Key"/>
+                    </div>
+                    </td>
+                    <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
+                    You can use PCRE expression
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>

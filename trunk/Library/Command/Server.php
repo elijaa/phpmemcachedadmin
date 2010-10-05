@@ -35,7 +35,7 @@ class Library_Command_Server implements Library_Command_Interface
     public function __construct()
     {
         # Importing configuration
-        self::$_ini = Library_Configuration::getInstance();
+        self::$_ini = Library_Configuration_Loader::singleton();
     }
 
     /**
@@ -56,8 +56,11 @@ class Library_Command_Server implements Library_Command_Interface
         $handle = null;
 
         # Socket Opening
-        if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
+        if(!($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
         {
+            # Adding error to log
+            self::$_log = $errstr;
+
             return false;
         }
 
@@ -82,10 +85,12 @@ class Library_Command_Server implements Library_Command_Interface
         # Reading Results
         while((!feof($handle)))
         {
-            $buffer .= fgets($handle);
+            # Getting line
+            $line = fgets($handle);
+            $buffer .= $line;
 
             # Checking for end of MemCache command
-            if($this->end($buffer))
+            if($this->end($line))
             {
                 break;
             }
@@ -107,7 +112,7 @@ class Library_Command_Server implements Library_Command_Interface
     private function end($buffer)
     {
         # Checking command response end
-        if(preg_match('/(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED)\r\n$/', $buffer, $mathc))
+        if(preg_match('/(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED)\r\n$/', $buffer))
         {
             return true;
         }
@@ -359,5 +364,60 @@ class Library_Command_Server implements Library_Command_Interface
             return $result;
         }
         return self::$_log;
+    }
+
+    /**
+     * Search for item
+     * Return all the items matching parameters if successful, false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to search
+     *
+     * @return array
+     */
+    function search($server, $port, $search)
+    {
+        $slabs = array();
+        $items = false;
+
+        # Executing command : slabs stats
+        if(($result = $this->exec('stats slabs', $server, $port)))
+        {
+            # Parsing result
+            $result = $this->parse($result);
+            unset($result['active_slabs']);
+            unset($result['total_malloced']);
+            # Indexing by slabs
+            foreach($result as $key => $value)
+            {
+                $key = preg_split('/:/', $key);
+                $slabs[$key[0]] = true;
+            }
+        }
+
+        # Exploring each slabs
+        foreach($slabs as $slab => $unused)
+        {
+            # Executing command : stats cachedump
+            if(($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port)))
+            {
+                # Parsing result
+                preg_match_all('/^ITEM ((?:.*)' . $search . '(?:.*)) \[(?:.*)\]\r\n/mU', $result, $matchs, PREG_SET_ORDER);
+
+                foreach($matchs as $item)
+                {
+                    $items[] = $item[1];
+                }
+            }
+            unset($slabs[$slab]);
+        }
+
+        if(is_array($items))
+        {
+            sort($items);
+        }
+
+        return $items;
     }
 }

@@ -1,4 +1,3 @@
-    <br/>
     <div class="size-4" style="float:left;">
         <div class="sub-header corner padding">Get <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -161,6 +160,11 @@ if(isset($_GET['server']))
                 <span class="left setting">Total Connections</span>
                 <?php echo Library_Analysis::hitResize($stats['total_connections']); ?>
             </div>
+            <div class="line">
+                <span class="left setting">Max Connections Errors</span>
+                <?php echo Library_Analysis::hitResize($stats['listen_disabled_num']); ?>
+            </div>
+
             <div class="line" style="margin-top:4px;">
                 <span class="left setting">Current Items</span>
                 <?php echo Library_Analysis::hitResize($stats['curr_items']); ?>
@@ -203,10 +207,15 @@ if(isset($_GET['server']))
 { ?>
         <div class="sub-header corner padding">Server <span class="green">Settings</span></div>
         <div class="container corner padding">
+<?php
+# Not Northscale server
+if(isset($stats['accepting_conns']))
+{ ?>
             <div class="line">
                 <span class="left setting">Accepting Connections</span>
                 <?php if($stats['accepting_conns']) { echo 'Yes'; } else { echo 'No'; } ?>
             </div>
+<?php } ?>
             <div class="line">
                 <span class="left setting">Max Bytes</span>
                 <?php echo Library_Analysis::byteResize($settings['maxbytes']); ?>Bytes
@@ -271,13 +280,19 @@ if(isset($_GET['server']))
                 <span class="left setting">TCP Listen Backlog</span>
                 <?php echo $settings['tcp_backlog']; ?>
             </div>
+<?php
+# Memcached >= 1.4.4
+if(isset($settings['auth_enabled_sasl']))
+{ ?>
             <div class="line">
                 <span class="left setting">SASL Auth</span>
                 <?php echo ucfirst($settings['auth_enabled_sasl']); ?>
             </div>
+<?php } ?>
         </div>
 <?php
 }
+# Viewing all servers
 else
 { ?>
         <div class="sub-header corner padding">Servers in Cluster <span class="green">Stats</span></div>

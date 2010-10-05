@@ -137,9 +137,9 @@ class Library_Analysis
         $stats['decr_rate'] = ($stats['cmd_decr'] == 0) ? '0.0':sprintf('%.1f', $stats['cmd_decr'] / $stats['uptime'], 1);
 
         # Total hit & miss
-        $stats['cmd_total'] = $stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr'];
-        $stats['hit_percent'] = ($stats['cmd_total'] == 0) ? '0.0':sprintf('%.1f', ($stats['cmd_set'] + $stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['cmd_total'] * 100, 1);
-        $stats['miss_percent'] = ($stats['cmd_total'] == 0) ? '0.0':sprintf('%.1f', ($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['cmd_total'] * 100, 1);
+        #$stats['cmd_total'] = $stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr'];
+        $stats['hit_percent'] = ($stats['cmd_get'] == 0) ? '0.0':sprintf('%.1f', ($stats['get_hits']) / ($stats['get_hits'] + $stats['get_misses']) * 100, 1);
+        $stats['miss_percent'] = ($stats['cmd_get'] == 0) ? '0.0':sprintf('%.1f', ($stats['get_misses']) / ($stats['get_hits'] + $stats['get_misses']) * 100, 1);
 
         # Command flush_all
         $stats['flush_rate'] = ($stats['cmd_flush'] == 0) ? '0.0':sprintf('%.1f', $stats['cmd_flush'] / $stats['uptime'], 1);
@@ -149,8 +149,8 @@ class Library_Analysis
 
         # Request rate
         $stats['request_rate'] = sprintf('%.1f', ($stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr']) / $stats['uptime'], 1);
-        $stats['hit_rate'] = sprintf('%.1f', ($stats['get_hits'] + $stats['delete_hits'] + $stats['cas_hits'] + $stats['incr_hits'] + $stats['decr_hits']) / $stats['uptime'], 1);
-        $stats['miss_rate'] = sprintf('%.1f', ($stats['get_misses'] + $stats['delete_misses'] + $stats['cas_misses'] + $stats['cas_badval'] + $stats['incr_misses'] + $stats['decr_misses']) / $stats['uptime'], 1);
+        $stats['hit_rate'] = sprintf('%.1f', ($stats['get_hits']) / $stats['uptime'], 1);
+        $stats['miss_rate'] = sprintf('%.1f', ($stats['get_misses']) / $stats['uptime'], 1);
 
         # Eviction & reclaimed rate
         $stats['eviction_rate'] = ($stats['evictions'] == 0) ? '0.0':sprintf('%.1f', $stats['evictions'] / $stats['uptime'], 1);
