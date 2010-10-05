@@ -1,30 +1,30 @@
 <?php
+/*
+# Command issue
 if((isset($response)) && ($response != array()))
 { ?>
-    <br/>
-    <span class="title grey rounded" style="width:772px;">
+    <div class="sub-header corner full-size padding">
         Result of <span class="green">
         <?php echo isset($_POST['request_command']) ? ucfirst($_POST['request_command']) : ucfirst($_GET['request_command']); ?></span>
         Command with <?php echo isset($_POST['request_api']) ? $_POST['request_api'] : $_GET['request_api']; ?> API
-    </span>
-    <div class="container rounded" style="width:772px;padding:7px;">
+    </div>
+    <div class="container corner padding">
     <?php
     foreach($response as $server => $result)
     { ?>
         <strong>Server <?php echo $server; ?></strong>
-        <pre style="width:772px;"><?php echo htmlentities(trim($result)); ?></pre>
+        <pre style="font-size:12px; overflow:visible;" class="full-size"><?php echo htmlentities(trim($result)); ?></pre>
     <?php
     }
     ?>
     </div>
 <?php
-}
+}*/
 # Configuration save
 if(isset($write))
 {
     if($write = true)
     { ?>
-    <br/>
     <span class="title grey rounded" style="width:772px;text-align:center;">
         Configuration saved
     </span>

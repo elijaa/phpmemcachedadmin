@@ -42,7 +42,7 @@ if(!isset($_COOKIE['live_stats_id']))
 {
     $live_stats_id = rand();
 
-    # Cookie set failed : usin remote_addr
+    # Cookie set failed : using remote_addr
     if(!setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*365))
     {
         $live_stats_id = $_SERVER['REMOTE_ADDR'];
@@ -62,10 +62,10 @@ switch($request)
 {
     case 'live_stats':
         # Opening old stats dump
-        $old_stats = unserialize(file_get_contents($file_path));
+        $previous = unserialize(file_get_contents($file_path));
 
         # Initializing variables
-        $new_stats = array();
+        $actual = array();
         $stats = array();
         $time = 0;
 
@@ -79,31 +79,39 @@ switch($request)
             $time = microtime(true);
 
             # Asking server for stats
-            $new_stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            $actual[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
 
             # Calculating query time length
-            $new_stats[$server[0] . ':' . $server[1]]['query_time'] = (microtime(true) - $time) * 1000;
+            $actual[$server[0] . ':' . $server[1]]['query_time'] = (microtime(true) - $time) * 1000;
         }
 
         # Analysing stats
         foreach($_ini->get('server') as $server)
         {
             # Diff between old and new dump
-            $stats[$server] = Library_Analysis::diff($old_stats[$server], $new_stats[$server]);
+            $stats[$server] = Library_Analysis::diff($previous[$server], $actual[$server]);
 
             # Making stats for each server
             foreach($stats as $server => $array)
             {
-                if($stats[$server]['uptime'] == 0) { $stats[$server]['uptime'] = $_ini->get('refresh_rate'); }
-                $stats[$server] = Library_Analysis::stats($stats[$server]);
-                $stats[$server]['bytes_percent'] = number_format($new_stats[$server]['bytes'] / $new_stats[$server]['limit_maxbytes'] * 100, 1);
-                $stats[$server]['curr_connections'] = $new_stats[$server]['curr_connections'];
-                $stats[$server]['query_time'] = $new_stats[$server]['query_time'];
+                # Analysing request
+                if((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0))
+                {
+                    # Computing stats
+                    $stats[$server] = Library_Analysis::stats($stats[$server]);
+
+                    # Because we make a diff on every key, we must reasign some values
+                    $stats[$server]['bytes_percent'] = sprintf('%.1f', $actual[$server]['bytes'] / $actual[$server]['limit_maxbytes'] * 100);
+                    $stats[$server]['bytes'] = $actual[$server]['bytes'];
+                    $stats[$server]['limit_maxbytes'] = $actual[$server]['limit_maxbytes'];
+                    $stats[$server]['curr_connections'] = $actual[$server]['curr_connections'];
+                    $stats[$server]['query_time'] = $actual[$server]['query_time'];
+                }
             }
         }
 
         # Saving new stats dump
-        file_put_contents($file_path, serialize($new_stats));
+        file_put_contents($file_path, serialize($actual));
 
         # Showing stats
         include 'View/LiveStats/Stats.tpl';
@@ -129,7 +137,7 @@ switch($request)
             $stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
         }
 
-        # Saving stats dump
+        # Saving first stats dump
         file_put_contents($file_path, serialize($stats));
         break;
 }

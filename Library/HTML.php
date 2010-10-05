@@ -23,22 +23,31 @@
 class Library_HTML
 {
     /**
-     * Dump server list in HTML select
+     * Dump server list in an HTML select
      *
      * @return String
      */
-    public static function serverList()
+    public static function serverList($name, $selected = '', $class = '', $events = '')
     {
         # Loading ini file
-        $_ini = Library_Configuration::getInstance();
+        $_ini = Library_Configuration_Loader::singleton();
 
-        # Making Servers Select
-        $serverList = '<select class="commands" name="request_server"><option value="">All Servers</option>';
-        foreach($_ini->get('server') as $server)
+        # Select Name
+        $serverList = '<select name="' . $name . '" ';
+
+        # CSS Class
+        $serverList .= ($class != '') ? 'class="' . $class . '"' : '';
+
+        # Javascript Events
+        $serverList .= ' ' . $events .'><option value="">All Servers</option>';
+
+        foreach($_ini->get('servers') as $server)
         {
-            $serverList .= '<option value="' . $server . '">' . $server . '</option>';
+            # Option value and selected case
+            $serverList .= '<option value="' . $server['hostname'] . ':' . $server['port'] . '" ';
+            $serverList .= ($selected == $server['hostname'] . ':' . $server['port']) ? 'selected="selected"' : '';
+            $serverList .= '>' . $server['hostname'] . ':' . $server['port'] . '</option>';
         }
-        $serverList .= '</select>';
         return $serverList;
     }
 
@@ -52,7 +61,7 @@ class Library_HTML
      */
     public static function apiList($iniAPI = '', $id)
     {
-        return '<select class="commands" name="' . $id . '">
+        return '<select class="commands" id="' . $id . '">
         <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
         <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
         <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
