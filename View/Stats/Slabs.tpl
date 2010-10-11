@@ -1,4 +1,4 @@
-    <div class="size-4" style="float:left;">
+        <div class="size-4" style="float:left;margin-top:18px;">
         <div class="sub-header corner padding">Get <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
