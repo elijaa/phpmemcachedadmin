@@ -205,7 +205,7 @@ if(isset($stats['reclaimed']))
 # Viewing a server
 if(isset($_GET['server']))
 { ?>
-        <div class="sub-header corner padding">Server <span class="green">Settings</span></div>
+        <div class="sub-header corner padding">Server <span class="green">Configuration</span></div>
         <div class="container corner padding">
 <?php
 # Not Northscale server
@@ -252,13 +252,13 @@ if(isset($stats['accepting_conns']))
                 <span class="left setting">Domain Socket Umask</span>
                 <?php echo $settings['umask']; ?>
             </div>
+            <div class="line">
+                <span class="left setting">Chunk Size</span>
+                <?php echo $settings['chunk_size']; ?>
+            </div>
             <div class="line" style="margin-top:6px;">
                 <span class="left setting">Chunk Size Growth Factor</span>
                 <?php echo $settings['growth_factor']; ?>
-            </div>
-            <div class="line">
-                <span class="left setting">Minimum space allocated for key+value+flags</span>
-                <?php echo $settings['chunk_size']; ?>
             </div>
             <div class="line">
                 <span class="left setting">Max Threads</span>
@@ -288,7 +288,8 @@ if(isset($settings['auth_enabled_sasl']))
                 <span class="left setting">SASL Auth</span>
                 <?php echo ucfirst($settings['auth_enabled_sasl']); ?>
             </div>
-<?php } ?>
+<?php
+} ?>
         </div>
 <?php
 }
@@ -307,7 +308,7 @@ else
             </div>
          </div>
 <?php
-}?>
+} ?>
     </div>
 
     <div class="size-4" style="float:left; padding-left:9px;clear:right;">
@@ -326,9 +327,7 @@ else
 
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
-
-                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="270" height="200"/>
-
+                <img src="http://chart.apis.google.com/chart?cht=pc&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="270" height="200"/>
         </div>
         <br/>
 
@@ -352,7 +351,7 @@ else
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
          <div class="container corner padding">
             <div class="line">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=270x174&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=86&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="270" height="174"/>
+            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['hit_percent']; ?>,<?php echo $stats['miss_percent']; ?>&amp;chs=270x174&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="270" height="174"/>
             </div>
         </div>
         <br/>
