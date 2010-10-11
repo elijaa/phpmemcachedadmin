@@ -23,7 +23,7 @@
     <div class="size-2" style="float:left; padding-left:9px;">
         <form method="post" id="flushForm" action="commands.php">
         <div class="header corner padding size-3cols" style="text-align:center;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Stats</a> |
+            <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
             <input type="hidden" name="request_command" value="flush_all"/>

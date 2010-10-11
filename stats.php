@@ -55,7 +55,7 @@ else
 }
 
 # Live stats dump file
-$file_path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
+$file_path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
 
 # Display by request type
 switch($request)

@@ -54,7 +54,22 @@ class Library_Command_Server implements Library_Command_Interface
         # Variables
         $buffer = '';
         $handle = null;
+/**
+// stupid simple example to send an argument string via TCP
+// there is no error checking because this is "stupid" simple!
 
+function send_data($host, $string) {
+  $client = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+  socket_connect($client, $host, 1234);
+  socket_send($client, $string, strlen($string), 0);
+  socket_recv($client, $response, 128, 0);
+  socket_close($client);
+  return $response;
+}
+
+$response = send_data("mail_server", "add user@domain.com local\n");
+echo $response;
+*/
         # Socket Opening
         if(!($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
         {

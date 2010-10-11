@@ -1,3 +1,18 @@
+<?php
+if((isset($response)) && ($response != array()))
+{ ?>
+    <div class="sub-header corner full-size padding">Result</div>
+    <div class="container corner full-size padding">
+    <?php
+    foreach($response as $server => $result)
+    { ?>
+        <pre style="font-size:12px; overflow:visible;" class="full-size"><?php echo htmlentities(trim($result)); ?></pre>
+    <?php
+    }
+    ?>
+    </div>
+    <br/>
+<?php } ?>
     <div class="sub-header corner full-size padding">
         Items in Slab <?php echo $_GET['slab']; ?>, only showing first <?php echo $_ini->get('max_item_dump'); ?> items
         <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Back to Server Slabs</a></span>

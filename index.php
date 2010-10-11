@@ -67,9 +67,6 @@ switch($request)
         # Items are well formed
         if($items !== false)
         {
-            # Showing results
-            include 'View/Response.tpl';
-
             # Showing items
             include 'View/Stats/Items.tpl';
         }

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 # Command issue
 if((isset($response)) && ($response != array()))
 { ?>
