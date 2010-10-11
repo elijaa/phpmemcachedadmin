@@ -75,7 +75,7 @@ echo $response;
         {
             # Adding error to log
             self::$_log = $errstr;
-
+            Library_Data_Error::add($errstr);
             return false;
         }
 

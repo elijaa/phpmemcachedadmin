@@ -119,15 +119,6 @@ switch($request)
 
         # Default : No command
     default :
-        # Showing header
-        include 'View/Header.tpl';
-
-        # Showing live stats frame
-        include 'View/LiveStats/Frame.tpl';
-
-        # Showing footer
-        include 'View/Footer.tpl';
-
         # Initializing : making stats dump
         $stats = array();
         foreach($_ini->get('server') as $server)
@@ -139,5 +130,18 @@ switch($request)
 
         # Saving first stats dump
         file_put_contents($file_path, serialize($stats));
+
+        # Searching for connection error, adding some time to refresh rate to prevent error
+        $refresh_rate = max($_ini->get('refresh_rate') + Library_Data_Error::count(), $_ini->get('refresh_rate'));
+
+        # Showing header
+        include 'View/Header.tpl';
+
+        # Showing live stats frame
+        include 'View/LiveStats/Frame.tpl';
+
+        # Showing footer
+        include 'View/Footer.tpl';
+
         break;
 }

@@ -73,7 +73,7 @@ switch($request)
         # Items are not well formed
         else
         {
-            include 'View/Error.tpl';
+            include 'View/Stats/Error.tpl';
         }
         unset($items);
         break;
@@ -101,7 +101,7 @@ switch($request)
         # Slabs are not well formed
         else
         {
-            include 'View/Error.tpl';
+            include 'View/Stats/Error.tpl';
         }
         unset($slabs);
         break;
@@ -141,7 +141,7 @@ switch($request)
         # Stats are not well formed
         else
         {
-            include 'View/Error.tpl';
+            include 'View/Stats/Error.tpl';
         }
         unset($stats);
         break;
