@@ -1,4 +1,4 @@
-    <div style="float:left;">
+    <div style="float:left;margin-top:18px;">
         <div class="sub-header corner full-size padding">Console</div>
         <div class="container corner full-size padding">
             <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size"></pre>
