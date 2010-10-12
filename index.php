@@ -32,7 +32,7 @@ require_once 'Library/Loader.php';
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = Library_Configuration::getInstance();
+$_ini = Library_Configuration_Loader::singleton();
 
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
@@ -112,13 +112,19 @@ switch($request)
         $stats = array();
         $settings = array();
 
-        # Ask for one server stats
-        if(isset($_GET['server']))
+        # Ask for a particular cluster stats
+        if(isset($_GET['server']) && ($cluster = $_ini->cluster($_GET['server'])))
         {
-            # Spliting server in hostname:port
-            $server = preg_split('/:/', $_GET['server']);
-            $stats = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
-            $settings = Library_Command_Factory::instance('stats_api')->settings($server[0], $server[1]);
+            foreach($cluster as $server)
+            {
+                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']));
+            }
+        }
+        # Asking for a server stats
+        elseif(isset($_GET['server']) && ($server = $_ini->server($_GET['server'])))
+        {
+            $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $settings = Library_Command_Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
         }
         # Ask for all servers stats
         else

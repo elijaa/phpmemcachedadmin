@@ -79,7 +79,7 @@ foreach($stats as $server => $data)
     }
     else
     {
-        echo str_pad('', 20, ' ') . 'An error has occured when retreiving or calculating stats';
+        echo str_pad('', 20, ' ') . '<span class="alert">An error has occured when retreiving or calculating stats</span>';
     }
 
     # End of Line
