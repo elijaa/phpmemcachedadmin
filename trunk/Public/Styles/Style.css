@@ -101,6 +101,12 @@ img {
     font-weight: bold; 
     color: #ffffff;
 }
+.live {
+    font-family:Bitstream Vera Sans Mono,Lucida Sans Typewriter,DejaVu Sans Mono;
+    font-size:12px; 
+    overflow:visible;
+    white-space:pre-wrap;
+}
 
 /** Line and formatting */
 .line {
@@ -133,11 +139,11 @@ hr {
     border:none;
     border-bottom:solid 1px #ffffff;	
 	}
-pre {
+/*pre {
 	overflow:auto;
 	white-space:pre-wrap;
 	font-family:Bitstream Vera Sans Mono,Lucida Sans Typewriter,DejaVu Sans Mono;
-}
+}*/
 
 /** Color */
 .green {
@@ -160,7 +166,7 @@ input, select, textarea
     font-family:tahoma;
     font-size:1em;
 }
-select 
+select
 {
 	width:262px;
 }

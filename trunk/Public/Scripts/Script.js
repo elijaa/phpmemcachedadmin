@@ -6,6 +6,14 @@ function changeServer(obj) {
 	}
 }
 
+function changeCluster(obj) {
+	if (obj.options[obj.selectedIndex].value != '') {
+		window.location = 'stats.php?cluster=' + obj.options[obj.selectedIndex].value;
+	} else {
+		window.location = 'stats.php';
+	}
+}
+
 function changeCommand(obj) {
 	document.getElementById('request_key').value = '';
 	document.getElementById('request_duration').value = '';
@@ -147,7 +155,7 @@ function deleteServer(divID) {
 	document.getElementById('server_form').removeChild(
 			document.getElementById(divID));
 }
-var page = 'stats.php?request_command=live_stats'
+
 function ajax(url, target) {
 	if (window.XMLHttpRequest) {
 		req = new XMLHttpRequest();
@@ -166,7 +174,7 @@ function ajax(url, target) {
 			req.send();
 		}
 	}
-	setTimeout("ajax(page,'stats')", timeout);
+	setTimeout("ajax(page, 'stats')", timeout);
 }
 function ajaxDone(target) {
 	if (req.readyState == 4) {

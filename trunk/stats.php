@@ -32,10 +32,22 @@ require_once 'Library/Loader.php';
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = Library_Configuration::getInstance();
+$_ini = Library_Configuration_Loader::singleton();
 
 # Initializing requests
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
+if(isset($_GET['cluster']))
+{
+    $cluster = $_GET['cluster'];
+}
+# Getting default cluster
+else
+{
+    $clusters = array_keys(Library_Configuration_Loader::singleton()->get('servers'));
+    $cluster = $clusters[0];
+}
+# Refresh rate
+$refresh_rate = (isset($_GET['refresh_rate'])) ? $_GET['refresh_rate'] : null;
 
 # Cookie
 if(!isset($_COOKIE['live_stats_id']))
@@ -70,24 +82,24 @@ switch($request)
         $time = 0;
 
         # Requesting stats for each server
-        foreach($_ini->get('server') as $server)
+        foreach($_ini->cluster($cluster) as $server)
         {
-            # Spliting server in hostname:port
-            $server = preg_split('/:/', $server);
-
             # Start query time calculation
             $time = microtime(true);
 
             # Asking server for stats
-            $actual[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            $actual[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
             # Calculating query time length
-            $actual[$server[0] . ':' . $server[1]]['query_time'] = (microtime(true) - $time) * 1000;
+            $actual[$server['hostname'] . ':' . $server['port']]['query_time'] = (microtime(true) - $time) * 1000;
         }
 
         # Analysing stats
-        foreach($_ini->get('server') as $server)
+        foreach($_ini->cluster($cluster) as $server)
         {
+            # Making an alias
+            $server = $server['hostname'] . ':' . $server['port'];
+
             # Diff between old and new dump
             $stats[$server] = Library_Analysis::diff($previous[$server], $actual[$server]);
 
@@ -121,18 +133,16 @@ switch($request)
     default :
         # Initializing : making stats dump
         $stats = array();
-        foreach($_ini->get('server') as $server)
+        foreach($_ini->cluster($cluster) as $server)
         {
-            # Spliting server in hostname:port
-            $server = preg_split('/:/', $server);
-            $stats[$server[0] . ':' . $server[1]] = Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]);
+            $stats[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         }
 
         # Saving first stats dump
         file_put_contents($file_path, serialize($stats));
 
         # Searching for connection error, adding some time to refresh rate to prevent error
-        $refresh_rate = max($_ini->get('refresh_rate') + Library_Data_Error::count(), $_ini->get('refresh_rate'));
+        $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Library_Data_Error::count() * (0.5 + $_ini->get('connection_timeout'))));
 
         # Showing header
         include 'View/Header.tpl';

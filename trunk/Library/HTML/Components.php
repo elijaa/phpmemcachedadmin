@@ -41,14 +41,47 @@ class Library_HTML_Components
         # Javascript Events
         $serverList .= ' ' . $events .'><option value="">All Servers</option>';
 
-        foreach($_ini->get('servers') as $server)
+        foreach($_ini->get('servers') as $cluster => $servers)
         {
-            # Option value and selected case
-            $serverList .= '<option value="' . $server['hostname'] . ':' . $server['port'] . '" ';
-            $serverList .= ($selected == $server['hostname'] . ':' . $server['port']) ? 'selected="selected"' : '';
-            $serverList .= '>' . $server['hostname'] . ':' . $server['port'] . '</option>';
+            $serverList .= '<option value="' . $cluster . '">' . $cluster . ' cluster</option>';
+            foreach($servers as $server)
+            {
+                # Option value and selected case
+                $serverList .= '<option value="' . $server['hostname'] . ':' . $server['port'] . '" ';
+                $serverList .= ($selected == $server['hostname'] . ':' . $server['port']) ? 'selected="selected"' : '';
+                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . $server['hostname'] . ':' . $server['port'] . '</option>';
+            }
         }
         return $serverList . '</select>';
+    }
+
+    /**
+     * Dump cluster list in an HTML select
+     *
+     * @return string
+     */
+    public static function clusterSelect($name, $selected = '', $class = '', $events = '')
+    {
+        # Loading ini file
+        $_ini = Library_Configuration_Loader::singleton();
+
+        # Select Name
+        $clusterList = '<select id="' . $name . '" ';
+
+        # CSS Class
+        $clusterList .= ($class != '') ? 'class="' . $class . '"' : '';
+
+        # Javascript Events
+        $clusterList .= ' ' . $events .'>';
+
+        foreach($_ini->get('servers') as $cluster => $servers)
+        {
+            # Option value and selected case
+            $clusterList .= '<option value="' . $cluster . '" ';
+            $clusterList .= ($selected == $cluster) ? 'selected="selected"' : '';
+            $clusterList .= '>' . $cluster . ' cluster</option>';
+        }
+        return $clusterList . '</select>';
     }
 
     /**
