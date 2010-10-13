@@ -43,10 +43,14 @@ class Library_HTML_Components
 
         foreach($_ini->get('servers') as $cluster => $servers)
         {
-            $serverList .= '<option value="' . $cluster . '">' . $cluster . ' cluster</option>';
+            # Cluster
+            $serverList .= '<option value="' . $cluster . '" ';
+            $serverList .= ($selected == $cluster) ? 'selected="selected"' : '';
+            $serverList .= '>' . $cluster . ' cluster</option>';
+
+            # Cluster server
             foreach($servers as $server)
             {
-                # Option value and selected case
                 $serverList .= '<option value="' . $server['hostname'] . ':' . $server['port'] . '" ';
                 $serverList .= ($selected == $server['hostname'] . ':' . $server['port']) ? 'selected="selected"' : '';
                 $serverList .= '>&nbsp;&nbsp;-&nbsp;' . $server['hostname'] . ':' . $server['port'] . '</option>';

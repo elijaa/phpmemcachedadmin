@@ -347,19 +347,26 @@ if(isset($settings['auth_enabled_sasl']))
 # Viewing all servers
 else
 { ?>
-        <div class="sub-header corner padding">Servers in Cluster <span class="green">List</span></div>
+        <div class="sub-header corner padding">Servers <span class="green">List</span></div>
         <div class="container corner padding">
 <?php
-foreach(Library_Configuration_Loader::singleton()->get('servers') as $server)
-{ ?>
+    foreach(Library_Configuration_Loader::singleton()->get('servers') as $cluster => $servers)
+    { ?>
             <div class="line">
+                <span class="left setting">Cluster </span>
+                <?php echo $cluster; ?>
+            </div>
+<?php
+        foreach($servers as $server)
+        { ?>
+            <div class="line" style="margin-left:10px;">
                 <span class="left setting">Hostname:port</span>
                 <?php echo $server['hostname'] . ':' . $server['port']; ?>
             </div>
 <?php
-} ?>
+        }
+    } ?>
          </div>
-
 <?php
 } ?>
     </div>

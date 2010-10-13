@@ -111,6 +111,8 @@ switch($request)
         # Initializing stats & settings array
         $stats = array();
         $settings = array();
+        $cluster = null;
+        $server = null;
 
         # Ask for a particular cluster stats
         if(isset($_GET['server']) && ($cluster = $_ini->cluster($_GET['server'])))
@@ -129,16 +131,19 @@ switch($request)
         # Ask for all servers stats
         else
         {
-            foreach($_ini->get('server') as $server)
+            # Looking into each cluster
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Spliting server in hostname:port
-                $server = preg_split('/:/', $server);
-                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server[0], $server[1]));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']));
+                }
             }
         }
 
         # Stats are well formed
-        if($stats !== false)
+        if(($stats !== false) && ($stats != array()))
         {
             # Analysis
             $stats = Library_Analysis::stats($stats);

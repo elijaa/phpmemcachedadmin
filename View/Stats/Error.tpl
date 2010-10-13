@@ -1,9 +1,19 @@
 <?php
 # Server seems down
-if((isset($stats)) && ($stats === false))
+if((isset($stats)) && (($stats === false) || ($stats == array())))
 { ?>
     <div class="header corner full-size padding" style="margin-top:18px;font-size:22px;text-align:center;">
-        Error : Server did not respond !
+        <?php
+        # Asking server of cluster stats
+        if(isset($_GET['server']))
+        {
+            echo (is_array($cluster)) ? 'All servers from Cluster ' . $_GET['server'] : 'Server '  . $_GET['server'], ' did not respond !';
+        }
+        # All servers stats
+        else
+        {
+            echo 'No servers responded !';
+        } ?>
     </div>
     <div class="container corner full-size padding">
         <span class="left">Error message</span>
