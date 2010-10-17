@@ -17,7 +17,7 @@
  *
  * Live Stats top style
  *
- * @author c.mahieux@of2m.fr
+ * @author Cyrille Mahieux : elijaa(at)free.fr
  * @since 12/04/2010
  */
 
@@ -36,29 +36,28 @@ $_ini = Library_Configuration_Loader::singleton();
 
 # Initializing requests
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
+
+# Stat of a particular cluster
 if(isset($_GET['cluster']))
 {
     $cluster = $_GET['cluster'];
 }
-# Getting default cluster
+# Else getting default cluster
 else
 {
     $clusters = array_keys(Library_Configuration_Loader::singleton()->get('servers'));
     $cluster = $clusters[0];
 }
-# Refresh rate
-$refresh_rate = (isset($_GET['refresh_rate'])) ? $_GET['refresh_rate'] : null;
 
-# Cookie
+# Refresh rate (Ajax)
+# $refresh_rate = (isset($_GET['refresh_rate'])) ? $_GET['refresh_rate'] : null;
+
+# Cookie @FIXME not a perfect method
 if(!isset($_COOKIE['live_stats_id']))
 {
     $live_stats_id = rand();
-
-    # Cookie set failed : using remote_addr
-    if(!setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*365))
-    {
-        $live_stats_id = $_SERVER['REMOTE_ADDR'];
-    }
+    # Cookie
+    setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*365);
 }
 else
 {
@@ -72,6 +71,7 @@ $file_path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . 'live_s
 # Display by request type
 switch($request)
 {
+    # Ajax ask : stats
     case 'live_stats':
         # Opening old stats dump
         $previous = unserialize(file_get_contents($file_path));
@@ -102,23 +102,23 @@ switch($request)
 
             # Diff between old and new dump
             $stats[$server] = Library_Analysis::diff($previous[$server], $actual[$server]);
+        }
 
-            # Making stats for each server
-            foreach($stats as $server => $array)
+        # Making stats for each server
+        foreach($stats as $server => $array)
+        {
+            # Analysing request
+            if((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0))
             {
-                # Analysing request
-                if((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0))
-                {
-                    # Computing stats
-                    $stats[$server] = Library_Analysis::stats($stats[$server]);
+                # Computing stats
+                $stats[$server] = Library_Analysis::stats($stats[$server]);
 
-                    # Because we make a diff on every key, we must reasign some values
-                    $stats[$server]['bytes_percent'] = sprintf('%.1f', $actual[$server]['bytes'] / $actual[$server]['limit_maxbytes'] * 100);
-                    $stats[$server]['bytes'] = $actual[$server]['bytes'];
-                    $stats[$server]['limit_maxbytes'] = $actual[$server]['limit_maxbytes'];
-                    $stats[$server]['curr_connections'] = $actual[$server]['curr_connections'];
-                    $stats[$server]['query_time'] = $actual[$server]['query_time'];
-                }
+                # Because we make a diff on every key, we must reasign some values
+                $stats[$server]['bytes_percent'] = sprintf('%.1f', $actual[$server]['bytes'] / $actual[$server]['limit_maxbytes'] * 100);
+                $stats[$server]['bytes'] = $actual[$server]['bytes'];
+                $stats[$server]['limit_maxbytes'] = $actual[$server]['limit_maxbytes'];
+                $stats[$server]['curr_connections'] = $actual[$server]['curr_connections'];
+                $stats[$server]['query_time'] = $actual[$server]['query_time'];
             }
         }
 

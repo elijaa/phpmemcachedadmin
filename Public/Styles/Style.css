@@ -33,7 +33,7 @@ a.tooltip:hover span {
 body {
     color: #000000;
     background: #FFFFFF; 
-    font-family : Tahoma, Segoe UI, Arial;
+    font-family : Verdana, Tahoma, Segoe UI, Arial;
     font-size: 0.8em;
     margin-top: 10px;
 }
@@ -162,13 +162,13 @@ input, select, textarea
     -webkit-border-radius: 2px; 
     border-radius: 2px;
     border:solid 1px #AAAAAA;
-    width:260px;
+    width:250px;
     font-family:tahoma;
     font-size:1em;
 }
 select
 {
-	width:262px;
+	width:252px;
 }
 input:focus, textarea:focus
 {
