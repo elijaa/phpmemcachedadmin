@@ -1,7 +1,7 @@
 <script type="text/javascript">
-var timeout = <?php echo $refresh_rate * 1000; ?>;
-var page = 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>';
-setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
+    var timeout = <?php echo $refresh_rate * 1000; ?>;
+    var page = 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>';
+    setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
 </script>
 
 <div style="float:left;margin-top:18px;">
@@ -11,9 +11,8 @@ setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('ref
     if($refresh_rate > $_ini->get('refresh_rate'))
     { ?>
         <div class="container corner" style="padding:9px;">
-        Connections errors were discovered, to prevent any problem, refresh rate was increased by
-        <?php echo sprintf('%.1f', $refresh_rate - $_ini->get('refresh_rate')); ?> seconds,
-        refresh this page to reinitiate the refresh rate
+            Connections errors were discovered, to prevent any problem, refresh rate was increased by
+            <?php echo sprintf('%.1f', $refresh_rate - $_ini->get('refresh_rate')); ?> seconds.
         </div>
     <?php
     } ?>

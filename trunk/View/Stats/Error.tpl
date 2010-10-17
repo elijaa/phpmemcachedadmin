@@ -12,7 +12,7 @@ if((isset($stats)) && (($stats === false) || ($stats == array())))
         # All servers stats
         else
         {
-            echo 'No servers responded !';
+            echo 'Servers did not respond !';
         } ?>
     </div>
     <div class="container corner full-size padding">
