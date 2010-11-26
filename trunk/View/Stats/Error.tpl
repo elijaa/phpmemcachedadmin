@@ -2,7 +2,7 @@
 # Server seems down
 if((isset($stats)) && (($stats === false) || ($stats == array())))
 { ?>
-    <div class="header corner full-size padding" style="margin-top:18px;font-size:22px;text-align:center;">
+    <div class="header corner full-size padding" style="margin-top:18px;text-align:center;">
         <?php
         # Asking server of cluster stats
         if(isset($_GET['server']))

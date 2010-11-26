@@ -42,72 +42,105 @@ switch($request)
 {
     # Memcache::get command
     case 'get':
-        # Ask for get on one server
-        if($_GET['request_server'] != '')
+        # Ask for get on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
-            if(($server = $_ini->server($_GET['request_server'])) != false)
+            foreach($cluster as $server)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->get($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['request_api'])->get($server['hostname'], $server['port'], $_GET['request_key']));
             }
+        }
+        # Ask for get on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server get command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->get($server['hostname'], $server['port'], $_GET['request_key']));
         }
         # Ask for get on all servers
         else
         {
-            foreach($_ini->get('servers') as $server)
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->get($server['hostname'], $server['port'], $_GET['request_key']));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server get command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->get($server['hostname'], $server['port'], $_GET['request_key']));
+                }
             }
         }
         break;
 
         # Memcache::set command
     case 'set':
-        # Ask for set on one server
-        if($_GET['request_server'] != '')
+        # Ask for set on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
-            if(($server = $_ini->server($_GET['request_server'])) != false)
+            foreach($cluster as $server)
             {
-                # Dumping server set command response
+                # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']));
+                Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key']));
             }
+        }
+        # Ask for set on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server set command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']));
         }
         # Ask for set on all servers
         else
         {
-            foreach($_ini->get('servers') as $server)
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Dumping server set command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server set command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']));
+                }
             }
         }
         break;
 
         # Memcache::delete command
     case 'delete':
-        # Ask for delete on one server
-        if($_GET['request_server'] != '')
+        # Ask for delete on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
-            if(($server = $_ini->server($_GET['request_server'])) != false)
+            foreach($cluster as $server)
             {
-                # Dumping server delete command response
+                # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->delete($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['request_api'])->delete($server['hostname'], $server['port'], $_GET['request_key']));
             }
+        }
+        # Ask for delete on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server delete command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->delete($server['hostname'], $server['port'], $_GET['request_key']));
         }
         # Ask for delete on all servers
         else
         {
-            foreach($_ini->get('servers') as $server)
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Dumping server delete command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->delete($server['hostname'], $server['port'], $_GET['request_key']));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server delete command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->delete($server['hostname'], $server['port'], $_GET['request_key']));
+                }
             }
         }
         break;
@@ -120,48 +153,71 @@ switch($request)
             $_GET['request_delay'] = 0;
         }
 
-        # Ask for flush_all on one server
-        if($_GET['request_server'] != '')
+        # Ask for flush_all on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
-            if(($server = $_ini->server($_GET['request_server'])) != false)
+            foreach($cluster as $server)
             {
-                # Dumping server flush_all command response
+                # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_delay']));
+                Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_key']));
             }
+        }
+        # Ask for flush_all on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server flush_all command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_delay']));
         }
         # Ask for flush_all on all servers
         else
         {
-            foreach($_ini->get('servers') as $server)
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Dumping server flush_all command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_delay']));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server flush_all command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_delay']));
+                }
             }
         }
         break;
 
         # Memcache::search command
     case 'search':
-        # Ask for search on one server
-        if($_GET['request_server'] != '')
+        # Ask for flush_all on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
-            if(($server = $_ini->server($_GET['request_server'])) != false)
+            foreach($cluster as $server)
             {
-                # Dumping server search command response
+                # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['request_api'])->search($server['hostname'], $server['port'], $_GET['request_key']));
             }
+        }
+        # Ask for search on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server search command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
         }
         # Ask for search on all servers
         else
         {
-            foreach($_ini->get('servers') as $server)
+            # Looking into each cluster
+            foreach($_ini->get('servers') as $cluster => $servers)
             {
-                # Dumping server search command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                     Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server search command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+                }
             }
         }
         break;
