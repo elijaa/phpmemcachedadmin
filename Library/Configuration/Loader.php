@@ -107,7 +107,7 @@ class Library_Configuration_Loader
         return false;
     }
 
-     /**
+    /**
      * Check and return server data
      * Return the value, or false if does not exists
      *
@@ -138,6 +138,16 @@ class Library_Configuration_Loader
     public function set($key, $value)
     {
         self::$_ini[$key] = $value;
+    }
+
+    /**
+     * Return actual ini file path
+     *
+     * @return String
+     */
+    public static function path()
+    {
+        return self::$_iniPath;
     }
 
     /**

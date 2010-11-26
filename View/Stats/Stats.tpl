@@ -285,7 +285,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 </span>
             </div>
             <div class="line">
-                <span class="left setting">Chunk Size Growth Factor</span>
+                <span class="left setting">Chunk Growth Factor</span>
                 <?php echo $settings['growth_factor']; ?>
                 <span class="right">
                     <a href="#" class="tooltip green">[?]<span>Domain Socket Umask :<br/>umask for the creation of the domain socket</span></a>

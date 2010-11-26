@@ -32,7 +32,7 @@ require_once 'Library/Loader.php';
 date_default_timezone_set('Europe/Paris');
 
 # Loading ini file
-$_ini = Library_Configuration::getInstance();
+$_ini = Library_Configuration_Loader::singleton();
 
 # Initializing requests
 $request = (isset($_GET['request_write'])) ? $_GET['request_write'] : null;
@@ -44,6 +44,13 @@ include 'View/Header.tpl';
 # Display by request rype
 switch($request)
 {
+    # Unlock configuration file & temp directory
+    case 'unlock':
+        # chmod 0755
+        chmod(Library_Configuration_Loader::path(), 0755);
+        chmod($_ini->get('file_path'), 0755);
+        break;
+
         # Live stats configuration save
     case 'live_stats':
         # Updating configuration
@@ -95,8 +102,6 @@ switch($request)
     default :
         break;
 }
-# Showing results
-include 'View/Response.tpl';
 
 # Showing formulary
 include 'View/Configure/Configure.tpl';

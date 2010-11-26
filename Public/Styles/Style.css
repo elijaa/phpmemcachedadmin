@@ -6,7 +6,7 @@ a:hover{color:#AA0000;}
 div.title{display:block;width:772px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 span.title{display:block;width:241px;padding:3px 7px 3px 7px;background:#514845;font-weight:bold;}
 /** .container{width:254px;background:#DBDBDB;margin-top:1px;padding-bottom:3px;} */
-.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}
+/**.serverlist{background:#B5463F;margin-top:1px;font-weight:bold;}*/
 
 div.row{padding:3px 0px 2px 7px;min-height:18px;}
 div.left{width:100px;float:left;font-weight:bold;padding-top:2px;}
@@ -17,6 +17,7 @@ div.full{width:140px;float:left;padding-top:2px;}
 .green{color:#2A707B;}
 .grey{color:#EEEEEE;}
 
+/**
 a.tooltip span {
 	display:none; padding:2px 3px; margin-left:8px; width:300px;
 	}
@@ -28,7 +29,7 @@ a.tooltip:hover span {
     display:inline; 
     position:absolute;
     }
-    
+*/
 
 body {
     color: #000000;
@@ -41,9 +42,9 @@ body {
 .full-size {
     width: 980px;
 }
-/*.size-0 {
-    width: 460px;
-}*/
+.size-0 {
+    width: 494px;
+}
 .size-1 {
     width: 696px;
 }
@@ -127,6 +128,10 @@ img {
 .setting {
     min-width: 180px;
 }
+/* For slabs */
+.slabs {
+    min-width: 106px;
+}
 
 /** Live Stats */
 hr {
@@ -139,21 +144,17 @@ hr {
     border:none;
     border-bottom:solid 1px #ffffff;	
 	}
-/*pre {
-	overflow:auto;
-	white-space:pre-wrap;
-	font-family:Bitstream Vera Sans Mono,Lucida Sans Typewriter,DejaVu Sans Mono;
-}*/
 
 /** Color */
 .green {
 	color:#40aaba;
 }
+/**
 .alert {
 	background:#b5463f;
 	color:#ffffff;
-/*	font-weight: bold; */
-}
+//	font-weight: bold; 
+}*/
 
 /** Inputs, Selects */
 input, select, textarea
@@ -162,13 +163,18 @@ input, select, textarea
     -webkit-border-radius: 2px; 
     border-radius: 2px;
     border:solid 1px #AAAAAA;
-    width:250px;
+    width:298px;
     font-family:tahoma;
     font-size:1em;
 }
+textarea
+{
+	width: 368px;
+	resize: none;
+}
 select
 {
-	width:252px;
+	width:300px;
 }
 input:focus, textarea:focus
 {
