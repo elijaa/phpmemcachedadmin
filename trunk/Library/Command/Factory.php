@@ -40,7 +40,7 @@ class Library_Command_Factory
     public static function instance($command)
     {
         # Importing configuration
-        $_ini = Library_Configuration::getInstance();
+        $_ini = Library_Configuration_Loader::singleton();
 
         # Instance does not exists
         if(!isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server'))

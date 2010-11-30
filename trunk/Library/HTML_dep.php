@@ -55,13 +55,13 @@ class Library_HTML
      * Dump api list un HTML select with select name
      *
      * @param String $iniAPI API Name from ini file
-     * @param String $id Select ID
+     * @param String $id Select Name
      *
      * @return String
      */
     public static function apiList($iniAPI = '', $id)
     {
-        return '<select class="commands" id="' . $id . '">
+        return '<select class="commands" name="' . $id . '">
         <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
         <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
         <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>

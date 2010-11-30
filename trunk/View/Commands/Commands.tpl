@@ -4,6 +4,9 @@
             <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size"></pre>
         </div>
         <div class="container corner full-size padding" style="text-align:right;">
+            <span style="float:left;">
+                <input class="header" type="submit" id="loading" value="Waiting for server response ..."/>
+            </span>
             <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
         </div>
         <br/>
@@ -93,17 +96,18 @@
                         <hr/>
                     </div>
                     <div class="line" style="text-align:center;">
-                        <textarea name="script_data" class="size-0" rows="2" cols="2"></textarea>
+                        <textarea id="request_telnet" rows="2" cols="2"></textarea>
                     </div>
                     <div class="line">
                         <span class="left">Server</span>
                         <span class="right">
-                            <?php echo Library_HTML_Components::serverSelect('script_server'); ?>
+                            <?php echo Library_HTML_Components::serverSelect('request_telnet_server'); ?>
                         </span>
                     </div>
                     <div class="line" style="text-align:center;">
                         <hr/>
-                        <input class="header" type="submit" value="Execute Script"/>
+                        <input class="header" type="submit"
+                            onclick="javascript:executeTelnet('container');javascript:this.blur();" value="Execute Telnet Command"/>
                     </div>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
