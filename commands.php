@@ -195,7 +195,7 @@ switch($request)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                Library_Command_Factory::api($_GET['request_api'])->search($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['Server'])->search($server['hostname'], $server['port'], $_GET['request_key']));
             }
         }
         # Ask for search on one server
@@ -222,6 +222,41 @@ switch($request)
         }
         break;
 
+        # Memcache::telnet command
+    case 'telnet':
+        # Ask for a telnet command on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
+        {
+            foreach($cluster as $server)
+            {
+                # Dumping server telnet command response
+                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_GET['request_telnet']));
+            }
+        }
+        # Ask for a telnet command on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server telnet command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_GET['request_telnet']));
+        }
+        # Ask for a telnet command on all servers
+        else
+        {
+            # Looking into each cluster
+            foreach($_ini->get('servers') as $cluster => $servers)
+            {
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server telnet command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_GET['request_telnet']));
+                }
+            }
+        }
+        break;
         # Default : No command
     default :
         # Showing header

@@ -70,10 +70,6 @@ function executeCommand(target) {
 	}
 }
 
-function executeScript() {
-
-}
-
 function searchKey(target) {
 	if(document.getElementById('search_key').value != '')
 	{
@@ -83,6 +79,17 @@ function searchKey(target) {
 		
 		execute(request_url, target, true);
 	}
+}
+
+function executeTelnet(target) {
+    if(document.getElementById('request_telnet').value != '')
+    {
+        var request_url = 'commands.php?request_command=telnet' +
+        '&request_telnet=' + document.getElementById('request_telnet').value +
+        '&request_server=' + document.getElementById('request_telnet_server').value;
+        
+        execute(request_url, target, true);
+    }
 }
 
 function execute(url, target, append) {
@@ -106,7 +113,11 @@ function execute(url, target, append) {
 }
 
 function onExecute(target, append) {
-	if (req.readyState == 4) {
+    if (req.readyState == 1) {
+            document.getElementById('loading').style.visibility = "visible";
+    }
+    else if (req.readyState == 4) {
+        document.getElementById('loading').style.visibility = "hidden";
 		if (req.status == 200 || req.status == 304) {
 			if(append == true)
 			{
@@ -122,6 +133,9 @@ function onExecute(target, append) {
 			}
 		}
 	}
+    else {
+        document.getElementById('loading').style.visibility = "hidden";
+    }
 }
 
 function serverOnFocus(obj) {

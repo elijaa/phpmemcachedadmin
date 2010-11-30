@@ -42,31 +42,31 @@ if((!is_writeable(Library_Configuration_Loader::path())) || (!is_writeable($_ini
             </div>
             <div class="line">
                 <span class="left">Stats</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('stats_api'), 'stats_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('stats_api'), 'stats_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Slabs</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('slabs_api'), 'slabs_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('slabs_api'), 'slabs_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Items</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('items_api'), 'items_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('items_api'), 'items_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Get</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('get_api'), 'get_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('get_api'), 'get_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Set</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('set_api'), 'set_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('set_api'), 'set_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Delete</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('delete_api'), 'delete_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('delete_api'), 'delete_api'); ?></span>
             </div>
             <div class="line">
                 <span class="left">Flush All</span>
-                <span class="right"><?php echo Library_HTML::apiList($_ini->get('flush_all_api'), 'flush_all_api'); ?></span>
+                <span class="right"><?php echo Library_HTML_Components::apiList($_ini->get('flush_all_api'), 'flush_all_api'); ?></span>
             </div>
             <div class="line" style="text-align:center;">
                 <hr/>

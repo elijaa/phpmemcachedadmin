@@ -61,7 +61,7 @@ switch($request)
         $_ini->set('file_path', $_POST['file_path']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = Library_Configuration_Loader::singleton()->write();
         break;
 
     # Commands configuration save
@@ -76,7 +76,7 @@ switch($request)
         $_ini->set('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = Library_Configuration_Loader::singleton()->write();
         break;
 
         # Server configuration save
@@ -85,7 +85,7 @@ switch($request)
         $_ini->set('server', $_POST['server']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = Library_Configuration_Loader::singleton()->write();
         break;
 
         # Miscellaneous configuration save
@@ -95,7 +95,7 @@ switch($request)
         $_ini->set('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
-        $write = Library_Configuration::write();
+        $write = Library_Configuration_Loader::singleton()->write();
         break;
 
         # Default : No command

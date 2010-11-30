@@ -54,28 +54,13 @@ class Library_Command_Server implements Library_Command_Interface
         # Variables
         $buffer = '';
         $handle = null;
-/**
-// stupid simple example to send an argument string via TCP
-// there is no error checking because this is "stupid" simple!
 
-function send_data($host, $string) {
-  $client = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-  socket_connect($client, $host, 1234);
-  socket_send($client, $string, strlen($string), 0);
-  socket_recv($client, $response, 128, 0);
-  socket_close($client);
-  return $response;
-}
-
-$response = send_data("mail_server", "add user@domain.com local\n");
-echo $response;
-*/
         # Socket Opening
         if(!($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
         {
             # Adding error to log
-            self::$_log = $errstr;
-            Library_Data_Error::add($errstr);
+            self::$_log = utf8_encode($errstr);
+            Library_Data_Error::add(utf8_encode($errstr));
             return false;
         }
 
@@ -373,7 +358,7 @@ echo $response;
      */
     function flush_all($server, $port, $delay)
     {
-        # Executing command : delete
+        # Executing command : flush_all
         if(($result = $this->exec('flush_all ' . $delay, $server, $port)))
         {
             return $result;
@@ -434,5 +419,25 @@ echo $response;
         }
 
         return $items;
+    }
+
+    /**
+     * Execute a telnet command on a server
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $command Command to execute
+     *
+     * @return String
+     */
+    function telnet($server, $port, $command)
+    {
+        # Executing command
+        if(($result = $this->exec($command, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
     }
 }

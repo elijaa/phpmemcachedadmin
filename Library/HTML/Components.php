@@ -99,7 +99,7 @@ class Library_HTML_Components
      */
     public static function serverResponse($hostname, $port, $data)
     {
-        $header = '<span class="alert">Server ' . $hostname . ':' . $port . "</span>\r\n";
+        $header = '<span class="red">Server ' . $hostname . ':' . $port . "</span>\r\n";
         $return = '';
         if(is_array($data))
         {
@@ -122,7 +122,7 @@ class Library_HTML_Components
      */
     public static function apiList($iniAPI = '', $id)
     {
-        return '<select class="commands" id="' . $id . '">
+        return '<select name="' . $id . '">
         <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
         <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
         <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>

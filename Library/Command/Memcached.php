@@ -35,7 +35,7 @@ class Library_Command_Memcached implements Library_Command_Interface
     public function __construct()
     {
         # Importing configuration
-        self::$_ini = Library_Configuration::getInstance();
+        self::$_ini = Library_Configuration_Loader::singleton();
 
         # Initializing
         self::$_memcache = new Memcached();
