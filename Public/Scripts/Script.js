@@ -138,38 +138,66 @@ function onExecute(target, append) {
     }
 }
 
-function serverOnFocus(obj) {
-	if (obj.value == 'hostname:port') {
-		obj.value = '';
-	}
-}
-function serverOnBlur(obj) {
-	if (obj.value == '') {
-		obj.value = 'hostname:port';
-	}
-}
 function flushServer(obj) {
 	if (confirm('Are you sure you want to execute flush_all on server') == true) {
 		obj.submit();
 	}
 	return false;
 }
-var server = 0;
-function addServer() {
-	var serverDiv = document.createElement('div');
-	var serverID = server++;
-	serverDiv.innerHTML = '<div class="row"><div class="left">Server</div>'
-			+ '<div><input type="text" name="server[]" value="hostname:port" onfocus="serverOnFocus(this)" onblur="serverOnBlur(this)">'
-			+ ' <a class="menu grey serverlist" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServer(\'server_'
-			+ serverID + '\')">Delete</a></div>';
-	serverDiv.setAttribute('id', 'server_' + serverID);
-	document.getElementById('server_form').appendChild(serverDiv);
-}
-function deleteServer(divID) {
-	document.getElementById('server_form').removeChild(
-			document.getElementById(divID));
+var server_id = 1;
+var cluster_id = 1;
+
+function addCluster() {
+    var clusterDiv = document.createElement('div');
+    cluster_id++;
+    
+    clusterDiv.innerHTML = '<hr/><strong>Cluster ' +
+        '<input type="text" style="width:200px;" name="cluster[' + cluster_id + ']" value=""/></strong>' +
+        '<div style="margin-left:40px;margin-top:6px;" id="cluster_' + cluster_id + '_commands"><a class="list button" href="javascript:addServer(' + cluster_id + ')">' +
+        'Add New Server to Cluster</a> <a class="list" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" ' +
+        'href="#" onclick="deleteServerOrCluster(\'cluster_' + cluster_id + '\')">Delete Cluster</a></div><br/>';
+    clusterDiv.setAttribute('id', 'cluster_' + cluster_id);
+    document.getElementById('server_form').appendChild(clusterDiv);
 }
 
+function addServer(current_cluster_id) {
+	var serverDiv = document.createElement('div');
+	server_id++;
+	
+	serverDiv.innerHTML = '<div id="server_' + server_id + '"><div style="margin-left:40px;margin-top:3px;">' +
+        '<input type="text" style="width:200px;" name="server[' + current_cluster_id + '][' + server_id + '][hostname]" value="hostname" onfocus="hostnameOnFocus(this)" onblur="hostnameOnBlur(this)"/> ' +
+        '<input type="text" style="width:50px;" name="server[' + current_cluster_id + '][' + server_id + '][port]" value="port" onfocus="portOnFocus(this)" onblur="portOnBlur(this)"/> ' +
+        '<a class="list button" style="padding:1px 2px;" href="#" onclick="deleteServerOrCluster(\'server_' + server_id + '\')">Delete</a>' +
+        '</div></div>';
+	serverDiv.setAttribute('id', 'server_' + server_id);
+	document.getElementById('cluster_' + current_cluster_id).insertBefore(serverDiv, document.getElementById('cluster_' + current_cluster_id + '_commands'));
+}
+
+function deleteServerOrCluster(divID) {
+    var div = document.getElementById(divID);
+    div.parentNode.removeChild(div);
+}
+
+function hostnameOnFocus(obj) {
+    if (obj.value == 'hostname') {
+        obj.value = '';
+    }
+}
+function hostnameOnBlur(obj) {
+    if (obj.value == '') {
+        obj.value = 'hostname';
+    }
+}
+function portOnFocus(obj) {
+    if (obj.value == 'port') {
+        obj.value = '';
+    }
+}
+function portOnBlur(obj) {
+    if (obj.value == '') {
+        obj.value = 'port';
+    }
+}
 function ajax(url, target) {
 	if (window.XMLHttpRequest) {
 		req = new XMLHttpRequest();

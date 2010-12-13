@@ -38,9 +38,6 @@ $_ini = Library_Configuration_Loader::singleton();
 $request = (isset($_GET['request_write'])) ? $_GET['request_write'] : null;
 $write = null;
 
-# Showing header
-include 'View/Header.tpl';
-
 # Display by request rype
 switch($request)
 {
@@ -82,7 +79,18 @@ switch($request)
         # Server configuration save
     case 'servers':
         # Updating configuration
-        $_ini->set('server', $_POST['server']);
+        $array = array();
+        foreach($_POST['server'] as $cluster => $servers)
+        {
+            foreach($servers as $data)
+            {
+                $array[$_POST['cluster'][$cluster]][$data['hostname'] . ':' . $data['port']] = $data;
+            }
+        }
+
+var_dump($_POST);
+var_dump($array);
+        $_ini->set('servers', $array);
 
         # Writing configuration file
         $write = Library_Configuration_Loader::singleton()->write();
@@ -102,6 +110,9 @@ switch($request)
     default :
         break;
 }
+
+# Showing header
+include 'View/Header.tpl';
 
 # Showing formulary
 include 'View/Configure/Configure.tpl';

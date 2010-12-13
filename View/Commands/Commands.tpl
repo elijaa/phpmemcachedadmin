@@ -66,7 +66,7 @@
                     <div class="line">
                         <span class="left">API</span>
                         <span class="right">
-                            <?php echo Library_HTML::apiList($_ini->get('get_api'), 'request_api'); ?>
+                            <?php echo Library_HTML_Components::apiList($_ini->get('get_api'), 'request_api'); ?>
                         </span>
                     </div>
                     <div class="line" style="text-align:center;">
