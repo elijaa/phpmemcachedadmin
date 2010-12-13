@@ -37,6 +37,9 @@ $_ini = Library_Configuration_Loader::singleton();
 # Initializing requests & response
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
 
+# Starting
+ob_start();
+
 # Display by request rype
 switch($request)
 {
@@ -269,3 +272,5 @@ switch($request)
         include 'View/Footer.tpl';
         break;
 }
+
+ob_end_flush();

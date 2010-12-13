@@ -45,7 +45,7 @@ class Library_Analysis
         # Merging Stats
         foreach($stats as $key => $value)
         {
-            if(isset($array[$key]) && ($key != 'version'))
+            if(isset($array[$key]) && ($key != 'version') && ($key != 'uptime'))
             {
                 $array[$key] += $value;
             }

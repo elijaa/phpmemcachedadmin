@@ -26,7 +26,7 @@ foreach($stats as $server => $data)
         # Memory Occupation / Alert State
         if($data['bytes_percent'] > $_ini->get('memory_alert'))
         {
-            echo str_pad('', 7 - strlen($data['bytes_percent']), ' ') . '<span class="alert">' . sprintf('%.1f', $data['bytes_percent']) . '</span>';
+            echo str_pad('', 7 - strlen($data['bytes_percent']), ' ') . '<span class="red">' . sprintf('%.1f', $data['bytes_percent']) . '</span>';
         }
         else
         {
@@ -42,7 +42,7 @@ foreach($stats as $server => $data)
         # Hit percent (get, delete, cas, incr & decr)
         if($data['get_hits_percent'] < $_ini->get('hit_rate_alert'))
         {
-            echo str_pad('', 7 - strlen($data['get_hits_percent']), ' ') . '<span class="alert">' . sprintf('%.1f', $data['get_hits_percent']) . '</span>';
+            echo str_pad('', 7 - strlen($data['get_hits_percent']), ' ') . '<span class="red">' . sprintf('%.1f', $data['get_hits_percent']) . '</span>';
         }
         else
         {
@@ -64,7 +64,7 @@ foreach($stats as $server => $data)
         # Eviction rate
         if($data['eviction_rate'] > $_ini->get('eviction_alert'))
         {
-            echo str_pad('', 8 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="alert">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
+            echo str_pad('', 8 - strlen(Library_Analysis::valueResize($data['eviction_rate'])), ' ') . '<span class="red">' . Library_Analysis::valueResize($data['eviction_rate']) . '</span>';
         }
         else
         {

@@ -122,11 +122,11 @@ class Library_HTML_Components
      */
     public static function apiList($iniAPI = '', $id)
     {
-        return '<select name="' . $id . '">
-        <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
-        <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
-        <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
-        </select>';
+        return '<select id="' . $id . '" name="' . $id . '">
+                <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
+                <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
+                <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
+                </select>';
     }
 
     /**

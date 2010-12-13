@@ -72,7 +72,7 @@ div.full {
 }
 .item {
 	font-family: Bitstream Vera Sans Mono;
-	}
+}
 
 #loading {
 	text-decoration: blink;
@@ -99,7 +99,7 @@ a.tooltip:hover span {
 
 body {
 	color: #000000;
-	background: #FFFFFF;
+	background-color: #FFFFFF;
 	font-family: Verdana, Tahoma, Segoe UI, Arial;
 	font-size: 0.8em;
 	margin-top: 10px;
@@ -182,9 +182,14 @@ img {
 	color: #ffffff;
 }
 
+.button {
+	padding:1px 20px;
+	-moz-border-radius:2px;
+	-webkit-border-radius:2px;
+	border-radius: 2px;
+}
 .live {
-	font-family: Bitstream Vera Sans Mono, Lucida Sans Typewriter,
-		DejaVu Sans Mono;
+	font-family: Bitstream Vera Sans Mono, Lucida Sans Typewriter, DejaVu Sans Mono;
 	font-size: 12px;
 	overflow: visible;
 	white-space: pre-wrap;

@@ -109,44 +109,6 @@ if((!is_writeable(Library_Configuration_Loader::path())) || (!is_writeable($_ini
             </div>
             </form>
         </div>
-
-    </div>
-    <div class="size-0" style="float:left;padding-left:9px;margin-top:18px;">
-
-        <div class="sub-header corner padding">Server <span class="green">List</span></div>
-        <div class="container corner padding" style="padding-right:14px;">
-            <form method="post" action="configure.php?request_write=servers">
-            <div class="line">
-                Servers list used by phpMemCacheAdmin<br/><br/>
-                <strong>Recommendations :</strong><br/>
-                - Use the scheme hostname:port even if port is 11211
-                <br/>
-                - You can specify multiple instance on different port on same server
-                <hr/>
-            </div>
-            <div id="server_form">
-            <?php
-            foreach($_ini->get('server') as $server)
-            { ?>
-            <div id="server_<?php echo $server; ?>">
-                <div class="line">
-                    <span class="left">Server</div>
-                    <div>
-                        <input type="text" name="server[]" value="<?php echo $server; ?>" onfocus="serverOnFocus(this)" onblur="serverOnBlur(this)"/>
-                        <a class="list" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServer('server_<?php echo $server; ?>')">Delete</a>
-                    </div>
-                </div>
-            </div>
-            <?php
-            } ?>
-            </div>
-            <div class="line">
-                <hr/>
-                <a class="list" style="padding:1px 20px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="javascript:addServer()">Add New Server</a>
-                <input class="list" type="submit" value="Save Servers Configuration"/>
-            </div>
-            </form>
-        </div>
         <br/>
 
         <div class="sub-header corner padding">Miscellaneous <span class="green">Configuration</span></div>
@@ -172,6 +134,63 @@ if((!is_writeable(Library_Configuration_Loader::path())) || (!is_writeable($_ini
             </div>
             </form>
         </div>
+
+    </div>
+    <div class="size-0" style="float:left;padding-left:9px;margin-top:18px;">
+
+        <div class="sub-header corner padding">Server <span class="green">List</span></div>
+        <div class="container corner padding" style="padding-right:14px;">
+            <form method="post" action="configure.php?request_write=servers">
+            <div class="line">
+                Servers list used by phpMemCacheAdmin<br/><br/>
+                <strong>Recommendations :</strong><br/>
+                - Use the scheme hostname:port even if port is 11211
+                <br/>
+                - You can specify multiple instance on different port on same server
+            </div>
+            <div id="server_form">
+<?php
+            # Initializing variables
+            $server_id = 0;
+            $cluster_id = 0;
+
+            # Looking into each cluster
+            foreach($_ini->get('servers') as $cluster => $servers)
+            {
+            $cluster_id++; ?>
+            <div id="cluster_<?php echo $cluster_id; ?>">
+                <hr/>
+                <strong>Cluster <input type="text" style="width:200px;" name="cluster[<?php echo $cluster_id; ?>]" value="<?php echo $cluster; ?>"/></strong>
+<?php           # Adding input for each server
+                foreach($servers as $server)
+                {
+                $server_id++; ?>
+                <div id="server_<?php echo $server_id; ?>">
+                    <div style="margin-left:40px;margin-top:3px;">
+                        <input type="text" style="width:200px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][hostname]" value="<?php echo $server['hostname']; ?>" onfocus="hostnameOnFocus(this)" onblur="hostnameOnBlur(this)"/>
+                        <input type="text" style="width:50px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][port]" value="<?php echo $server['port']; ?>" onfocus="portOnFocus(this)" onblur="portOnBlur(this)"/>
+                        <a class="list button" style="padding:1px 2px;" href="#" onclick="deleteServerOrCluster('server_<?php echo $server_id; ?>')">Delete</a>
+                    </div>
+                </div>
+<?php           } ?>
+                <div id="cluster_<?php echo $cluster_id; ?>_commands" style="margin-left:40px;margin-top:6px;">
+                    <a class="list button" href="javascript:addServer(<?php echo $cluster_id; ?>)">Add New Server to Cluster</a> <a class="list" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServerOrCluster('cluster_<?php echo $cluster_id; ?>')">Delete Cluster</a>
+                </div>
+                <br/>
+            </div>
+<?php       } ?>
+            </div>
+            <div class="line">
+                <hr/>
+                <a class="list button" href="javascript:addCluster()">Add New Cluster</a>
+                <input class="list" type="submit" value="Save Servers Configuration"/>
+            </div>
+            </form>
+        </div>
+        <script type="text/javascript">
+            server_id = <?php echo $server_id; ?>;
+            cluster_id = <?php echo $cluster_id; ?>;
+        </script>
         <br/>
 
         <div class="container corner padding">
