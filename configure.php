@@ -88,8 +88,6 @@ switch($request)
             }
         }
 
-var_dump($_POST);
-var_dump($array);
         $_ini->set('servers', $array);
 
         # Writing configuration file

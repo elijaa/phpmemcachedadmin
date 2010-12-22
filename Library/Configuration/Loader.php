@@ -180,7 +180,6 @@ class Library_Configuration_Loader
     {
         if($this->check())
         {
-            var_dump('<?php' . PHP_EOL . 'return ' . var_export(self::$_ini, true) . ';');
             return is_numeric(file_put_contents(self::$_iniPath, '<?php' . PHP_EOL . 'return ' . var_export(self::$_ini, true) . ';'));
         }
         return false;
