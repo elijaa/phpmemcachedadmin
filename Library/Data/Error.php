@@ -40,11 +40,11 @@ class Library_Data_Error
     /**
      * Return last Error message
      *
-     * @return String
+     * @return Mixed
      */
     public static function last()
     {
-        return self::$_errors[count(self::$_errors) - 1];
+        return (isset(self::$_errors[count(self::$_errors) - 1])) ? self::$_errors[count(self::$_errors) - 1] : null;
     }
 
     /**

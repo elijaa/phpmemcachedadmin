@@ -7,8 +7,8 @@ echo 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('re
 
 # Table header
 echo '<strong>' . sprintf('%-40s', 'SERVER:PORT') . sprintf('%10s', 'SIZE') . sprintf('%7s', '%MEM') . sprintf('%8s', 'TIME') .
-sprintf('%6s', 'CONN') . sprintf('%7s', '%HIT') . sprintf('%9s', 'REQ/s') . sprintf('%8s', 'GET/s') . sprintf('%8s', 'SET/s') .
-sprintf('%8s', 'DEL/s') . sprintf('%8s', 'EVI/s') . sprintf('%10s', 'READ/s') . sprintf('%10s', 'WRITE/s') . '</strong>' . EOL . '<hr>';
+sprintf('%6s', 'CONN') . sprintf('%7s', '%HIT') . sprintf('%8s', 'REQ/s') . sprintf('%8s', 'GET/s') . sprintf('%8s', 'SET/s') .
+sprintf('%8s', 'DEL/s') . sprintf('%8s', 'EVI/s') . sprintf('%11s', 'READ/s') . sprintf('%10s', 'WRITE/s') . '</strong>' . EOL . '<hr>';
 
 # Showing stats for every server
 foreach($stats as $server => $data)
@@ -50,7 +50,7 @@ foreach($stats as $server => $data)
         }
 
         # Request rate
-        echo sprintf('%9s', Library_Analysis::valueResize($data['request_rate']));
+        echo sprintf('%8s', Library_Analysis::valueResize($data['request_rate']));
 
         # Get rate
         echo sprintf('%8s', Library_Analysis::valueResize($data['get_rate']));
@@ -72,7 +72,7 @@ foreach($stats as $server => $data)
         }
 
         # Bytes read
-        echo sprintf('%10s', Library_Analysis::byteResize($data['bytes_read'] / $data['time']) . 'b');
+        echo sprintf('%11s', Library_Analysis::byteResize($data['bytes_read'] / $data['time']) . 'b');
 
         # Bytes written
         echo sprintf('%10s', Library_Analysis::byteResize($data['bytes_written'] / $data['time']) . 'b');

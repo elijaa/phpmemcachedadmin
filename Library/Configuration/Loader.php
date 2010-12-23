@@ -96,7 +96,7 @@ class Library_Configuration_Loader
      *
      * @param String $cluster Cluster to retreive
      *
-     * @return Mixed
+     * @return Array
      */
     public function cluster($cluster)
     {
@@ -104,7 +104,7 @@ class Library_Configuration_Loader
         {
             return self::$_ini['servers'][$cluster];
         }
-        return false;
+        return array();
     }
 
     /**
@@ -113,7 +113,7 @@ class Library_Configuration_Loader
      *
      * @param String $server Server to retreive
      *
-     * @return Mixed
+     * @return Array
      */
     public function server($server)
     {
@@ -124,7 +124,7 @@ class Library_Configuration_Loader
                 return self::$_ini['servers'][$cluster][$server];
             }
         }
-        return false;
+        return array();
     }
 
     /**
