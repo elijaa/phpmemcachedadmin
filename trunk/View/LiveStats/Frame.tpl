@@ -18,7 +18,7 @@
     } ?>
 
     <div class="full-size padding">
-        <pre class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live size-5', 'onchange="changeCluster(this)"'); ?> stats</pre>
+        <pre class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this)"'); ?> stats</pre>
         <pre id="stats" class="live">
 
         Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
