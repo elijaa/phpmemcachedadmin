@@ -78,7 +78,6 @@ switch($request)
 
         # Server configuration save
     case 'servers':
-        # Updating configuration
         $array = array();
         foreach($_POST['server'] as $cluster => $servers)
         {
@@ -88,6 +87,16 @@ switch($request)
             }
         }
 
+        # Sorting clusters
+        ksort($array);
+        foreach($array as $cluster => $servers)
+        {
+            # Sorting servers
+            ksort($servers);
+            $array[$cluster] = $servers;
+        }
+
+        # Updating configuration
         $_ini->set('servers', $array);
 
         # Writing configuration file
