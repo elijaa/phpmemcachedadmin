@@ -343,14 +343,20 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 <?php
 }
 # Viewing a cluster
-elseif((isset($_GET['server'])) && ($_ini->cluster($_GET['server'])))
+elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 { ?>
         <div class="sub-header corner padding">Cluster <?php echo $_GET['server']; ?> Servers <span class="green">List</span></div>
         <div class="container corner padding">
 <?php
-
-?>
-        </div>
+    foreach($cluster as $server)
+    { ?>
+            <div class="line" style="margin-left:20px;">
+            <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
+            <?php #echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] : 'Server did not respond'; ?>
+            </div>
+<?php
+    } ?>
+    </div>
 <?php
 }
 # Viewing all servers
