@@ -91,7 +91,7 @@ switch($request)
             $actual[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
             # Calculating query time length
-            $actual[$server['hostname'] . ':' . $server['port']]['query_time'] = (microtime(true) - $time) * 1000;
+            $actual[$server['hostname'] . ':' . $server['port']]['query_time'] = max((microtime(true) - $time) * 1000, 1);
         }
 
         # Analysing stats
