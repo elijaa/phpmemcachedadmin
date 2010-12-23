@@ -46,7 +46,7 @@ if(isset($_GET['cluster']))
 else
 {
     $clusters = array_keys(Library_Configuration_Loader::singleton()->get('servers'));
-    $cluster = $clusters[0];
+    $cluster = isset($cluster[0]) ? $cluster[0] : null;
 }
 
 # Refresh rate (Ajax)
