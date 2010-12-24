@@ -144,6 +144,10 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 } ?>
         <div class="sub-header corner padding">Server <span class="green">Stats</span></div>
         <div class="container corner padding size-3cols">
+<?php
+# Viewing a single server
+if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+{ ?>
             <div class="line">
                 <span class="left setting">Uptime</span>
                 <?php echo Library_Analysis::uptime($stats['uptime']); ?>
@@ -152,6 +156,8 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Memcached</span>
                 Version <?php echo $stats['version']; ?>
             </div>
+<?php
+} ?>
             <div class="line" style="margin-top:4px;">
                 <span class="left setting">Curr Connections</span>
                 <?php echo $stats['curr_connections']; ?>
@@ -231,7 +237,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Max Bytes</span>
                 <?php echo (isset($settings['maxbytes'])) ? Library_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : maxbytes<br/>Maximum number of bytes allows in this cache</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : maxbytes<br/>Maximum number of bytes allowed in this cache</span></a>
                 </span>
             </div>
             <div class="line">
@@ -252,7 +258,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Listen Interface</span>
                 <?php echo (isset($settings['inter'])) ? $settings['inter'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : inter<br/>0 = none, 1 = some, 2 = lots</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : inter<br/>Listen interface</span></a>
                 </span>
             </div>
             <div class="line">
@@ -294,35 +300,35 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Chunk Growth Factor</span>
                 <?php echo (isset($settings['growth_factor'])) ? $settings['growth_factor'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : growth_factor<br/>umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : growth_factor<br/>Chunk size growth factor</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max Threads</span>
                 <?php echo (isset($settings['num_threads'])) ? $settings['num_threads'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : num_threads<br/>umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : num_threads<br/>Number of threads (including dispatch)</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Detail Enabled</span>
                 <?php echo (isset($settings['detail_enabled'])) ? ucfirst($settings['detail_enabled']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : detail_enabled<br/>umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : detail_enabled<br/>If yes, stats detail is enabled</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max IO Ops/Event</span>
                 <?php echo (isset($settings['reqs_per_event'])) ? $settings['reqs_per_event'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : reqs_per_event<br/>umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : reqs_per_event<br/>Max num IO ops processed within an event</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">CAS Enabled</span>
                 <?php echo (isset($settings['cas_enabled'])) ? ucfirst($settings['cas_enabled']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : cas_enabled<br/>umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : cas_enabled<br/>When no, CAS is not enabled for this server</span></a>
                 </span>
             </div>
             <div class="line">
@@ -336,7 +342,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">SASL Auth</span>
                 <?php echo (isset($settings['auth_enabled_sasl'])) ? ucfirst($settings['auth_enabled_sasl']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : auth_enabled_sasl<br/>TCP listen backlog</span></a>
+                    <a href="#" class="tooltip green">[?]<span>Internal name : auth_enabled_sasl<br/>SASL auth requested and enabled</span></a>
                 </span>
             </div>
         </div>
@@ -345,7 +351,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 # Viewing a cluster
 elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 { ?>
-        <div class="sub-header corner padding">Cluster <?php echo $_GET['server']; ?> Servers <span class="green">List</span></div>
+        <div class="sub-header corner padding">Cluster <?php echo $_GET['server']; ?> <span class="green">Servers List</span></div>
         <div class="container corner padding">
 <?php
     foreach($cluster as $server)

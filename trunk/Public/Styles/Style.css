@@ -1,75 +1,9 @@
-img {
-	border: none;
-}
-
-a {
-	color: #EEEEEE;
-	text-decoration: none;
-}
-
-a:hover {
-	color: #AA0000;
-}
-
-div.title {
-	display: block;
-	width: 772px;
-	padding: 3px 7px 3px 7px;
-	background: #514845;
-	font-weight: bold;
-}
-
-span.title {
-	display: block;
-	width: 241px;
-	padding: 3px 7px 3px 7px;
-	background: #514845;
-	font-weight: bold;
-}
-
-div.row {
-	padding: 3px 0px 2px 7px;
-	min-height: 18px;
-}
-
-div.left {
-	width: 100px;
-	float: left;
-	font-weight: bold;
-	padding-top: 2px;
-}
-
-div.right {
-	width: 52px;
-	float: left;
-	padding-top: 2px;
-}
-
-div.middle {
-	width: 86px;
-	float: left;
-	padding-top: 2px;
-}
-
-div.full {
-	width: 140px;
-	float: left;
-	padding-top: 2px;
-}
-
 .menu {
 	border: solid 1px #A0312A;
 	color: #EEEEEE;
 	width: 198px;
 }
 
-.green {
-	color: #2A707B;
-}
-
-.grey {
-	color: #EEEEEE;
-}
 .item {
 	font-family: Bitstream Vera Sans Mono;
 }
@@ -79,7 +13,13 @@ div.full {
 	width: 680px;
 	visibility: hidden;
 }
-
+a {
+    color: #EEEEEE;
+    text-decoration: none;
+}
+a:hover {
+    color: #AA0000;
+}
 a.tooltip span {
 	display: none;
 	padding: 2px 3px;
@@ -91,7 +31,7 @@ a.tooltip:hover span {
 	border: 1px solid #514845;
 	background: url("../Images/635855.png") repeat-x scroll 50% 50%
 		#635855;
-	font-weight: bold;
+	font-weight: none;
 	color: #ffffff;
 	display: inline;
 	position: absolute;
@@ -136,7 +76,6 @@ body {
 .padding {
 	padding: 3px 7px 3px 7px;
 }
-
 img {
 	border: none;
 }
@@ -236,10 +175,12 @@ hr {
 }
 
 /** Color */
+.grey {
+    color: #EEEEEE;
+}
 .green {
 	color: #40aaba;
 }
-
 .red {
 	background: #b5463f;
 	color: #ffffff;

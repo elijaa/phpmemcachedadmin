@@ -38,26 +38,36 @@ $_ini = Library_Configuration_Loader::singleton();
 $request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
 
 # Stat of a particular cluster
-if(isset($_GET['cluster']))
+if(isset($_GET['cluster']) && ($_GET['cluster'] != null))
 {
     $cluster = $_GET['cluster'];
 }
-# Else getting default cluster
+# Getting default cluster
 else
 {
-    $clusters = array_keys(Library_Configuration_Loader::singleton()->get('servers'));
-    $cluster = isset($cluster[0]) ? $cluster[0] : null;
+    $clusters = array_keys($_ini->get('servers'));
+    $cluster = isset($clusters[0]) ? $clusters[0] : null;
 }
-
-# Refresh rate (Ajax)
-# $refresh_rate = (isset($_GET['refresh_rate'])) ? $_GET['refresh_rate'] : null;
 
 # Cookie @FIXME not a perfect method
 if(!isset($_COOKIE['live_stats_id']))
 {
-    $live_stats_id = rand();
+    # Cleaning temporary directory
+    $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT );
+    foreach($files as $path)
+    {
+        $stats = @stat($path);
+        if(isset($stats[9]) && ($stats[9] < (time() - 60*60*24)))
+        {
+            @unlink($path);
+        }
+    }
+
+    # Generating unique id
+    $live_stats_id = rand() . md5($_GET['cluster']);
+
     # Cookie
-    setcookie('live_stats_id', $live_stats_id, time() + 60*60*24*365);
+    setcookie('live_stats_id', $live_stats_id, time() + 60*60*24);
 }
 else
 {
