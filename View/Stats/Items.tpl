@@ -20,9 +20,6 @@ if((isset($response)) && ($response != array()))
 <?php
 $notFirst = false;
 
-# Computing server boot timestamp
-$start_time = $stats['time'] - $stats['uptime'];
-
 # Items
 foreach($items as $key => $data)
 {
@@ -34,17 +31,18 @@ foreach($items as $key => $data)
 
         <span class="right" style="clear:right;">
             <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>Bytes,
-            <strong>Expiration</strong> : <?php
-            # Expiration equals server start_time -> infinite
-            if($data[1] == $start_time)
+            <strong>Expiration</strong> :
+<?php
+            # Infinite expiration
+            if($data[1] == $infinite)
             {
                 echo '&#8734;';
             }
+            # Timestamp expiration
             else
             {
                 echo Library_Analysis::uptime($data[1] - time());
-            }
-            ?>
+            } ?>
         </span>
 <?php
     # First item done

@@ -146,8 +146,11 @@
                     </div>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
-                    You can use PCRE expression<br/>
-                    That does not list all keys. It lists keys up to a certain buffer size
+                    <span class="red">Warning !</span><br/>This thing is only for debuging issue, do not use it in a production environment as it can lock
+                    or impact your memcached servers performances.
+                    <br/>Also keep in mind that it does not list all keys. It lists keys up to a certain buffer size (1 or 2MB)
+                    <br/>
+                    <br/>You can use a PCRE regular expression
                     </td>
                 </tr>
             </table>
