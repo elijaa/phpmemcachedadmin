@@ -351,8 +351,9 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
     foreach($cluster as $server)
     { ?>
             <div class="line" style="margin-left:20px;">
-            <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-            <?php #echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] : 'Server did not respond'; ?>
+                <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
+                <div class="line"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                </div>
             </div>
 <?php
     } ?>
@@ -375,7 +376,8 @@ else
         { ?>
             <div class="line" style="margin-left:20px;">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] : 'Server did not respond'; ?>
+                <div class="line"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                </div>
             </div>
 <?php
         }

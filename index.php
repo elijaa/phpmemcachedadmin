@@ -121,7 +121,10 @@ switch($request)
         {
             foreach($cluster as $server)
             {
-                $stats = Library_Analysis::merge($stats, Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']));
+                $data = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+                $status[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['version'] : '';
+                $uptime[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['uptime'] : '';
+                $stats = Library_Analysis::merge($stats, $data);
             }
         }
         # Asking for a server stats
@@ -141,6 +144,7 @@ switch($request)
                 {
                     $data = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
                     $status[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['version'] : '';
+                    $uptime[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['uptime'] : '';
                     $stats = Library_Analysis::merge($stats, $data);
                 }
             }
