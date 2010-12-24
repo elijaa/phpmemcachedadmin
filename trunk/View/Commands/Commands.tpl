@@ -146,7 +146,8 @@
                     </div>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
-                    You can use PCRE expression
+                    You can use PCRE expression<br/>
+                    That does not list all keys. It lists keys up to a certain buffer size
                     </td>
                 </tr>
             </table>

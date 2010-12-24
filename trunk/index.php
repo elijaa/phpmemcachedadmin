@@ -62,6 +62,9 @@ switch($request)
             $response[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('get_api')->get($server['hostname'], $server['port'], $_GET['request_key']);
         }
 
+        # Getting stats to calculate server boot time
+        $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port'], $_GET['slab']);
+
         # Items are well formed
         if($items !== false)
         {

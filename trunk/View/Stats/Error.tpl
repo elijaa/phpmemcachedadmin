@@ -7,7 +7,7 @@ if((isset($stats)) && (($stats === false) || ($stats == array())))
         # Asking server of cluster stats
         if(isset($_GET['server']))
         {
-            echo (is_array($cluster)) ? 'All servers from Cluster ' . $_GET['server'] : 'Server '  . $_GET['server'], ' did not respond !';
+            echo ($_ini->cluster($_GET['server'])) ? 'All servers from Cluster ' . $_GET['server'] : 'Server '  . $_GET['server'], ' did not respond !';
         }
         # All servers stats
         else
