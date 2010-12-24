@@ -72,12 +72,12 @@ foreach($slabs as $id => $slab)
                 </div>
                 <div class="line">
                     <span class="left slabs">Used Chunk</span>
-                    <?php echo Library_Analysis::valueResize($slab['used_chunks']); ?>
+                    <?php echo Library_Analysis::hitResize($slab['used_chunks']); ?>
                     <span class="right">[<?php echo Library_Analysis::valueResize($slab['used_chunks'] / $slab['total_chunks'] * 100); ?> %]</span>
                 </div>
                 <div class="line">
                     <span class="left slabs">Total Chunk</span>
-                    <?php echo Library_Analysis::valueResize($slab['total_chunks']); ?>
+                    <?php echo Library_Analysis::hitResize($slab['total_chunks']); ?>
                 </div>
                 <div class="line">
                     <span class="left slabs">Total Page</span>
