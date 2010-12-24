@@ -87,7 +87,7 @@
         <br/>
 
         <div class="sub-header corner full-size padding">Execute Telnet <span class="green">Commands</span></div>
-        <div class="container corner padding">
+        <div class="container corner full-size padding">
             <table>
                 <tr valign="top">
                     <td class="size-0 padding" style="padding-right:14px;">
@@ -119,7 +119,7 @@
         <br/>
 
         <div class="sub-header corner full-size padding">Search <span class="green">Key</span></div>
-        <div class="container corner padding">
+        <div class="container corner full-size padding">
             <table>
                 <tr valign="top">
                     <td class="size-0 padding" style="padding-right:14px;">

@@ -356,9 +356,9 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 <?php
     foreach($cluster as $server)
     { ?>
-            <div class="line" style="margin-left:20px;">
+            <div class="line" style="margin-left:10px;">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <div class="line"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                <div class="line" style="margin-left:5px;"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
             </div>
 <?php
@@ -380,13 +380,14 @@ else
 <?php
         foreach($servers as $server)
         { ?>
-            <div class="line" style="margin-left:20px;">
+            <div class="line" style="margin-left:10px;">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <div class="line"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                <div class="line" style="margin-left:5px;"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
             </div>
 <?php
         }
+        if(count($_ini->get('servers')) > 1) { echo '<hr/>'; }
     } ?>
        </div>
 <?php
