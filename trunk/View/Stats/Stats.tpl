@@ -387,7 +387,6 @@ else
             </div>
 <?php
         }
-        if(count($_ini->get('servers')) > 1) { echo '<hr/>'; }
     } ?>
        </div>
 <?php

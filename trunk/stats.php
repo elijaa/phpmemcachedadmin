@@ -49,8 +49,11 @@ else
     $cluster = isset($clusters[0]) ? $clusters[0] : null;
 }
 
+# Hashing cluster
+$hash = md5($_GET['cluster']);
+
 # Cookie @FIXME not a perfect method
-if(!isset($_COOKIE['live_stats_id']))
+if(!isset($_COOKIE['live_stats_id' . $hash]))
 {
     # Cleaning temporary directory
     $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT );
@@ -64,15 +67,15 @@ if(!isset($_COOKIE['live_stats_id']))
     }
 
     # Generating unique id
-    $live_stats_id = rand() . md5($_GET['cluster']);
+    $live_stats_id = rand() . $hash;
 
     # Cookie
-    setcookie('live_stats_id', $live_stats_id, time() + 60*60*24);
+    setcookie('live_stats_id' . $hash, $live_stats_id, time() + 60*60*24);
 }
 else
 {
     # Backup from a previous request
-    $live_stats_id = $_COOKIE['live_stats_id'];
+    $live_stats_id = $_COOKIE['live_stats_id' . $hash];
 }
 
 # Live stats dump file
