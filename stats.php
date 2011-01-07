@@ -47,6 +47,7 @@ else
 {
     $clusters = array_keys($_ini->get('servers'));
     $cluster = isset($clusters[0]) ? $clusters[0] : null;
+    $_GET['cluster'] = $cluster;
 }
 
 # Hashing cluster
