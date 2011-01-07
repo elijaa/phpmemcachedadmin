@@ -20,7 +20,6 @@
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
-
 # Headers
 header('Content-type: text/html; charset=UTF-8');
 header('Cache-Control: no-cache, must-revalidate');

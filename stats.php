@@ -87,7 +87,7 @@ switch($request)
     # Ajax ask : stats
     case 'live_stats':
         # Opening old stats dump
-        $previous = unserialize(file_get_contents($file_path));
+        $previous = @unserialize(file_get_contents($file_path));
 
         # Initializing variables
         $actual = array();
