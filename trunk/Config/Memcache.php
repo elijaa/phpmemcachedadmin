@@ -18,9 +18,9 @@ return array (
   array (
     'Memcached Development' => 
     array (
-      'gulma.dev.local:11211' => 
+      '192.120.1.213:11211' => 
       array (
-        'hostname' => 'gulma.dev.local',
+        'hostname' => '192.120.1.213',
         'port' => '11211',
       ),
       'gulma.tcmlan.com:11211' => 
