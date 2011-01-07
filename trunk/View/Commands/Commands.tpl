@@ -77,8 +77,7 @@
                     </form>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
-                        For more informations about memcached commands, see memcached protocol
-                        <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
+
                     <br/>
                     </td>
                 </tr>
@@ -111,7 +110,15 @@
                     </div>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
-                    Texte
+                        You can use this thing to execute any telnet command to any memcached server
+                        <br/>
+                        It will connect to the server, execute the command and return it in the console
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        For more informations about memcached commands, see memcached protocol
+                        <a href="http://github.com/memcached/memcached/blob/master/doc/protocol.txt" target="_blank"><span class="green">here</span></a>
                     </td>
                 </tr>
             </table>
@@ -148,7 +155,7 @@
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
                     <span class="red">Warning !</span><br/>This thing is only for debuging issue, do not use it in a production environment as it can lock
                     or impact your memcached servers performances.
-                    <br/>Also keep in mind that it does not list all keys. It lists keys up to a certain buffer size (1 or 2MB)
+                    <br/>Also keep in mind that it does not list all keys. It lists keys up to a certain buffer size (1 or 2MB), and it list key that are expired.
                     <br/>
                     <br/>You can use a PCRE regular expression
                     </td>

@@ -56,7 +56,7 @@ class Library_Command_Server implements Library_Command_Interface
         $handle = null;
 
         # Socket Opening
-        if(!($handle = fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
+        if(!($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
         {
             # Adding error to log
             self::$_log = utf8_encode($errstr);
@@ -403,11 +403,11 @@ class Library_Command_Server implements Library_Command_Interface
             if(($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port)))
             {
                 # Parsing result
-                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[(?:.*) b; (.*) s\]\r\n/mU', $result, $matchs, PREG_SET_ORDER);
+                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[(?:.*)\]\r\n/mU', $result, $matchs, PREG_SET_ORDER);
 
                 foreach($matchs as $item)
                 {
-                    $items[$item[1]] = $item[2];
+                    $items[] = $item[1];
                 }
             }
             unset($slabs[$slab]);

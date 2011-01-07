@@ -62,7 +62,7 @@ switch($request)
         }
 
         # Getting stats to calculate server boot time
-        $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port'], $_GET['slab']);
+        $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         $infinite = (isset($stats['time'], $stats['uptime'])) ? ($stats['time'] - $stats['uptime']) : 0;
 
         # Items are well formed
