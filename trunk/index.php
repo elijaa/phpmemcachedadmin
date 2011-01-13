@@ -132,22 +132,6 @@ switch($request)
             $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
             $settings = Library_Command_Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
         }
-        # Ask for all servers stats
-        else
-        {
-            # Looking into each cluster
-            foreach($_ini->get('servers') as $cluster => $servers)
-            {
-                # Asking for each server stats
-                foreach($servers as $server)
-                {
-                    $data = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
-                    $status[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['version'] : '';
-                    $uptime[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['uptime'] : '';
-                    $stats = Library_Analysis::merge($stats, $data);
-                }
-            }
-        }
 
         # Stats are well formed
         if(($stats !== false) && ($stats != array()))
