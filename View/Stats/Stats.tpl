@@ -386,7 +386,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="sub-header corner padding">Pages Allocation <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100; ?>&chdl=Wasted|Used|Free" alt="Cache Size by GoogleCharts" width="280" height="225"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100; ?>&chdl=Wasted|Used|Free" alt="Cache Size by GoogleCharts" width="280" height="225"/>
             </div>
         </div>
         <br/>
