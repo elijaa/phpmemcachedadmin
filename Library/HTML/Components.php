@@ -39,7 +39,7 @@ class Library_HTML_Components
         $serverList .= ($class != '') ? 'class="' . $class . '"' : '';
 
         # Javascript Events
-        $serverList .= ' ' . $events .'><option value="">All Servers</option>';
+        $serverList .= ' ' . $events .'>';
 
         foreach($_ini->get('servers') as $cluster => $servers)
         {

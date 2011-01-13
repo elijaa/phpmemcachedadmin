@@ -338,6 +338,13 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                     <a href="#" class="tooltip green">[?]<span>Internal name : tcp_backlog<br/>TCP listen backlog</span></a>
                 </span>
             </div>
+             <div class="line">
+                <span class="left setting">Binding Protocol</span>
+                <?php echo (isset($settings['binding_protocol'])) ? ucfirst($settings['binding_protocol']) : 'N/A on ' . $stats['version']; ?>
+                <span class="right">
+                    <a href="#" class="tooltip green">[?]<span>Internal name : binding_protocol<br/>Binding protocol</span></a>
+                </span>
+            </div>
             <div class="line">
                 <span class="left setting">SASL Auth</span>
                 <?php echo (isset($settings['auth_enabled_sasl'])) ? ucfirst($settings['auth_enabled_sasl']) : 'N/A on ' . $stats['version']; ?>
@@ -364,31 +371,6 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 <?php
     } ?>
     </div>
-<?php
-}
-# Viewing all servers
-else
-{ ?>
-        <div class="sub-header corner padding">Servers <span class="green">List</span></div>
-        <div class="container corner padding">
-<?php
-    foreach($_ini->get('servers') as $cluster => $servers)
-    { ?>
-            <div class="line">
-                <span class="left setting">Cluster <?php echo $cluster; ?></span>
-            </div>
-<?php
-        foreach($servers as $server)
-        { ?>
-            <div class="line" style="margin-left:10px;">
-                <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <div class="line" style="margin-left:5px;"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
-                </div>
-            </div>
-<?php
-        }
-    } ?>
-       </div>
 <?php
 } ?>
     </div>
