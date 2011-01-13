@@ -36,6 +36,14 @@ $_ini = Library_Configuration_Loader::singleton();
 # Initializing requests
 $request = (isset($_GET['show'])) ? $_GET['show'] : null;
 
+# Getting default cluster
+if(!isset($_GET['server']))
+{
+    $clusters = array_keys($_ini->get('servers'));
+    $cluster = isset($clusters[0]) ? $clusters[0] : null;
+    $_GET['server'] = $cluster;
+}
+
 # Showing header
 include 'View/Header.tpl';
 
