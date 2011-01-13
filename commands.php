@@ -198,7 +198,7 @@ switch($request)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                Library_Command_Factory::api($_GET['Server'])->search($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
             }
         }
         # Ask for search on one server

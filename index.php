@@ -120,6 +120,7 @@ switch($request)
         $stats = array();
         $settings = array();
         $status = array();
+        $slabs = array();
         $cluster = null;
         $server = null;
 
@@ -131,6 +132,7 @@ switch($request)
                 $data = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
                 $status[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['version'] : '';
                 $uptime[$server['hostname'] . ':' . $server['port']] = ($data != array()) ? $data['uptime'] : '';
+                $slabs = Library_Analysis::merge($slabs, Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
                 $stats = Library_Analysis::merge($stats, $data);
             }
         }
@@ -139,6 +141,7 @@ switch($request)
         {
             $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
             $settings = Library_Command_Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
+            $slabs = Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']);
         }
 
         # Stats are well formed

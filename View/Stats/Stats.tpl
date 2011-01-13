@@ -170,7 +170,6 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Max Connections Errors</span>
                 <?php echo (isset($stats['listen_disabled_num'])) ? Library_Analysis::hitResize($stats['listen_disabled_num']) : 'N/A on ' . $stats['version']; ?>
             </div>
-
             <div class="line" style="margin-top:4px;">
                 <span class="left setting">Current Items</span>
                 <?php echo Library_Analysis::hitResize($stats['curr_items']); ?>
@@ -201,7 +200,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Rate</span>
                 <?php echo $stats['eviction_rate']; ?> Eviction/sec
             </div>
-            <div class="line">
+            <div class="line" style="margin-top:4px;">
                 <span class="left setting">Reclaimed</span>
                 <?php echo (isset($stats['reclaimed'])) ? Library_Analysis::hitResize($stats['reclaimed']) : 'N/A on ' . $stats['version']; ?>
             </div>
@@ -230,126 +229,112 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                     echo 'N/A on ' . $stats['version'];
                 }?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : accepting_conns<br/>This is the crazy little Easy Tooltip Text.</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : accepting_conns<br/>Whether the server is accepting connection or not</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max Bytes</span>
                 <?php echo (isset($settings['maxbytes'])) ? Library_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : maxbytes<br/>Maximum number of bytes allowed in this cache</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : maxbytes<br/>Maximum number of bytes allowed in this cache</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max Connection</span>
                 <?php echo (isset($settings['maxconns'])) ? $settings['maxconns'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : maxconns<br/>Maximum number of clients allowed</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : maxconns<br/>Maximum number of clients allowed</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">TCP/UDP Port</span>
                 <?php echo (isset($settings['tcpport'], $settings['udpport'])) ? 'TCP : ' . $settings['tcpport'] . ', UDP : ' . $settings['udpport'] : 'N/A on ' . $stats['version'] ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : tcpport & udpport<br/>TCP &amp; UDP listen port</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : tcpport & udpport<br/>TCP &amp; UDP listen port</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Listen Interface</span>
                 <?php echo (isset($settings['inter'])) ? $settings['inter'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : inter<br/>Listen interface</span></a>
-                </span>
-            </div>
-            <div class="line">
-                <span class="left setting">Verbosity</span>
-                <?php echo (isset($settings['verbosity'])) ? $settings['verbosity'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : verbosity<br/>0 = none, 1 = some, 2 = lots</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : inter<br/>Listen interface</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Evictions</span>
                 <?php echo (isset($settings['evictions'])) ? ucfirst($settings['evictions']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : evictions<br/>When Off, LRU evictions are disabled</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : evictions<br/>When Off, LRU evictions are disabled</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Path to Domain Socket</span>
                 <?php echo (isset($settings['domain_socket'])) ? $settings['domain_socket'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : domain_socket<br/>Path to the domain socket (if any)</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : domain_socket<br/>Path to the domain socket (if any)</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Domain Socket Umask</span>
                 <?php echo (isset($settings['umask'])) ? $settings['umask'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : umask<br/>Umask for the creation of the domain socket</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : umask<br/>Umask for the creation of the domain socket</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Chunk Size</span>
                 <?php echo (isset($settings['chunk_size'])) ? $settings['chunk_size'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : chunk_size<br/>Minimum space allocated for key + value + flags</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : chunk_size<br/>Minimum space allocated for key + value + flags</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Chunk Growth Factor</span>
                 <?php echo (isset($settings['growth_factor'])) ? $settings['growth_factor'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : growth_factor<br/>Chunk size growth factor</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : growth_factor<br/>Chunk size growth factor</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max Threads</span>
                 <?php echo (isset($settings['num_threads'])) ? $settings['num_threads'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : num_threads<br/>Number of threads (including dispatch)</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : num_threads<br/>Number of threads (including dispatch)</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Detail Enabled</span>
                 <?php echo (isset($settings['detail_enabled'])) ? ucfirst($settings['detail_enabled']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : detail_enabled<br/>If yes, stats detail is enabled</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : detail_enabled<br/>If yes, stats detail is enabled</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">Max IO Ops/Event</span>
                 <?php echo (isset($settings['reqs_per_event'])) ? $settings['reqs_per_event'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : reqs_per_event<br/>Max num IO ops processed within an event</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : reqs_per_event<br/>Max num IO ops processed within an event</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">CAS Enabled</span>
                 <?php echo (isset($settings['cas_enabled'])) ? ucfirst($settings['cas_enabled']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : cas_enabled<br/>When no, CAS is not enabled for this server</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : cas_enabled<br/>When no, CAS is not enabled for this server</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">TCP Listen Backlog</span>
                 <?php echo (isset($settings['tcp_backlog'])) ? $settings['tcp_backlog'] : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : tcp_backlog<br/>TCP listen backlog</span></a>
-                </span>
-            </div>
-             <div class="line">
-                <span class="left setting">Binding Protocol</span>
-                <?php echo (isset($settings['binding_protocol'])) ? ucfirst($settings['binding_protocol']) : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : binding_protocol<br/>Binding protocol</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : tcp_backlog<br/>TCP listen backlog</span></a>
                 </span>
             </div>
             <div class="line">
                 <span class="left setting">SASL Auth</span>
                 <?php echo (isset($settings['auth_enabled_sasl'])) ? ucfirst($settings['auth_enabled_sasl']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">[?]<span>Internal name : auth_enabled_sasl<br/>SASL auth requested and enabled</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : auth_enabled_sasl<br/>SASL auth requested and enabled</span></a>
                 </span>
             </div>
         </div>
@@ -393,25 +378,70 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
          </div>
          <br/>
 
-        <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
-        <div class="container corner padding">
-                <img src="http://chart.apis.google.com/chart?cht=pc&amp;chd=t:<?php echo $stats['bytes_percent']; ?>,<?php echo (100 - $stats['bytes_percent']); ?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Cache Size by GoogleChart" width="270" height="200"/>
-        </div>
-        <br/>
 
-        <div class="sub-header corner padding">Cache Request <span class="green">Stats</span></div>
-         <div class="container corner padding">
+      <?php
+   $allocated_pages = 0;
+   $maximum_pages = 0;
+   $remaining_pages = 0;
+  $sum_page_size = 0;
+   $num_pages = 0;
+   foreach($slabs as $id => $slab)
+   {
+       if(is_numeric($id) && $slab['used_chunks'] > 0)
+       {
+       $allocated_pages += $slab['total_pages'];
+       $sum_page_size += $slab['chunks_per_page'] * $slab['chunk_size'];
+       $num_pages++;
+      }
+   }
+   if($num_pages > 0)
+   {
+       $mean_page_size = $sum_page_size / $num_pages;
+       $maximum_pages = round($stats['limit_maxbytes'] / $mean_page_size);
+       $remaining_pages = $maximum_pages - $allocated_pages;
+       if($remaining_pages < 0) $remaining_pages = 0;
+   }
+   $span_style = "title grey rounded";
+  $div_style = "container rounded";
+   if($remaining_pages <= 0.05*$maximum_pages)
+   {
+       $div_style .= " warning-high";
+       $span_style .= " warning-high";
+   }
+  elseif($remaining_pages <= 0.1*$maximum_pages)
+   {
+       $div_style .= " warning-medium";
+       $span_style .= " warning-medium";
+   }
+   elseif($remaining_pages <= 0.15*$maximum_pages)
+   {
+       $div_style .= " warning-low";
+       $span_style .= " warning-low";
+   }
+?>
+       <div class="sub-header corner padding">Pages Allocation <span class="green">Stats</span></div>
+       <div class="container corner padding">
+       <!--
+        <span class=<?php echo '"' . $span_style . '"'?>>Pages Allocation <span class="green">Stats</span></span>
+        <div class=<?php echo '"' . $div_style . '"'?>>-->
             <div class="line">
-                <span class="left">Request Rate</span>
-                <?php echo $stats['request_rate']; ?> Request/sec
+                <span class="left">Allocated</span>
+                <?php echo $allocated_pages ?>
             </div>
             <div class="line">
-                <span class="left">Hit Rate</span>
-                <?php echo $stats['hit_rate']; ?> Request/sec
+                <span class="left">Maximum</span>
+                <?php echo $maximum_pages ?>
             </div>
+         </div>
+         <br/>
+
+       <div class="sub-header corner padding">Pages Allocation <span class="green">Graphic</span></div>
+       <div class="container corner padding">
+       <!--
+        <span class=<?php echo '"' . $span_style . '"'?>>Pages Allocation <span class="green">Graphic</span></span>
+        <div class=<?php echo '"' . $div_style . '"'?>>-->
             <div class="line">
-                <span class="left">Miss Rate</span>
-                <?php echo $stats['miss_rate']; ?> Request/sec
+                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $allocated_pages; ?>,<?php echo $remaining_pages; ?>&amp;chds=<?php echo "0,$maximum_pages,0,$maximum_pages"?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Pages allocation by GoogleChart" width="270" height="200"/>
             </div>
         </div>
         <br/>
