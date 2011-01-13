@@ -2,10 +2,6 @@
         <div class="sub-header corner padding">Slabs <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
-                <span class="left">Slabs Allocated</span>
-                <?php echo $slabs['active_slabs']; ?>
-            </div>
-            <div class="line">
                 <span class="left">Slabs Used</span>
                 <?php echo $slabs['active_slabs']; ?>
             </div>

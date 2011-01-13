@@ -365,12 +365,17 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Used</span>
-                <?php echo Library_Analysis::byteResize($stats['bytes']); ?>Bytes
+                <?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
             </div>
             <div class="line">
                 <span class="left">Total</span>
                 <?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes
-            </div><!--
+            </div>
+            <div class="line">
+                <span class="left">Wasted</span>
+                <?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
+            </div>
+            <!--
             <div class="line">
                 <span class="left">Percent</span>
                 <?php echo sprintf('%.1f', $stats['bytes'] / $stats['limit_maxbytes'] * 100, 1); ?>%
@@ -378,76 +383,16 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
          </div>
          <br/>
 
-
-      <?php
-   $allocated_pages = 0;
-   $maximum_pages = 0;
-   $remaining_pages = 0;
-  $sum_page_size = 0;
-   $num_pages = 0;
-   foreach($slabs as $id => $slab)
-   {
-       if(is_numeric($id) && $slab['used_chunks'] > 0)
-       {
-       $allocated_pages += $slab['total_pages'];
-       $sum_page_size += $slab['chunks_per_page'] * $slab['chunk_size'];
-       $num_pages++;
-      }
-   }
-   if($num_pages > 0)
-   {
-       $mean_page_size = $sum_page_size / $num_pages;
-       $maximum_pages = round($stats['limit_maxbytes'] / $mean_page_size);
-       $remaining_pages = $maximum_pages - $allocated_pages;
-       if($remaining_pages < 0) $remaining_pages = 0;
-   }
-   $span_style = "title grey rounded";
-  $div_style = "container rounded";
-   if($remaining_pages <= 0.05*$maximum_pages)
-   {
-       $div_style .= " warning-high";
-       $span_style .= " warning-high";
-   }
-  elseif($remaining_pages <= 0.1*$maximum_pages)
-   {
-       $div_style .= " warning-medium";
-       $span_style .= " warning-medium";
-   }
-   elseif($remaining_pages <= 0.15*$maximum_pages)
-   {
-       $div_style .= " warning-low";
-       $span_style .= " warning-low";
-   }
-?>
-       <div class="sub-header corner padding">Pages Allocation <span class="green">Stats</span></div>
-       <div class="container corner padding">
-       <!--
-        <span class=<?php echo '"' . $span_style . '"'?>>Pages Allocation <span class="green">Stats</span></span>
-        <div class=<?php echo '"' . $div_style . '"'?>>-->
+        <div class="sub-header corner padding">Pages Allocation <span class="green">Graphic</span></div>
+        <div class="container corner padding">
             <div class="line">
-                <span class="left">Allocated</span>
-                <?php echo $allocated_pages ?>
-            </div>
-            <div class="line">
-                <span class="left">Maximum</span>
-                <?php echo $maximum_pages ?>
-            </div>
-         </div>
-         <br/>
-
-       <div class="sub-header corner padding">Pages Allocation <span class="green">Graphic</span></div>
-       <div class="container corner padding">
-       <!--
-        <span class=<?php echo '"' . $span_style . '"'?>>Pages Allocation <span class="green">Graphic</span></span>
-        <div class=<?php echo '"' . $div_style . '"'?>>-->
-            <div class="line">
-                <img src="http://chart.apis.google.com/chart?cht=p&amp;chd=t:<?php echo $allocated_pages; ?>,<?php echo $remaining_pages; ?>&amp;chds=<?php echo "0,$maximum_pages,0,$maximum_pages"?>&amp;chs=270x200&amp;chl=Used|Free&amp;chf=bg,s,f2f2f2&amp;chco=B5463F|2A707B" alt="Pages allocation by GoogleChart" width="270" height="200"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100; ?>&chdl=Wasted|Used|Free" alt="Cache Size by GoogleCharts" width="280" height="225"/>
             </div>
         </div>
         <br/>
 
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
-         <div class="container corner padding">
+        <div class="container corner padding">
             <div class="line">
             <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=270x183&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="270" height="183"/>
             </div>
