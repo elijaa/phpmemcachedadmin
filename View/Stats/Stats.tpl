@@ -348,9 +348,11 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 <?php
     foreach($cluster as $server)
     { ?>
-            <div class="line" style="margin-left:10px;">
+            <div class="line">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <div class="line" style="margin-left:5px;"><?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                <span class="right"><a href="index.php?server=<?php echo $server['hostname'] . ':' . $server['port']; ?>" class="green">See Server Stats</a></span>
+                <div class="line" style="margin-left:5px;">
+                    <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
             </div>
 <?php
@@ -361,9 +363,9 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
     </div>
 <?php
     # Making cache size stats
-    $wasted_percent = sprintf('%.0f', $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100);
-    $used_percent = sprintf('%.0f', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
-    $free_percent = sprintf('%.0f', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
+    $wasted_percent = sprintf('%.0u', $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100);
+    $used_percent = sprintf('%.0u', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
+    $free_percent = sprintf('%.0u', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
 ?>
     <div class="size-4" style="float:left; padding-left:9px;clear:right;margin-top:18px;">
         <div class="sub-header corner padding">Cache Size <span class="green">Stats</span></div>
@@ -400,7 +402,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=270x183&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="270" height="183"/>
+            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=280x225&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="280" height="225"/>
             </div>
         </div>
         <br/>
