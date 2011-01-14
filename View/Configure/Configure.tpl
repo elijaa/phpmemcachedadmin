@@ -110,7 +110,6 @@
 
     </div>
     <div class="size-0" style="float:left;padding-left:9px;margin-top:18px;">
-
         <div class="sub-header corner padding">Server <span class="green">List</span></div>
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=servers">
@@ -172,4 +171,5 @@
                 <a href="http://code.google.com/p/phpmemcacheadmin/wiki/InstallationGuide" target="_blank"><span class="green">here</span></a>
             </div>
         </div>
+    </div>
     </div>

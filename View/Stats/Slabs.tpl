@@ -94,11 +94,11 @@ if($slab['used_chunks'] > 0)
                     <span class="left slabs">Evicted</span>
                     <?php echo $slab['items:evicted']; ?>
                 </div>
-
+<!--
                 <div class="line">
                     <span class="left slabs">Evicted Last</span>
                     <?php echo Library_Analysis::uptime($slab['items:evicted_time']); ?>
-                </div><!--
+                </div>
                 <div class="line">
                     <span class="left slabs">Out of Memory</span>
                     <?php echo $slab['items:outofmemory']; ?>
