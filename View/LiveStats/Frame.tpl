@@ -1,6 +1,6 @@
 <script type="text/javascript">
     var timeout = <?php echo $refresh_rate * 1000; ?>;
-    var page = 'stats.php?request_command=live_stats&amp;cluster=<?php echo $cluster; ?>';
+    var page = 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>';
     setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
 </script>
 
