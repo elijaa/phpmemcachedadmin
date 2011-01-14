@@ -27,9 +27,35 @@
  * Fixed some slabs not displayed
 
 ===Version 1.2.0 : XX/XX/2010===
- * Ping & average on Live Stats
- * HTML Cleaning
- * "Check for new version" button
- * Server configuration
- * Delete on item
- * Better handling of read/write on configuration file
+General
+ * Improved code, improved error handling
+ * Improved look & feel
+ * Added cluster support
+ * Removed the 'All Servers' options
+
+Live Stats :
+ * Added cache size, ping
+ * Corrected hit ratio
+ * Added a legend for every value
+ * Better handling of connection errors when doing request to server
+
+Servers Stats :
+ * Correcting uptime and version when viewing multiples servers (see http://code.google.com/p/phpmemcacheadmin/issues/detail?id=5)
+ * Added flush_all stats
+ * Better Cache Size graphic (with used, wasted and free) (see http://code.google.com/p/phpmemcacheadmin/issues/detail?id=8)
+ * Added max connection error
+ * Added list of a cluster servers with version and uptime
+ * Added configuration values with some help when viewing a single server
+ * Compatibility with Memcached < 1.4.0
+
+Slabs Stats :
+ * Now in four columns (up from three)
+ * Added a "Slab allocated but not used" message
+
+Items List :
+ * Added the infinite lifetime
+
+Commands :
+ * Added a Console to show results (Loading, clear console, ...)
+ * Added a "Execute a telnet command" part
+ * Added an experimental "Search a key" part
