@@ -1,6 +1,6 @@
 <script type="text/javascript">
     var timeout = <?php echo $refresh_rate * 1000; ?>;
-    var page = 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>';
+    var page = 'stats.php?request_command=live_stats&amp;cluster=<?php echo $cluster; ?>';
     setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
 </script>
 
@@ -18,7 +18,8 @@
     } ?>
 
     <div class="full-size padding">
-        <pre class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this)"'); ?> stats</pre>
+        <br/>
+        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"'); ?> stats</span>
         <pre id="stats" class="live">
 
         Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...

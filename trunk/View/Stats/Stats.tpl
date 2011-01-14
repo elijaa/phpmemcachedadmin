@@ -152,13 +152,13 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Uptime</span>
                 <?php echo Library_Analysis::uptime($stats['uptime']); ?>
             </div>
-            <div class="line">
+            <div class="line" style="margin-bottom:4px;">
                 <span class="left setting">Memcached</span>
                 Version <?php echo $stats['version']; ?>
             </div>
 <?php
 } ?>
-            <div class="line" style="margin-top:4px;">
+            <div class="line">
                 <span class="left setting">Curr Connections</span>
                 <?php echo $stats['curr_connections']; ?>
             </div>
@@ -250,7 +250,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">TCP/UDP Port</span>
                 <?php echo (isset($settings['tcpport'], $settings['udpport'])) ? 'TCP : ' . $settings['tcpport'] . ', UDP : ' . $settings['udpport'] : 'N/A on ' . $stats['version'] ?>
                 <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : tcpport & udpport<br/>TCP &amp; UDP listen port</span></a>
+                    <a href="#" class="tooltip green">?<span>Internal name : tcpport &amp; udpport<br/>TCP &amp; UDP listen port</span></a>
                 </span>
             </div>
             <div class="line">
@@ -373,7 +373,6 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
             <div class="line">
                 <span class="left">Used</span>
                 <?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
-                <span class="right"></span>
             </div>
             <div class="line">
                 <span class="left">Total</span>
@@ -394,7 +393,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&chdl=Wasted : <?php echo $wasted_percent; ?>%|Used : <?php echo $used_percent; ?>%|Free : <?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&amp;chs=280x225&amp;cht=p&amp;chco=B5463F|2A707B|FFFFFF&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20:%20<?php echo $wasted_percent; ?>%|Used%20:%20<?php echo $used_percent; ?>%|Free%20:%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
             </div>
         </div>
         <br/>
