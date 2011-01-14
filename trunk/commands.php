@@ -87,7 +87,7 @@ switch($request)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['request_api'])->set($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_data'], $_GET['request_duration']));
             }
         }
         # Ask for set on one server
@@ -163,7 +163,7 @@ switch($request)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api($_GET['request_api'])->flush_all($server['hostname'], $server['port'], $_GET['request_delay']));
             }
         }
         # Ask for flush_all on one server
