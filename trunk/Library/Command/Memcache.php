@@ -224,4 +224,34 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->flush();
         return 'OK';
     }
+
+    /**
+     * Search for item
+     * Return all the items matching parameters if successful, false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to search
+     *
+     * @return array
+     */
+    function search($server, $port, $search)
+    {
+        throw new Exception('PECL Memcache does not support search function, use Server instead');
+    }
+
+    /**
+     * Execute a telnet command on a server
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $command Command to execute
+     *
+     * @return String
+     */
+    function telnet($server, $port, $command)
+    {
+        throw new Exception('PECL Memcache does not support telnet, use Server instead');
+    }
 }

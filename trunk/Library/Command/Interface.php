@@ -112,4 +112,28 @@ interface Library_Command_Interface
      * @return String
      */
     function flush_all($server, $port, $delay);
+
+    /**
+     * Search for item
+     * Return all the items matching parameters if successful, false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to search
+     *
+     * @return array
+     */
+    function search($server, $port, $search);
+
+    /**
+     * Execute a telnet command on a server
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $command Command to execute
+     *
+     * @return String
+     */
+    function telnet($server, $port, $command);
 }
