@@ -359,13 +359,19 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 <?php
 } ?>
     </div>
-
+<?php
+    # Making cache size stats
+    $wasted_percent = sprintf('%.0f', $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100);
+    $used_percent = sprintf('%.0f', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
+    $free_percent = sprintf('%.0f', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
+?>
     <div class="size-4" style="float:left; padding-left:9px;clear:right;margin-top:18px;">
         <div class="sub-header corner padding">Cache Size <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Used</span>
                 <?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
+                <span class="right"></span>
             </div>
             <div class="line">
                 <span class="left">Total</span>
@@ -383,10 +389,10 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
          </div>
          <br/>
 
-        <div class="sub-header corner padding">Pages Allocation <span class="green">Graphic</span></div>
+        <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100; ?>,<?php echo ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100; ?>&chdl=Wasted|Used|Free" alt="Cache Size by GoogleCharts" width="280" height="225"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&chs=280x225&cht=p&chco=B5463F|2A707B|FFFFFF&chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&chdl=Wasted : <?php echo $wasted_percent; ?>%|Used : <?php echo $used_percent; ?>%|Free : <?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
             </div>
         </div>
         <br/>
