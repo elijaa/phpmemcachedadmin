@@ -1,31 +1,4 @@
    <div style="float:left;">
-<?php
-if((!is_writeable(Library_Configuration_Loader::path())) || (!is_writeable($_ini->get('file_path'))))
-{ ?>
-        <div class="header corner full-size padding" style="margin-top:18px;text-align:center;">
-            Errors are detected !
-        </div>
-        <div class="container corner padding">
-<?php
-    if(!is_writeable(Library_Configuration_Loader::path()))
-    { ?>
-            <strong>You cannot save configuration if this file is unwritable</strong><br/>
-            File <?php echo realpath(Library_Configuration_Loader::path()); ?> is in mode
-            <?php echo substr(sprintf('%o', fileperms(Library_Configuration_Loader::path())), -4); ?><br/>
-            You can manually change permissions of this file or try to fix it by clicking <a class="green" href="configure.php?request_write=unlock">here</a>
-<?php
-    }
-    if(!is_writeable($_ini->get('file_path')))
-    { ?>
-            <strong>You cannot use Live Stats if this directory is unwritable</strong><br/>
-            File <?php echo realpath(Library_Configuration_Loader::path()); ?> is in mode
-            <?php echo substr(sprintf('%o', fileperms(Library_Configuration_Loader::path())), -4); ?><br/>
-            You can manually change permissions of this file or try to fix it by clicking <a class="green" href="configure.php?request_write=unlock">here</a>
-<?php
-    } ?>
-        </div>
-<?php
-} ?>
    <div class="size-0" style="float:left;margin-top:18px;">
 
         <div class="sub-header corner padding">Commands <span class="green">Configuration</span></div>
@@ -157,7 +130,7 @@ if((!is_writeable(Library_Configuration_Loader::path())) || (!is_writeable($_ini
             # Looking into each cluster
             foreach($_ini->get('servers') as $cluster => $servers)
             {
-            $cluster_id++; ?>
+                $cluster_id++; ?>
             <div id="cluster_<?php echo $cluster_id; ?>">
                 <hr/>
                 <strong>Cluster <input type="text" style="width:200px;" name="cluster[<?php echo $cluster_id; ?>]" value="<?php echo $cluster; ?>"/></strong>
