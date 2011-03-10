@@ -1,17 +1,8 @@
-.menu {
-	border: solid 1px #A0312A;
-	color: #EEEEEE;
-	width: 198px;
-}
-
-.item {
-	font-family: Bitstream Vera Sans Mono;
-}
-
-#loading {
-	text-decoration: blink;
-	width: 680px;
-	visibility: hidden;
+body {
+	background-color: #FEFEFE;
+	font-family: Verdana, Tahoma, Segoe UI, Arial;
+	font-size: 0.8em;
+	margin-top: 10px;
 }
 a {
     color: #EEEEEE;
@@ -20,29 +11,21 @@ a {
 a:hover {
     color: #AA0000;
 }
-a.tooltip span {
-	display: none;
-	padding: 2px 3px;
-	margin-left: 8px;
-	width: 300px;
+
+.menu {
+    border: solid 1px #A0312A;
+    color: #EEEEEE;
+    width: 198px;
 }
 
-a.tooltip:hover span {
-	border: 1px solid #514845;
-	background: url("../Images/635855.png") repeat-x scroll 50% 50%
-		#635855;
-	font-weight: none;
-	color: #ffffff;
-	display: inline;
-	position: absolute;
+.item {
+    font-family: Bitstream Vera Sans Mono;
 }
 
-body {
-	color: #000000;
-	background-color: #FFFFFF;
-	font-family: Verdana, Tahoma, Segoe UI, Arial;
-	font-size: 0.8em;
-	margin-top: 10px;
+#loading {
+    text-decoration: blink;
+    width: 680px;
+    visibility: hidden;
 }
 
 .full-size {
