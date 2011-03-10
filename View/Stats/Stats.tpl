@@ -217,7 +217,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
         <div class="sub-header corner padding">Server <span class="green">Configuration</span></div>
         <div class="container corner padding">
             <div class="line">
-                <span class="left setting">Accepting Connections</span>
+                <span class="left setting" title="Internal name : accepting_conns&#013;Whether the server is accepting connection or not">Accepting Connections</span>
                 <?php
                 # Northscale/Membase server specific
                 if(isset($stats['accepting_conns']))
@@ -228,114 +228,66 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 {
                     echo 'N/A on ' . $stats['version'];
                 }?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : accepting_conns<br/>Whether the server is accepting connection or not</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Max Bytes</span>
+                <span class="left setting" title="Internal name : maxbytes&#013;Maximum number of bytes allowed in this cache">Max Bytes</span>
                 <?php echo (isset($settings['maxbytes'])) ? Library_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : maxbytes<br/>Maximum number of bytes allowed in this cache</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Max Connection</span>
+                <span class="left setting" title="Internal name : maxconns&#013;Maximum number of clients allowed">Max Connection</span>
                 <?php echo (isset($settings['maxconns'])) ? $settings['maxconns'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : maxconns<br/>Maximum number of clients allowed</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">TCP/UDP Port</span>
+                <span class="left setting" title="Internal name : tcpport &amp; udpport&#013;TCP &amp; UDP listen port">TCP/UDP Port</span>
                 <?php echo (isset($settings['tcpport'], $settings['udpport'])) ? 'TCP : ' . $settings['tcpport'] . ', UDP : ' . $settings['udpport'] : 'N/A on ' . $stats['version'] ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : tcpport &amp; udpport<br/>TCP &amp; UDP listen port</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Listen Interface</span>
+                <span class="left setting" title="Internal name : inter&#013;Listen interface">Listen Interface</span>
                 <?php echo (isset($settings['inter'])) ? $settings['inter'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : inter<br/>Listen interface</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Evictions</span>
+                <span class="left setting" title="Internal name : evictions&#013;When Off, LRU evictions are disabled">Evictions</span>
                 <?php echo (isset($settings['evictions'])) ? ucfirst($settings['evictions']) : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : evictions<br/>When Off, LRU evictions are disabled</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Path to Domain Socket</span>
+                <span class="left setting" title="Internal name : domain_socket&#013;Path to the domain socket (if any)">Path to Domain Socket</span>
                 <?php echo (isset($settings['domain_socket'])) ? $settings['domain_socket'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : domain_socket<br/>Path to the domain socket (if any)</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Domain Socket Umask</span>
+                <span class="left setting" title="Internal name : umask&#013;Umask for the creation of the domain socket">Domain Socket Umask</span>
                 <?php echo (isset($settings['umask'])) ? $settings['umask'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : umask<br/>Umask for the creation of the domain socket</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Chunk Size</span>
+                <span class="left setting" title="Internal name : chunk_size&#013;Minimum space allocated for key + value + flags">Chunk Size</span>
                 <?php echo (isset($settings['chunk_size'])) ? $settings['chunk_size'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : chunk_size<br/>Minimum space allocated for key + value + flags</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Chunk Growth Factor</span>
+                <span class="left setting" title="Internal name : growth_factor&#013;Chunk size growth factor">Chunk Growth Factor</span>
                 <?php echo (isset($settings['growth_factor'])) ? $settings['growth_factor'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : growth_factor<br/>Chunk size growth factor</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Max Threads</span>
+                <span class="left setting" title="Internal name : num_threads&#013;Number of threads (including dispatch)">Max Threads</span>
                 <?php echo (isset($settings['num_threads'])) ? $settings['num_threads'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : num_threads<br/>Number of threads (including dispatch)</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Detail Enabled</span>
+                <span class="left setting" title="Internal name : detail_enabled&#013;If yes, stats detail is enabled">Detail Enabled</span>
                 <?php echo (isset($settings['detail_enabled'])) ? ucfirst($settings['detail_enabled']) : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : detail_enabled<br/>If yes, stats detail is enabled</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">Max IO Ops/Event</span>
+                <span class="left setting" title="Internal name : reqs_per_event&#013;Max num IO ops processed within an event">Max IO Ops/Event</span>
                 <?php echo (isset($settings['reqs_per_event'])) ? $settings['reqs_per_event'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : reqs_per_event<br/>Max num IO ops processed within an event</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">CAS Enabled</span>
+                <span class="left setting" title="Internal name : cas_enabled&#013;When no, CAS is not enabled for this server">CAS Enabled</span>
                 <?php echo (isset($settings['cas_enabled'])) ? ucfirst($settings['cas_enabled']) : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : cas_enabled<br/>When no, CAS is not enabled for this server</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">TCP Listen Backlog</span>
+                <span class="left setting" title="Internal name : tcp_backlog&#013;TCP listen backlog">TCP Listen Backlog</span>
                 <?php echo (isset($settings['tcp_backlog'])) ? $settings['tcp_backlog'] : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : tcp_backlog<br/>TCP listen backlog</span></a>
-                </span>
             </div>
             <div class="line">
-                <span class="left setting">SASL Auth</span>
+                <span class="left setting" title="Internal name : auth_enabled_sasl&#013;SASL auth requested and enabled">SASL Auth</span>
                 <?php echo (isset($settings['auth_enabled_sasl'])) ? ucfirst($settings['auth_enabled_sasl']) : 'N/A on ' . $stats['version']; ?>
-                <span class="right">
-                    <a href="#" class="tooltip green">?<span>Internal name : auth_enabled_sasl<br/>SASL auth requested and enabled</span></a>
-                </span>
             </div>
         </div>
 <?php
