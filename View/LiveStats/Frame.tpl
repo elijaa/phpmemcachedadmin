@@ -4,7 +4,7 @@
     setTimeout("ajax(page,'stats')", <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
 </script>
 
-<div style="float:left;margin-top:18px;">
+<div style="float:left;">
     <div class="sub-header corner full-size padding">Live <span class="green">Stats</span></div>
     <?php
     # Refresh rate increased

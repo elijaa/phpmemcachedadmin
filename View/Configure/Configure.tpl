@@ -1,5 +1,5 @@
    <div style="float:left;">
-   <div class="size-0" style="float:left;margin-top:18px;">
+   <div class="size-0" style="float:left;">
 
         <div class="sub-header corner padding">Commands <span class="green">Configuration</span></div>
         <div class="container corner padding" style="padding-right:14px;">
@@ -47,7 +47,6 @@
             </div>
             </form>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Live Stats <span class="green">Configuration</span></div>
         <div class="container corner padding" style="padding-right:14px;">
@@ -82,7 +81,6 @@
             </div>
             </form>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Miscellaneous <span class="green">Configuration</span></div>
         <div class="container corner padding" style="padding-right:14px;">
@@ -109,7 +107,7 @@
         </div>
 
     </div>
-    <div class="size-0" style="float:left;padding-left:9px;margin-top:18px;">
+    <div class="size-0" style="float:left;padding-left:9px;">
         <div class="sub-header corner padding">Server <span class="green">List</span></div>
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=servers">
@@ -163,9 +161,8 @@
             server_id = <?php echo $server_id; ?>;
             cluster_id = <?php echo $cluster_id; ?>;
         </script>
-        <br/>
 
-        <div class="container corner padding">
+        <div class="container corner padding" style="margin-top:10px;">
             <div class="line">
                 For more information about configuring phpMemCacheAdmin, see installation guide
                 <a href="http://code.google.com/p/phpmemcacheadmin/wiki/InstallationGuide" target="_blank"><span class="green">here</span></a>

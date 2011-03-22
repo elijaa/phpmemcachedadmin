@@ -2,7 +2,7 @@
 # Server seems down
 if((isset($stats)) && (($stats === false) || ($stats == array())))
 { ?>
-    <div class="header corner full-size padding" style="margin-top:18px;text-align:center;">
+    <div class="header corner full-size padding" style="margin-top:10px;text-align:center;">
         <?php
         # Asking server of cluster stats
         if(isset($_GET['server']))
@@ -29,7 +29,7 @@ if((isset($stats)) && (($stats === false) || ($stats == array())))
 elseif((isset($slabs)) && ($slabs === false))
 {
 ?>
-    <div class="header corner full-size padding" style="margin-top:18px;text-align:center;">
+    <div class="header corner full-size padding" style="margin-top:10px;text-align:center;">
         No slabs used in this server !
     </div>
     <div class="container corner full-size padding">
@@ -43,7 +43,7 @@ elseif((isset($slabs)) && ($slabs === false))
 elseif((isset($items)) && ($items === false))
 {
 ?>
-    <div class="header corner full-size padding" style="margin-top:18px;text-align:center;">
+    <div class="header corner full-size padding" style="margin-top:10px;text-align:center;">
         No item in this slab !
     </div>
     <div class="container corner full-size padding">

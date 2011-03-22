@@ -1,4 +1,4 @@
-    <div style="float:left;margin-top:18px;">
+    <div style="float:left;">
         <div class="sub-header corner full-size padding">Console</div>
         <div class="container corner full-size padding">
             <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size"></pre>
@@ -9,7 +9,6 @@
             </span>
             <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
         </div>
-        <br/>
 
         <div class="sub-header corner full-size padding">Execute predefined <span class="green">Command</span></div>
         <div class="container corner full-size padding">
@@ -83,7 +82,6 @@
                 </tr>
             </table>
         </div>
-        <br/>
 
         <div class="sub-header corner full-size padding">Execute Telnet <span class="green">Commands</span></div>
         <div class="container corner full-size padding">
@@ -123,7 +121,6 @@
                 </tr>
             </table>
         </div>
-        <br/>
 
         <div class="sub-header corner full-size padding">Search <span class="green">Key</span></div>
         <div class="container corner full-size padding">

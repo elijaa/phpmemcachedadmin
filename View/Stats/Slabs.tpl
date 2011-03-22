@@ -1,4 +1,4 @@
-        <div class="size-4" style="float:left;margin-top:18px;">
+        <div class="size-4" style="float:left;">
         <div class="sub-header corner padding">Slabs <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -14,9 +14,9 @@
                 <?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
             </div>
         </div>
-        <br/>
     </div>
-    <div class="size-2" style="float:left;padding-left:9px;margin-top:18px;">
+
+    <div class="size-2" style="float:left;padding-left:9px;margin-top:10px;">
         <form method="post" id="flushForm" action="commands.php">
         <div class="header corner padding size-3cols" style="text-align:center;">
             <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
@@ -116,7 +116,6 @@ else
                 </div>
 <?php } ?>
             </div>
-            <br/>
             </td>
 <?php
             $actualSlab++;
