@@ -1,4 +1,4 @@
-    <div class="size-4" style="float:left;margin-top:18px;">
+    <div class="size-4" style="float:left;">
         <div class="sub-header corner padding">Get <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -16,7 +16,6 @@
                 <?php echo $stats['get_rate']; ?> Request/sec
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Set <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -29,7 +28,6 @@
                 <?php echo $stats['set_rate']; ?> Request/sec
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Delete <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -48,7 +46,6 @@
                 <?php echo (isset($stats['delete_hits'])) ? $stats['delete_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Cas <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -72,7 +69,6 @@
                 <?php echo (isset($stats['cas_hits'])) ? $stats['cas_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Increment <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -91,7 +87,6 @@
                 <?php echo (isset($stats['incr_hits'])) ? $stats['incr_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Decrement <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -110,7 +105,6 @@
                 <?php echo (isset($stats['decr_hits'])) ? $stats['decr_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Flush <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -125,13 +119,13 @@
         </div>
     </div>
 
-    <div class="size-2" style="float:left;padding-left:9px;margin-top:18px;">
+    <div class="size-2" style="float:left;padding-left:9px;">
 <?php
 # Viewing a single server
 if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 { ?>
         <form method="post" id="flushForm" action="commands.php">
-        <div class="header corner padding size-3cols" style="text-align:center;">
+        <div class="header corner padding size-3cols" style="text-align:center;margin-top:10px;">
             <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
             <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
             <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
@@ -139,10 +133,9 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
         </div>
         </form>
-        <br/>
 <?php
 } ?>
-        <div class="sub-header corner padding">Server <span class="green">Stats</span></div>
+        <div class="sub-header corner padding"><?php echo (isset($_GET['server'])) && ($_ini->server($_GET['server'])) ? 'Server' : 'Cluster'; ?> <span class="green">Stats</span></div>
         <div class="container corner padding size-3cols">
 <?php
 # Viewing a single server
@@ -189,7 +182,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 <?php
 } ?>
         </div>
-        <br/>
+
         <div class="sub-header corner padding">Eviction &amp; Reclaimed <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -209,7 +202,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <?php echo (isset($stats['reclaimed'])) ? $stats['reclaimed_rate'] . ' Reclaimed/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        <br/>
+
 <?php
 # Viewing a server
 if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
@@ -302,7 +295,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
     { ?>
             <div class="line">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
-                <span class="right"><a href="index.php?server=<?php echo $server['hostname'] . ':' . $server['port']; ?>" class="green">See Server Stats</a></span>
+                <span class="right" style="font-weight:bold;"><a href="index.php?server=<?php echo $server['hostname'] . ':' . $server['port']; ?>" class="green">See Server Stats</a></span>
                 <div class="line" style="margin-left:5px;">
                     <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
@@ -319,7 +312,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
     $used_percent = sprintf('%.0u', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
     $free_percent = sprintf('%.0u', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
 ?>
-    <div class="size-4" style="float:left; padding-left:9px;clear:right;margin-top:18px;">
+    <div class="size-4" style="float:left; padding-left:9px;clear:right;">
         <div class="sub-header corner padding">Cache Size <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -340,23 +333,20 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                 <?php echo sprintf('%.1f', $stats['bytes'] / $stats['limit_maxbytes'] * 100, 1); ?>%
             </div>-->
          </div>
-         <br/>
 
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,F2F2F2&amp;chs=280x225&amp;cht=p&amp;chco=B5463F|2A707B|FFFFFF&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20:%20<?php echo $wasted_percent; ?>%|Used%20:%20<?php echo $used_percent; ?>%|Free%20:%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,ebebeb&amp;chs=280x225&amp;cht=p&amp;chco=b5463f|2a707b|ffffff&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20:%20<?php echo $wasted_percent; ?>%|Used%20:%20<?php echo $used_percent; ?>%|Free%20:%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=280x225&amp;chl=Hit|Miss&amp;chf=bg,s,f2f2f2&amp;chco=2A707B|B5463F&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="280" height="225"/>
+            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=280x235&amp;chl=Hit|Miss&amp;chf=bg,s,ebebeb&amp;chco=2a707b|b5463f&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="280" height="235"/>
             </div>
         </div>
-        <br/>
 
         <div class="sub-header corner padding">Network <span class="green">Stats</span></div>
         <div class="container corner padding">

@@ -1,7 +1,7 @@
 <?php
 if((isset($response)) && ($response != array()))
 { ?>
-    <div class="sub-header corner full-size padding" style="margin-top:18px;">Result</div>
+    <div class="sub-header corner full-size padding">Result</div>
     <div class="container corner full-size padding">
     <?php
     foreach($response as $server => $result)
@@ -13,7 +13,7 @@ if((isset($response)) && ($response != array()))
     </div>
 <?php
 } ?>
-    <div class="sub-header corner full-size padding" style="margin-top:18px;">
+    <div class="sub-header corner full-size padding">
         Items in Slab <?php echo $_GET['slab']; ?>, only showing first <?php echo $_ini->get('max_item_dump'); ?> items
         <span style="float:right;"><a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Back to Server Slabs</a></span>
     </div>
