@@ -56,8 +56,7 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
     </div>
 
 <!--[if IE]>
-<br/>
-<div class="header corner full-size padding" style="text-align:center;">
+<div class="header corner full-size padding" style="text-align:center;margin-top:10px;">
 Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
 </div>
 <![endif]-->
