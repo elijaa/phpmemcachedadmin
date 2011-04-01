@@ -1,6 +1,6 @@
 <?php
 # Constants declaration
-define('CURRENT_VERSION', '1.2.0 Beta');
+define('CURRENT_VERSION', '1.2.0');
 
 # Autoloader
 function __autoload($class)

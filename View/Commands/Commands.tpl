@@ -89,7 +89,7 @@
                 <tr valign="top">
                     <td class="size-0 padding" style="padding-right:14px;">
                     <div class="line" style="text-align:center;">
-                        Execute command on one or all memcached servers<br/>
+                        Execute telnet command on one or all memcached servers<br/>
                         <hr/>
                     </div>
                     <div class="line" style="text-align:center;">
@@ -154,7 +154,7 @@
                     or impact your memcached servers performances.
                     <br/>Also keep in mind that it does not list all keys. It lists keys up to a certain buffer size (1 or 2MB), and it list key that are expired.
                     <br/>
-                    <br/>You can use a PCRE regular expression
+                    <br/>You can also use a PCRE regular expression
                     </td>
                 </tr>
             </table>
