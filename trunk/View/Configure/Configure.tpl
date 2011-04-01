@@ -5,7 +5,7 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=commands">
             <div class="line">
-                Memcached commands API used by phpMemCacheAdmin
+                Memcached commands API used by phpMemCacheAdmin<br/>
                 <hr/>
             </div>
             <div class="line">
@@ -47,11 +47,11 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=live_stats">
             <div class="line">
-                Configuration for Live Stats<br/>
+                Alert &amp; refresh rate for Live Stats<br/>
                 <hr/>
             </div>
             <div class="line">
-                <span class="left">Refresh Rate</span>
+                <span class="left">Refresh Rate in sec</span>
                 <span class="right"><input type="text" name="refresh_rate" value="<?php echo $_ini->get('refresh_rate'); ?>"/></span>
             </div>
             <div class="line">
@@ -81,11 +81,11 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=miscellaneous">
             <div class="line">
-                Miscellaneous configuration
+                Server connection timeout &amp; miscellaneous<br/>
                 <hr/>
             </div>
             <div class="line">
-                <span class="left">Timeout</span>
+                <span class="left">Timeout in sec</span>
                 <span class="right"><input type="text" name="connection_timeout" value="<?php echo $_ini->get('connection_timeout'); ?>"/></span>
             </div>
             <div class="line">
@@ -105,7 +105,7 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=servers">
             <div class="line">
-                Cluster list
+                Servers list used by phpMemCacheAdmin<br/>
             </div>
             <div id="server_form">
 <?php
