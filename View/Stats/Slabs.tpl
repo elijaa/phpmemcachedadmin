@@ -17,15 +17,9 @@
     </div>
 
     <div class="size-2" style="float:left;padding-left:9px;margin-top:10px;">
-        <form method="post" id="flushForm" action="commands.php">
         <div class="header corner padding size-3cols" style="text-align:center;">
-            <a href="?server=<?php echo $_GET['server']; ?>">See Stats</a> |
-            <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
-            <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
-            <input type="hidden" name="request_command" value="flush_all"/>
-            <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
+            <a href="?server=<?php echo $_GET['server']; ?>">See <?php echo $_GET['server']; ?> Stats</a>
         </div>
-        </form>
         <br/>
     </div>
 
@@ -92,7 +86,7 @@ if($slab['used_chunks'] > 0)
 { ?>
                 <div class="line">
                     <span class="left slabs">Evicted</span>
-                    <?php echo $slab['items:evicted']; ?>
+                    <?php echo (isset($slab['items:evicted'])) ? $slab['items:evicted'] : 'N/A'; ?>
                 </div>
 <!--
                 <div class="line">
