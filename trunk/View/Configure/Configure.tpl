@@ -5,12 +5,7 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=commands">
             <div class="line">
-                Memcached commands API used by phpMemCacheAdmin<br/><br/>
-                <strong>Recommendations :</strong><br/>
-                - Use Server for stats, slabs, items<br/>
-                - PECL Memcached does not support the slabs and items commands<br/>
-                - If you're using PECL Memcache in your scripts, don't use PECL Memcache, same thing for PECL Memcached<br/>
-                - PECL Memcache can't use delay with flush_all<br/>
+                Memcached commands API used by phpMemCacheAdmin
                 <hr/>
             </div>
             <div class="line">
@@ -86,9 +81,7 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=miscellaneous">
             <div class="line">
-                Miscellaneous configuration used by phpMemCacheAdmin<br/><br/>
-                <strong>Recommendations :</strong><br/>
-                - Don't specify a max items too heavy, use get command instead to see a particular key
+                Miscellaneous configuration
                 <hr/>
             </div>
             <div class="line">
@@ -112,11 +105,7 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=servers">
             <div class="line">
-                Servers list used by phpMemCacheAdmin<br/><br/>
-                <strong>Recommendations :</strong><br/>
-                - Use the scheme hostname:port even if port is 11211
-                <br/>
-                - You can specify multiple instance on different port on same server
+                Cluster list
             </div>
             <div id="server_form">
 <?php
@@ -164,7 +153,7 @@
 
         <div class="container corner padding" style="margin-top:10px;">
             <div class="line">
-                For more information about configuring phpMemCacheAdmin, see installation guide
+                For more information about configuring phpMemcachedAdmin, see installation guide
                 <a href="http://code.google.com/p/phpmemcacheadmin/wiki/InstallationGuide" target="_blank"><span class="green">here</span></a>
             </div>
         </div>

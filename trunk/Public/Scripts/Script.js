@@ -138,12 +138,6 @@ function onExecute(target, append) {
     }
 }
 
-function flushServer(obj) {
-	if (confirm('Are you sure you want to execute flush_all on server') == true) {
-		obj.submit();
-	}
-	return false;
-}
 var server_id = 1;
 var cluster_id = 1;
 

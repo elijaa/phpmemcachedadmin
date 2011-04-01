@@ -124,15 +124,9 @@
 # Viewing a single server
 if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 { ?>
-        <form method="post" id="flushForm" action="commands.php">
         <div class="header corner padding size-3cols" style="text-align:center;margin-top:10px;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a> |
-            <input type="hidden" name="request_server" value="<?php echo $_GET['server']; ?>"/>
-            <input type="hidden" name="request_api" value="<?php echo $_ini->get('flush_all_api'); ?>"/>
-            <input type="hidden" name="request_command" value="flush_all"/>
-            <a href="#" onclick="flushServer(document.getElementById('flushForm'));">Flush this Server</a>
+            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a>
         </div>
-        </form>
 <?php
 } ?>
         <div class="sub-header corner padding"><?php echo (isset($_GET['server'])) && ($_ini->server($_GET['server'])) ? 'Server' : 'Cluster'; ?> <span class="green">Stats</span></div>
