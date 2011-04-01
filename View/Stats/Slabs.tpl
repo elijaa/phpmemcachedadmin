@@ -18,7 +18,7 @@
 
     <div class="size-2" style="float:left;padding-left:9px;margin-top:10px;">
         <div class="header corner padding size-3cols" style="text-align:center;">
-            <a href="?server=<?php echo $_GET['server']; ?>">See <?php echo $_GET['server']; ?> Stats</a>
+            <a href="?server=<?php echo $_GET['server']; ?>">See this Server Stats</a>
         </div>
         <br/>
     </div>

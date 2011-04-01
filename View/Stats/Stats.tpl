@@ -125,7 +125,7 @@
 if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 { ?>
         <div class="header corner padding size-3cols" style="text-align:center;margin-top:10px;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See Slabs Stats</a>
+            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See this Server Slabs Stats</a>
         </div>
 <?php
 } ?>

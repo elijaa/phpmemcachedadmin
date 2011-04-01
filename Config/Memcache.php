@@ -1,5 +1,7 @@
 <?php
 return array (
+  'username' => 'eli',
+  'password' => '40bd001563085fc35165329ea1ff5c5ecbdbbeef',
   'stats_api' => 'Server',
   'slabs_api' => 'Server',
   'items_api' => 'Server',
@@ -14,15 +16,38 @@ return array (
   'hit_rate_alert' => '100',
   'eviction_alert' => '0',
   'file_path' => 'Temp/',
-  'servers' =>
+  'servers' => 
   array (
-    'Default' =>
+    'Default' => 
     array (
-      '127.0.0.1:11211' =>
+      '192.120.1.13:11211' => 
+      array (
+        'hostname' => '192.120.1.13',
+        'port' => '11211',
+      ),
+    ),
+    'sdvdvsdvsd' => 
+    array (
+      'sdvvsd:port' => 
+      array (
+        'hostname' => 'sdvvsd',
+        'port' => 'port',
+      ),
+    ),
+    'toto' => 
+    array (
+      '127.0.0.1:11211' => 
       array (
         'hostname' => '127.0.0.1',
         'port' => '11211',
       ),
     ),
+  ),
+  'auth_api' => 
+  array (
+    'commands' => 'basic',
+    'stats' => 'none',
+    'configuration' => 'basic',
+    'live' => 'none',
   ),
 );
