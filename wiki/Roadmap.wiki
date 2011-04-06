@@ -26,7 +26,7 @@
  * Fixed the live stats initializing based on refresh time
  * Fixed some slabs not displayed
 
-===Version 1.2.0 : XX/XX/2010===
+===Version 1.2.0 : 06/04/2011===
 General
  * Improved code, improved error handling
  * Improved look & feel
