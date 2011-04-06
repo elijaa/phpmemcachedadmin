@@ -139,8 +139,11 @@ switch($request)
                 $stats = Library_Analysis::merge($stats, $data['stats']);
 
                 # Computing stats
-                $slabs['total_malloced'] += $data['slabs']['total_malloced'];
-                $slabs['total_wasted'] += $data['slabs']['total_wasted'];
+                if(isset($data['slabs']['total_malloced'], $data['slabs']['total_wasted']))
+                {
+	                $slabs['total_malloced'] += $data['slabs']['total_malloced'];
+	                $slabs['total_wasted'] += $data['slabs']['total_wasted'];
+                }
                 $status[$server['hostname'] . ':' . $server['port']] = ($data['stats'] != array()) ? $data['stats']['version'] : '';
                 $uptime[$server['hostname'] . ':' . $server['port']] = ($data['stats'] != array()) ? $data['stats']['uptime'] : '';
             }
