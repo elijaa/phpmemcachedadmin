@@ -107,7 +107,7 @@ class Library_HTML_Components
             {
                 $return .= $string . "\r\n";
             }
-            return $header . htmlentities($return) . "\r\n";
+            return $header . htmlentities($return, ENT_NOQUOTES | ENT_IGNORE, "UTF-8") . "\r\n";
         }
         return $header . $return . $data . "\r\n";
     }
