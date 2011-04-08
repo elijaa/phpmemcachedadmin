@@ -1,6 +1,6 @@
 #summary Read before installing
 #labels m
-= Installation Guide Version 1.1.3 =
+= Installation Guide =
 
 == 1. Download ==
 
@@ -8,19 +8,19 @@ Download latest release from Google Code : http://code.google.com/p/phpmemcachea
 
 == 2. Install the program on an Apache/PHP server ==
 
+This is the most important part !
+
 *Make sure that Apache has rw right in the temp file folder (default : Temp/) and the entire config directory (Config/)*
 
 
 == 3. Go to Menu > Edit Configuration ==
-
-http://www.elijaa.org/blog/public/phpMemCacheAdmin_configuration.png
 
 *Remember to save after each configuration part*
 
 
 === Server List ===
 
-By default there is only a localhost:11211, you can add your server or instance on same server by typing hostname:port
+By default there is only a localhost:11211, you can add your clusters and then your server or instance on same server by typing hostname:port
 
 =You can use phpMemCacheAdmin now and use the default configuration for the rest=
 
