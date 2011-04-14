@@ -1,30 +1,7 @@
 #summary Roadmap, ideas, release notes
 
-===Version 1.0.0 : 01/04/2010===
- * First public release
-
-===Version 1.1.0 : 14/04/2010===
- * Support of multiple instance of memcached on same server
- * Page to execute get, set, delete or flush_all on one or all servers
- * Live stats : a top-like stats tools
- * Configuration page to update your configuration without editing an ini file
- * Various improvements and fixes
-
-===Version 1.1.1 : 19/04/2010===
- * Added the reclaimed stats and reclaimed rate (New in Memcached 1.4.5)
- * Added the eviction rate
- * Added a "Are you sure ?" for flush_all command
- * Fixed the eviction rate bug on live stats
- * Fixed the PECL Memcache/Memcached API bug with get commands
- * Fixed the flush_all link not working from slabs stats
-
-===Version 1.1.2 : 06/05/2010===
- * Fixed the 1.0 rates in live stats
- * Added the version number
-
-===Version 1.1.3 : 18/05/2010===
- * Fixed the live stats initializing based on refresh time
- * Fixed some slabs not displayed
+===Version 1.2.1 : 09/04/2011===
+ * Fixing issue #10 : invalid encoding on return command
 
 ===Version 1.2.0 : 06/04/2011===
 General
@@ -59,3 +36,29 @@ Commands :
  * Added a Console to show results (Loading, clear console, ...)
  * Added a "Execute a telnet command" part
  * Added an experimental "Search a key" part
+
+===Version 1.1.3 : 18/05/2010===
+ * Fixed the live stats initializing based on refresh time
+ * Fixed some slabs not displayed
+
+===Version 1.1.2 : 06/05/2010===
+ * Fixed the 1.0 rates in live stats
+ * Added the version number
+
+===Version 1.1.1 : 19/04/2010===
+ * Added the reclaimed stats and reclaimed rate (New in Memcached 1.4.5)
+ * Added the eviction rate
+ * Added a "Are you sure ?" for flush_all command
+ * Fixed the eviction rate bug on live stats
+ * Fixed the PECL Memcache/Memcached API bug with get commands
+ * Fixed the flush_all link not working from slabs stats
+
+===Version 1.1.0 : 14/04/2010===
+ * Support of multiple instance of memcached on same server
+ * Page to execute get, set, delete or flush_all on one or all servers
+ * Live stats : a top-like stats tools
+ * Configuration page to update your configuration without editing an ini file
+ * Various improvements and fixes
+
+===Version 1.0.0 : 01/04/2010===
+ * First public release
