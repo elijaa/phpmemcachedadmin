@@ -403,7 +403,7 @@ class Library_Command_Server implements Library_Command_Interface
             if(($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port)))
             {
                 # Parsing result
-                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[(?:.*)\]\r\n/mU', $result, $matchs, PREG_SET_ORDER);
+                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[(?:.*)\]\r\n/imU', $result, $matchs, PREG_SET_ORDER);
 
                 foreach($matchs as $item)
                 {
