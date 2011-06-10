@@ -17,3 +17,7 @@
 
 *- Live stats doesn't refresh or doesn't work*
   Check if Apache have the right to read and write in the temp folder (default : Temp/)
+
+*- Memory Usage is buggy like
+
+http://blog.elijaa.org/public/phpMemcachedAdmin_bug.png
