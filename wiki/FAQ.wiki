@@ -1,4 +1,4 @@
-#summary FAQ
+#summary FAQ & Known Bug
 
 *- Configuration file doesn't seem to work*
   Your php include_path must have the .(dot) in it and the file must be in read and write mod for Apache
