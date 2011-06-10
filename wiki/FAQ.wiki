@@ -18,6 +18,8 @@
 *- Live stats doesn't refresh or doesn't work*
   Check if Apache have the right to read and write in the temp folder (default : Temp/)
 
-*- Memory Usage is buggy like
+*- Cache Size is displaying erroneous statistics
 
 http://blog.elijaa.org/public/phpMemcachedAdmin_bug.png
+
+This is a bug in Memcached 1.4.5 stats slabs return command : http://code.google.com/p/memcached/issues/detail?id=163
