@@ -1,5 +1,6 @@
 #summary Read before installing
 #labels m
+
 = Installation Guide =
 
 == 1. Download ==
@@ -17,12 +18,17 @@ This is the most important part !
 
 *Remember to save after each configuration part*
 
-
 === Server List ===
 
 By default there is only a localhost:11211, you can add your clusters and then your server or instance on same server by typing hostname:port
 
 =You can use phpMemCacheAdmin now and use the default configuration for the rest=
+
+
+For a detailed guide for phpMemcachedAdmin installation on Apache or Nginx see
+
+http://www.kutukupret.com/2011/06/13/monitoring-and-debugging-memcached-server-using-phpmemcachedadmin/
+
 
 
 
