@@ -25,9 +25,13 @@ By default there is only a localhost:11211, you can add your clusters and then y
 =You can use phpMemCacheAdmin now and use the default configuration for the rest=
 
 
-For a detailed guide for phpMemcachedAdmin installation on Apache or Nginx see
+*For a detailed guide for phpMemcachedAdmin installation on Apache or Nginx see*
 
 http://www.kutukupret.com/2011/06/13/monitoring-and-debugging-memcached-server-using-phpmemcachedadmin/
+
+
+
+
 
 
 
