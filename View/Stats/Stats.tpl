@@ -107,7 +107,7 @@
         </div>
 
         <div class="sub-header corner padding">Flush <span class="green">Stats</span></div>
-        <div class="container corner padding">
+        <div class="container corner padding" style="height:48px;">
             <div class="line">
                 <span class="left">Total</span>
                 <?php echo (isset($stats['cmd_flush'])) ? Library_Analysis::hitResize($stats['cmd_flush']) : 'N/A on ' . $stats['version']; ?>
@@ -204,7 +204,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
         <div class="sub-header corner padding">Server <span class="green">Configuration</span></div>
         <div class="container corner padding">
             <div class="line">
-                <span class="left setting" title="Internal name : accepting_conns&#013;Whether the server is accepting connection or not">Accepting Connections</span>
+                <span class="left setting help" title="Internal name : accepting_conns&#013;Whether the server is accepting connection or not">Accepting Connections</span>
                 <?php
                 # Northscale/Membase server specific
                 if(isset($stats['accepting_conns']))
@@ -217,63 +217,63 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 }?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : maxbytes&#013;Maximum number of bytes allowed in this cache">Max Bytes</span>
+                <span class="left setting help" title="Internal name : maxbytes&#013;Maximum number of bytes allowed in this cache">Max Bytes</span>
                 <?php echo (isset($settings['maxbytes'])) ? Library_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : maxconns&#013;Maximum number of clients allowed">Max Connection</span>
+                <span class="left setting help" title="Internal name : maxconns&#013;Maximum number of clients allowed">Max Connection</span>
                 <?php echo (isset($settings['maxconns'])) ? $settings['maxconns'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : tcpport &amp; udpport&#013;TCP &amp; UDP listen port">TCP/UDP Port</span>
+                <span class="left setting help" title="Internal name : tcpport &amp; udpport&#013;TCP &amp; UDP listen port">TCP/UDP Port</span>
                 <?php echo (isset($settings['tcpport'], $settings['udpport'])) ? 'TCP : ' . $settings['tcpport'] . ', UDP : ' . $settings['udpport'] : 'N/A on ' . $stats['version'] ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : inter&#013;Listen interface">Listen Interface</span>
+                <span class="left setting help" title="Internal name : inter&#013;Listen interface">Listen Interface</span>
                 <?php echo (isset($settings['inter'])) ? $settings['inter'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : evictions&#013;When Off, LRU evictions are disabled">Evictions</span>
+                <span class="left setting help" title="Internal name : evictions&#013;When Off, LRU evictions are disabled">Evictions</span>
                 <?php echo (isset($settings['evictions'])) ? ucfirst($settings['evictions']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : domain_socket&#013;Path to the domain socket (if any)">Path to Domain Socket</span>
+                <span class="left setting help" title="Internal name : domain_socket&#013;Path to the domain socket (if any)">Path to Domain Socket</span>
                 <?php echo (isset($settings['domain_socket'])) ? $settings['domain_socket'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : umask&#013;Umask for the creation of the domain socket">Domain Socket Umask</span>
+                <span class="left setting help" title="Internal name : umask&#013;Umask for the creation of the domain socket">Domain Socket Umask</span>
                 <?php echo (isset($settings['umask'])) ? $settings['umask'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : chunk_size&#013;Minimum space allocated for key + value + flags">Chunk Size</span>
+                <span class="left setting help" title="Internal name : chunk_size&#013;Minimum space allocated for key + value + flags">Chunk Size</span>
                 <?php echo (isset($settings['chunk_size'])) ? $settings['chunk_size'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : growth_factor&#013;Chunk size growth factor">Chunk Growth Factor</span>
+                <span class="left setting help" title="Internal name : growth_factor&#013;Chunk size growth factor">Chunk Growth Factor</span>
                 <?php echo (isset($settings['growth_factor'])) ? $settings['growth_factor'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : num_threads&#013;Number of threads (including dispatch)">Max Threads</span>
+                <span class="left setting help" title="Internal name : num_threads&#013;Number of threads (including dispatch)">Max Threads</span>
                 <?php echo (isset($settings['num_threads'])) ? $settings['num_threads'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : detail_enabled&#013;If yes, stats detail is enabled">Detail Enabled</span>
+                <span class="left setting help" title="Internal name : detail_enabled&#013;If yes, stats detail is enabled">Detail Enabled</span>
                 <?php echo (isset($settings['detail_enabled'])) ? ucfirst($settings['detail_enabled']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : reqs_per_event&#013;Max num IO ops processed within an event">Max IO Ops/Event</span>
+                <span class="left setting help" title="Internal name : reqs_per_event&#013;Max num IO ops processed within an event">Max IO Ops/Event</span>
                 <?php echo (isset($settings['reqs_per_event'])) ? $settings['reqs_per_event'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : cas_enabled&#013;When no, CAS is not enabled for this server">CAS Enabled</span>
+                <span class="left setting help" title="Internal name : cas_enabled&#013;When no, CAS is not enabled for this server">CAS Enabled</span>
                 <?php echo (isset($settings['cas_enabled'])) ? ucfirst($settings['cas_enabled']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : tcp_backlog&#013;TCP listen backlog">TCP Listen Backlog</span>
+                <span class="left setting help" title="Internal name : tcp_backlog&#013;TCP listen backlog">TCP Listen Backlog</span>
                 <?php echo (isset($settings['tcp_backlog'])) ? $settings['tcp_backlog'] : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting" title="Internal name : auth_enabled_sasl&#013;SASL auth requested and enabled">SASL Auth</span>
+                <span class="left setting help" title="Internal name : auth_enabled_sasl&#013;SASL auth requested and enabled">SASL Auth</span>
                 <?php echo (isset($settings['auth_enabled_sasl'])) ? ucfirst($settings['auth_enabled_sasl']) : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
@@ -285,14 +285,27 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="sub-header corner padding">Cluster <?php echo $_GET['server']; ?> <span class="green">Servers List</span></div>
         <div class="container corner padding">
 <?php
+    # Displaying first 8 servers
+    $displayed = 0;
     foreach($cluster as $server)
     { ?>
-            <div class="line">
+            <div class="line server" style="<?php if($displayed > 8) { echo 'display:none;'; } else { $displayed++; } ?>">
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
                 <span class="right" style="font-weight:bold;"><a href="index.php?server=<?php echo $server['hostname'] . ':' . $server['port']; ?>" class="green">See Server Stats</a></span>
                 <div class="line" style="margin-left:5px;">
                     <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
+            </div>
+<?php
+    }
+    # Displaying remaining X server line
+    $remaining = (count($cluster) - $displayed);
+    if(($displayed > 8) && ($remaining >= 0))
+    { ?>
+            <div class="line more">
+            	<span class="left" style="font-weight:bold;">
+            	<?php echo $remaining; ?> Server<?php echo ($remaining > 1) ? 's are' : ' is'; ?> not displayed</span>
+            	<span class="right" style="font-weight:bold;"><a href="#" onclick="javascript:show('server');javascript:hide('more');" class="green">See all <?php echo count($cluster); ?> Servers</a></span>
             </div>
 <?php
     } ?>
@@ -301,10 +314,17 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 } ?>
     </div>
 <?php
+    # Fixing issue 163, some results from stats slabs mem_requested are buggy @FIXME
+    if($slabs['total_malloced'] > $stats['limit_maxbytes'])
+    {
+        $slabs['total_wasted'] = $stats['limit_maxbytes'] - ($slabs['total_malloced'] - $slabs['total_wasted']);
+        $slabs['total_malloced'] = $stats['limit_maxbytes'];
+    }
+
     # Making cache size stats
-    $wasted_percent = sprintf('%.0u', $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100);
-    $used_percent = sprintf('%.0u', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
-    $free_percent = sprintf('%.0u', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
+    $wasted_percent = sprintf('%.1f', $slabs['total_wasted'] / $stats['limit_maxbytes'] * 100);
+    $used_percent = sprintf('%.1f', ($slabs['total_malloced'] - $slabs['total_wasted']) / $stats['limit_maxbytes'] * 100);
+    $free_percent = sprintf('%.1f', ($stats['limit_maxbytes'] - $slabs['total_malloced']) / $stats['limit_maxbytes'] * 100);
 ?>
     <div class="size-4" style="float:left; padding-left:9px;clear:right;">
         <div class="sub-header corner padding">Cache Size <span class="green">Stats</span></div>
@@ -331,7 +351,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,ebebeb&amp;chs=280x225&amp;cht=p&amp;chco=b5463f|2a707b|ffffff&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20:%20<?php echo $wasted_percent; ?>%|Used%20:%20<?php echo $used_percent; ?>%|Free%20:%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="280" height="225"/>
+                <img src="http://chart.apis.google.com/chart?chf=bg,s,ebebeb&amp;chs=281x225&amp;cht=p&amp;chco=b5463f|2a707b|ffffff&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20<?php echo $wasted_percent; ?>%|Used%20<?php echo $used_percent; ?>%|Free%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="281" height="225"/>
             </div>
         </div>
 

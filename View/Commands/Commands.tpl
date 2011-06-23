@@ -76,7 +76,13 @@
                     </form>
                     </td>
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
-
+					Available commands :
+					<ul>
+						<li>Get</li>
+						<li>Set</li>
+						<li>Delete</li>
+						<li>Flush All</li>
+					</ul>
                     <br/>
                     </td>
                 </tr>
