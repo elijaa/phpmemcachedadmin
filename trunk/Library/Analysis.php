@@ -216,6 +216,7 @@ class Library_Analysis
         # Initializing Used Slabs
         $slabs['used_slabs'] = 0;
         $slabs['total_wasted'] = 0;
+
         # Request Rate par Slabs
         foreach($slabs as $id => $slab)
         {
@@ -232,6 +233,13 @@ class Library_Analysis
                 $slabs['total_wasted'] += $slabs[$id]['mem_wasted'];
             }
         }
+
+        # Cheking server total malloced > 0
+        if(!isset($slabs['total_malloced']))
+        {
+            $slabs['total_malloced'] = 0;
+        }
+
         return $slabs;
     }
 
