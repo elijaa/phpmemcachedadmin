@@ -112,7 +112,7 @@ class Library_Command_Server implements Library_Command_Interface
     private function end($buffer)
     {
         # Checking command response end
-        if(preg_match('/(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET)\r\n$/', $buffer))
+        if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET)\r\n$/', $buffer))
         {
             return true;
         }
