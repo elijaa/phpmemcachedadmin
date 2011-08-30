@@ -20,7 +20,6 @@
  * @author Cyrille Mahieux : elijaa(at)free.fr
  * @since 12/04/2010
  */
-
 # Headers
 header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
@@ -60,8 +59,11 @@ if(!isset($_COOKIE['live_stats_id' . $hash]))
     $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT );
     foreach($files as $path)
     {
+        # Getting file last modification time
         $stats = @stat($path);
-        if(isset($stats[9]) && ($stats[9] < (time() - 60*60*24)))
+
+        # Deleting file older than 24 hours
+        if(isset($stats['mtime']) && ($stats['mtime'] < (time() - 60*60*24)))
         {
             @unlink($path);
         }
