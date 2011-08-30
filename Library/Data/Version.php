@@ -28,6 +28,9 @@ class Library_Data_Version
     # Google Code latest version data file
     protected static $_latest = 'http://phpmemcacheadmin.googlecode.com/files/latest';
 
+    # Time between HTTP check
+    protected static $_time = 60 * 60 * 24 * 15;
+
     /**
      * Check for the latest version, from local cache or via http
      * Return true if a newer version is available, false otherwise
@@ -43,7 +46,7 @@ class Library_Data_Version
         $path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . self::$_file;
 
         # Checking if file was modified for less than 15 days ago
-        if((is_array($stats = @stat($path))) && (isset($stats['mtime'])) && ($stats['mtime'] > (time() - 60)))
+        if((is_array($stats = @stat($path))) && (isset($stats['mtime'])) && ($stats['mtime'] > (time() - self::$_time)))
         {
             # Opening file and checking for latest version
             return (version_compare(CURRENT_VERSION, file_get_contents($path)) == -1);
