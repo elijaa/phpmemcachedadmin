@@ -20,13 +20,13 @@
  * @author c.mahieux@of2m.fr
  * @since 20/03/2010
  */
-class Library_Analysis
+class Library_Data_Analysis
 {
     /**
-     * Merge two arrays of stats from MemCacheAdmin_ServerCommands::stats()
+     * Merge two arrays of stats from Command_XX::stats()
      *
-     * @param $array Statistic from MemCacheAdmin_ServerCommands::stats()
-     * @param $stats Statistic from MemCacheAdmin_ServerCommands::stats()
+     * @param Array $array Statistic from Command_XX::stats()
+     * @param Array $stats Statistic from Command_XX::stats()
      *
      * @return Array
      */
@@ -58,10 +58,10 @@ class Library_Analysis
     }
 
     /**
-     * Diff two arrays of stats from MemCacheAdmin_ServerCommands::stats()
+     * Diff two arrays of stats from Command_XX::stats()
      *
-     * @param Array $array Statistic from MemCacheAdmin_ServerCommands::stats()
-     * @param Array $stats Statistic from MemCacheAdmin_ServerCommands::stats()
+     * @param Array $array Statistic from Command_XX::stats()
+     * @param Array $stats Statistic from Command_XX::stats()
      *
      * @return Array
      */
@@ -92,7 +92,7 @@ class Library_Analysis
     /**
      * Analyse and return memcache stats command
      *
-     * @param Array $stats Statistic from MemCacheAdmin_ServerCommands::stats()
+     * @param Array $stats Statistic from Command_XX::stats()
      *
      * @return Array
      */
@@ -207,7 +207,7 @@ class Library_Analysis
     /**
      * Analyse and return memcache slabs command
      *
-     * @param Array $slabs Statistic from MemCacheAdmin_ServerCommands::slabs()
+     * @param Array $slabs Statistic from Command_XX::slabs()
      *
      * @return Array
      */

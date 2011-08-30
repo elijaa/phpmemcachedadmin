@@ -103,7 +103,7 @@ switch($request)
         if($slabs !== false)
         {
             # Analysis
-            $slabs = Library_Analysis::slabs($slabs);
+            $slabs = Library_Data_Analysis::slabs($slabs);
             include 'View/Stats/Slabs.tpl';
         }
         # Slabs are not well formed
@@ -135,8 +135,8 @@ switch($request)
                 # Getting Stats & Slabs stats
                 $data = array();
                 $data['stats'] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
-                $data['slabs'] = Library_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
-                $stats = Library_Analysis::merge($stats, $data['stats']);
+                $data['slabs'] = Library_Data_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
+                $stats = Library_Data_Analysis::merge($stats, $data['stats']);
 
                 # Computing stats
                 if(isset($data['slabs']['total_malloced'], $data['slabs']['total_wasted']))
@@ -153,7 +153,7 @@ switch($request)
         {
             # Getting Stats & Slabs stats
             $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
-            $slabs = Library_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
+            $slabs = Library_Data_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
             $settings = Library_Command_Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
         }
 
@@ -161,7 +161,7 @@ switch($request)
         if(($stats !== false) && ($stats != array()))
         {
             # Analysis
-            $stats = Library_Analysis::stats($stats);
+            $stats = Library_Data_Analysis::stats($stats);
             include 'View/Stats/Stats.tpl';
         }
         # Stats are not well formed

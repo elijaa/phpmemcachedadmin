@@ -29,13 +29,13 @@ class Library_Data_Version
     protected static $_latest = 'http://phpmemcacheadmin.googlecode.com/files/latest';
 
     # Time between HTTP check
-    protected static $_time = 60 * 60 * 24 * 15;
+    protected static $_time = 1296000; # 15 days
 
     /**
      * Check for the latest version, from local cache or via http
      * Return true if a newer version is available, false otherwise
      *
-     * @return boolean
+     * @return Boolean
      */
     public static function check()
     {

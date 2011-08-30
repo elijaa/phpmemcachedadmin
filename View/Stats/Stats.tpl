@@ -3,12 +3,12 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Hits</span>
-                <?php echo Library_Analysis::hitResize($stats['get_hits']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['get_hits']); ?>
                 <span class="right">[<?php echo $stats['get_hits_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Miss</span>
-                <?php echo Library_Analysis::hitResize($stats['get_misses']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['get_misses']); ?>
                 <span class="right">[<?php echo $stats['get_misses_percent']; ?>%]</span>
             </div>
             <div class="line">
@@ -21,7 +21,7 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Total</span>
-                <?php echo Library_Analysis::hitResize($stats['cmd_set']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['cmd_set']); ?>
             </div>
             <div class="line">
                 <span class="left">Rate</span>
@@ -33,12 +33,12 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Hits</span>
-                <?php echo (isset($stats['delete_hits'])) ? Library_Analysis::hitResize($stats['delete_hits']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['delete_hits'])) ? Library_Data_Analysis::hitResize($stats['delete_hits']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['delete_hits_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Miss</span>
-                <?php echo (isset($stats['delete_misses'])) ? Library_Analysis::hitResize($stats['delete_misses']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['delete_misses'])) ? Library_Data_Analysis::hitResize($stats['delete_misses']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['delete_misses_percent']; ?>%]</span>
             </div>
             <div class="line">
@@ -51,17 +51,17 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Hits</span>
-                <?php echo (isset($stats['cas_hits'])) ? Library_Analysis::hitResize($stats['cas_hits']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['cas_hits'])) ? Library_Data_Analysis::hitResize($stats['cas_hits']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['cas_hits_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Miss</span>
-                <?php echo (isset($stats['cas_misses'])) ? Library_Analysis::hitResize($stats['cas_misses']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['cas_misses'])) ? Library_Data_Analysis::hitResize($stats['cas_misses']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['cas_misses_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Bad Value</span>
-                <?php echo (isset($stats['cas_badval'])) ? Library_Analysis::hitResize($stats['cas_badval']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['cas_badval'])) ? Library_Data_Analysis::hitResize($stats['cas_badval']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['cas_badval_percent']; ?>%]</span>
             </div>
             <div class="line">
@@ -74,12 +74,12 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Hits</span>
-                <?php echo (isset($stats['incr_hits'])) ? Library_Analysis::hitResize($stats['incr_hits']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['incr_hits'])) ? Library_Data_Analysis::hitResize($stats['incr_hits']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['incr_hits_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Miss</span>
-                <?php echo (isset($stats['incr_misses'])) ? Library_Analysis::hitResize($stats['incr_misses']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['incr_misses'])) ? Library_Data_Analysis::hitResize($stats['incr_misses']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['incr_misses_percent']; ?>%]</span>
             </div>
             <div class="line">
@@ -92,12 +92,12 @@
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Hits</span>
-                <?php echo (isset($stats['decr_hits'])) ? Library_Analysis::hitResize($stats['decr_hits']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['decr_hits'])) ? Library_Data_Analysis::hitResize($stats['decr_hits']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['decr_hits_percent']; ?>%]</span>
             </div>
             <div class="line">
                 <span class="left">Miss</span>
-                <?php echo (isset($stats['decr_misses'])) ? Library_Analysis::hitResize($stats['decr_misses']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['decr_misses'])) ? Library_Data_Analysis::hitResize($stats['decr_misses']) : 'N/A on ' . $stats['version']; ?>
                 <span class="right">[<?php echo $stats['decr_misses_percent']; ?>%]</span>
             </div>
             <div class="line">
@@ -110,7 +110,7 @@
         <div class="container corner padding" style="height:48px;">
             <div class="line">
                 <span class="left">Total</span>
-                <?php echo (isset($stats['cmd_flush'])) ? Library_Analysis::hitResize($stats['cmd_flush']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['cmd_flush'])) ? Library_Data_Analysis::hitResize($stats['cmd_flush']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
                 <span class="left">Rate</span>
@@ -137,7 +137,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 { ?>
             <div class="line">
                 <span class="left setting">Uptime</span>
-                <?php echo Library_Analysis::uptime($stats['uptime']); ?>
+                <?php echo Library_Data_Analysis::uptime($stats['uptime']); ?>
             </div>
             <div class="line" style="margin-bottom:4px;">
                 <span class="left setting">Memcached</span>
@@ -151,19 +151,19 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
             <div class="line">
                 <span class="left setting">Total Connections</span>
-                <?php echo Library_Analysis::hitResize($stats['total_connections']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['total_connections']); ?>
             </div>
             <div class="line">
                 <span class="left setting">Max Connections Errors</span>
-                <?php echo (isset($stats['listen_disabled_num'])) ? Library_Analysis::hitResize($stats['listen_disabled_num']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['listen_disabled_num'])) ? Library_Data_Analysis::hitResize($stats['listen_disabled_num']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line" style="margin-top:4px;">
                 <span class="left setting">Current Items</span>
-                <?php echo Library_Analysis::hitResize($stats['curr_items']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['curr_items']); ?>
             </div>
             <div class="line">
                 <span class="left setting">Total Items</span>
-                <?php echo Library_Analysis::hitResize($stats['total_items']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['total_items']); ?>
             </div>
 <?php
 # Viewing a single server
@@ -171,7 +171,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 { ?>
             <div class="line">
                 <span class="left setting">Oldest Item</span>
-                <?php echo (isset($settings['oldest'])) ? Library_Analysis::uptime($settings['oldest']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($settings['oldest'])) ? Library_Data_Analysis::uptime($settings['oldest']) : 'N/A on ' . $stats['version']; ?>
             </div>
 <?php
 } ?>
@@ -181,7 +181,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
         <div class="container corner padding">
             <div class="line">
                 <span class="left setting">Items Eviction</span>
-                <?php echo Library_Analysis::hitResize($stats['evictions']); ?>
+                <?php echo Library_Data_Analysis::hitResize($stats['evictions']); ?>
             </div>
             <div class="line">
                 <span class="left setting">Rate</span>
@@ -189,7 +189,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
             <div class="line" style="margin-top:4px;">
                 <span class="left setting">Reclaimed</span>
-                <?php echo (isset($stats['reclaimed'])) ? Library_Analysis::hitResize($stats['reclaimed']) : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($stats['reclaimed'])) ? Library_Data_Analysis::hitResize($stats['reclaimed']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
                 <span class="left setting">Rate</span>
@@ -218,7 +218,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
             <div class="line">
                 <span class="left setting help" title="Internal name : maxbytes&#013;Maximum number of bytes allowed in this cache">Max Bytes</span>
-                <?php echo (isset($settings['maxbytes'])) ? Library_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
+                <?php echo (isset($settings['maxbytes'])) ? Library_Data_Analysis::byteResize($settings['maxbytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
                 <span class="left setting help" title="Internal name : maxconns&#013;Maximum number of clients allowed">Max Connection</span>
@@ -293,7 +293,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                 <span class="left setting"><?php echo $server['hostname'] . ':' . $server['port']; ?></span>
                 <span class="right" style="font-weight:bold;"><a href="index.php?server=<?php echo $server['hostname'] . ':' . $server['port']; ?>" class="green">See Server Stats</a></span>
                 <div class="line" style="margin-left:5px;">
-                    <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
+                    <?php echo ($status[$server['hostname'] . ':' . $server['port']] != '') ? 'Version ' . $status[$server['hostname'] . ':' . $server['port']] . ', Uptime : ' . Library_Data_Analysis::uptime($uptime[$server['hostname'] . ':' . $server['port']]) : 'Server did not respond'; ?>
                 </div>
             </div>
 <?php
@@ -331,15 +331,15 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Used</span>
-                <?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
             </div>
             <div class="line">
                 <span class="left">Total</span>
-                <?php echo Library_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes
             </div>
             <div class="line">
                 <span class="left">Wasted</span>
-                <?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
             </div>
             <!--
             <div class="line">
@@ -366,11 +366,11 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         <div class="container corner padding">
             <div class="line">
                 <span class="left">Bytes Read</span>
-                <?php echo Library_Analysis::byteResize($stats['bytes_read']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($stats['bytes_read']); ?>Bytes
             </div>
             <div class="line">
                 <span class="left">Bytes Written</span>
-                <?php echo Library_Analysis::byteResize($stats['bytes_written']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($stats['bytes_written']); ?>Bytes
             </div>
         </div>
     </div>

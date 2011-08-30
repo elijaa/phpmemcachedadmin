@@ -31,7 +31,7 @@ foreach($items as $key => $data)
         <a class="green item" href="index.php?server=<?php echo $_GET['server']; ?>&amp;show=items&amp;slab=<?php echo $_GET['slab']; ?>&amp;request_key=<?php echo $key; ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get"><?php echo ((strlen($key) > 70) ? substr($key, 0, 70) . '[..]' : $key); ?></a>
 
         <span class="right" style="clear:right;">
-            <strong>Size</strong> : <?php echo Library_Analysis::byteResize($data[0]); ?>Bytes,
+            <strong>Size</strong> : <?php echo Library_Data_Analysis::byteResize($data[0]); ?>Bytes,
             <strong>Expiration</strong> :
 <?php
             # Infinite expiration
@@ -42,7 +42,7 @@ foreach($items as $key => $data)
             # Timestamp expiration
             else
             {
-                echo Library_Analysis::uptime($data[1] - time());
+                echo Library_Data_Analysis::uptime($data[1] - time());
             } ?>
         </span>
 <?php
