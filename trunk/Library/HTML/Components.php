@@ -25,7 +25,7 @@ class Library_HTML_Components
     /**
      * Dump server list in an HTML select
      *
-     * @return string
+     * @return String
      */
     public static function serverSelect($name, $selected = '', $class = '', $events = '')
     {
@@ -62,7 +62,7 @@ class Library_HTML_Components
     /**
      * Dump cluster list in an HTML select
      *
-     * @return string
+     * @return String
      */
     public static function clusterSelect($name, $selected = '', $class = '', $events = '')
     {
@@ -91,11 +91,11 @@ class Library_HTML_Components
     /**
      * Dump server response in proper formatting
      *
-     * @param string $hostname Hostname
-     * @param string $port Port
-     * @param mixed $data Data (reponse)
+     * @param String $hostname Hostname
+     * @param String $port Port
+     * @param Mixed $data Data (reponse)
      *
-     * @return string
+     * @return String
      */
     public static function serverResponse($hostname, $port, $data)
     {

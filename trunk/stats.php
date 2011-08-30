@@ -117,7 +117,7 @@ switch($request)
             $server = $server['hostname'] . ':' . $server['port'];
 
             # Diff between old and new dump
-            $stats[$server] = Library_Analysis::diff($previous[$server], $actual[$server]);
+            $stats[$server] = Library_Data_Analysis::diff($previous[$server], $actual[$server]);
         }
 
         # Making stats for each server
@@ -127,7 +127,7 @@ switch($request)
             if((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0))
             {
                 # Computing stats
-                $stats[$server] = Library_Analysis::stats($stats[$server]);
+                $stats[$server] = Library_Data_Analysis::stats($stats[$server]);
 
                 # Because we make a diff on every key, we must reasign some values
                 $stats[$server]['bytes_percent'] = sprintf('%.1f', $actual[$server]['bytes'] / $actual[$server]['limit_maxbytes'] * 100);

@@ -7,11 +7,11 @@
             </div>
             <div class="line">
                 <span class="left">Memory Used</span>
-                <?php echo Library_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($slabs['total_malloced']); ?>Bytes
             </div>
             <div class="line">
                 <span class="left">Wasted</span>
-                <?php echo Library_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
+                <?php echo Library_Data_Analysis::byteResize($slabs['total_wasted']); ?>Bytes
             </div>
         </div>
     </div>
@@ -58,16 +58,16 @@ foreach($slabs as $id => $slab)
             <div class="container corner padding size-5">
                 <div class="line">
                     <span class="left slabs">Chunk Size</span>
-                    <?php echo Library_Analysis::byteResize($slab['chunk_size']); ?>Bytes
+                    <?php echo Library_Data_Analysis::byteResize($slab['chunk_size']); ?>Bytes
                 </div>
                 <div class="line">
                     <span class="left slabs">Used Chunk</span>
-                    <?php echo Library_Analysis::hitResize($slab['used_chunks']); ?>
-                    <span class="right">[<?php echo Library_Analysis::valueResize($slab['used_chunks'] / $slab['total_chunks'] * 100); ?> %]</span>
+                    <?php echo Library_Data_Analysis::hitResize($slab['used_chunks']); ?>
+                    <span class="right">[<?php echo Library_Data_Analysis::valueResize($slab['used_chunks'] / $slab['total_chunks'] * 100); ?> %]</span>
                 </div>
                 <div class="line">
                     <span class="left slabs">Total Chunk</span>
-                    <?php echo Library_Analysis::hitResize($slab['total_chunks']); ?>
+                    <?php echo Library_Data_Analysis::hitResize($slab['total_chunks']); ?>
                 </div>
                 <div class="line">
                     <span class="left slabs">Total Page</span>
@@ -75,7 +75,7 @@ foreach($slabs as $id => $slab)
                 </div>
                 <div class="line">
                     <span class="left slabs">Wasted</span>
-                    <?php echo Library_Analysis::byteResize($slab['mem_wasted']); ?>Bytes
+                    <?php echo Library_Data_Analysis::byteResize($slab['mem_wasted']); ?>Bytes
                 </div>
                 <div class="line">
                     <span class="left slabs">Hits</span>
@@ -91,7 +91,7 @@ if($slab['used_chunks'] > 0)
 <!--
                 <div class="line">
                     <span class="left slabs">Evicted Last</span>
-                    <?php echo Library_Analysis::uptime($slab['items:evicted_time']); ?>
+                    <?php echo Library_Data_Analysis::uptime($slab['items:evicted_time']); ?>
                 </div>
                 <div class="line">
                     <span class="left slabs">Out of Memory</span>
