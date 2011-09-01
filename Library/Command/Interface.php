@@ -41,6 +41,17 @@ interface Library_Command_Interface
     function stats($server, $port);
 
     /**
+     * Send stats settings command to server
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     *
+     * @return Array|Boolean
+     */
+    public function settings($server, $port);
+
+    /**
      * Retrieve slabs stats
      * Return the result if successful or false otherwise
      *
@@ -100,6 +111,32 @@ interface Library_Command_Interface
      * @return String
      */
     function delete($server, $port, $key);
+
+    /**
+     * Increment the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to increment
+     * @param Integer $value Value to increment
+     *
+     * @return String
+     */
+    function increment($server, $port, $key, $value);
+
+    /**
+     * Decrement the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to decrement
+     * @param Integer $value Value to decrement
+     *
+     * @return String
+     */
+    function decrement($server, $port, $key, $value);
 
     /**
      * Flush all items on a server after delay

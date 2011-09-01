@@ -34,31 +34,43 @@ function changeCommand(obj) {
 	document.getElementById('request_duration').value = '';
 	document.getElementById('request_data').value = '';
 	document.getElementById('request_delay').value = '';
+	document.getElementById('request_value').value = '';
 	var command = obj.options[obj.selectedIndex].value;
 	var div_key = document.getElementById('div_key');
 	var div_duration = document.getElementById('div_duration');
 	var div_data = document.getElementById('div_data');
 	var div_delay = document.getElementById('div_delay');
+	var div_value = document.getElementById('div_value');
 	if (command == 'get' || command == 'delete') {
 		div_key.style.display = '';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
 		div_delay.style.display = 'none';
+		div_value.style.display = 'none';
 	} else if (command == 'set') {
 		div_key.style.display = '';
 		div_duration.style.display = '';
 		div_data.style.display = '';
 		div_delay.style.display = 'none';
+		div_value.style.display = 'none';
 	} else if (command == 'flush_all') {
 		div_key.style.display = 'none';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
 		div_delay.style.display = '';
+		div_value.style.display = 'none';
+	} else if (command == 'increment' || command == 'decrement') {
+		div_key.style.display = '';
+		div_duration.style.display = 'none';
+		div_data.style.display = 'none';
+		div_delay.style.display = 'none';
+		div_value.style.display = '';
 	} else {
 		div_key.style.display = 'none';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
 		div_delay.style.display = 'none';
+		div_value.style.display = 'none';
 	}
 }
 function executeClear(target) {
@@ -77,6 +89,8 @@ function executeCommand(target) {
 				+ document.getElementById('request_data').value
 				+ '&request_delay='
 				+ document.getElementById('request_delay').value
+				+ '&request_value='
+				+ document.getElementById('request_value').value
 				+ '&request_server='
 				+ document.getElementById('request_server').value
 				+ '&request_api='

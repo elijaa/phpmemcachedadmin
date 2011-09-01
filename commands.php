@@ -148,6 +148,88 @@ switch($request)
         }
         break;
 
+    # Memcache::increment command
+    case 'increment':
+        # Checking value
+        if(!isset($_GET['request_value']) || !is_numeric($_GET['request_value']))
+        {
+            $_GET['request_value'] = 1;
+        }
+
+        # Ask for increment on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
+        {
+            foreach($cluster as $server)
+            {
+                # Dumping server increment command response
+                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                Library_Command_Factory::api($_GET['request_api'])->increment($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+            }
+        }
+        # Ask for increment on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server increment command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->increment($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+        }
+        # Ask for increment on all servers
+        else
+        {
+            foreach($_ini->get('servers') as $cluster => $servers)
+            {
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server increment command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->increment($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+                }
+            }
+        }
+        break;
+
+    # Memcache::decrement command
+    case 'decrement':
+        # Checking value
+        if(!isset($_GET['request_value']) || !is_numeric($_GET['request_value']))
+        {
+            $_GET['request_value'] = 1;
+        }
+
+        # Ask for decrement on a cluster
+        if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
+        {
+            foreach($cluster as $server)
+            {
+                # Dumping server decrement command response
+                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                Library_Command_Factory::api($_GET['request_api'])->decrement($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+            }
+        }
+        # Ask for decrement on one server
+        elseif(isset($_GET['request_server']) && ($server = $_ini->server($_GET['request_server'])))
+        {
+            # Dumping server decrement command response
+            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+            Library_Command_Factory::api($_GET['request_api'])->decrement($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+        }
+        # Ask for decrement on all servers
+        else
+        {
+            foreach($_ini->get('servers') as $cluster => $servers)
+            {
+                # Asking for each server stats
+                foreach($servers as $server)
+                {
+                    # Dumping server decrement command response
+                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                    Library_Command_Factory::api($_GET['request_api'])->decrement($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_value']));
+                }
+            }
+        }
+        break;
+
         # Memcache::flush_all command
     case 'flush_all':
         # Checking delay
