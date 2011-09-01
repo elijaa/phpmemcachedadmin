@@ -25,10 +25,12 @@
                         <span class="right">
                             <select id="request_command" onchange="javascript:changeCommand(this);">
                                 <option value="">Choose a Command</option>
-                                <option value="get">Get</option>
-                                <option value="set">Set</option>
-                                <option value="delete">Delete</option>
-                                <option value="flush_all">Flush All</option>
+                                <option value="get">get</option>
+                                <option value="set">set</option>
+                                <option value="delete">delete</option>
+                                <option value="increment">increment</option>
+                                <option value="decrement">decrement</option>
+                                <option value="flush_all">flush all</option>
                             </select>
                         </span>
                     </div>
@@ -42,6 +44,12 @@
                         <span class="left">Duration</span>
                         <span class="right">
                             <input id="request_duration"/>
+                        </span>
+                    </div>
+                    <div id="div_value" class="line" style="display:none;">
+                        <span class="left">Value</span>
+                        <span class="right">
+                            <input id="request_value"/>
                         </span>
                     </div>
                     <div id="div_data" class="line" style="display:none;">
@@ -78,10 +86,12 @@
                     <td class="padding" style="border-left:1px solid #ffffff;padding-left:14px;">
 					Available commands :
 					<ul>
-						<li>Get</li>
-						<li>Set</li>
-						<li>Delete</li>
-						<li>Flush All</li>
+						<li>get : retreive a key value</li>
+						<li>set : set a key/value pair</li>
+						<li>delete : delete a specific key</li>
+						<li>increment : increment a numeric key value</li>
+						<li>decrement : decrement a numeric key value</li>
+						<li>flush all : flush a Memcached server</li>
 					</ul>
                     <br/>
                     </td>

@@ -71,7 +71,7 @@ class Library_Command_Server implements Library_Command_Interface
         $buffer = fgets($handle);
 
         # Checking if result is valid
-        if($this->end($buffer))
+        if($this->end($buffer) || $end)
         {
             # Closing socket
             fclose($handle);
@@ -112,7 +112,7 @@ class Library_Command_Server implements Library_Command_Interface
     private function end($buffer)
     {
         # Checking command response end
-        if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET)\r\n$/', $buffer))
+        if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET|[0-9]*)\r\n$/', $buffer))
         {
             return true;
         }
@@ -340,6 +340,48 @@ class Library_Command_Server implements Library_Command_Interface
     {
         # Executing command : delete
         if(($result = $this->exec('delete ' . $key, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
+    }
+
+    /**
+     * Increment the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to increment
+     * @param Integer $value Value to increment
+     *
+     * @return String
+     */
+    function increment($server, $port, $key, $value)
+    {
+        # Executing command : increment
+        if(($result = $this->exec('incr ' . $key . ' ' . $value, $server, $port)))
+        {
+            return $result;
+        }
+        return self::$_log;
+    }
+
+    /**
+     * Decrement the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to decrement
+     * @param Integer $value Value to decrement
+     *
+     * @return String
+     */
+    function decrement($server, $port, $key, $value)
+    {
+        # Executing command : decrement
+        if(($result = $this->exec('decr ' . $key . ' ' . $value, $server, $port)))
         {
             return $result;
         }

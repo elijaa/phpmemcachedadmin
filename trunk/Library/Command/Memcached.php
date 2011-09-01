@@ -78,6 +78,20 @@ class Library_Command_Memcached implements Library_Command_Interface
     }
 
     /**
+     * Send stats settings command to server
+     * Return the result if successful or false otherwise
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     *
+     * @return Array|Boolean
+     */
+    public function settings($server, $port)
+    {
+        return false
+    }
+
+    /**
      * Send stats items command to server to retrieve slabs stats
      * Return the result if successful or false otherwise
      *
@@ -171,6 +185,54 @@ class Library_Command_Memcached implements Library_Command_Interface
 
         # Executing command : delete
         self::$_memcache->delete($key);
+        return self::$_memcache->getResultMessage();
+    }
+
+    /**
+     * Increment the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to increment
+     * @param Integer $value Value to increment
+     *
+     * @return String
+     */
+    function increment($server, $port, $key, $value)
+    {
+        # Adding server
+        self::$_memcache->addServer($server, $port);
+
+        # Executing command : increment
+        if($result = self::$_memcache->increment($key, $value))
+        {
+            return $result;
+        }
+        return self::$_memcache->getResultMessage();
+    }
+
+    /**
+     * Decrement the key by value
+     * Return the result
+     *
+     * @param String $server Hostname
+     * @param Integer $port Hostname Port
+     * @param String $key Key to decrement
+     * @param Integer $value Value to decrement
+     *
+     * @return String
+     */
+    function decrement($server, $port, $key, $value)
+    {
+        # Adding server
+        self::$_memcache->addServer($server, $port);
+
+        # Executing command : decrement
+        if($result = self::$_memcache->decrement($key, $value))
+        {
+            return $result;
+        }
         return self::$_memcache->getResultMessage();
     }
 
