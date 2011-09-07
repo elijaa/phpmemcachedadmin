@@ -141,8 +141,18 @@ hr {
 }
 
 .live {
-	font-family: Bitstream Vera Sans Mono, Lucida Sans Typewriter,
-		DejaVu Sans Mono;
+	font-family: "Bitstream Vera Sans Mono",
+             "Lucida Sans Typewriter",
+             "DejaVu Sans Mono",
+             Consolas,
+             "Andale Mono",
+             "Lucida Console",
+             "Liberation Mono",
+             "Nimbus Mono L",
+             Monaco,
+             "Courier New",
+             Courier,
+             monospace;
 	font-size: 12px;
 	overflow: visible;
 	white-space: pre-wrap
