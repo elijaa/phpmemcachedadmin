@@ -1,5 +1,22 @@
 #summary Roadmap, ideas, release notes
 
+===Version 1.2.2 : Not released yet===
+General
+ * Added help to a lot of stats and configuration value
+ * Resized server list
+ * Improved performances
+ * New Version check system
+ * Fixing an issue on Mac OS (About fonts and CSS)
+ * Fixing issue #11 : invalid stats and graphics
+ * Added Memcached 1.4.8 Hash Table stats
+ * Added touch stats
+ * Added expired_unfetched & evicted_unfetched stats
+
+Commands :
+ * Added incr and decr commands
+ * Added case insensitive search
+
+
 ===Version 1.2.1 : 09/04/2011===
  * Fixing issue #10 : invalid encoding on return command
 
