@@ -79,7 +79,7 @@ foreach($slabs as $id => $slab)
                 </div>
                 <div class="line">
                     <span class="left slabs">Hits</span>
-                    <?php echo $slab['request_rate']; ?> Request/sec
+                    <?php echo ($slab['request_rate'] > 999) ? Library_Data_Analysis::hitResize($slab['request_rate']) : $slab['request_rate']; ?> Request/sec
                 </div>
 <?php
 if($slab['used_chunks'] > 0)

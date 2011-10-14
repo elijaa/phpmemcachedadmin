@@ -215,11 +215,11 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
             
             <div class="line" style="margin-top:4px;">
-                <span class="left setting">Expired unfetched</span>
+                <span class="left setting help" title="Internal name : expired_unfetched&#013;Items pulled from LRU that were never touched by get/incr/append/etc before expiring">Expired unfetched</span>
                 <?php echo (isset($stats['expired_unfetched'])) ? Library_Data_Analysis::hitResize($stats['expired_unfetched']) : 'N/A on ' . $stats['version']; ?>
             </div>
             <div class="line">
-                <span class="left setting">Evicted unfeteched</span>
+                <span class="left setting help" title="Internal name : evicted_unfetched&#013;Items evicted from LRU that were never touched by get/incr/append/etc">Evicted unfetched</span>
                 <?php echo (isset($stats['evicted_unfetched'])) ? Library_Data_Analysis::hitResize($stats['evicted_unfetched']) : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
@@ -381,7 +381,39 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                 <img src="http://chart.apis.google.com/chart?chf=bg,s,ebebeb&amp;chs=281x225&amp;cht=p&amp;chco=b5463f|2a707b|ffffff&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20<?php echo $wasted_percent; ?>%|Used%20<?php echo $used_percent; ?>%|Free%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="281" height="225"/>
             </div>
         </div>
-
+<?php
+# Viewing a single server
+if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+{ ?>
+        <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left help" title="Internal name : hash_power_level&#013;Current size multiplier for hash table">Power Level</span>
+                <?php echo (isset($stats['hash_power_level'])) ? Library_Data_Analysis::byteResize($stats['hash_power_level']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
+            </div>
+            <div class="line">
+                <span class="left">Size</span>
+                <?php echo (isset($stats['hash_bytes'])) ? Library_Data_Analysis::byteResize($stats['hash_bytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
+            </div>
+            <div class="line">
+                <span class="left help" title="Internal name : hash_is_expanding&#013;Indicates if the hash table is being grown to a new size">Expanding</span>
+                <?php if(isset($stats['hash_is_expanding'])) { if($stats['hash_is_expanding']) { echo 'Yes'; } else { echo 'No'; } } else { echo 'N/A on ' . $stats['version']; } ?>
+            </div>
+         </div>
+<?php
+} 
+# Viewing a cluster
+elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
+{ ?>       
+        <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left">Size</span>
+                <?php echo (isset($stats['hash_bytes'])) ? Library_Data_Analysis::byteResize($stats['hash_bytes']) . 'Bytes' : 'N/A on ' . $stats['version']; ?>
+            </div>
+         </div>
+<?php
+} ?>
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
             <div class="line">
