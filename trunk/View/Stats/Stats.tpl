@@ -105,6 +105,24 @@
                 <?php echo (isset($stats['decr_hits'])) ? $stats['decr_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
+        
+        <div class="sub-header corner padding">Touch <span class="green">Stats</span></div>
+        <div class="container corner padding">
+            <div class="line">
+                <span class="left">Hits</span>
+                <?php echo (isset($stats['touch_hits'])) ? Library_Data_Analysis::hitResize($stats['touch_hits']) : 'N/A on ' . $stats['version']; ?>
+                <span class="right">[<?php echo $stats['touch_hits_percent']; ?>%]</span>
+            </div>
+            <div class="line">
+                <span class="left">Miss</span>
+                <?php echo (isset($stats['touch_misses'])) ? Library_Data_Analysis::hitResize($stats['touch_misses']) : 'N/A on ' . $stats['version']; ?>
+                <span class="right">[<?php echo $stats['touch_misses_percent']; ?>%]</span>
+            </div>
+            <div class="line">
+                <span class="left">Rate</span>
+                <?php echo (isset($stats['touch_hits'])) ? $stats['touch_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
+            </div>
+        </div>
 
         <div class="sub-header corner padding">Flush <span class="green">Stats</span></div>
         <div class="container corner padding" style="height:48px;">
@@ -194,6 +212,15 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             <div class="line">
                 <span class="left setting">Rate</span>
                 <?php echo (isset($stats['reclaimed'])) ? $stats['reclaimed_rate'] . ' Reclaimed/sec' : 'N/A on ' . $stats['version']; ?>
+            </div>
+            
+            <div class="line" style="margin-top:4px;">
+                <span class="left setting">Expired unfetched</span>
+                <?php echo (isset($stats['expired_unfetched'])) ? Library_Data_Analysis::hitResize($stats['expired_unfetched']) : 'N/A on ' . $stats['version']; ?>
+            </div>
+            <div class="line">
+                <span class="left setting">Evicted unfeteched</span>
+                <?php echo (isset($stats['evicted_unfetched'])) ? Library_Data_Analysis::hitResize($stats['evicted_unfetched']) : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
 

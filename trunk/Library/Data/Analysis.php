@@ -174,6 +174,21 @@ class Library_Data_Analysis
         }
         $stats['decr_rate'] = ($stats['cmd_decr'] == 0) ? '0.0' : sprintf('%.1f', $stats['cmd_decr'] / $stats['uptime'], 1);
 
+        # Command decrement(), version > 1.4.7
+        if(isset($stats['touch_hits'], $stats['touch_misses']))
+        {
+            $stats['cmd_touch'] = $stats['touch_hits'] + $stats['touch_misses'];
+            $stats['touch_hits_percent'] = ($stats['cmd_touch'] == 0) ? ' - ' : sprintf('%.1f', $stats['touch_hits'] / $stats['cmd_touch'] * 100, 1);
+            $stats['touch_misses_percent'] = ($stats['cmd_touch'] == 0) ? ' - ' : sprintf('%.1f', $stats['touch_misses'] / $stats['cmd_touch'] * 100, 1);
+        }
+        else
+        {
+            $stats['cmd_touch'] = 0;
+            $stats['touch_hits_percent'] = ' - ';
+            $stats['touch_misses_percent'] = ' - ';
+        }
+        $stats['touch_rate'] = ($stats['cmd_touch'] == 0) ? '0.0' : sprintf('%.1f', $stats['cmd_touch'] / $stats['uptime'], 1);
+
         # Total hit & miss
         #$stats['cmd_total'] = $stats['cmd_get'] + $stats['cmd_set'] + $stats['cmd_delete'] + $stats['cmd_cas'] + $stats['cmd_incr'] + $stats['cmd_decr'];
         #$stats['hit_percent'] = ($stats['cmd_get'] == 0) ? '0.0' : sprintf('%.1f', ($stats['get_hits']) / ($stats['get_hits'] + $stats['get_misses']) * 100, 1);
