@@ -264,7 +264,7 @@ class Library_Command_Memcached implements Library_Command_Interface
      * @param Integer $port Hostname Port
      * @param String $key Key to search
      *
-     * @return array
+     * @return Array
      */
     function search($server, $port, $search)
     {

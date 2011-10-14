@@ -71,7 +71,7 @@ class Library_Command_Server implements Library_Command_Interface
         $buffer = fgets($handle);
 
         # Checking if result is valid
-        if($this->end($buffer) || $end)
+        if($this->end($buffer, $command))
         {
             # Closing socket
             fclose($handle);
@@ -90,7 +90,7 @@ class Library_Command_Server implements Library_Command_Interface
             $buffer .= $line;
 
             # Checking for end of MemCache command
-            if($this->end($line))
+            if($this->end($line, $command))
             {
                 break;
             }
@@ -102,19 +102,31 @@ class Library_Command_Server implements Library_Command_Interface
     }
 
     /**
-     * Check if response is at the end from memcache server
+     * Check if response is at the end from memcached server
      * Return true if response end, true otherwise
      *
-     * @param String $buffer Buffer received from memcache server
+     * @param String $buffer Buffer received from memcached server
+     * @param String $command Command issued to memcached server
      *
      * @return Boolean
      */
-    private function end($buffer)
+    private function end($buffer, $command)
     {
-        # Checking command response end
-        if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET|[0-9]*)\r\n$/', $buffer))
+        # incr or decr also return integer
+        if(($command == 'incr') || ($command == 'decr'))
         {
-            return true;
+            if(preg_match('/^(END|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|[0-9]*)/', $buffer))
+            {
+                return true;
+            }
+        }
+        else
+        {
+            # Checking command response end
+            if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET|TOUCHED)/', $buffer))
+            {
+                return true;
+            }
         }
         return false;
     }
