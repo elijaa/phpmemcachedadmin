@@ -26,7 +26,7 @@ class Library_Data_Version
     protected static $_file = '.version';
 
     # Google Code latest version data file
-    protected static $_latest = 'http://phpmemcacheadmin.googlecode.com/files/latest';
+    protected static $_latest = 'http://phpmemcancheadmin.googlecode.com/files/latest';
 
     # Time between HTTP check
     protected static $_time = 1296000; # 15 days
@@ -61,8 +61,11 @@ class Library_Data_Version
 
                 # Checking for latest version
                 return (version_compare(CURRENT_VERSION, $latest) == -1);
+            } else {
+                # To avoid error spam
+                file_put_contents($path, 'Net unreachable');
+                return true;
             }
-            return true;
         }
     }
 }
