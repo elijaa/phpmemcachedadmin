@@ -62,6 +62,7 @@ class Library_Data_Version
                 # Checking for latest version
                 return (version_compare(CURRENT_VERSION, $latest) == -1);
             }
+            return true;
         }
     }
 }
