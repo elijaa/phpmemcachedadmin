@@ -18,7 +18,9 @@ input,select,textarea {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-	border: solid 1px #AAA;
+	border-width: 1px;
+    border-style: solid;
+    border-color: #AAA;
 	width: 298px;
 	font-family: Tahoma;
 	font-size: 1em;
@@ -34,7 +36,9 @@ select {
 }
 
 input:focus,textarea:focus {
-	border: solid 1px #EEE;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #EEE;
 }
 
 input:hover {
@@ -47,11 +51,15 @@ img {
 hr {
 	height: 0;
 	border: none;
-	border-bottom: solid 1px #eee;
+	border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #EEE;
 }
 
 .menu {
-	border: solid 1px #a0312a;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #a0312a;
 	color: #eee;
 	width: 198px;
 }
@@ -71,7 +79,7 @@ hr {
              monospace;
 }
 
-#loading {
+.loading {
 	text-decoration: blink;
 	width: 680px;
 	visibility: hidden;
@@ -112,7 +120,9 @@ hr {
 }
 
 .header {
-	border: 1px solid #9c3c36;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #9c3c36;
 	background: url("../Images/b5463f.png") repeat-x scroll 50% 50% #B5463F;
 	font-weight: bold;
 	color: #fff;
@@ -120,7 +130,9 @@ hr {
 }
 
 .sub-header {
-	border: 1px solid #514845;
+	border-width: 1px;
+    border-style: solid;
+    border-color: #514845;
 	background: url("../Images/635855.png") repeat-x scroll 50% 50% #635855;
 	font-weight: bold;
 	color: #fff;
@@ -129,7 +141,9 @@ hr {
 }
 
 .container {
-	border: 1px solid #d0d0d0;
+	border-width: 1px;
+    border-style: solid;
+    border-color: #d0d0d0;
 	background: #ebebeb;
 	font-weight: none;
 	color: #000;
@@ -138,7 +152,9 @@ hr {
 }
 
 .list {
-	border: 1px solid #9c3c36;
+	border-width: 1px;
+    border-style: solid;
+    border-color: #9c3c36;
 	background: #B5463F;
 	font-weight: bold;
 	color: #fff
@@ -200,7 +216,9 @@ hr {
 .container hr {
 	height: 0;
 	border: none;
-	border-bottom: solid 1px #fff
+	border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #fff;
 }
 
 .grey {

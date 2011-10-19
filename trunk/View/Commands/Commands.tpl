@@ -5,7 +5,7 @@
         </div>
         <div class="container corner full-size padding" style="text-align:right;">
             <span style="float:left;">
-                <input class="header" type="submit" id="loading" value="Waiting for server response ..."/>
+                <input class="header loading" type="submit" id="loading" value="Waiting for server response ..."/>
             </span>
             <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
         </div>
