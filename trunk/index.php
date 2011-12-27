@@ -66,7 +66,8 @@ switch($request)
         # Cheking if asking an item
         if(isset($_GET['request_key']))
         {
-            $response[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('get_api')->get($server['hostname'], $server['port'], $_GET['request_key']);
+            $response[$server['hostname'] . ':' . $server['port']] = Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
+                                                                         Library_Command_Factory::instance('get_api')->get($server['hostname'], $server['port'], $_GET['request_key']));
         }
 
         # Getting stats to calculate server boot time
