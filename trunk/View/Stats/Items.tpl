@@ -6,7 +6,7 @@ if((isset($response)) && ($response != array()))
     <?php
     foreach($response as $server => $result)
     { ?>
-        <pre style="font-size:12px;overflow:auto;" class="full-size"><?php echo htmlentities(trim($result), ENT_NOQUOTES, 'UTF-8'); ?></pre>
+        <pre style="font-size:12px;overflow:auto;" class="full-size"><?php echo htmlentities(trim($result), ENT_NOQUOTES | ENT_IGNORE, 'UTF-8'); ?></pre>
     <?php
     }
     ?>

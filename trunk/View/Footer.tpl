@@ -3,7 +3,7 @@
 if(Library_Data_Version::check())
 { ?>
             <div class="header corner full-size padding" style="float:left; text-align:center; margin-top:10px;">
-            A newer version of phpMemcachedAdmin may be available , visit <a href="http://code.google.com/p/phpmemcacheadmin/" target="_blank">GoogleCode</a> to now more.
+            A newer version of phpMemcachedAdmin may be available , visit <a href="http://code.google.com/p/phpmemcacheadmin/" target="_blank">GoogleCode</a> to know more.
 <?php
 } else { ?>
 			<div class="sub-header corner full-size padding" style="float:left; text-align:center; margin-top:10px;">
