@@ -76,7 +76,7 @@ class Library_Command_Memcache implements Library_Command_Interface
      */
     public function settings($server, $port)
     {
-        return false
+        return false;
     }
 
     /**
