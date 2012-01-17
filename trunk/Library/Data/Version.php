@@ -23,7 +23,7 @@
 class Library_Data_Version
 {
     # Version file
-    protected static $_file = '.version';
+    protected static $_file = 'latest';
 
     # Google Code latest version data file
     protected static $_latest = 'http://phpmemcacheadmin.googlecode.com/files/latest';
@@ -43,7 +43,7 @@ class Library_Data_Version
         $_ini = Library_Configuration_Loader::singleton();
 
         # Version definition file path
-        $path = $_ini->get('file_path') . DIRECTORY_SEPARATOR . self::$_file;
+        $path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . self::$_file;
 
         # Checking if file was modified for less than 15 days ago
         if((is_array($stats = @stat($path))) && (isset($stats['mtime'])) && ($stats['mtime'] > (time() - self::$_time)))
