@@ -5,7 +5,13 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=commands">
             <div class="line">
-                Memcached commands API used by phpMemCacheAdmin<br/>
+                Memcached commands API used by phpMemcacheAdmin<br/>
+                <a class="green" href="http://pecl.php.net/package/memcache">PECL Memcache</a> was 
+                <?php echo (class_exists('Memcache', false)) ? '' : ' not '; ?> found on this server
+                <br/>
+                <a class="green" href="http://pecl.php.net/package/memcached">PECL Memcached</a> was 
+                <?php echo (class_exists('Memcached', false)) ? '' : ' not '; ?> found on this server
+                <br/>
                 <hr/>
             </div>
             <div class="line">
@@ -105,7 +111,8 @@
         <div class="container corner padding" style="padding-right:14px;">
             <form method="post" action="configure.php?request_write=servers">
             <div class="line">
-                Servers list used by phpMemCacheAdmin<br/>
+                Servers list used by phpMemcacheAdmin<br/><br/>
+                The server name will be filled by default with hostname:port
             </div>
             <div id="server_form">
 <?php
@@ -120,20 +127,51 @@
             <div id="cluster_<?php echo $cluster_id; ?>">
                 <hr/>
                 <strong>Cluster <input type="text" style="width:200px;" name="cluster[<?php echo $cluster_id; ?>]" value="<?php echo $cluster; ?>"/></strong>
+                <div style="margin-left:30px;margin-top:3px;">
+                    <div style="width:150px;float:left;">Name (Optionnal)</div>
+                    <div style="width:150px;float:left;margin-left:7px;">IP/Hostname</div>
+                    <div style="width:50px;float:left;margin-left:7px;">Port</div>
+                </div>
 <?php           # Adding input for each server
-                foreach($servers as $server)
+                foreach($servers as $name => $server)
                 {
-                $server_id++; ?>
+                    $server_id++; ?>
                 <div id="server_<?php echo $server_id; ?>">
-                    <div style="margin-left:40px;margin-top:3px;">
-                        <input type="text" style="width:200px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][hostname]" value="<?php echo $server['hostname']; ?>" onfocus="hostnameOnFocus(this)" onblur="hostnameOnBlur(this)"/>
-                        <input type="text" style="width:50px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][port]" value="<?php echo $server['port']; ?>" onfocus="portOnFocus(this)" onblur="portOnBlur(this)"/>
+                    <div style="margin-left:30px;margin-top:3px;">
+                        <input type="text" style="width:150px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][name]" 
+                               value="<?php echo $name; ?>" 
+                               id="name_<?php echo $server_id; ?>" 
+                               onchange="nameOnChange(<?php echo $server_id; ?>)"/>
+                        <input type="text" style="width:150px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][hostname]" 
+                               value="<?php echo $server['hostname']; ?>" 
+                               id="host_<?php echo $server_id; ?>" 
+                        <?php # Custom name
+                        if ($name == $server['hostname'] . ':' . $server['port']) { ?>
+                               onchange="hostOrPortOnChange(<?php echo $server_id; ?>)" 
+                               onKeyUp="hostOrPortOnChange(<?php echo $server_id; ?>)" 
+                        <?php
+                        } ?>
+                               onfocus="hostOnFocus(this)" 
+                               onblur="hostOnBlur(this)"/>
+                        <input type="text" style="width:50px;" name="server[<?php echo $cluster_id; ?>][<?php echo $server_id; ?>][port]" 
+                               value="<?php echo $server['port']; ?>" 
+                               id="port_<?php echo $server_id; ?>" 
+                        <?php # Custom name
+                        if ($name == $server['hostname'] . ':' . $server['port']) { ?>
+                               onchange="hostOrPortOnChange(<?php echo $server_id; ?>)" 
+                               onKeyUp="hostOrPortOnChange(<?php echo $server_id; ?>)" 
+                        <?php
+                        } ?>
+                               onfocus="portOnFocus(this)" 
+                               onblur="portOnBlur(this)"/>
                         <a class="list button" style="padding:1px 2px;" href="#" onclick="deleteServerOrCluster('server_<?php echo $server_id; ?>')">Delete</a>
                     </div>
                 </div>
 <?php           } ?>
                 <div id="cluster_<?php echo $cluster_id; ?>_commands" style="margin-left:40px;margin-top:6px;">
-                    <a class="list button" href="javascript:addServer(<?php echo $cluster_id; ?>)">Add New Server to Cluster</a> <a class="list" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" onclick="deleteServerOrCluster('cluster_<?php echo $cluster_id; ?>')">Delete Cluster</a>
+                    <a class="list button" href="javascript:addServer(<?php echo $cluster_id; ?>)">Add New Server to Cluster</a> 
+                    <a class="list" style="padding:1px 2px;-moz-border-radius:3px;-webkit-border-radius:3px;" href="#" 
+                       onclick="deleteServerOrCluster('cluster_<?php echo $cluster_id; ?>')">Delete Cluster</a>
                 </div>
                 <br/>
             </div>

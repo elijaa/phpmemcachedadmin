@@ -49,11 +49,11 @@ class Library_HTML_Components
             $serverList .= '>' . $cluster . ' cluster</option>';
 
             # Cluster server
-            foreach($servers as $server)
+            foreach($servers as $name => $servers)
             {
-                $serverList .= '<option value="' . $server['hostname'] . ':' . $server['port'] . '" ';
-                $serverList .= ($selected == $server['hostname'] . ':' . $server['port']) ? 'selected="selected"' : '';
-                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . $server['hostname'] . ':' . $server['port'] . '</option>';
+                $serverList .= '<option value="' . $name . '" ';
+                $serverList .= ($selected == $name) ? 'selected="selected"' : '';
+                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . $name . '</option>';
             }
         }
         return $serverList . '</select>';

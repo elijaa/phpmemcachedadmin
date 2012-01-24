@@ -98,23 +98,23 @@ switch($request)
         $time = 0;
 
         # Requesting stats for each server
-        foreach($_ini->cluster($cluster) as $server)
+        foreach($_ini->cluster($cluster) as $name => $server)
         {
             # Start query time calculation
             $time = microtime(true);
 
             # Asking server for stats
-            $actual[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $actual[$name] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
             # Calculating query time length
-            $actual[$server['hostname'] . ':' . $server['port']]['query_time'] = max((microtime(true) - $time) * 1000, 1);
+            $actual[$name]['query_time'] = max((microtime(true) - $time) * 1000, 1);
         }
 
         # Analysing stats
-        foreach($_ini->cluster($cluster) as $server)
+        foreach($_ini->cluster($cluster) as $name => $server)
         {
-            # Making an alias
-            $server = $server['hostname'] . ':' . $server['port'];
+            # Making an alias @FIXME Used ?
+            $server = $name;
 
             # Diff between old and new dump
             $stats[$server] = Library_Data_Analysis::diff($previous[$server], $actual[$server]);
@@ -149,9 +149,9 @@ switch($request)
     default :
         # Initializing : making stats dump
         $stats = array();
-        foreach($_ini->cluster($cluster) as $server)
+        foreach($_ini->cluster($cluster) as $name => $server)
         {
-            $stats[$server['hostname'] . ':' . $server['port']] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $stats[$name] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         }
 
         # Saving first stats dump

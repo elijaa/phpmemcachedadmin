@@ -66,8 +66,7 @@ switch($request)
         # Cheking if asking an item
         if(isset($_GET['request_key']))
         {
-            $response[$server['hostname'] . ':' . $server['port']] = Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                                                                         Library_Command_Factory::instance('get_api')->get($server['hostname'], $server['port'], $_GET['request_key']));
+
         }
 
         # Getting stats to calculate server boot time
@@ -131,7 +130,7 @@ switch($request)
         # Ask for a particular cluster stats
         if(isset($_GET['server']) && ($cluster = $_ini->cluster($_GET['server'])))
         {
-            foreach($cluster as $server)
+            foreach($cluster as $name => $server)
             {
                 # Getting Stats & Slabs stats
                 $data = array();
@@ -145,8 +144,8 @@ switch($request)
 	                $slabs['total_malloced'] += $data['slabs']['total_malloced'];
 	                $slabs['total_wasted'] += $data['slabs']['total_wasted'];
                 }
-                $status[$server['hostname'] . ':' . $server['port']] = ($data['stats'] != array()) ? $data['stats']['version'] : '';
-                $uptime[$server['hostname'] . ':' . $server['port']] = ($data['stats'] != array()) ? $data['stats']['uptime'] : '';
+                $status[$name] = ($data['stats'] != array()) ? $data['stats']['version'] : '';
+                $uptime[$name] = ($data['stats'] != array()) ? $data['stats']['uptime'] : '';
             }
         }
         # Asking for a server stats
