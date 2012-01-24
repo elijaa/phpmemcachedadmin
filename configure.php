@@ -82,7 +82,8 @@ switch($request)
         {
             foreach($servers as $data)
             {
-                $array[$_POST['cluster'][$cluster]][$data['hostname'] . ':' . $data['port']] = $data;
+                $array[$_POST['cluster'][$cluster]][$data['name']] = $data;
+                unset($array[$_POST['cluster'][$cluster]][$data['name']]['name']);
             }
         }
 

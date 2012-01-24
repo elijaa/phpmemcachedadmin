@@ -6,7 +6,7 @@ define('EOL', "\r\n");
 echo 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('refresh_rate') . ' sec)' . EOL . EOL;
 
 # Table header
-echo '<strong>' . sprintf('%-40s', 'SERVER:PORT') . sprintf('%10s', 'SIZE') . sprintf('%7s', '%MEM') . sprintf('%8s', 'TIME') .
+echo '<strong>' . sprintf('%-40s', 'NAME') . sprintf('%10s', 'SIZE') . sprintf('%7s', '%MEM') . sprintf('%8s', 'TIME') .
 sprintf('%6s', 'CONN') . sprintf('%7s', '%HIT') . sprintf('%8s', 'REQ/s') . sprintf('%8s', 'GET/s') . sprintf('%8s', 'SET/s') .
 sprintf('%8s', 'DEL/s') . sprintf('%8s', 'EVI/s') . sprintf('%11s', 'READ/s') . sprintf('%10s', 'WRITE/s') . '</strong>' . EOL . '<hr>';
 
