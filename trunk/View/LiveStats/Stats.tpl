@@ -6,7 +6,7 @@ define('EOL', "\r\n");
 echo 'Last update : ' . date('r', time()) . ' (refresh rate : ' . $_ini->get('refresh_rate') . ' sec)' . EOL . EOL;
 
 # Table header
-echo '<strong>' . sprintf('%-40s', 'NAME') . sprintf('%10s', 'SIZE') . sprintf('%7s', '%MEM') . sprintf('%8s', 'TIME') .
+echo '<strong>' . sprintf('%-35s', 'NAME') . sprintf('%10s', 'SIZE') . sprintf('%7s', '%MEM') . sprintf('%8s', 'TIME') .
 sprintf('%6s', 'CONN') . sprintf('%7s', '%HIT') . sprintf('%8s', 'REQ/s') . sprintf('%8s', 'GET/s') . sprintf('%8s', 'SET/s') .
 sprintf('%8s', 'DEL/s') . sprintf('%8s', 'EVI/s') . sprintf('%11s', 'READ/s') . sprintf('%10s', 'WRITE/s') . '</strong>' . EOL . '<hr>';
 
@@ -14,7 +14,7 @@ sprintf('%8s', 'DEL/s') . sprintf('%8s', 'EVI/s') . sprintf('%11s', 'READ/s') . 
 foreach($stats as $server => $data)
 {
     # Server name
-    echo sprintf('%-40.40s', $server);
+    echo sprintf('%-35.35s', $server);
 
     # Checking for stats validity
     if((isset($data['time'], $data['bytes_percent'], $data['get_hits_percent'], $data['query_time'], $data['request_rate'], $data['curr_connections'],
