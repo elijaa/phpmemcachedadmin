@@ -73,11 +73,29 @@ function changeCommand(obj) {
 		div_value.style.display = 'none';
 	}
 }
+function executeHideShow(target, input, force) {
+	var object = document.getElementById(target);
+	var input = document.getElementById(input);
+	if ((object.style.display == "block") && (force != true))  {
+		input.value = "Show Console";
+		object.style.visibility = "hidden";
+		object.style.display = "none";
+	} else {
+		object.style.visibility = "visible";
+		object.style.display = "block";
+		input.value = "Hide Console";
+	}
+}
 function executeClear(target) {
 	var object = document.getElementById(target);
 	object.innerHTML = '';
 }
-function executeCommand(target) {
+function executeCommand(target, params) {
+	if (params != null) {
+		var request_url = 'commands.php?' + params;
+		execute(request_url, target, true);
+		return;
+	}
 	if (document.getElementById('request_command').value != '') {
 		var request_url = 'commands.php?request_command='
 				+ document.getElementById('request_command').value
@@ -96,6 +114,7 @@ function executeCommand(target) {
 				+ '&request_api='
 				+ document.getElementById('request_api').value;
 		execute(request_url, target, true);
+		return;
 	}
 }
 function searchKey(target) {

@@ -55,18 +55,11 @@ switch($request)
         # Initializing items array
         $server = null;
         $items = false;
-        $response = array();
 
         # Ask for one server and one slabs items
         if(isset($_GET['server']) && ($server = $_ini->server($_GET['server'])))
         {
             $items = Library_Command_Factory::instance('items_api')->items($server['hostname'], $server['port'], $_GET['slab']);
-        }
-
-        # Cheking if asking an item
-        if(isset($_GET['request_key']))
-        {
-
         }
 
         # Getting stats to calculate server boot time
