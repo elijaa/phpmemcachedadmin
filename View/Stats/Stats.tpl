@@ -317,7 +317,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
     foreach($cluster as $name => $server)
     { ?>
             <div class="line server" style="<?php if($displayed > 8) { echo 'display:none;'; } else { $displayed++; } ?>">
-                <span class="left setting"><?php echo $name; ?></span>
+                <span class="left setting"><?php echo (strlen($name) > 27) ? substr($name, 0, 27) . ' [...]' : $name; ?></span>
                 <span class="right" style="font-weight:bold;"><a href="index.php?server=<?php echo $name; ?>" class="green">See Server Stats</a></span>
                 <div class="line" style="margin-left:5px;">
                     <?php echo ($status[$name] != '') ? 'Version ' . $status[$name] . ', Uptime : ' . Library_Data_Analysis::uptime($uptime[$name]) : 'Server did not respond'; ?>

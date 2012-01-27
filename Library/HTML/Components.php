@@ -53,7 +53,7 @@ class Library_HTML_Components
             {
                 $serverList .= '<option value="' . $name . '" ';
                 $serverList .= ($selected == $name) ? 'selected="selected"' : '';
-                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . $name . '</option>';
+                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . ((strlen($name) > 38) ? substr($name, 0, 38) . ' [...]' : $name) . '</option>';
             }
         }
         return $serverList . '</select>';

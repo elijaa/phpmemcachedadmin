@@ -81,7 +81,6 @@ hr {
 
 .loading {
 	text-decoration: blink;
-	width: 680px;
 	visibility: hidden;
 }
 
