@@ -87,6 +87,7 @@ class Library_Command_Server implements Library_Command_Interface
         {
             # Getting line
             $line = fgets($handle);
+
             $buffer .= $line;
 
             # Checking for end of MemCache command
@@ -113,7 +114,7 @@ class Library_Command_Server implements Library_Command_Interface
     private function end($buffer, $command)
     {
         # incr or decr also return integer
-        if(($command == 'incr') || ($command == 'decr'))
+        if((preg_match('/^(incr|decr)/', $command)))
         {
             if(preg_match('/^(END|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|[0-9]*)/', $buffer))
             {
