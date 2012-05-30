@@ -1,6 +1,6 @@
 #summary Roadmap, ideas, release notes
 
-===Version 1.2.2 : Not released yet===
+===Version 1.2.2 : 30/05/2012===
 General
  * Added help to a lot of stats and configuration value
  * Resized server list
