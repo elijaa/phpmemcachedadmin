@@ -142,7 +142,7 @@ switch($request)
         file_put_contents($file_path, serialize($actual));
 
         # Showing stats
-        include 'View/LiveStats/Stats.tpl';
+        include 'View/LiveStats/Stats.phtml';
         break;
 
         # Default : No command
@@ -161,13 +161,13 @@ switch($request)
         $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Library_Data_Error::count() * (0.5 + $_ini->get('connection_timeout'))));
 
         # Showing header
-        include 'View/Header.tpl';
+        include 'View/Header.phtml';
 
         # Showing live stats frame
-        include 'View/LiveStats/Frame.tpl';
+        include 'View/LiveStats/Frame.phtml';
 
         # Showing footer
-        include 'View/Footer.tpl';
+        include 'View/Footer.phtml';
 
         break;
 }

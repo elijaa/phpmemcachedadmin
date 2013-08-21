@@ -344,13 +344,13 @@ switch($request)
         # Default : No command
     default :
         # Showing header
-        include 'View/Header.tpl';
+        include 'View/Header.phtml';
 
         # Showing formulary
-        include 'View/Commands/Commands.tpl';
+        include 'View/Commands/Commands.phtml';
 
         # Showing footer
-        include 'View/Footer.tpl';
+        include 'View/Footer.phtml';
         break;
 }
 

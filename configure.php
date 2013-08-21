@@ -119,10 +119,10 @@ switch($request)
 }
 
 # Showing header
-include 'View/Header.tpl';
+include 'View/Header.phtml';
 
 # Showing formulary
-include 'View/Configure/Configure.tpl';
+include 'View/Configure/Configure.phtml';
 
 # Showing footer
-include 'View/Footer.tpl';
+include 'View/Footer.phtml';

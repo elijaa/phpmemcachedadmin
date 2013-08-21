@@ -45,7 +45,7 @@ if(!isset($_GET['server']))
 }
 
 # Showing header
-include 'View/Header.tpl';
+include 'View/Header.phtml';
 
 # Display by request type
 switch($request)
@@ -70,12 +70,12 @@ switch($request)
         if($items !== false)
         {
             # Showing items
-            include 'View/Stats/Items.tpl';
+            include 'View/Stats/Items.phtml';
         }
         # Items are not well formed
         else
         {
-            include 'View/Stats/Error.tpl';
+            include 'View/Stats/Error.phtml';
         }
         unset($items);
         break;
@@ -97,12 +97,12 @@ switch($request)
         {
             # Analysis
             $slabs = Library_Data_Analysis::slabs($slabs);
-            include 'View/Stats/Slabs.tpl';
+            include 'View/Stats/Slabs.phtml';
         }
         # Slabs are not well formed
         else
         {
-            include 'View/Stats/Error.tpl';
+            include 'View/Stats/Error.phtml';
         }
         unset($slabs);
         break;
@@ -155,15 +155,15 @@ switch($request)
         {
             # Analysis
             $stats = Library_Data_Analysis::stats($stats);
-            include 'View/Stats/Stats.tpl';
+            include 'View/Stats/Stats.phtml';
         }
         # Stats are not well formed
         else
         {
-            include 'View/Stats/Error.tpl';
+            include 'View/Stats/Error.phtml';
         }
         unset($stats);
         break;
 }
 # Showing footer
-include 'View/Footer.tpl';
+include 'View/Footer.phtml';
