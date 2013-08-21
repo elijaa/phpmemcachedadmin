@@ -1,3 +1,11 @@
+Highcharts.setOptions({
+    chart: {
+        style: {
+            fontFamily: 'Verdana'
+        }
+    }
+});
+
 function changeServer(obj) {
 	if (obj.options[obj.selectedIndex].value != '') {
 		window.location = 'index.php?server='
