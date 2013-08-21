@@ -105,7 +105,7 @@
                 <?php echo (isset($stats['decr_hits'])) ? $stats['decr_rate'] . ' Request/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
         </div>
-        
+
         <div class="sub-header corner padding">Touch <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -213,7 +213,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
                 <span class="left setting">Rate</span>
                 <?php echo (isset($stats['reclaimed'])) ? $stats['reclaimed_rate'] . ' Reclaimed/sec' : 'N/A on ' . $stats['version']; ?>
             </div>
-            
+
             <div class="line" style="margin-top:4px;">
                 <span class="left setting help" title="Internal name : expired_unfetched&#013;Items pulled from LRU that were never touched by get/incr/append/etc before expiring">Expired unfetched</span>
                 <?php echo (isset($stats['expired_unfetched'])) ? Library_Data_Analysis::hitResize($stats['expired_unfetched']) : 'N/A on ' . $stats['version']; ?>
@@ -377,9 +377,66 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
-            <div class="line">
-                <img src="http://chart.apis.google.com/chart?chf=bg,s,ebebeb&amp;chs=281x225&amp;cht=p&amp;chco=b5463f|2a707b|ffffff&amp;chd=t:<?php echo $wasted_percent; ?>,<?php echo $used_percent; ?>,<?php echo $free_percent; ?>&amp;chdl=Wasted%20<?php echo $wasted_percent; ?>%|Used%20<?php echo $used_percent; ?>%|Free%20<?php echo $free_percent; ?>%&amp;chdlp=b" alt="Cache Size by GoogleCharts" width="281" height="225"/>
-            </div>
+            <script>
+            $(function () {
+                $('#cacheUsageContainer').highcharts({
+                    chart: {
+                        backgroundColor: '#EBEBEB',
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        width: 274,
+                        height: 234,
+                        marginLeft: 0,
+                        marginRight: 0,
+                        marginTop: 0,
+                        marginBottom: 0
+                    },
+                    title: {
+                        text: '<b><?php echo Library_Data_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes</b>',
+                        y: 110,
+                        style: {
+                            fontSize: '12px'
+                        }
+                    },
+                    tooltip: {
+                    	enabled: false
+                    },
+                    plotOptions: {
+                        pie: {
+                        	borderWidth: 0,
+                            allowPointSelect: false,
+                            dataLabels: {
+                                enabled: true,
+                                color: '#000000',
+                                distance: 15,
+                                connectorWidth: 1.5,
+                                format: '<b>{point.name}</b> : {point.percentage:.1f} %'
+                            },
+                            center: ['50%', '50%']
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        type: 'pie',
+                        name: 'Cache Size',
+                        size: '70%',
+                        innerSize: '55%',
+                        data: [{name: 'Wasted',
+                                y: <?php echo $wasted_percent; ?>,
+                                color: '#B5463F'},
+                               {name: 'Used',
+                                y: <?php echo $used_percent; ?>,
+                                color: '#2A707B'},
+                               {name: 'Free',
+                                y: <?php echo $free_percent; ?>,
+                                color: '#FFFFFF'}]
+                    }]
+                });
+            });
+            </script>
+            <div id="cacheUsageContainer"></div>
         </div>
 <?php
 # Viewing a single server
@@ -401,10 +458,10 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
          </div>
 <?php
-} 
+}
 # Viewing a cluster
 elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
-{ ?>       
+{ ?>
         <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
         <div class="container corner padding">
             <div class="line">
@@ -425,12 +482,61 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                 <?php if(isset($stats['slab_reassign_running'])) { if($stats['slab_reassign_running']) { echo 'Yes'; } else { echo 'No'; } } else { echo 'N/A on ' . $stats['version']; } ?>
             </div>
          </div>
-         
+
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
-            <div class="line">
-            <img src="http://chart.apis.google.com/chart?cht=bvg&amp;chd=t:<?php echo $stats['get_hits_percent']; ?>,<?php echo $stats['get_misses_percent']; ?>&amp;chs=280x145&amp;chl=Hit|Miss&amp;chf=bg,s,ebebeb&amp;chco=2a707b|b5463f&amp;chxt=y&amp;chbh=a&amp;chm=N,000000,0,-1,11" alt="Cache Hit &amp; Miss Rate by GoogleChart" width="280" height="145"/>
-            </div>
+            <script>
+            $(function () {
+                $('#hitsContainer').highcharts({
+                    chart: {
+                        backgroundColor: '#EBEBEB',
+                        width: 274,
+                        height: 147,
+                        marginLeft: 0,
+                        marginRight: 0,
+                        marginTop: 0,
+                        marginBottom: 20
+                    },
+                    title: {
+                        text: null
+                    },
+                    tooltip: {
+                    	enabled: false
+                    },
+                    plotOptions: {
+                    	column: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{y} %</b>'
+                            }
+                        }
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    xAxis: {
+                    	categories: ['Hits', 'Misses']
+                    },
+                    yAxis: {
+                    	gridLineWidth: 0
+                    },
+                    series: [{
+                        type: 'column',
+                        name: 'Cache Size',
+                        data: [{name: 'Hits',
+                                y: <?php echo $stats['get_hits_percent']; ?>,
+                                color: '#2A707B'},
+                               {name: 'Misses',
+                                y: <?php echo $stats['get_misses_percent']; ?>,
+                                color: '#B5463F'}]
+                    }]
+                });
+            });
+            </script>
+            <div id="hitsContainer"></div>
         </div>
 
         <div class="sub-header corner padding">Network <span class="green">Stats</span></div>
