@@ -9,16 +9,31 @@ return array (
   'flush_all_api' => 'Server',
   'connection_timeout' => '1',
   'max_item_dump' => '100',
-  'refresh_rate' => 5,
+  'refresh_rate' => 2,
   'memory_alert' => '80',
   'hit_rate_alert' => '90',
   'eviction_alert' => '0',
   'file_path' => 'Temp/',
-  'servers' =>
+  'servers' => 
   array (
-    'Default' =>
+    'Default' => 
     array (
-      '127.0.0.1:11211' =>
+      '127.0.0.1:11211' => 
+      array (
+        'hostname' => '127.0.0.1',
+        'port' => '11211',
+      ),
+      '127.0.0.2:11211' => 
+      array (
+        'hostname' => '127.0.0.1',
+        'port' => '11211',
+      ),
+      '127.0.0.3:11211' => 
+      array (
+        'hostname' => '127.0.0.1',
+        'port' => '11211',
+      ),
+      '127.0.0.4:11211' => 
       array (
         'hostname' => '127.0.0.1',
         'port' => '11211',
