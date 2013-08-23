@@ -49,6 +49,16 @@ else
     $_GET['cluster'] = $cluster;
 }
 
+# Getting view mode
+if(isset($_GET['mode']) && (($_GET['mode'] == 'console') || ($_GET['mode'] == 'graphic')))
+{
+    $mode = $_GET['mode'];
+}
+else
+{
+    $mode = 'graphic';
+}
+
 # Hashing cluster
 $hash = md5($_GET['cluster']);
 
@@ -56,7 +66,7 @@ $hash = md5($_GET['cluster']);
 if(!isset($_COOKIE['live_stats_id' . $hash]))
 {
     # Cleaning temporary directory
-    $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT );
+    $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT);
     foreach($files as $path)
     {
         # Getting file last modification time
