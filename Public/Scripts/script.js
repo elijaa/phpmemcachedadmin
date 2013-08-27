@@ -3,7 +3,10 @@ Highcharts.setOptions({
         style: {
             fontFamily: 'Verdana'
         }
-    }
+    },
+	global: {
+	    useUTC: false
+	}
 });
 
 function changeServer(obj) {
