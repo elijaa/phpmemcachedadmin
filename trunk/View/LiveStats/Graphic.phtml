@@ -1,0 +1,495 @@
+<?php
+# Creating Base Series for each host
+foreach ($stats as $name => $stat)
+{
+    $series[] = '{id: \'' .  $name . '\',
+                  name: \'' .  $name . '\',
+                  type: \'line\',
+                  pointStart: (' . (time() - (100 * $refresh_rate)) * 1000 . '),
+                  pointInterval: ' . ($refresh_rate * 1000) . ',
+                  data: ' . json_encode(array_fill(0, 100, -1)) . ',
+                  enableMouseTracking: false}';
+}
+
+# Creating replacement Code for each stats by host
+$columns = array('REQ/s', 'EVI/s', '%MEM', 'TIME', 'CONN', 'READ/s', 'WRITE/s');
+
+# Making line for each series
+foreach ($columns as $column)
+{
+    # Making a replacement line for each Host
+    foreach ($stats as $name => $stat) {
+        $data[] = 'chart[\'' . $column . '\'].get(\'' . $name . '\').addPoint([data[\'time\'], data[\'' .  $column . '\'][\'' . $name . '\']], true, true);';
+    }
+}
+?>
+<div style="float:left;">
+    <div class="sub-header corner full-size padding">Live <span class="green">Stats</span></div>
+    <?php
+    # Refresh rate increased
+    if($refresh_rate > $_ini->get('refresh_rate'))
+    { ?>
+        <div class="container corner" style="padding:9px;">
+            Connections errors were discovered, to prevent any problem, refresh rate was increased by
+            <?php echo sprintf('%.1f', $refresh_rate - $_ini->get('refresh_rate')); ?> seconds.
+        </div>
+    <?php
+    } ?>
+
+    <div class="full-size padding">
+        <br/>
+        <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"'); ?> stats</span>
+        <select class="right live" id="cluster_select" class="live" style="width:120px;">
+            <option value="console" selected="selected">Console Mode</option>
+            <option value="graphic">Graphic Mode</option>
+        </select>
+
+        <div id="chartREQ/s" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+                <div id="chartEVI/s" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+                <div id="chart%MEM" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+        <div id="chartTIME" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+        <div id="chartCONN" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+                <div id="chartREAD/s" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+                <div id="chartWRITE/s" class="live">
+
+        Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
+        </div>
+    </div>
+    <div class="container corner full-size padding">
+        <div class="line">
+            <span class="left setting">SIZE</span>
+            Total cache size on this server
+        </div>
+        <div class="line">
+            <span class="left setting">%MEM</span>
+            Percentage of total cache size used on this server
+        </div>
+        <div class="line">
+            <span class="left setting">%HIT</span>
+            Global hit percent on this server : get_hits / (get_hits + get_misses)
+        </div>
+        <div class="line">
+            <span class="left setting">TIME</span>
+            Time taken to connect to the server and proceed the request, high value can indicate a latency or server problem
+        </div>
+        <div class="line">
+            <span class="left setting">REQ/s</span>
+            Total request per second (get, set, delete, incr, ...) issued to this server
+        </div>
+        <div class="line">
+            <span class="left setting">CONN</span>
+            Current connections, monitor that this number doesn't come too close to the server max connection setting
+        </div>
+        <div class="line">
+            <span class="left setting">GET/s, SET/s, DEL/s</span>
+            Get, set or delete commands per second issued to this server
+        </div>
+        <div class="line">
+            <span class="left setting">EVI/s</span>
+            Number of times an item which had an explicit expire time set had to be evicted before it expired
+        </div>
+        <div class="line">
+            <span class="left setting">READ/s</span>
+             Total number of bytes read by this server from network
+        </div>
+        <div class="line">
+            <span class="left setting">WRITE/s</span>
+            Total number of bytes sent by this server to network
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+Highcharts.setOptions({
+    chart: {
+        style: {
+            fontFamily: 'Verdana'
+        },
+    	shadow: false,
+    	animation: false
+    },
+	global: {
+	    useUTC: false
+	}
+});
+
+    var chart = {};
+    function requestData() {
+    	req = null;
+    	delete req;
+    	if (window.XMLHttpRequest) {
+    		req = new XMLHttpRequest();
+    		req.onreadystatechange = function() {
+    			requestDone();
+    		};
+    		req.open("GET", 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>&mode=graphic', true);
+    		req.send(null);
+
+    	} else if (window.ActiveXObject) {
+    		req = new ActiveXObject('Microsoft.XMLHTTP');
+    		if (req) {
+    			req.onreadystatechange = function() {
+    				requestDone();
+    			};
+    			req.open("GET", 'stats.php?request_command=live_stats&cluster=<?php echo $cluster; ?>&mode=graphic', true);
+    			req.send();
+    		}
+    	}
+    	setTimeout("requestData()", <?php echo ($refresh_rate * 1000) ?>);
+    }
+
+    function requestDone() {
+    	if (req.readyState == 4) {
+    		if ((req.status == 200) || (req.status == 0)) {
+        		var data = JSON.parse(req.responseText);
+        		<?php echo implode('', $data) ?>
+        		data = null;
+        		delete data;
+    		} else {
+    		    // Error Loading
+    		}
+    	}
+    }
+
+    /** Base Launch */
+    setTimeout(function() {
+        requestData()
+    }, <?php echo (5 + $refresh_rate - $_ini->get('refresh_rate')) * 1000; ?>);
+<?php
+
+    # Charts Code
+    # Creating Base Series for each host
+    foreach ($columns as $column)
+    {
+    ?>
+	chart['<?php echo $column ?>'] = new Highcharts.Chart({
+		chart: {
+			renderTo: 'chart<?php echo $column ?>',
+			height: 150
+		},
+        credits: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        title: {
+        	text: '<?php echo $column ?>'
+        },
+        xAxis: {
+        	type: 'datetime',
+            labels: {
+                enabled: true
+            },
+            title: {
+                text: null
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            },
+            showFirstLabel: false,
+            min: 0,
+            max: 100
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+        	line: {
+                marker: {
+                    enabled: false
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                    	enabled: false
+                    }
+                }
+            },
+            series: {
+            	threshold: 50,
+            	shadow: false
+            }
+        },
+        series: [<?php echo implode(',', $series) ?>]
+    });
+<?php
+} ?>
+
+/** Time Chart */
+chart['%MEM'] = new Highcharts.Chart({
+	chart: {
+		renderTo: 'chart%MEM',
+		height: 140,
+		width: 500
+	},
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    title: {
+    	text: '%MEM : Percentage of total cache size used by server',
+    	align: 'left'
+    },
+    subtitle: {
+        text : 'Memory limit % : <?php echo $_ini->get('memory_alert') ?>',
+    	align: 'left'
+    },
+    xAxis: {
+    	type: 'datetime',
+        labels: {
+            enabled: true
+        },
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        showFirstLabel: false,
+        min: 0
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+    },
+    tooltip: {
+        shared: true
+    },
+    plotOptions: {
+    	line: {
+            marker: {
+                enabled: false
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                	enabled: false
+                }
+            }
+        },
+        series: {
+        	maxThreshold: 80,
+        	shadow: false
+        }
+    },
+    series: [<?php echo implode(',', $series) ?>]
+});
+
+/** Time Chart */
+chart['TIME'] = new Highcharts.Chart({
+	chart: {
+		renderTo: 'chartTIME',
+		height: 140
+	},
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    title: {
+    	text: 'TIME : Time taken to connect to the server and proceed the request',
+        align: 'left'
+    },
+    subtitle: {
+        text : 'High value can indicate a latency or server problem',
+    	align: 'left'
+    },
+    xAxis: {
+    	type: 'datetime',
+        labels: {
+            enabled: true
+        },
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        showFirstLabel: false,
+        min: 0
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+    },
+    tooltip: {
+        shared: true
+    },
+    plotOptions: {
+    	line: {
+            marker: {
+                enabled: false
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                	enabled: false
+                }
+            }
+        }
+    },
+    series: [<?php echo implode(',', $series) ?>]
+});
+
+/** Read/s Chart */
+chart['READ/s'] = new Highcharts.Chart({
+	chart: {
+		renderTo: 'chartREAD/s',
+		height: 140
+	},
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    title: {
+    	text: 'READ/s : Total number of bytes read by server from network (in Kb/s)',
+        align: 'left'
+    },
+    subtitle: {
+        text : '',
+    	align: 'left'
+    },
+    xAxis: {
+    	type: 'datetime',
+        labels: {
+            enabled: true
+        },
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        showFirstLabel: false,
+        min: 0
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+    },
+    tooltip: {
+        shared: true
+    },
+    plotOptions: {
+    	line: {
+            marker: {
+                enabled: false
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                	enabled: false
+                }
+            }
+        }
+    },
+    series: [<?php echo implode(',', $series) ?>]
+});
+/** WRITE/s Chart */
+chart['WRITE/s'] = new Highcharts.Chart({
+	chart: {
+		renderTo: 'chartWRITE/s',
+		height: 140
+	},
+    credits: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    title: {
+    	text: 'WRITE/s : Total number of bytes sent by server to network (in Kb/s)',
+        align: 'left'
+    },
+    subtitle: {
+        text : '',
+    	align: 'left'
+    },
+    xAxis: {
+    	type: 'datetime',
+        labels: {
+            enabled: true
+        },
+        title: {
+            text: null
+        }
+    },
+    yAxis: {
+        title: {
+            text: null
+        },
+        showFirstLabel: false,
+        min: 0
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        borderWidth: 0
+    },
+    tooltip: {
+        shared: true
+    },
+
+    plotOptions: {
+    	line: {
+            marker: {
+                enabled: false
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                	enabled: false
+                }
+            }
+        }
+    },
+    series: [<?php echo implode(',', $series) ?>]
+});
+</script>

@@ -27,9 +27,6 @@ header('Cache-Control: no-cache, must-revalidate');
 # Require
 require_once 'Library/Loader.php';
 
-# Date timezone
-date_default_timezone_set('Europe/Paris');
-
 # Loading ini file
 $_ini = Library_Configuration_Loader::singleton();
 
@@ -174,7 +171,8 @@ switch($request)
         include 'View/Header.phtml';
 
         # Showing live stats frame
-        include 'View/LiveStats/Frame.phtml';
+        #include 'View/LiveStats/Frame.phtml';
+        include 'View/LiveStats/Graphic.phtml';
 
         # Showing footer
         include 'View/Footer.phtml';
