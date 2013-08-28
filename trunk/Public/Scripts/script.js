@@ -217,7 +217,6 @@ function addServer(current_cluster_id) {
 			+ '       value="port" id="port_' + server_id + '" onfocus="portOnFocus(this)" onblur="portOnBlur(this) onchange="hostOrPortOnChange(' + server_id + ')"/> '
 			+ '<a class="list button" style="padding:1px 2px;" href="#" onclick="deleteServerOrCluster(\'server_' + server_id + '\')">Delete</a>' + '</div>';
 	serverDiv.setAttribute('id', 'server_' + server_id);
-	console.log(document.getElementById('cluster_' + current_cluster_id));
 	document.getElementById('cluster_' + current_cluster_id).insertBefore(serverDiv, document.getElementById('cluster_' + current_cluster_id + '_commands'));
 }
 function deleteServerOrCluster(divID) {

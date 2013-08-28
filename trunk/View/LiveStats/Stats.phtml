@@ -107,10 +107,10 @@ else
             $array['%HIT'][$server] = $data['get_hits_percent'];
 
             # Request rate
-            $array['REQ/s'][$server] = $data['request_rate'] + rand(0, 100);
+            $array['REQ/s'][$server] = $data['request_rate'];
 
             # Eviction rate
-            $array['EVI/s'][$server] = $data['eviction_rate'] + rand(0, 100);
+            $array['EVI/s'][$server] = $data['eviction_rate'];
 
             # Memory Occupation / Alert State
             $array['%MEM'][$server] = $data['bytes_percent'];
