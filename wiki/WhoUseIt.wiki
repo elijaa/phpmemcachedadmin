@@ -3,4 +3,4 @@
 
 =Project Website is moving to another more flexible place=
 
-==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Who-use-it Find it here]==
+==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Who-use-it Find all website using phpMemcachedAdmin here]==
