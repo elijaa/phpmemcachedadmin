@@ -1,5 +1,6 @@
 #summary Roadmap, ideas, release notes
 
 =Project Website is moving to another more flexible place=
-
-==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Release-Notes-and-Roadmap Find release notes and roadmap of phpMemcachedAdmin here]==
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+=[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Release-Notes-and-Roadmap Find release notes and roadmap of phpMemcachedAdmin here]=
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
