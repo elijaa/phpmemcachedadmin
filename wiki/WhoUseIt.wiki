@@ -1,14 +1,6 @@
 #summary Who use it
 
-*If you use it and like it, drop a line & a link and you will be added to the list*
 
-  * http://nullege.com - Python source code search engine.
-  * http://www.maville.com
-  * http://www.ouest-france.fr - Most read Francophone newspaper in the world.
-  * http://www.somewhereinblog.net - Biggest and most popular bangla blog
-  * http://sintonizate.net/ - Portuguese Online Radio and Live TV Streams site
-  * http://123monsite.com - Small french webagency, is using phpmemcacheadmin to administer memcached (used by website)
-  * http://burako.com - Online rummy-like gaming platform 
-  * http://www.slideshare.net
-  * http://www.creamclicks.com - A london based PPC Agency (Search Engine Marketing)
-  * http://www.lohnsteuer-kompakt.de - Deutsche Website zum Thema Online-Steuererklärung
+=Project Website is moving to another more flexible place=
+
+==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Who-use-it Find it here]==
