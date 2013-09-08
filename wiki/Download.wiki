@@ -10,4 +10,4 @@
 ==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Installation-Guide Installation instructions]==
 <br>
 <br>
-Archives arer stored in Google Code
+Archives are stored in Google Code
