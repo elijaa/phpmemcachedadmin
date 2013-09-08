@@ -2,7 +2,7 @@
 
 = Download =
 
-==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Download New website download page]==
+==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Download Download page]== On new website
 <br>
 <br>
 = Installation =
