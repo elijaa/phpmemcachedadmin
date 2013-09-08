@@ -3,9 +3,11 @@
 = Download =
 
 ==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Download Download page]== 
-On new website
 <br>
 <br>
 = Installation =
 
-==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Installation-Guide New website installation instructions]==
+==[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Installation-Guide Installation instructions]==
+<br>
+<br>
+Archives arer stored in Google Code
