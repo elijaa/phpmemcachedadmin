@@ -1,0 +1,9 @@
+#summary Download
+
+= Download =
+
+[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Download Check new website download page]
+
+= Installation =
+
+[http://blog.elijaa.org/index.php?pages/phpMemcachedAdmin-Installation-Guide Check new website installation instructions]
