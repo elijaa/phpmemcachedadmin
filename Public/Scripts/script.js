@@ -132,6 +132,8 @@ function searchKey(target) {
 	if (document.getElementById('search_key').value != '') {
 		var request_url = 'commands.php?request_command=search'
 				+ '&request_key=' + document.getElementById('search_key').value
+				+ '&request_level=' + document.getElementById('search_level').value
+				+ '&request_more=' + document.getElementById('search_more').value
 				+ '&request_server='
 				+ document.getElementById('search_server').value;
 		execute(request_url, target, true);

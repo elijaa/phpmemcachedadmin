@@ -309,7 +309,11 @@ class Library_Command_Server implements Library_Command_Interface
         # Executing command : get
         if(($string = $this->exec('get ' . $key, $server, $port)))
         {
-            return preg_replace('/^VALUE ' . preg_quote($key, '/') . '[0-9 ]*\r\n/', '', $string);
+            $string = preg_replace('/^VALUE ' . preg_quote($key, '/') . '[0-9 ]*\r\n/', '', $string);
+            if(ord($string[0]) == 0x78 && in_array(ord($string[1]), array(0x01,0x5e,0x9c,0xda))) {
+                return gzuncompress($string);
+            }
+            return $string;
         }
         return self::$_log;
     }
@@ -428,13 +432,23 @@ class Library_Command_Server implements Library_Command_Interface
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to search
+     * @param String $level Level of Detail
+     * @param String $more More action
      *
      * @return array
      */
-    function search($server, $port, $search)
+    function search($server, $port, $search, $level = false, $more = false)
     {
         $slabs = array();
         $items = false;
+
+        # Executing command : stats
+        if(($level == 'full') && ($result = $this->exec('stats', $server, $port)))
+        {
+            # Parsing result
+            $result = $this->parse($result);
+            $infinite = (isset($result['time'], $result['uptime'])) ? ($result['time'] - $result['uptime']) : 0;
+        }
 
         # Executing command : slabs stats
         if(($result = $this->exec('stats slabs', $server, $port)))
@@ -458,11 +472,21 @@ class Library_Command_Server implements Library_Command_Interface
             if(($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port)))
             {
                 # Parsing result
-                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[(?:.*)\]\r\n/imU', $result, $matchs, PREG_SET_ORDER);
-
+                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[([0-9]*) b; ([0-9]*) s\]\r\n/imU', $result, $matchs, PREG_SET_ORDER);
                 foreach($matchs as $item)
                 {
-                    $items[] = $item[1];
+                    # Search & Delete
+                    if ($more == 'delete') {
+                        $items[] = $item[1] . ' : ' . $this->delete($server, $port, $item[1]);
+                    # Basic search
+                    } else {
+                        # Detail level
+                        if ($level == 'full') {
+                            $items[] = $item[1] . ' : [' . str_pad(Library_Data_Analysis::byteResize($item[2]), 7, ' ', STR_PAD_LEFT) . 'b, Expire : ' . (($item[3] == $infinite) ? '&#8734;': Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
+                        } else {
+                            $items[] = $item[1];
+                        }
+                    }
                 }
             }
             unset($slabs[$slab]);

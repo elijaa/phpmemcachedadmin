@@ -272,14 +272,14 @@ switch($request)
 
         # Memcache::search command
     case 'search':
-        # Ask for flush_all on a cluster
+        # Ask for search on a cluster
         if(isset($_GET['request_server']) && ($cluster = $_ini->cluster($_GET['request_server'])))
         {
             foreach($cluster as $server)
             {
                 # Dumping server get command response
                 echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+                Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_level'], $_GET['request_more']));
             }
         }
         # Ask for search on one server
@@ -287,7 +287,7 @@ switch($request)
         {
             # Dumping server search command response
             echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-            Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+            Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_level'], $_GET['request_more']));
         }
         # Ask for search on all servers
         else
@@ -300,7 +300,7 @@ switch($request)
                 {
                     # Dumping server search command response
                     echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'],
-                    Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key']));
+                    Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_GET['request_key'], $_GET['request_level'], $_GET['request_more']));
                 }
             }
         }

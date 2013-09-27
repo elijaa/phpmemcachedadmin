@@ -157,10 +157,12 @@ interface Library_Command_Interface
      * @param String $server Hostname
      * @param Integer $port Hostname Port
      * @param String $key Key to search
+     * @param Boolean $level Level of detail
+     * @param Boolean $more More action
      *
      * @return array
      */
-    function search($server, $port, $search);
+    function search($server, $port, $search, $level = false, $more = false);
 
     /**
      * Execute a telnet command on a server

@@ -1,13 +1,14 @@
     <div style="float:left;">
         <div class="sub-header corner full-size padding">Console</div>
-        <div class="container corner full-size padding">
-            <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size"></pre>
+        <div class="container corner full-size padding" id="console" style="visibility:visible;display:block;">
+            <pre id="container" style="font-size:11px;overflow:auto;min-height:180px;max-height:500px;" class="full-size live"></pre>
         </div>
         <div class="container corner full-size padding" style="text-align:right;">
             <span style="float:left;">
                 <input class="header loading" type="submit" id="loading" value="Waiting for server response ..."/>
             </span>
             <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
+            <input class="header" id="hide" type="submit" onclick="javascript:executeHideShow('console', 'hide');javascript:this.blur();" value="Hide Console">
         </div>
 
         <div class="sub-header corner full-size padding">Execute predefined <span class="green">Command</span></div>
@@ -157,6 +158,24 @@
                         <span class="left">Server</span>
                         <span class="right">
                             <?php echo Library_HTML_Components::serverSelect('search_server'); ?>
+                        </span>
+                    </div>
+                    <div class="line">
+                        <span class="left">Detail Level</span>
+                        <span class="right">
+                            <select id="search_level">
+                                <option value="keys">Show Keys</option>
+                                <option value="full">Show Keys, Expiration & Size</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div class="line">
+                        <span class="left">Action</span>
+                        <span class="right">
+                            <select id="search_more">
+                                <option value="show">Search & Show Keys</option>
+                                <option value="delete">Search & Deleted Keys</option>
+                            </select>
                         </span>
                     </div>
                     <div class="line" style="text-align:center;">
