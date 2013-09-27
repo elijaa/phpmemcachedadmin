@@ -262,10 +262,11 @@ class Library_Data_Analysis
      * Calculate Uptime
      *
      * @param Integer $uptime Uptime timestamp
+     * @param Boolean $compact Compact Mode
      *
      * @return String
      */
-    public static function uptime($uptime)
+    public static function uptime($uptime, $compact = false)
     {
         if($uptime > 0)
         {
@@ -276,7 +277,11 @@ class Library_Data_Analysis
             {
                 return ' less than 1 min';
             }
-            return $days . ' days ' . $hours . ' hrs ' . $mins . ' min';
+            if ($compact == false) {
+                return $days . ' day' . (($days > 1) ? 's' : '') . ' ' . $hours . ' hr' . (($hours > 1) ? 's' : '') . ' ' . $mins . ' min' . (($mins > 1) ? 's' : '');
+            } else {
+                return $days . 'd ' . $hours . 'h ' . $mins . 'm';
+            }
         }
         return ' - ';
     }

@@ -266,7 +266,7 @@ class Library_Command_Memcached implements Library_Command_Interface
      *
      * @return Array
      */
-    function search($server, $port, $search)
+    function search($server, $port, $search, $level = false, $more = false)
     {
         throw new Exception('PECL Memcached does not support search function, use Server instead');
     }

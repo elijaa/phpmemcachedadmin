@@ -113,7 +113,6 @@ foreach ($columns as $column)
 			style: {
 				fontFamily: 'Verdana'
 			},
-			shadow: false,
 			animation: false
 		},
 		global: {
@@ -560,7 +559,7 @@ foreach ($columns as $column)
 		},
 		series: [<?php echo implode(',', $series) ?>]
 	});
-	
+
 	var objects = ['REQ/s', 'EVI/s', '%MEM', 'TIME', 'CONN', 'READ/s', 'WRITE/s'];
 	for(i = 0 ; i < objects.length ; i++){
 		console.log(chart[objects[i]]);
@@ -570,9 +569,9 @@ foreach ($columns as $column)
 	$(chart.series[0].data).each(function(i, e) {
             e.legendItem.on('click', function(event) {
                 var legendItem=e.name;
-                
+
                 event.stopPropagation();
-                
+
                 $(chart.series).each(function(j,f){
                        $(this.data).each(function(k,z){
                            if(z.name==legendItem)
@@ -588,7 +587,7 @@ foreach ($columns as $column)
                            }
                        });
                 });
-                
+
             });
         });
 		*/
