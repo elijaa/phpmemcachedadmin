@@ -46,6 +46,7 @@ else
     $_GET['cluster'] = $cluster;
 }
 
+/** In Progress
 # Getting view mode
 if(isset($_GET['mode']) && (($_GET['mode'] == 'console') || ($_GET['mode'] == 'graphic')))
 {
@@ -55,6 +56,7 @@ else
 {
     $mode = 'graphic';
 }
+*/
 
 # Hashing cluster
 $hash = md5($_GET['cluster']);
@@ -171,8 +173,8 @@ switch($request)
         include 'View/Header.phtml';
 
         # Showing live stats frame
-        #include 'View/LiveStats/Frame.phtml';
-        include 'View/LiveStats/Graphic.phtml';
+        include 'View/LiveStats/Frame.phtml';
+        # include 'View/LiveStats/Graphic.phtml';
 
         # Showing footer
         include 'View/Footer.phtml';

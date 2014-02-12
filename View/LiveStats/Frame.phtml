@@ -20,11 +20,12 @@
     <div class="full-size padding">
         <br/>
         <span class="live">Actually looking at <?php echo Library_HTML_Components::clusterSelect('cluster_select', (isset($_GET['cluster'])) ? $_GET['cluster'] : '', 'live', 'onchange="changeCluster(this);"'); ?> stats</span>
+        <!-- In Progress
         <select class="right live" id="cluster_select" class="live" style="width:120px;">
             <option value="console" selected="selected">Console Mode</option>
             <option value="graphic">Graphic Mode</option>
         </select>
-
+        -->
         <pre id="stats" class="live">
 
         Loading live stats, please wait ~<?php echo sprintf('%.0f', 5 + $refresh_rate - $_ini->get('refresh_rate')); ?> seconds ...
