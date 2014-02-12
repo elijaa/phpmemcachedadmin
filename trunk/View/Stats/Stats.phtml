@@ -377,9 +377,9 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 
         <div class="sub-header corner padding">Cache Size <span class="green">Graphic</span></div>
         <div class="container corner padding">
+        <div id="cacheUsageContainer"></div>
             <script>
-            $(function () {
-                $('#cacheUsageContainer').highcharts({
+                new Highcharts.Chart({
                     chart: {
                         backgroundColor: '#EBEBEB',
                         plotBorderWidth: null,
@@ -389,7 +389,8 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                         marginLeft: 0,
                         marginRight: 0,
                         marginTop: 0,
-                        marginBottom: 0
+                        marginBottom: 0,
+                        renderTo: 'cacheUsageContainer'
                     },
                     title: {
                         text: '<b><?php echo Library_Data_Analysis::byteResize($stats['limit_maxbytes']); ?>Bytes</b>',
@@ -434,9 +435,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                                 color: '#FFFFFF'}]
                     }]
                 });
-            });
             </script>
-            <div id="cacheUsageContainer"></div>
         </div>
 <?php
 # Viewing a single server
@@ -485,9 +484,9 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
 
         <div class="sub-header corner padding">Hit &amp; Miss Rate <span class="green">Graphic</span></div>
         <div class="container corner padding">
+        <div id="hitsContainer"></div>
             <script>
-            $(function () {
-                $('#hitsContainer').highcharts({
+                new Highcharts.Chart({
                     chart: {
                         backgroundColor: '#EBEBEB',
                         width: 274,
@@ -495,7 +494,8 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                         marginLeft: 0,
                         marginRight: 0,
                         marginTop: 0,
-                        marginBottom: 20
+                        marginBottom: 20,
+                        renderTo: 'hitsContainer'
                     },
                     title: {
                         text: null
@@ -534,9 +534,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
                                 color: '#B5463F'}]
                     }]
                 });
-            });
             </script>
-            <div id="hitsContainer"></div>
         </div>
 
         <div class="sub-header corner padding">Network <span class="green">Stats</span></div>
