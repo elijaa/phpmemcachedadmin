@@ -8,6 +8,7 @@ body {
 a {
 	color: #EEE;
 	text-decoration: none;
+	cursor: pointer;
 }
 
 a:hover {
@@ -43,6 +44,9 @@ input:focus,textarea:focus {
 
 input:hover {
 	color: #A00;
+}
+input[type=submit] {
+	cursor: pointer;
 }
 
 img {
