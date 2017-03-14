@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@
  *
  * Sending command to memcache server
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 20/03/2010
  */
 class Library_Command_Server implements Library_Command_Interface
@@ -56,8 +57,7 @@ class Library_Command_Server implements Library_Command_Interface
         $handle = null;
 
         # Socket Opening
-        if(!($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout'))))
-        {
+        if (! ($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout')))) {
             # Adding error to log
             self::$_log = utf8_encode($errstr);
             Library_Data_Error::add(utf8_encode($errstr));
@@ -71,8 +71,7 @@ class Library_Command_Server implements Library_Command_Interface
         $buffer = fgets($handle);
 
         # Checking if result is valid
-        if($this->end($buffer, $command))
-        {
+        if ($this->end($buffer, $command)) {
             # Closing socket
             fclose($handle);
 
@@ -83,16 +82,14 @@ class Library_Command_Server implements Library_Command_Interface
         }
 
         # Reading Results
-        while((!feof($handle)))
-        {
+        while ((! feof($handle))) {
             # Getting line
             $line = fgets($handle);
 
             $buffer .= $line;
 
             # Checking for end of MemCache command
-            if($this->end($line, $command))
-            {
+            if ($this->end($line, $command)) {
                 break;
             }
         }
@@ -114,18 +111,13 @@ class Library_Command_Server implements Library_Command_Interface
     private function end($buffer, $command)
     {
         # incr or decr also return integer
-        if((preg_match('/^(incr|decr)/', $command)))
-        {
-            if(preg_match('/^(END|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|[0-9]*)/', $buffer))
-            {
+        if ((preg_match('/^(incr|decr)/', $command))) {
+            if (preg_match('/^(END|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|[0-9]*)/', $buffer)) {
                 return true;
             }
-        }
-        else
-        {
+        } else {
             # Checking command response end
-            if(preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET|TOUCHED)/', $buffer))
-            {
+            if (preg_match('/^(END|DELETED|OK|ERROR|SERVER_ERROR|CLIENT_ERROR|NOT_FOUND|STORED|RESET|TOUCHED)/', $buffer)) {
                 return true;
             }
         }
@@ -149,27 +141,20 @@ class Library_Command_Server implements Library_Command_Interface
         $lines = preg_split('/\r\n/', $string);
 
         # Stats
-        if($stats)
-        {
+        if ($stats) {
             # Browsing each line
-            foreach($lines as $line)
-            {
+            foreach ($lines as $line) {
                 $data = preg_split('/ /', $line);
-                if(isset($data[2]))
-                {
+                if (isset($data[2])) {
                     $return[$data[1]] = $data[2];
                 }
             }
-        }
-        # Items
-        else
-        {
+        }         # Items
+        else {
             # Browsing each line
-            foreach($lines as $line)
-            {
+            foreach ($lines as $line) {
                 $data = preg_split('/ /', $line);
-                if(isset($data[1]))
-                {
+                if (isset($data[1])) {
                     $return[$data[1]] = array(substr($data[2], 1), $data[4]);
                 }
             }
@@ -189,8 +174,7 @@ class Library_Command_Server implements Library_Command_Interface
     public function stats($server, $port)
     {
         # Executing command
-        if(($return = $this->exec('stats', $server, $port)))
-        {
+        if (($return = $this->exec('stats', $server, $port))) {
             return $this->parse($return);
         }
         return false;
@@ -208,8 +192,7 @@ class Library_Command_Server implements Library_Command_Interface
     public function settings($server, $port)
     {
         # Executing command
-        if(($return = $this->exec('stats settings', $server, $port)))
-        {
+        if (($return = $this->exec('stats settings', $server, $port))) {
             return $this->parse($return);
         }
         return false;
@@ -235,8 +218,7 @@ class Library_Command_Server implements Library_Command_Interface
         unset($stats);
 
         # Executing command : slabs stats
-        if(($result = $this->exec('stats slabs', $server, $port)))
-        {
+        if (($result = $this->exec('stats slabs', $server, $port))) {
             # Parsing result
             $result = $this->parse($result);
             $slabs['active_slabs'] = $result['active_slabs'];
@@ -245,21 +227,18 @@ class Library_Command_Server implements Library_Command_Interface
             unset($result['total_malloced']);
 
             # Indexing by slabs
-            foreach($result as $key => $value)
-            {
+            foreach ($result as $key => $value) {
                 $key = preg_split('/:/', $key);
                 $slabs[$key[0]][$key[1]] = $value;
             }
 
             # Executing command : items stats
-            if(($result = $this->exec('stats items', $server, $port)))
-            {
+            if (($result = $this->exec('stats items', $server, $port))) {
                 # Parsing result
                 $result = $this->parse($result);
 
                 # Indexing by slabs
-                foreach($result as $key => $value)
-                {
+                foreach ($result as $key => $value) {
                     $key = preg_split('/:/', $key);
                     $slabs[$key[1]]['items:' . $key[2]] = $value;
                 }
@@ -286,8 +265,7 @@ class Library_Command_Server implements Library_Command_Interface
         $items = false;
 
         # Executing command : stats cachedump
-        if(($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini->get('max_item_dump'), $server, $port)))
-        {
+        if (($result = $this->exec('stats cachedump ' . $slab . ' ' . self::$_ini->get('max_item_dump'), $server, $port))) {
             # Parsing result
             $items = $this->parse($result, false);
         }
@@ -307,10 +285,9 @@ class Library_Command_Server implements Library_Command_Interface
     public function get($server, $port, $key)
     {
         # Executing command : get
-        if(($string = $this->exec('get ' . $key, $server, $port)))
-        {
+        if (($string = $this->exec('get ' . $key, $server, $port))) {
             $string = preg_replace('/^VALUE ' . preg_quote($key, '/') . '[0-9 ]*\r\n/', '', $string);
-            if(ord($string[0]) == 0x78 && in_array(ord($string[1]), array(0x01,0x5e,0x9c,0xda))) {
+            if (ord($string[0]) == 0x78 && in_array(ord($string[1]), array(0x01, 0x5e, 0x9c, 0xda))) {
                 return gzuncompress($string);
             }
             return $string;
@@ -336,8 +313,7 @@ class Library_Command_Server implements Library_Command_Interface
         $data = preg_replace('/\r/', '', $data);
 
         # Executing command : set
-        if(($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port)))
-        {
+        if (($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port))) {
             return $result;
         }
         return self::$_log;
@@ -356,8 +332,7 @@ class Library_Command_Server implements Library_Command_Interface
     public function delete($server, $port, $key)
     {
         # Executing command : delete
-        if(($result = $this->exec('delete ' . $key, $server, $port)))
-        {
+        if (($result = $this->exec('delete ' . $key, $server, $port))) {
             return $result;
         }
         return self::$_log;
@@ -377,8 +352,7 @@ class Library_Command_Server implements Library_Command_Interface
     function increment($server, $port, $key, $value)
     {
         # Executing command : increment
-        if(($result = $this->exec('incr ' . $key . ' ' . $value, $server, $port)))
-        {
+        if (($result = $this->exec('incr ' . $key . ' ' . $value, $server, $port))) {
             return $result;
         }
         return self::$_log;
@@ -398,8 +372,7 @@ class Library_Command_Server implements Library_Command_Interface
     function decrement($server, $port, $key, $value)
     {
         # Executing command : decrement
-        if(($result = $this->exec('decr ' . $key . ' ' . $value, $server, $port)))
-        {
+        if (($result = $this->exec('decr ' . $key . ' ' . $value, $server, $port))) {
             return $result;
         }
         return self::$_log;
@@ -418,8 +391,7 @@ class Library_Command_Server implements Library_Command_Interface
     function flush_all($server, $port, $delay)
     {
         # Executing command : flush_all
-        if(($result = $this->exec('flush_all ' . $delay, $server, $port)))
-        {
+        if (($result = $this->exec('flush_all ' . $delay, $server, $port))) {
             return $result;
         }
         return self::$_log;
@@ -443,46 +415,40 @@ class Library_Command_Server implements Library_Command_Interface
         $items = false;
 
         # Executing command : stats
-        if(($level == 'full') && ($result = $this->exec('stats', $server, $port)))
-        {
+        if (($level == 'full') && ($result = $this->exec('stats', $server, $port))) {
             # Parsing result
             $result = $this->parse($result);
             $infinite = (isset($result['time'], $result['uptime'])) ? ($result['time'] - $result['uptime']) : 0;
         }
 
         # Executing command : slabs stats
-        if(($result = $this->exec('stats slabs', $server, $port)))
-        {
+        if (($result = $this->exec('stats slabs', $server, $port))) {
             # Parsing result
             $result = $this->parse($result);
             unset($result['active_slabs']);
             unset($result['total_malloced']);
             # Indexing by slabs
-            foreach($result as $key => $value)
-            {
+            foreach ($result as $key => $value) {
                 $key = preg_split('/:/', $key);
                 $slabs[$key[0]] = true;
             }
         }
 
         # Exploring each slabs
-        foreach($slabs as $slab => $unused)
-        {
+        foreach ($slabs as $slab => $unused) {
             # Executing command : stats cachedump
-            if(($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port)))
-            {
+            if (($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port))) {
                 # Parsing result
                 preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[([0-9]*) b; ([0-9]*) s\]\r\n/imU', $result, $matchs, PREG_SET_ORDER);
-                foreach($matchs as $item)
-                {
+                foreach ($matchs as $item) {
                     # Search & Delete
                     if ($more == 'delete') {
                         $items[] = $item[1] . ' : ' . $this->delete($server, $port, $item[1]);
-                    # Basic search
+                        # Basic search
                     } else {
                         # Detail level
                         if ($level == 'full') {
-                            $items[] = $item[1] . ' : [' . str_pad(Library_Data_Analysis::byteResize($item[2]), 7, ' ', STR_PAD_LEFT) . 'b, Expire : ' . (($item[3] == $infinite) ? '&#8734;': Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
+                            $items[] = $item[1] . ' : [' . str_pad(Library_Data_Analysis::byteResize($item[2]), 7, ' ', STR_PAD_LEFT) . 'b, Expire : ' . (($item[3] == $infinite) ? '&#8734;' : Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
                         } else {
                             $items[] = $item[1];
                         }
@@ -492,8 +458,7 @@ class Library_Command_Server implements Library_Command_Interface
             unset($slabs[$slab]);
         }
 
-        if(is_array($items))
-        {
+        if (is_array($items)) {
             sort($items);
         }
 
@@ -513,8 +478,7 @@ class Library_Command_Server implements Library_Command_Interface
     function telnet($server, $port, $command)
     {
         # Executing command
-        if(($result = $this->exec($command, $server, $port)))
-        {
+        if (($result = $this->exec($command, $server, $port))) {
             return $result;
         }
         return self::$_log;

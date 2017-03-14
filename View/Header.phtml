@@ -33,7 +33,7 @@ if(basename($_SERVER['PHP_SELF']) == 'index.php')
 <?php
 }
 # Server HTML select
-echo Library_HTML_Components::serverSelect('server_select', (isset($_GET['server'])) ? $_GET['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
+echo Library_HTML_Components::serverSelect('server_select', (isset($_REQUEST['server'])) ? $_REQUEST['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
         |
 <?php
 # Commands view
@@ -57,6 +57,14 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 <?php
 } ?>
     </div>
+<?php
+if (is_writable($_ini->get('file_path')) === false) {
+?>
+    <div class="header corner full-size padding" style="text-align:center;margin-top:10px;">
+        Warning : Temporary directory <em><?php echo realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $_ini->get('file_path')) ?></em> is not writable, please fix this error and try again.
+    </div>
+<?php
+} ?>
 
 <!--[if IE]>
 <div class="header corner full-size padding" style="text-align:center;margin-top:10px;">

@@ -140,18 +140,18 @@
     <div class="size-2" style="float:left;padding-left:9px;">
 <?php
 # Viewing a single server
-if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
 { ?>
         <div class="header corner padding size-3cols" style="text-align:center;margin-top:10px;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">See this Server Slabs Stats</a>
+            <a href="?server=<?php echo $_REQUEST['server']; ?>&amp;show=slabs">See this Server Slabs Stats</a>
         </div>
 <?php
 } ?>
-        <div class="sub-header corner padding"><?php echo (isset($_GET['server'])) && ($_ini->server($_GET['server'])) ? 'Server' : 'Cluster'; ?> <span class="green">Stats</span></div>
+        <div class="sub-header corner padding"><?php echo (isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])) ? 'Server' : 'Cluster'; ?> <span class="green">Stats</span></div>
         <div class="container corner padding size-3cols">
 <?php
 # Viewing a single server
-if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
 { ?>
             <div class="line">
                 <span class="left setting">Uptime</span>
@@ -185,7 +185,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
             </div>
 <?php
 # Viewing a single server
-if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
 { ?>
             <div class="line">
                 <span class="left setting">Oldest Item</span>
@@ -226,7 +226,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 
 <?php
 # Viewing a server
-if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
 { ?>
         <div class="sub-header corner padding">Server <span class="green">Configuration</span></div>
         <div class="container corner padding">
@@ -307,9 +307,9 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 <?php
 }
 # Viewing a cluster
-elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
+elseif((isset($_REQUEST['server'])) && ($cluster = $_ini->cluster($_REQUEST['server'])))
 { ?>
-        <div class="sub-header corner padding">Cluster <?php echo $_GET['server']; ?> <span class="green">Servers List</span></div>
+        <div class="sub-header corner padding">Cluster <?php echo $_REQUEST['server']; ?> <span class="green">Servers List</span></div>
         <div class="container corner padding">
 <?php
     # Displaying first 8 servers
@@ -439,7 +439,7 @@ elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
         </div>
 <?php
 # Viewing a single server
-if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
+if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
 { ?>
         <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
         <div class="container corner padding">
@@ -459,7 +459,7 @@ if((isset($_GET['server'])) && ($_ini->server($_GET['server'])))
 <?php
 }
 # Viewing a cluster
-elseif((isset($_GET['server'])) && ($cluster = $_ini->cluster($_GET['server'])))
+elseif((isset($_REQUEST['server'])) && ($cluster = $_ini->cluster($_REQUEST['server'])))
 { ?>
         <div class="sub-header corner padding">Hash Table <span class="green">Stats</span></div>
         <div class="container corner padding">

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@
  *
  * Sending command to memcache server via PECL memcache API http://pecl.php.net/package/memcache
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 20/03/2010
  */
 class Library_Command_Memcached implements Library_Command_Interface
@@ -56,10 +57,9 @@ class Library_Command_Memcached implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command
-        if(($return = self::$_memcache->getStats()))
-        {
+        if (($return = self::$_memcache->getStats())) {
             # Delete server key based
-            $stats = $return[$server.':'.$port];
+            $stats = $return[$server . ':' . $port];
 
             # Adding value that miss
             $stats['delete_hits'] = '';
@@ -136,8 +136,7 @@ class Library_Command_Memcached implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : get
-        if($item = self::$_memcache->get($key))
-        {
+        if ($item = self::$_memcache->get($key)) {
             return print_r($item, true);
         }
         return self::$_memcache->getResultMessage();
@@ -161,7 +160,9 @@ class Library_Command_Memcached implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Checking duration
-        if($duration == '') { $duration = 0; }
+        if ($duration == '') {
+            $duration = 0;
+        }
 
         # Executing command : set
         self::$_memcache->set($key, $data, $duration);
@@ -205,8 +206,7 @@ class Library_Command_Memcached implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : increment
-        if($result = self::$_memcache->increment($key, $value))
-        {
+        if ($result = self::$_memcache->increment($key, $value)) {
             return $result;
         }
         return self::$_memcache->getResultMessage();
@@ -229,8 +229,7 @@ class Library_Command_Memcached implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : decrement
-        if($result = self::$_memcache->decrement($key, $value))
-        {
+        if ($result = self::$_memcache->decrement($key, $value)) {
             return $result;
         }
         return self::$_memcache->getResultMessage();

@@ -17,7 +17,7 @@
  *
  * Interface of communication to MemCache Server
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 20/03/2010
  */
 interface Library_Command_Interface

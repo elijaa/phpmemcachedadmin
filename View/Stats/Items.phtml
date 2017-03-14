@@ -16,9 +16,9 @@
         </div>
 
     <div class="sub-header corner full-size padding">
-        Items in Slab <?php echo $_GET['slab']; ?>, only showing first <?php echo $_ini->get('max_item_dump'); ?> items
+        Items in Slab <?php echo $_REQUEST['slab']; ?>, only showing first <?php echo $_ini->get('max_item_dump'); ?> items
         <span style="float:right;">
-            <a href="?server=<?php echo $_GET['server']; ?>&amp;show=slabs">Back to Server Slabs</a>
+            <a href="?server=<?php echo $_REQUEST['server']; ?>&amp;show=slabs">Back to Server Slabs</a>
         </span>
     </div>
     <div class="container corner full-size padding">
@@ -32,7 +32,7 @@ foreach($items as $key => $data)
     if($notFirst) { echo '<hr/>'; }
     ?>
         <a class="green item" style=""
-        onclick="javascript:executeHideShow('console', 'hide', true);javascript:executeCommand('container', 'request_key=<?php echo urlencode($key); ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get&amp;request_server=<?php echo $_GET['server']; ?>');"><?php echo ((strlen($key) > 70) ? substr($key, 0, 70) . '[..]' : $key); ?></a>
+        onclick="javascript:executeHideShow('console', 'hide', true);javascript:executeCommand('container', 'request_key=<?php echo urlencode($key); ?>&amp;request_api=<?php echo $_ini->get('get_api'); ?>&amp;request_command=get&amp;request_server=<?php echo $_REQUEST['server']; ?>');"><?php echo ((strlen($key) > 70) ? substr($key, 0, 70) . '[..]' : $key); ?></a>
 
         <span class="right" style="clear:right;">
             <strong>Size</strong> : <?php echo Library_Data_Analysis::byteResize($data[0]); ?>Bytes,

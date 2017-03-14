@@ -20,60 +20,40 @@
  * @author Cyrille Mahieux : elijaa(at)free.fr
  * @since 12/04/2010
  */
-# Headers
-header('Content-type: text/html;');
-header('Cache-Control: no-cache, must-revalidate');
-
 # Require
-require_once 'Library/Loader.php';
-
-# Loading ini file
-$_ini = Library_Configuration_Loader::singleton();
+require_once 'Library/Bootstrap.php';
 
 # Initializing requests
-$request = (isset($_GET['request_command'])) ? $_GET['request_command'] : null;
+$request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
 
 # Stat of a particular cluster
-if(isset($_GET['cluster']) && ($_GET['cluster'] != null))
-{
-    $cluster = $_GET['cluster'];
-}
-# Getting default cluster
-else
-{
+if (isset($_REQUEST['cluster']) && ($_REQUEST['cluster'] != null)) {
+    $cluster = $_REQUEST['cluster'];
+} # Getting default cluster
+else {
     $clusters = array_keys($_ini->get('servers'));
     $cluster = isset($clusters[0]) ? $clusters[0] : null;
-    $_GET['cluster'] = $cluster;
+    $_REQUEST['cluster'] = $cluster;
 }
 
-/** In Progress
-# Getting view mode
-if(isset($_GET['mode']) && (($_GET['mode'] == 'console') || ($_GET['mode'] == 'graphic')))
-{
-    $mode = $_GET['mode'];
+# Checking Writing Status in Temporary Folder
+if (is_writable($_ini->get('file_path')) === false) {
+    chmod($_ini->get('file_path'), 0775);
 }
-else
-{
-    $mode = 'graphic';
-}
-*/
 
 # Hashing cluster
-$hash = md5($_GET['cluster']);
+$hash = md5($_REQUEST['cluster']);
 
 # Cookie @FIXME not a perfect method
-if(!isset($_COOKIE['live_stats_id' . $hash]))
-{
+if (! isset($_COOKIE['live_stats_id' . $hash])) {
     # Cleaning temporary directory
     $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT);
-    foreach($files as $path)
-    {
+    foreach ($files as $path) {
         # Getting file last modification time
         $stats = @stat($path);
 
         # Deleting file older than 24 hours
-        if(isset($stats['mtime']) && ($stats['mtime'] < (time() - 60*60*24)))
-        {
+        if (isset($stats['mtime']) && ($stats['mtime'] < (time() - 60 * 60 * 24))) {
             @unlink($path);
         }
     }
@@ -82,10 +62,8 @@ if(!isset($_COOKIE['live_stats_id' . $hash]))
     $live_stats_id = rand() . $hash;
 
     # Cookie
-    setcookie('live_stats_id' . $hash, $live_stats_id, time() + 60*60*24);
-}
-else
-{
+    setcookie('live_stats_id' . $hash, $live_stats_id, time() + 60 * 60 * 24);
+} else {
     # Backup from a previous request
     $live_stats_id = $_COOKIE['live_stats_id' . $hash];
 }
@@ -94,10 +72,9 @@ else
 $file_path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
 
 # Display by request type
-switch($request)
-{
+switch ($request) {
     # Ajax ask : stats
-    case 'live_stats':
+    case 'live_stats' :
         # Opening old stats dump
         $previous = @unserialize(file_get_contents($file_path));
 
@@ -107,8 +84,7 @@ switch($request)
         $time = 0;
 
         # Requesting stats for each server
-        foreach($_ini->cluster($cluster) as $name => $server)
-        {
+        foreach ($_ini->cluster($cluster) as $name => $server) {
             # Start query time calculation
             $time = microtime(true);
 
@@ -120,8 +96,7 @@ switch($request)
         }
 
         # Analysing stats
-        foreach($_ini->cluster($cluster) as $name => $server)
-        {
+        foreach ($_ini->cluster($cluster) as $name => $server) {
             # Making an alias @FIXME Used ?
             $server = $name;
 
@@ -130,11 +105,9 @@ switch($request)
         }
 
         # Making stats for each server
-        foreach($stats as $server => $array)
-        {
+        foreach ($stats as $server => $array) {
             # Analysing request
-            if((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0))
-            {
+            if ((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0)) {
                 # Computing stats
                 $stats[$server] = Library_Data_Analysis::stats($stats[$server]);
 
@@ -154,12 +127,11 @@ switch($request)
         include 'View/LiveStats/Stats.phtml';
         break;
 
-        # Default : No command
+    # Default : No command
     default :
         # Initializing : making stats dump
         $stats = array();
-        foreach($_ini->cluster($cluster) as $name => $server)
-        {
+        foreach ($_ini->cluster($cluster) as $name => $server) {
             $stats[$name] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         }
 
@@ -174,7 +146,6 @@ switch($request)
 
         # Showing live stats frame
         include 'View/LiveStats/Frame.phtml';
-        # include 'View/LiveStats/Graphic.phtml';
 
         # Showing footer
         include 'View/Footer.phtml';

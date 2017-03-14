@@ -127,7 +127,7 @@ hr {
     border-width: 1px;
     border-style: solid;
     border-color: #9c3c36;
-	background: url("../Images/b5463f.png") repeat-x scroll 50% 50% #B5463F;
+	background: #B5463F;
 	font-weight: bold;
 	color: #fff;
 	clear: both
@@ -137,7 +137,7 @@ hr {
 	border-width: 1px;
     border-style: solid;
     border-color: #514845;
-	background: url("../Images/635855.png") repeat-x scroll 50% 50% #635855;
+	background: #635855;
 	font-weight: bold;
 	color: #fff;
 	clear: both;

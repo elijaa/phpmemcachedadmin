@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@
  *
  * Factory for communication with Memcache Server
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 30/03/2010
  */
 class Library_Command_Factory
@@ -25,10 +26,12 @@ class Library_Command_Factory
     private static $_object = array();
 
     # No explicit call of constructor
-    private function __construct() {}
+    private function __construct()
+    {}
 
     # No explicit call of clone()
-    private function __clone() {}
+    private function __clone()
+    {}
 
     /**
      * Accessor to command class instance by command type
@@ -43,25 +46,23 @@ class Library_Command_Factory
         $_ini = Library_Configuration_Loader::singleton();
 
         # Instance does not exists
-        if(!isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server'))
-        {
+        if (! isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server')) {
             # Switching by API
-            switch($_ini->get($command))
-            {
-                case 'Memcache':
+            switch ($_ini->get($command)) {
+                case 'Memcache' :
                     # PECL Memcache API
                     require_once 'Memcache.php';
                     self::$_object['Memcache'] = new Library_Command_Memcache();
                     break;
 
-                case 'Memcached':
+                case 'Memcached' :
                     # PECL Memcached API
                     require_once 'Memcached.php';
                     self::$_object['Memcached'] = new Library_Command_Memcached();
                     break;
 
-                case 'Server':
-                default:
+                case 'Server' :
+                default :
                     # Server API (eg communicating directly with the memcache server)
                     require_once 'Server.php';
                     self::$_object['Server'] = new Library_Command_Server();
@@ -81,25 +82,23 @@ class Library_Command_Factory
     public static function api($api)
     {
         # Instance does not exists
-        if(!isset(self::$_object[$api]) || ($api != 'Server'))
-        {
+        if (! isset(self::$_object[$api]) || ($api != 'Server')) {
             # Switching by API
-            switch($api)
-            {
-                case 'Memcache':
+            switch ($api) {
+                case 'Memcache' :
                     # PECL Memcache API
                     require_once 'Memcache.php';
                     self::$_object['Memcache'] = new Library_Command_Memcache();
                     break;
 
-                case 'Memcached':
+                case 'Memcached' :
                     # PECL Memcached API
                     require_once 'Memcached.php';
                     self::$_object['Memcached'] = new Library_Command_Memcached();
                     break;
 
-                case 'Server':
-                default:
+                case 'Server' :
+                default :
                     # Server API (eg communicating directly with the memcache server)
                     require_once 'Server.php';
                     self::$_object['Server'] = new Library_Command_Server();

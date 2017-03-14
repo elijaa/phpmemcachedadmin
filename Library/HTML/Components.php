@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,11 +18,12 @@
  *
  * Manipulation of HTML
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 05/04/2010
  */
 class Library_HTML_Components
 {
+
     /**
      * Dump server list in an HTML select
      *
@@ -39,18 +41,16 @@ class Library_HTML_Components
         $serverList .= ($class != '') ? 'class="' . $class . '"' : '';
 
         # Javascript Events
-        $serverList .= ' ' . $events .'>';
+        $serverList .= ' ' . $events . '>';
 
-        foreach($_ini->get('servers') as $cluster => $servers)
-        {
+        foreach ($_ini->get('servers') as $cluster => $servers) {
             # Cluster
             $serverList .= '<option value="' . $cluster . '" ';
             $serverList .= ($selected == $cluster) ? 'selected="selected"' : '';
             $serverList .= '>' . $cluster . ' cluster</option>';
 
             # Cluster server
-            foreach($servers as $name => $servers)
-            {
+            foreach ($servers as $name => $servers) {
                 $serverList .= '<option value="' . $name . '" ';
                 $serverList .= ($selected == $name) ? 'selected="selected"' : '';
                 $serverList .= '>&nbsp;&nbsp;-&nbsp;' . ((strlen($name) > 38) ? substr($name, 0, 38) . ' [...]' : $name) . '</option>';
@@ -76,10 +76,9 @@ class Library_HTML_Components
         $clusterList .= ($class != '') ? 'class="' . $class . '"' : '';
 
         # Javascript Events
-        $clusterList .= ' ' . $events .'>';
+        $clusterList .= ' ' . $events . '>';
 
-        foreach($_ini->get('servers') as $cluster => $servers)
-        {
+        foreach ($_ini->get('servers') as $cluster => $servers) {
             # Option value and selected case
             $clusterList .= '<option value="' . $cluster . '" ';
             $clusterList .= ($selected == $cluster) ? 'selected="selected"' : '';
@@ -101,10 +100,8 @@ class Library_HTML_Components
     {
         $header = '<span class="red">Server ' . $hostname . ':' . $port . "</span>\r\n";
         $return = '';
-        if(is_array($data))
-        {
-            foreach($data as $string)
-            {
+        if (is_array($data)) {
+            foreach ($data as $string) {
                 $return .= $string . "\r\n";
             }
             return $header . htmlentities($return, ENT_NOQUOTES | 0, 'UTF-8') . "\r\n";
@@ -139,8 +136,7 @@ class Library_HTML_Components
      */
     private static function selected($actual, $selected)
     {
-        if($actual == $selected)
-        {
+        if ($actual == $selected) {
             return 'selected="selected"';
         }
     }

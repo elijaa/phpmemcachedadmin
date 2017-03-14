@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@
  *
  * Sending command to memcache server via PECL memcache API http://pecl.php.net/package/memcache
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 20/03/2010
  */
 class Library_Command_Memcache implements Library_Command_Interface
@@ -56,10 +57,9 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command
-        if(($return = self::$_memcache->getExtendedStats()))
-        {
+        if (($return = self::$_memcache->getExtendedStats())) {
             # Delete server key based
-            $stats = $return[$server.':'.$port];
+            $stats = $return[$server . ':' . $port];
             return $stats;
         }
         return false;
@@ -97,21 +97,17 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : slabs
-        if(($slabs = self::$_memcache->getStats('slabs')))
-        {
+        if (($slabs = self::$_memcache->getStats('slabs'))) {
             # Finding uptime
             $stats = $this->stats($server, $port);
             $slabs['uptime'] = $stats['uptime'];
             unset($stats);
 
             # Executing command : items
-            if(($result = self::$_memcache->getStats('items')))
-            {
+            if (($result = self::$_memcache->getStats('items'))) {
                 # Indexing by slabs
-                foreach($result['items'] as $id => $items)
-                {
-                    foreach($items as $key => $value)
-                    {
+                foreach ($result['items'] as $id => $items) {
+                    foreach ($items as $key => $value) {
                         $slabs[$id]['items:' . $key] = $value;
                     }
                 }
@@ -140,8 +136,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : slabs stats
-        if(($items = self::$_memcache->getStats('cachedump', $slab, self::$_ini->get('max_item_dump'))))
-        {
+        if (($items = self::$_memcache->getStats('cachedump', $slab, self::$_ini->get('max_item_dump')))) {
             return $items;
         }
         return false;
@@ -163,8 +158,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : get
-        if($item = self::$_memcache->get($key))
-        {
+        if ($item = self::$_memcache->get($key)) {
             return print_r($item, true);
         }
         return 'NOT_FOUND';
@@ -188,8 +182,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : set
-        if(self::$_memcache->set($key, $data, 0, $duration))
-        {
+        if (self::$_memcache->set($key, $data, 0, $duration)) {
             return 'STORED';
         }
         return 'ERROR';
@@ -211,8 +204,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : delete
-        if(self::$_memcache->delete($key))
-        {
+        if (self::$_memcache->delete($key)) {
             return 'DELETED';
         }
         return 'NOT_FOUND';
@@ -235,8 +227,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : increment
-        if($result = self::$_memcache->increment($key, $value))
-        {
+        if ($result = self::$_memcache->increment($key, $value)) {
             return $result;
         }
         return 'NOT_FOUND';
@@ -259,8 +250,7 @@ class Library_Command_Memcache implements Library_Command_Interface
         self::$_memcache->addServer($server, $port);
 
         # Executing command : decrement
-        if($result = self::$_memcache->decrement($key, $value))
-        {
+        if ($result = self::$_memcache->decrement($key, $value)) {
             return $result;
         }
         return 'NOT_FOUND';

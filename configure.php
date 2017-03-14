@@ -17,38 +17,27 @@
  *
  * Configuration
  *
- * @author c.mahieux@of2m.fr
+ * @author elijaa@free.fr
  * @since 06/04/2010
  */
-# Headers
-header('Content-type: text/html;');
-header('Cache-Control: no-cache, must-revalidate');
-
 # Require
-require_once 'Library/Loader.php';
-
-# Date timezone
-date_default_timezone_set('Europe/Paris');
-
-# Loading ini file
-$_ini = Library_Configuration_Loader::singleton();
+require_once 'Library/Bootstrap.php';
 
 # Initializing requests
-$request = (isset($_GET['request_write'])) ? $_GET['request_write'] : null;
+$request = (isset($_REQUEST['request_write'])) ? $_REQUEST['request_write'] : null;
 $write = null;
 
 # Display by request rype
-switch($request)
-{
+switch ($request) {
     # Unlock configuration file & temp directory
-    case 'unlock':
+    case 'unlock' :
         # chmod 0755
         chmod(Library_Configuration_Loader::path(), 0755);
         chmod($_ini->get('file_path'), 0755);
         break;
 
-        # Live stats configuration save
-    case 'live_stats':
+    # Live stats configuration save
+    case 'live_stats' :
         # Updating configuration
         $_ini->set('refresh_rate', round(max(2, $_POST['refresh_rate'])));
         $_ini->set('memory_alert', $_POST['memory_alert']);
@@ -61,7 +50,7 @@ switch($request)
         break;
 
     # Commands configuration save
-    case 'commands':
+    case 'commands' :
         # Updating configuration
         $_ini->set('stats_api', $_POST['stats_api']);
         $_ini->set('slabs_api', $_POST['slabs_api']);
@@ -75,13 +64,11 @@ switch($request)
         $write = Library_Configuration_Loader::singleton()->write();
         break;
 
-        # Server configuration save
-    case 'servers':
+    # Server configuration save
+    case 'servers' :
         $array = array();
-        foreach($_POST['server'] as $cluster => $servers)
-        {
-            foreach($servers as $data)
-            {
+        foreach ($_POST['server'] as $cluster => $servers) {
+            foreach ($servers as $data) {
                 $array[$_POST['cluster'][$cluster]][$data['name']] = $data;
                 unset($array[$_POST['cluster'][$cluster]][$data['name']]['name']);
             }
@@ -89,8 +76,7 @@ switch($request)
 
         # Sorting clusters
         ksort($array);
-        foreach($array as $cluster => $servers)
-        {
+        foreach ($array as $cluster => $servers) {
             # Sorting servers
             ksort($servers);
             $array[$cluster] = $servers;
@@ -103,8 +89,8 @@ switch($request)
         $write = Library_Configuration_Loader::singleton()->write();
         break;
 
-        # Miscellaneous configuration save
-    case 'miscellaneous':
+    # Miscellaneous configuration save
+    case 'miscellaneous' :
         # Updating configuration
         $_ini->set('connection_timeout', $_POST['connection_timeout']);
         $_ini->set('max_item_dump', $_POST['max_item_dump']);
@@ -113,7 +99,7 @@ switch($request)
         $write = Library_Configuration_Loader::singleton()->write();
         break;
 
-        # Default : No command
+    # Default : No command
     default :
         break;
 }
