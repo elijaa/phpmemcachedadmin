@@ -409,9 +409,9 @@ elseif((isset($_REQUEST['server'])) && ($cluster = $_ini->cluster($_REQUEST['ser
                             dataLabels: {
                                 enabled: true,
                                 color: '#000000',
-                                distance: 15,
+                                distance: 20,
                                 connectorWidth: 1.5,
-                                format: '<b>{point.name}</b> : {point.percentage:.1f} %'
+                                format: '<b>{point.name}</b><br/>{point.percentage:.1f} %'
                             },
                             center: ['50%', '50%']
                         }
