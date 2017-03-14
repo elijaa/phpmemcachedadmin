@@ -4,14 +4,14 @@ header('Content-type: text/html;');
 header('Cache-Control: no-cache, must-revalidate');
 
 # Constants declaration
-define('CURRENT_VERSION', '1.3.1');
+define('CURRENT_VERSION', '1.3.0');
 
 # PHP < 5.3 Compatibility
-if (! defined('ENT_IGNORE')) {
+if (defined('ENT_IGNORE') === false) {
     define('ENT_IGNORE', 0);
 }
 
-# XSS / User Input Check
+# XSS / User input check
 foreach ($_REQUEST as $index => $data) {
     $_REQUEST[$index] = htmlentities($data);
 }

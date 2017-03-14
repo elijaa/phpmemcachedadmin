@@ -29,8 +29,22 @@ class Library_Configuration_Loader
     # Configuration file
     protected static $_iniPath = './Config/Memcache.php';
 
-    # Configuration needed keys
-    protected static $_iniKeys = array('stats_api', 'slabs_api', 'items_api', 'get_api', 'set_api', 'delete_api', 'flush_all_api', 'connection_timeout', 'max_item_dump', 'refresh_rate', 'memory_alert', 'hit_rate_alert', 'eviction_alert', 'file_path', 'servers');
+    # Configuration needed keys and default values
+    protected static $_iniKeys = array('stats_api' => 'Server',
+        'slabs_api' => 'Server',
+        'items_api' => 'Server',
+        'get_api' => 'Server',
+        'set_api' => 'Server',
+        'delete_api' => 'Server',
+        'flush_all_api' => 'Server',
+        'connection_timeout' => 1,
+        'max_item_dump' => 100,
+        'refresh_rate' => 2,
+        'memory_alert' => 80,
+        'hit_rate_alert' => 90,
+        'eviction_alert' => 0,
+        'file_path' => 'Temp/',
+        'servers' => array('Default' => array('127.0.0.1:11211' => array('hostname' => '127.0.0.1', 'port' => 11211))));
 
     # Storage
     protected static $_ini = array();
@@ -42,8 +56,14 @@ class Library_Configuration_Loader
      */
     protected function __construct()
     {
-        # Opening ini file
-        self::$_ini = require self::$_iniPath;
+        # Checking ini File
+        if (file_exists(self::$_iniPath)) {
+            # Opening ini file
+            self::$_ini = require self::$_iniPath;
+        } else {
+            # Fallback
+            self::$_ini = self::$_iniKeys;
+        }
     }
 
     /**
@@ -141,9 +161,9 @@ class Library_Configuration_Loader
     public function check()
     {
         # Checking configuration keys
-        foreach (self::$_iniKeys as $iniKey) {
+        foreach (array_keys(self::$_iniKeys) as $iniKey) {
             # Ini file key not set
-            if (! isset(self::$_ini[$iniKey])) {
+            if (isset(self::$_ini[$iniKey]) === false) {
                 return false;
             }
         }

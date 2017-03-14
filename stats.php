@@ -29,15 +29,16 @@ $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] 
 # Stat of a particular cluster
 if (isset($_REQUEST['cluster']) && ($_REQUEST['cluster'] != null)) {
     $cluster = $_REQUEST['cluster'];
-} # Getting default cluster
-else {
+} else {
+    # Getting default cluster
     $clusters = array_keys($_ini->get('servers'));
     $cluster = isset($clusters[0]) ? $clusters[0] : null;
     $_REQUEST['cluster'] = $cluster;
 }
 
-# Checking Writing Status in Temporary Folder
+# Checking writing status in temporary folder
 if (is_writable($_ini->get('file_path')) === false) {
+    # Trying to change permissions
     chmod($_ini->get('file_path'), 0775);
 }
 
