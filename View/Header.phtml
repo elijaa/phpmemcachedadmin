@@ -60,20 +60,20 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 if (is_writable($_ini->get('file_path')) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Warning : Temporary directory '<em><?php echo realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $_ini->get('file_path')) ?></em>' is not writable, please fix this error and try again.
+        Warning : Temporary directory '<em><?php echo $_ini->get('file_path') ?></em>' is not writable, please fix this error and try again.
     </div>
 <?php
 }
-if (is_writable($_ini->path()) === false) {
+if (file_exists($_ini->path()) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Error : Configuration file '<em><?php echo realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $_ini->path()) ?></em>' is not writable, please fix this error and try again.
+        Error : Configuration file or folder is missing, please fix this error and try again.
     </div>
 <?php
-} elseif (file_exists($_ini->path()) === false) {
+} elseif (is_writable($_ini->path()) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Error : Configuration file '<em><?php echo realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . $_ini->path()) ?></em>' is missing, please fix this error and try again.
+        Error : Configuration file or folder is not writable, please fix this error and try again.
     </div>
 <?php
 } ?>
