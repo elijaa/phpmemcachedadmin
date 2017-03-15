@@ -448,7 +448,7 @@ class Library_Command_Server implements Library_Command_Interface
                     } else {
                         # Detail level
                         if ($level == 'full') {
-                            $items[] = $item[1] . ' : [' . str_pad(Library_Data_Analysis::byteResize($item[2]), 7, ' ', STR_PAD_LEFT) . 'b, Expire : ' . (($item[3] == $infinite) ? '&#8734;' : Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
+                            $items[] = $item[1] . ' : [' . trim(Library_Data_Analysis::byteResize($item[2])) . 'b, expire in ' . (($item[3] == $infinite) ? '&#8734;' : Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
                         } else {
                             $items[] = $item[1];
                         }
