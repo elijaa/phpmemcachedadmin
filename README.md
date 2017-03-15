@@ -1,4 +1,4 @@
-# phpMemcachedAdmin #
+# PHPMemcachedAdmin #
 
 ### Graphic stand-alone administration for memcached to monitor and debug purpose ###
 
@@ -8,7 +8,7 @@ You can go further to **see each server slabs, occupation, memory wasted and ite
 
 Another part can execute commands to any memcached server : get, set, delete, flush\_all, as well as execute any commands (like stats) with telnet
 
-<h2>Feature list</h2>
+## Feature list ##
 
 <h4>Statistics</h4>
 <ul><li>Stats for each or all memcached servers, items, evicted, reclaimed ...<br>
@@ -33,3 +33,16 @@ Another part can execute commands to any memcached server : get, set, delete, fl
 <ul><li>Edit configuration directly from web page<br>
 </li><li>phpMemcachedAdmin can use socket communication, PECL Memcache or Memcached API<br>
 </li><li>Organize your servers into cluster</li></ul>
+
+## Security ##
+
+phpMemcachedAdmin does not provide any security system, you need to add this feature by yourself.
+
+## Installation ##
+
+Download latest release
+Unzip/Untar & Give files permissions
+
+You have to give **Read & Execute right to all files**, and **Read, Write & Execute to configuration files and temporary directory**.
+
+More information in https://blog.elijaa.org/phpmemcachedadmin-installation-guide/
