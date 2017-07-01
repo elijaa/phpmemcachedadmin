@@ -258,7 +258,7 @@ function portOnBlur(object) {
 	}
 }
 function hostOrPortOnChange(target) {
-	
+
 	nameObject = document.getElementById('name_' + target);
 	hostObject = document.getElementById('host_' + target);
 	portObject = document.getElementById('port_' + target);
