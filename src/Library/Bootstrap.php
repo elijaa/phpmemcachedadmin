@@ -11,10 +11,20 @@ if (defined('ENT_IGNORE') === false) {
     define('ENT_IGNORE', 0);
 }
 
+
 # XSS / User input check
-foreach ($_REQUEST as $index => $data) {
-    $_REQUEST[$index] = htmlentities($data);
+function xss_check($request)
+{
+    foreach ($request as $index => $data) {
+        if (gettype($data) == 'string') {
+            $request[$index] = htmlentities($data);
+        } elseif (gettype($data) == 'array') {
+            $data = xss_check($data);
+        }
+    }
+    return $request;
 }
+$_REQUEST=xss_check($_REQUEST);
 
 # Autoloader
 function __autoload($class)

@@ -1,0 +1,23 @@
+version: '2'
+services:
+    phpmemcachedadmin:
+       build: .
+       ports:
+        - "8000:80"
+       links:
+        - memcached
+       environment:
+        - MEMCACHED_GROUPS=2
+        - MEMCACHED_GROUP_0_NAME=docker
+        - MEMCACHED_GROUP_0_HOST_COUNT=1
+        - MEMCACHED_GROUP_0_HOST_0=memcached
+        - MEMCACHED_GROUP_0_PORT_0=11211
+        - MEMCACHED_GROUP_1_NAME=cluster
+        - MEMCACHED_GROUP_1_HOST_COUNT=2
+        - MEMCACHED_GROUP_1_HOST_0=memcached01
+        - MEMCACHED_GROUP_1_PORT_0=11211
+        - MEMCACHED_GROUP_1_HOST_1=memcached02
+        - MEMCACHED_GROUP_1_PORT_1=11211
+
+    memcached:
+            image: memcached:alpine
