@@ -1,0 +1,13 @@
+{
+    "name": "elijaa/phpmemcacheadmin",
+    "description": "Graphic stand-alone administration for memcached",
+    "type": "library",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Cyrille Mahieux",
+            "email": "elijaa@free.fr"
+        }
+    ],
+    "require": {}
+}
