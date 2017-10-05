@@ -71,9 +71,16 @@ class Library_Data_Analysis
 
         # Diff for each key
         foreach ($stats as $key => $value) {
-            if (isset($array[$key])) {
-                $stats[$key] = $value - $array[$key];
-            }
+            
+			if (!isset($array[$key]))
+            	continue;
+			
+            # Make sure we're dealing with a real number
+            $v = $array[$key];
+            if (!is_float($v) && !is_int($v))
+            	continue;
+            	
+            $stats[$key] = $value - $v;
         }
 
         return $stats;
