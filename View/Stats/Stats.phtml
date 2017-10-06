@@ -222,6 +222,26 @@ if((isset($_REQUEST['server'])) && ($_ini->server($_REQUEST['server'])))
                 <span class="left setting help" title="Internal name : evicted_unfetched&#013;Items evicted from LRU that were never touched by get/incr/append/etc">Evicted unfetched</span>
                 <?php echo (isset($stats['evicted_unfetched'])) ? Library_Data_Analysis::hitResize($stats['evicted_unfetched']) : 'N/A on ' . $stats['version']; ?>
             </div>
+
+			<? if (isset($stats['*reclaimed_fast'])) { // Additional attributes for custom memcached build ?> 
+			<div class="line" style="background: #DDFFDD">
+				<span class="left setting help" title="Internal name : *reclaimed_fast&#013;Reclaimed fast from LRU, items that were reclaimed by memory scan">Reclaimed fast</span>
+				<?php echo (isset($stats['*reclaimed_fast'])) ? Library_Data_Analysis::hitResize($stats['*reclaimed_fast']) : 'N/A on ' . $stats['version']; ?>
+			</div>
+			<div class="line" style="background: #CCFFCC">
+				<span class="left setting help" title="Internal name : *reclaimed_fast_bytes&#013;Reclaimed fast from LRU, in bytes">Reclaimed fast bytes</span>
+				<?php echo (isset($stats['*reclaimed_fast_bytes'])) ? Library_Data_Analysis::hitResize($stats['*reclaimed_fast_bytes']) : 'N/A on ' . $stats['version']; ?>
+			</div>
+			<div class="line" style="background: #DDFFDD">
+				<span class="left setting help" title="Internal name : *reclaim_item_passes&#013;Reclaimed item passes, number of times memory was scanned for old items">Reclaimed item passes</span>
+				<?php echo (isset($stats['*reclaim_item_passes'])) ? Library_Data_Analysis::hitResize($stats['*reclaim_item_passes']) : 'N/A on ' . $stats['version']; ?>
+			</div>
+			<div class="line" style="background: #CCFFCC">
+				<span class="left setting help" title="Internal name : *reclaim_item_found&#013;Number of old items found using memory scan">Reclaim item found</span>
+				<?php echo (isset($stats['*reclaim_item_found'])) ? Library_Data_Analysis::hitResize($stats['*reclaim_item_found']) : 'N/A on ' . $stats['version']; ?>
+			</div>
+			<? } ?>
+			
         </div>
 
 <?php

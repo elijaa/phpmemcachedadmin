@@ -1,5 +1,7 @@
 # PHPMemcachedAdmin #
 
+PHPMemcachedAdmin contains critical security bug (up to, and including v 1.3.0) which allows for remote code execution. This repository is aimed to increase PMA security by fixing this bug and (optionally) adding login option.
+
 ### Graphic stand-alone administration for memcached to monitor and debug purpose ###
 
 This program allows to see in **real-time** (top-like) or from the start of the server, **stats for get, set, delete, increment, decrement, evictions, reclaimed, cas command**, as well as **server stats** (network, items, server version) with googlecharts and  **server internal configuration**
