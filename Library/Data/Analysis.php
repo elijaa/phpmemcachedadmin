@@ -73,7 +73,7 @@ class Library_Data_Analysis
         foreach ($stats as $key => $value) {
             if (!isset($array[$key])) {
                 continue;
-	        }
+            }
 
             # Make sure we're dealing with a real number
             $v = $array[$key];
