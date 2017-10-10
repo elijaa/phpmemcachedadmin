@@ -1,6 +1,6 @@
 # PHPMemcachedAdmin #
 
-PHPMemcachedAdmin contains critical security bug (up to, and including v 1.3.0) which allows for remote code execution. This repository is aimed to increase PMA security by fixing this bug and (optionally) adding login option.
+PHPMemcachedAdmin contains critical security bug (up to, and including v 1.3.0) which allows for remote code execution. Version 1.3.1 has this security exploit fixed.
 
 ### Graphic stand-alone administration for memcached to monitor and debug purpose ###
 
