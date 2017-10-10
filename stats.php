@@ -51,10 +51,11 @@ if (! isset($_COOKIE['live_stats_id' . $hash])) {
     $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT);
     foreach ($files as $path) {
         
-    	# Only delete files which were created by us
-    	if (strpos($path, ".mcatmp.txt") === false || strpos($path, "live_stats") === false)
-    		continue;
-		
+        # Only delete files which were created by us
+        if (strpos($path, ".mcatmp.txt") === false || strpos($path, "live_stats") === false) {
+            continue;
+        }
+
     	# Getting file last modification time
         $stats = @stat($path);
 
