@@ -23,14 +23,14 @@
  */
 class Library_Data_Analysis
 {
-    const NON_ADDITIVE = [
+    private static $_non_additive = array(
         'libevent',
         'pid',
         'pointer_size',
         'time',
         'uptime',
         'version',
-    ];
+    );
 
     /**
      * Merge two arrays of stats from Command_XX::stats()
@@ -51,7 +51,7 @@ class Library_Data_Analysis
 
         # Merging Stats
         foreach ($stats as $key => $value) {
-            if (! isset($array[$key]) || in_array($key, static::NON_ADDITIVE)) {
+            if (! isset($array[$key]) || in_array($key, self::$_non_additive)) {
                 $array[$key] = $value;
             } else {
                 $array[$key] += $value;
@@ -79,7 +79,7 @@ class Library_Data_Analysis
 
         # Diff for each key
         foreach ($stats as $key => $value) {
-            if (isset($array[$key]) && ! in_array($key, static::NON_ADDITIVE)) {
+            if (isset($array[$key]) && ! in_array($key, self::$_non_additive)) {
                 $stats[$key] = $value - $array[$key];
             }
         }
