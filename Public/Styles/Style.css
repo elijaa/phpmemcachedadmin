@@ -12,16 +12,14 @@ a {
 }
 
 a:hover {
-	color: #A00
+	color: #A00;
 }
 
 input,select,textarea {
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
-	border-width: 1px;
-    border-style: solid;
-    border-color: #AAA;
+	border : 1px solid #aaaaaa;
 	width: 298px;
 	font-family: Tahoma;
 	font-size: 1em;
@@ -37,9 +35,7 @@ select {
 }
 
 input:focus,textarea:focus {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #EEE;
+	border : 1px solid #eeeeee;
 }
 
 input:hover {
@@ -61,9 +57,7 @@ hr {
 }
 
 .menu {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #a0312a;
+	border : 1px solid #a0312a;
 	color: #eee;
 	width: 198px;
 }
@@ -81,7 +75,7 @@ hr {
              "Courier New",
              Courier,
              monospace;
-     cursor: hand;
+     cursor: pointer;
 }
 
 .loading {
@@ -124,51 +118,43 @@ hr {
 }
 
 .header {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #9c3c36;
+	border     : 1px solid #9c3c36;
 	background: #B5463F;
 	font-weight: bold;
 	color: #fff;
-	clear: both
+	clear: both;
 }
 
 .sub-header {
-	border-width: 1px;
-    border-style: solid;
-    border-color: #514845;
+	border     : 1px solid #514845;
 	background: #635855;
 	font-weight: bold;
 	color: #fff;
 	clear: both;
-	margin-top: 10px
+	margin-top: 10px;
 }
 
 .container {
-	border-width: 1px;
-    border-style: solid;
-    border-color: #d0d0d0;
+	border     : 1px solid #d0d0d0;
 	background: #ebebeb;
-	font-weight: none;
+	font-weight: normal;
 	color: #000;
 	margin-top: 1px;
-	clear: both
+	clear: both;
 }
 
 .list {
-	border-width: 1px;
-    border-style: solid;
-    border-color: #9c3c36;
+	border     : 1px solid #9c3c36;
 	background: #B5463F;
 	font-weight: bold;
-	color: #fff
+	color: #fff;
 }
 
 .button {
 	padding: 1px 20px;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
-	border-radius: 2px
+	border-radius: 2px;
 }
 
 .live {
@@ -186,30 +172,30 @@ hr {
              monospace;
 	font-size: 12px;
 	overflow: visible;
-	white-space: pre-wrap
+	white-space: pre-wrap;
 }
 
 .line {
 	min-height: 18px;
 	padding-top: 3px;
 	padding-bottom: 2px;
-	clear: both
+	clear: both;
 }
 
 .left {
 	float: left;
 	min-width: 126px;
-	font-weight: bold
+	font-weight: bold;
 }
 .right {
-	float: right
+	float: right;
 }
 .setting {
-	min-width: 180px
+	min-width: 180px;
 }
 
 .slabs {
-	min-width: 104px
+	min-width: 104px;
 }
 .help {
 	cursor:help;
@@ -224,15 +210,15 @@ hr {
 }
 
 .grey {
-	color: #EEE
+	color: #EEE;
 }
 
 .green {
-	color: #40aaba
+	color: #40aaba;
 }
 
 .red {
 	background: #b5463f;
 	color: #fff;
-	font-weight: bold
+	font-weight: bold;
 }
