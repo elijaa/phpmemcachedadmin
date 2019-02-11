@@ -1,13 +1,21 @@
 {
     "name": "elijaa/phpmemcacheadmin",
-    "description": "Graphic stand-alone administration for memcached",
-    "type": "library",
+    "type": "application",
+    "description": "raphic stand-alone administration for memcached",
+    "keywords": ["phpmemcacheadmin","memcache","memcached","web"],
+    "homepage": "https://github.com/elijaa/phpmemcacheadmin",
     "license": "Apache-2.0",
     "authors": [
         {
             "name": "Cyrille Mahieux",
-            "email": "elijaa@free.fr"
+            "email": "elijaa@free.fr",
+            "homepage": "http://blog.elijaa.org/"
         }
     ],
-    "require": {}
+    "support": {
+        "source": "https://github.com/elijaa/phpmemcacheadmin"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    }
 }
