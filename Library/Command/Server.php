@@ -128,7 +128,7 @@ class Library_Command_Server implements Library_Command_Interface
      * Parse result to make an array
      *
      * @param String $string String to parse
-     * @param Boolean $string (optionnal) Parsing stats ?
+     * @param Boolean $string (optional) Parsing stats ?
      *
      * @return Array
      */

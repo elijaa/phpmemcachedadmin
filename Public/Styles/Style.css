@@ -149,7 +149,7 @@ hr {
     border-style: solid;
     border-color: #d0d0d0;
 	background: #ebebeb;
-	font-weight: none;
+	font-weight: inherit;
 	color: #000;
 	margin-top: 1px;
 	clear: both

@@ -195,7 +195,7 @@ function addCluster() {
 	cluster_id++;
 	clusterDiv.innerHTML = '<hr/><strong>Cluster <input type="text" style="width:200px;" name="cluster[' + cluster_id + ']" value=""/></strong>'
             + '<div style="margin-left:30px;margin-top:3px;">'
-            + '<div style="width:150px;float:left;">Name (Optionnal)</div>'
+            + '<div style="width:150px;float:left;">Name (Optional)</div>'
             + '<div style="width:150px;float:left;margin-left:7px;">IP/Hostname</div>'
             + '<div style="width:50px;float:left;margin-left:7px;">Port</div></div>'
 			+ '<div style="margin-left:40px;margin-top:6px;" id="cluster_' + cluster_id + '_commands">'
