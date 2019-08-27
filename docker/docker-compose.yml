@@ -1,0 +1,22 @@
+version: '2'
+services:
+  phpmemcachedadmin:
+    container_name: phpmemcachedadmin
+    image: phpmemcachedadmin
+    build:
+      context: ./phpmemcachedadmin/
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    links:
+      - memcached
+    depends_on:
+      - memcached
+    volumes:
+      - ./Memcache.docker.php:/var/www/localhost/htdocs/Config/Memcache.php
+  memcached:
+    container_name: memcached
+    image: memcached
+    restart: unless-stopped
+    ports:
+     - "11211:11211"
