@@ -45,4 +45,4 @@ Unzip/Untar & Give files permissions
 
 You have to give **Read & Execute right to all files**, and **Read, Write & Execute to configuration files and temporary directory**.
 
-More information in https://blog.elijaa.org/phpmemcachedadmin-installation-guide/
+More information in https://elijaa.org/phpmemcachedadmin-installation-guide/
