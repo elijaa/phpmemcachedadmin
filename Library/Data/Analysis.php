@@ -219,6 +219,9 @@ class Library_Data_Analysis
                 if ($slab['used_chunks'] > 0) {
                     $slabs['used_slabs'] ++;
                 }
+                
+                if ( !array_key_exists('mem_requested', $slab) ) $slab['mem_requested'] = 0;
+                
                 $slabs[$id]['request_rate'] = sprintf('%.1f', ($slab['get_hits'] + $slab['cmd_set'] + $slab['delete_hits'] + $slab['cas_hits'] + $slab['cas_badval'] + $slab['incr_hits'] + $slab['decr_hits']) / $slabs['uptime'], 1);
                 $requested = isset($slab['items:mem_requested']) // Post Memcached 1.5.17
                     ? $slab['items:mem_requested']
