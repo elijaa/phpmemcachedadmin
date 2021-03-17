@@ -50,7 +50,13 @@ if (! isset($_COOKIE['live_stats_id' . $hash])) {
     # Cleaning temporary directory
     $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT);
     foreach ($files as $path) {
-        # Getting file last modification time
+        
+        # Only delete files which were created by us
+        if (strpos($path, ".mcatmp.txt") === false || strpos($path, "live_stats") === false) {
+            continue;
+        }
+
+    	# Getting file last modification time
         $stats = @stat($path);
 
         # Deleting file older than 24 hours
@@ -68,6 +74,11 @@ if (! isset($_COOKIE['live_stats_id' . $hash])) {
     # Backup from a previous request
     $live_stats_id = $_COOKIE['live_stats_id' . $hash];
 }
+
+# Prefix the file to not allow setting custom extension via cookie 
+# https://rstforums.com/forum/topic/85493-phpmemcachedadmin-122-remote-code-execution/
+$live_stats_id = str_replace(chr(0), "", $live_stats_id);
+$live_stats_id = "{$live_stats_id}.mcatmp.txt";
 
 # Live stats dump file
 $file_path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;

@@ -82,6 +82,14 @@ class Library_Data_Analysis
             if (isset($array[$key]) && ! in_array($key, self::$_non_additive)) {
                 $stats[$key] = $value - $array[$key];
             }
+
+            # Make sure we're dealing with a real number
+            $v = $array[$key];
+            if (!is_float($v) && !is_int($v)) {
+                continue;
+            }
+            	
+            $stats[$key] = $value - $v;
         }
 
         return $stats;
