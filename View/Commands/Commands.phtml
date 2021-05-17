@@ -8,7 +8,7 @@
                 <input class="header loading" type="submit" id="loading" value="Waiting for server response ..."/>
             </span>
             <input class="header" type="submit" onclick="javascript:executeClear('container')" value="Clear Console"/>
-            <input class="header" id="hide" type="submit" onclick="javascript:executeHideShow('console', 'hide');javascript:this.blur();" value="Hide Console">
+            <input class="header" id="hide" type="submit" onclick="javascript:executeHideShow('console', 'hide');javascript:this.blur();" value="Hide Console"/>
         </div>
 
         <div class="sub-header corner full-size padding">Execute predefined <span class="green">Command</span></div>
@@ -94,7 +94,6 @@
 						<li>decrement : decrement a numeric key value</li>
 						<li>flush all : flush a Memcached server</li>
 					</ul>
-                    <br/>
                     </td>
                 </tr>
             </table>
@@ -106,7 +105,7 @@
                 <tr valign="top">
                     <td class="size-0 padding" style="padding-right:14px;">
                     <div class="line" style="text-align:center;">
-                        Execute telnet command on one or all memcached servers<br/>
+                        Execute telnet command on one or all memcached servers
                         <hr/>
                     </div>
                     <div class="line" style="text-align:center;">
@@ -164,7 +163,7 @@
                         <span class="left">Detail Level</span>
                         <span class="right">
                             <select id="search_level">
-                                <option value="full">Show Keys, Expiration & Size</option>
+                                <option value="full">Show Keys, Expiration &amp; Size</option>
                                 <option value="keys">Show Keys</option>
                             </select>
                         </span>
@@ -173,8 +172,8 @@
                         <span class="left">Action</span>
                         <span class="right">
                             <select id="search_more">
-                                <option value="show">Search & Show Keys</option>
-                                <option value="delete">Search & Delete Keys</option>
+                                <option value="show">Search &amp; Show Keys</option>
+                                <option value="delete">Search &amp; Delete Keys</option>
                             </select>
                         </span>
                     </div>

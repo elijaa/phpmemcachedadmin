@@ -220,7 +220,12 @@ class Library_Data_Analysis
                     $slabs['used_slabs'] ++;
                 }
                 $slabs[$id]['request_rate'] = sprintf('%.1f', ($slab['get_hits'] + $slab['cmd_set'] + $slab['delete_hits'] + $slab['cas_hits'] + $slab['cas_badval'] + $slab['incr_hits'] + $slab['decr_hits']) / $slabs['uptime'], 1);
-                $slabs[$id]['mem_wasted'] = (($slab['total_chunks'] * $slab['chunk_size']) < $slab['mem_requested']) ? (($slab['total_chunks'] - $slab['used_chunks']) * $slab['chunk_size']) : (($slab['total_chunks'] * $slab['chunk_size']) - $slab['mem_requested']);
+                $requested = isset($slab['items:mem_requested']) // Post Memcached 1.5.17
+                    ? $slab['items:mem_requested']
+                    : (isset($slab['mem_requested']) ? $slab['mem_requested'] : 0);
+                $slabs[$id]['mem_wasted'] = (($slab['total_chunks'] * $slab['chunk_size']) < $requested)
+                    ? (($slab['total_chunks'] - $slab['used_chunks']) * $slab['chunk_size'])
+                    : (($slab['total_chunks'] * $slab['chunk_size']) - $requested);
                 $slabs['total_wasted'] += $slabs[$id]['mem_wasted'];
             }
         }

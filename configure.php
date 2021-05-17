@@ -27,7 +27,7 @@ require_once 'Library/Bootstrap.php';
 $request = (isset($_REQUEST['request_write'])) ? $_REQUEST['request_write'] : null;
 $write = null;
 
-# Display by request rype
+# Display by request type
 switch ($request) {
     # Unlock configuration file & temp directory
     case 'unlock' :

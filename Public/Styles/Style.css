@@ -137,7 +137,7 @@ hr {
 .container {
 	border     : 1px solid #d0d0d0;
 	background: #ebebeb;
-	font-weight: normal;
+	font-weight: inherit;
 	color: #000;
 	margin-top: 1px;
 	clear: both;

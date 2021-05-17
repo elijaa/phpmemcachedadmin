@@ -17,10 +17,11 @@ foreach ($_REQUEST as $index => $data) {
 }
 
 # Autoloader
-function __autoload($class)
+function autoloader($class)
 {
     require_once str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
 }
+spl_autoload_register('autoloader');
 
 # Loading ini file
 $_ini = Library_Configuration_Loader::singleton();

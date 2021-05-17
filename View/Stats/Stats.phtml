@@ -527,10 +527,10 @@ elseif((isset($_REQUEST['server'])) && ($cluster = $_ini->cluster($_REQUEST['ser
                         type: 'column',
                         name: 'Cache Size',
                         data: [{name: 'Hits',
-                                y: <?php echo $stats['get_hits_percent']; ?>,
+                                <?php echo $stats['get_hits_percent'] = ' - ' ? '' : 'y: ' . $stats['get_hits_percent'] . ','; ?>
                                 color: '#2A707B'},
                                {name: 'Misses',
-                                y: <?php echo $stats['get_misses_percent']; ?>,
+                                <?php echo $stats['get_misses_percent'] = ' - ' ? '' : 'y: ' . $stats['get_misses_percent'] . ','; ?>
                                 color: '#B5463F'}]
                     }]
                 });
