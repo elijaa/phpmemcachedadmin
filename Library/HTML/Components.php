@@ -117,7 +117,7 @@ class Library_HTML_Components
      *
      * @return String
      */
-    public static function apiList($iniAPI = '', $id)
+    public static function apiList($iniAPI, $id)
     {
         return '<select id="' . $id . '" name="' . $id . '">
                 <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
