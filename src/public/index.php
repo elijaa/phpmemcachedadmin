@@ -24,7 +24,7 @@
 use App\Library\Command\Factory;
 use App\Library\Data\Analysis;
 
-require_once 'library/bootstrap.php';
+require_once '../bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['show'])) ? $_REQUEST['show'] : null;
@@ -37,7 +37,7 @@ if (! isset($_REQUEST['server'])) {
 }
 
 # Showing header
-include 'View/Header.phtml';
+include '../view/header.phtml';
 
 # Display by request type
 switch ($request) {
@@ -59,10 +59,10 @@ switch ($request) {
         # Items are well formed
         if ($items !== false) {
             # Showing items
-            include 'View/Stats/Items.phtml';
+            include '../view/stats/items.phtml';
         }         # Items are not well formed
         else {
-            include 'View/Stats/Error.phtml';
+            include '../view/stats/error.phtml';
         }
         unset($items);
         break;
@@ -82,10 +82,10 @@ switch ($request) {
         if ($slabs !== false) {
             # Analysis
             $slabs = Analysis::slabs($slabs);
-            include 'View/Stats/Slabs.phtml';
+            include '../view/stats/slabs.phtml';
         }         # Slabs are not well formed
         else {
-            include 'View/Stats/Error.phtml';
+            include '../view/stats/error.phtml';
         }
         unset($slabs);
         break;
@@ -132,13 +132,13 @@ switch ($request) {
         if (($stats !== false) && ($stats != array())) {
             # Analysis
             $stats = Analysis::stats($stats);
-            include 'View/Stats/Stats.phtml';
+            include '../view/stats/stats.phtml';
         }         # Stats are not well formed
         else {
-            include 'View/Stats/Error.phtml';
+            include '../view/stats/error.phtml';
         }
         unset($stats);
         break;
 }
 # Showing footer
-include 'View/Footer.phtml';
+include '../view/footer.phtml';

@@ -54,10 +54,10 @@ class Version
         $_ini = Loader::singleton();
 
         # Version definition file path
-        $path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . self::$_file;
+        $path = rtrim($_ini->tempDirPath(), '/') . DIRECTORY_SEPARATOR . self::$_file;
 
         # Checking if path is writable
-        if (is_writable($_ini->get('file_path'))) {
+        if (is_writable($_ini->tempDirPath())) {
             # Checking if file was modified for less than 15 days ago
             if ((is_array($stats = @stat($path))) && (isset($stats['mtime'])) && ($stats['mtime'] > (time() - self::$_time))) {
                 # Opening file and checking for latest version

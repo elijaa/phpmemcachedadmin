@@ -26,7 +26,7 @@ use App\Library\Command\Factory;
 use App\Library\Data\Analysis;
 use App\Library\Data\Errors;
 
-require_once 'library/bootstrap.php';
+require_once '../bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
@@ -42,9 +42,9 @@ if (isset($_REQUEST['cluster']) && ($_REQUEST['cluster'] != null)) {
 }
 
 # Checking writing status in temporary folder
-if (is_writable($_ini->get('file_path')) === false) {
+if (is_writable($_ini->tempDirPath()) === false) {
     # Trying to change permissions
-    chmod($_ini->get('file_path'), 0775);
+    chmod($_ini->tempDirPath(), 0775);
 }
 
 # Hashing cluster
@@ -53,7 +53,7 @@ $hash = md5($_REQUEST['cluster']);
 # Cookie @FIXME not a perfect method
 if (! isset($_COOKIE['live_stats_id' . $hash])) {
     # Cleaning temporary directory
-    $files = glob($_ini->get('file_path') . '*', GLOB_NOSORT);
+    $files = glob($_ini->tempDirPath() . '*', GLOB_NOSORT);
     foreach ($files as $path) {
         # Getting file last modification time
         $stats = @stat($path);
@@ -75,7 +75,7 @@ if (! isset($_COOKIE['live_stats_id' . $hash])) {
 }
 
 # Live stats dump file
-$file_path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
+$file_path = rtrim($_ini->tempDirPath(), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
 
 # Display by request type
 switch ($request) {
@@ -130,7 +130,7 @@ switch ($request) {
         file_put_contents($file_path, serialize($actual));
 
         # Showing stats
-        include 'View/LiveStats/Stats.phtml';
+        include '../view/liveStats/stats.phtml';
         break;
 
     # Default : No command
@@ -148,13 +148,13 @@ switch ($request) {
         $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Errors::count() * (0.5 + $_ini->get('connection_timeout'))));
 
         # Showing header
-        include 'View/Header.phtml';
+        include '../view/header.phtml';
 
         # Showing live stats frame
-        include 'View/LiveStats/Frame.phtml';
+        include '../view/livestats/frame.phtml';
 
         # Showing footer
-        include 'View/Footer.phtml';
+        include '../view/footer.phtml';
 
         break;
 }

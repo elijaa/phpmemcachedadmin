@@ -8,12 +8,9 @@ header('Cache-Control: no-cache, must-revalidate');
 # Constants declaration
 const CURRENT_VERSION = '2.0.0';
 
-# PHP < 5.3 Compatibility
-if (defined('ENT_IGNORE') === false) {
-    define('ENT_IGNORE', 0);
-}
+require '../../vendor/autoload.php';
 
-require __DIR__ .'/../../vendor/autoload.php';
+ob_start();
 
 # XSS / User input check
 foreach ($_REQUEST as $index => $data) {

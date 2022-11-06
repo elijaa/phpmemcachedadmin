@@ -30,14 +30,9 @@ class Loader
     protected static $_instance = null;
 
     /**
-     * @var string Configuration file
-     */
-    protected static $_iniPath = './Config/Memcache.php';
-
-    /**
      * @var array Configuration needed keys and default values
      */
-    protected static $_iniKeys = [
+    protected $defaultConfig = [
         'stats_api' => 'Server',
         'slabs_api' => 'Server',
         'items_api' => 'Server',
@@ -51,7 +46,7 @@ class Loader
         'memory_alert' => 80,
         'hit_rate_alert' => 90,
         'eviction_alert' => 0,
-        'file_path' => 'Temp/',
+        'temp_dir_path' => '../../temp/',
         'servers' => [
             'Default' => [
                 '127.0.0.1:11211' => [
@@ -63,24 +58,31 @@ class Loader
     ];
 
     /**
-     * @var array|mixed Storage
+     * @var array Storage
      */
-    protected static $_ini = array();
+    protected $config;
+
+    /**
+     * @var
+     */
+    protected $configFilePath = '../../.config.php';
 
     /**
      * Constructor, load configuration file and parse server list
      *
      * @return Void
      */
-    protected function __construct()
+    protected function __construct(string $configFilePath = null)
     {
-        # Checking ini File
-        if (file_exists(self::$_iniPath)) {
-            # Opening ini file
-            self::$_ini = require self::$_iniPath;
-        } else {
-            # Fallback
-            self::$_ini = self::$_iniKeys;
+        if ($configFilePath) {
+            $this->configFilePath = $configFilePath;
+        }
+
+        $this->config = $this->defaultConfig;
+
+        if ($this->exists()) {
+            $userConfig = require($this->configFilePath);
+            $this->config = array_merge($this->config, $userConfig);
         }
     }
 
@@ -105,26 +107,52 @@ class Loader
      *
      * @return mixed
      */
-    public function get($key)
+    public function get(string $key)
     {
-        if (isset(self::$_ini[$key])) {
-            return self::$_ini[$key];
+        if (isset($this->config[$key])) {
+            return $this->config[$key];
         }
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function tempDirPath(): string
+    {
+        return $this->config['temp_dir_path'];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTempDirExists(): bool
+    {
+        $tempDirPath = $this->tempDirPath();
+        return is_dir($tempDirPath);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTempDirWritable(): bool
+    {
+        $tempDirPath = $this->tempDirPath();
+        return is_writable($tempDirPath);
     }
 
     /**
      * Servers to retrieve from cluster
      * Return the value, or false if does not exists
      *
-     * @param string $cluster Cluster to retreive
+     * @param string $cluster Cluster to retrieve
      *
      * @return array
      */
     public function cluster($cluster)
     {
-        if (isset(self::$_ini['servers'][$cluster])) {
-            return self::$_ini['servers'][$cluster];
+        if (isset($this->config['servers'][$cluster])) {
+            return $this->config['servers'][$cluster];
         }
         return array();
     }
@@ -133,15 +161,15 @@ class Loader
      * Check and return server data
      * Return the value, or false if does not exists
      *
-     * @param string $server Server to retreive
+     * @param string $server Server to retrieve
      *
      * @return array
      */
     public function server($server)
     {
-        foreach (self::$_ini['servers'] as $cluster => $servers) {
-            if (isset(self::$_ini['servers'][$cluster][$server])) {
-                return self::$_ini['servers'][$cluster][$server];
+        foreach ($this->config['servers'] as $cluster => $servers) {
+            if (isset($this->config['servers'][$cluster][$server])) {
+                return $this->config['servers'][$cluster][$server];
             }
         }
         return array();
@@ -152,12 +180,26 @@ class Loader
      *
      * @param string $key Key to set
      * @param mixed $value Value to set
-     *
-     * @return boolean
      */
     public function set($key, $value)
     {
-        self::$_ini[$key] = $value;
+        $this->config[$key] = $value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function exists(): bool
+    {
+        return is_file($this->configFilePath);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isWritable(): bool
+    {
+        return is_writable($this->configFilePath);
     }
 
     /**
@@ -165,9 +207,9 @@ class Loader
      *
      * @return string
      */
-    public function path()
+    public function path(): string
     {
-        return self::$_iniPath;
+        return $this->configFilePath;
     }
 
     /**
@@ -176,12 +218,12 @@ class Loader
      *
      * @return boolean
      */
-    public function check()
+    public function check(): bool
     {
         # Checking configuration keys
-        foreach (array_keys(self::$_iniKeys) as $iniKey) {
+        foreach (array_keys($this->defaultConfig) as $iniKey) {
             # Ini file key not set
-            if (isset(self::$_ini[$iniKey]) === false) {
+            if (isset($this->config[$iniKey]) === false) {
                 return false;
             }
         }
@@ -194,10 +236,10 @@ class Loader
      *
      * @return boolean
      */
-    public function write()
+    public function write(): bool
     {
         if ($this->check()) {
-            return is_numeric(file_put_contents(self::$_iniPath, '<?php' . PHP_EOL . 'return ' . var_export(self::$_ini, true) . ';'));
+            return is_numeric(file_put_contents($this->configFilePath, '<?php' . PHP_EOL . 'return ' . var_export($this->config, true) . ';'));
         }
         return false;
     }

@@ -1,5 +1,5 @@
-/.idea
-/vendor
+/.idea/
+/vendor/
 /.config.php
 /docker-compose.override.yml
-/src/temp
+/temp/*

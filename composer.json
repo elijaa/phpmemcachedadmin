@@ -14,11 +14,16 @@
         }
     ],
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "./src"
         }
     },
     "require": {
-        "ext-zlib": "*"
+        "php": ">=7.1",
+        "ext-zlib": "*",
+        "symfony/var-dumper": "^5.4"
     }
 }

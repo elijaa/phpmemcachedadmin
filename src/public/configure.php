@@ -23,7 +23,7 @@
 # Require
 use App\Library\Configuration\Loader;
 
-require_once 'library/bootstrap.php';
+require_once '../bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_write'])) ? $_REQUEST['request_write'] : null;
@@ -35,7 +35,7 @@ switch ($request) {
     case 'unlock' :
         # chmod 0755
         chmod(Loader::path(), 0755);
-        chmod($_ini->get('file_path'), 0755);
+        chmod($_ini->tempDirPath(), 0755);
         break;
 
     # Live stats configuration save
@@ -45,7 +45,7 @@ switch ($request) {
         $_ini->set('memory_alert', $_POST['memory_alert']);
         $_ini->set('hit_rate_alert', $_POST['hit_rate_alert']);
         $_ini->set('eviction_alert', $_POST['eviction_alert']);
-        $_ini->set('file_path', $_POST['file_path']);
+        $_ini->tempDirPath($_POST['file_path']);
 
         # Writing configuration file
         $write = Loader::singleton()->write();
@@ -107,10 +107,10 @@ switch ($request) {
 }
 
 # Showing header
-include 'View/Header.phtml';
+include '../view/header.phtml';
 
 # Showing formulary
-include 'View/Configure/Configure.phtml';
+include '../view/configure/configure.phtml';
 
 # Showing footer
-include 'View/Footer.phtml';
+include '../view/footer.phtml';

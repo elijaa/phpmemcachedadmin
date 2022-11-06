@@ -1,9 +1,9 @@
 version: "3"
 services:
     phpmemcachedadmin:
-        image: "alphayax/phpmemcachedadmin"
+        image: "php:7.4.33-apache"
         volumes:
             - "./:/var/www/"
-            - "./src:/var/www/html"
+            - "./docker/apache2/000-default.conf:/etc/apache2/sites-enabled/000-default.conf:ro"
         ports:
             - "80:80"
