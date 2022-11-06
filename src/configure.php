@@ -21,7 +21,9 @@
  * @since 06/04/2010
  */
 # Require
-require_once 'Library/Bootstrap.php';
+use App\Library\Configuration\Loader;
+
+require_once 'library/bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_write'])) ? $_REQUEST['request_write'] : null;
@@ -32,7 +34,7 @@ switch ($request) {
     # Unlock configuration file & temp directory
     case 'unlock' :
         # chmod 0755
-        chmod(Library_Configuration_Loader::path(), 0755);
+        chmod(Loader::path(), 0755);
         chmod($_ini->get('file_path'), 0755);
         break;
 
@@ -46,7 +48,7 @@ switch ($request) {
         $_ini->set('file_path', $_POST['file_path']);
 
         # Writing configuration file
-        $write = Library_Configuration_Loader::singleton()->write();
+        $write = Loader::singleton()->write();
         break;
 
     # Commands configuration save
@@ -61,7 +63,7 @@ switch ($request) {
         $_ini->set('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
-        $write = Library_Configuration_Loader::singleton()->write();
+        $write = Loader::singleton()->write();
         break;
 
     # Server configuration save
@@ -86,7 +88,7 @@ switch ($request) {
         $_ini->set('servers', $array);
 
         # Writing configuration file
-        $write = Library_Configuration_Loader::singleton()->write();
+        $write = Loader::singleton()->write();
         break;
 
     # Miscellaneous configuration save
@@ -96,7 +98,7 @@ switch ($request) {
         $_ini->set('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
-        $write = Library_Configuration_Loader::singleton()->write();
+        $write = Loader::singleton()->write();
         break;
 
     # Default : No command

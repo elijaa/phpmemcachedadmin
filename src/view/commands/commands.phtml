@@ -1,3 +1,6 @@
+<?php
+use App\Library\Html\Components;
+?>
     <div style="float:left;">
         <div class="sub-header corner full-size padding">Console</div>
         <div class="container corner full-size padding" id="console" style="visibility:visible;display:block;">
@@ -68,13 +71,13 @@
                     <div class="line">
                         <span class="left">Server</span>
                         <span class="right">
-                            <?php echo Library_HTML_Components::serverSelect('request_server'); ?>
+                            <?php echo Components::serverSelect('request_server'); ?>
                         </span>
                     </div>
                     <div class="line">
                         <span class="left">API</span>
                         <span class="right">
-                            <?php echo Library_HTML_Components::apiList($_ini->get('get_api'), 'request_api'); ?>
+                            <?php echo Components::apiList($_ini->get('get_api'), 'request_api'); ?>
                         </span>
                     </div>
                     <div class="line" style="text-align:center;">
@@ -114,7 +117,7 @@
                     <div class="line">
                         <span class="left">Server</span>
                         <span class="right">
-                            <?php echo Library_HTML_Components::serverSelect('request_telnet_server'); ?>
+                            <?php echo Components::serverSelect('request_telnet_server'); ?>
                         </span>
                     </div>
                     <div class="line" style="text-align:center;">
@@ -156,7 +159,7 @@
                     <div class="line">
                         <span class="left">Server</span>
                         <span class="right">
-                            <?php echo Library_HTML_Components::serverSelect('search_server'); ?>
+                            <?php echo Components::serverSelect('search_server'); ?>
                         </span>
                     </div>
                     <div class="line">

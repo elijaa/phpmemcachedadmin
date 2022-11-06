@@ -20,8 +20,13 @@
  * @author Cyrille Mahieux : elijaa(at)free.fr
  * @since 12/04/2010
  */
+
 # Require
-require_once 'Library/Bootstrap.php';
+use App\Library\Command\Factory;
+use App\Library\Data\Analysis;
+use App\Library\Data\Errors;
+
+require_once 'library/bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
@@ -90,7 +95,7 @@ switch ($request) {
             $time = microtime(true);
 
             # Asking server for stats
-            $actual[$name] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $actual[$name] = Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
 
             # Calculating query time length
             $actual[$name]['query_time'] = max((microtime(true) - $time) * 1000, 1);
@@ -102,7 +107,7 @@ switch ($request) {
             $server = $name;
 
             # Diff between old and new dump
-            $stats[$server] = Library_Data_Analysis::diff($previous[$server], $actual[$server]);
+            $stats[$server] = Analysis::diff($previous[$server], $actual[$server]);
         }
 
         # Making stats for each server
@@ -110,7 +115,7 @@ switch ($request) {
             # Analysing request
             if ((isset($stats[$server]['uptime'])) && ($stats[$server]['uptime'] > 0)) {
                 # Computing stats
-                $stats[$server] = Library_Data_Analysis::stats($stats[$server]);
+                $stats[$server] = Analysis::stats($stats[$server]);
 
                 # Because we make a diff on every key, we must reasign some values
                 $stats[$server]['bytes_percent'] = sprintf('%.1f', $actual[$server]['bytes'] / $actual[$server]['limit_maxbytes'] * 100);
@@ -133,14 +138,14 @@ switch ($request) {
         # Initializing : making stats dump
         $stats = array();
         foreach ($_ini->cluster($cluster) as $name => $server) {
-            $stats[$name] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $stats[$name] = Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         }
 
         # Saving first stats dump
         file_put_contents($file_path, serialize($stats));
 
         # Searching for connection error, adding some time to refresh rate to prevent error
-        $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Library_Data_Error::count() * (0.5 + $_ini->get('connection_timeout'))));
+        $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Errors::count() * (0.5 + $_ini->get('connection_timeout'))));
 
         # Showing header
         include 'View/Header.phtml';

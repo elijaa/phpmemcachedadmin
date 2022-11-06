@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,11 @@
  * @author elijaa@free.fr
  * @since 05/04/2010
  */
-class Library_HTML_Components
+namespace App\Library\Html;
+
+use App\Library\Configuration\Loader;
+
+class Components
 {
 
     /**
@@ -32,7 +35,7 @@ class Library_HTML_Components
     public static function serverSelect($name, $selected = '', $class = '', $events = '')
     {
         # Loading ini file
-        $_ini = Library_Configuration_Loader::singleton();
+        $_ini = Loader::singleton();
 
         # Select Name
         $serverList = '<select id="' . $name . '" ';
@@ -67,7 +70,7 @@ class Library_HTML_Components
     public static function clusterSelect($name, $selected = '', $class = '', $events = '')
     {
         # Loading ini file
-        $_ini = Library_Configuration_Loader::singleton();
+        $_ini = Loader::singleton();
 
         # Select Name
         $clusterList = '<select id="' . $name . '" ';

@@ -1,13 +1,24 @@
 {
-    "name": "elijaa/phpmemcacheadmin",
-    "description": "Graphic stand-alone administration for memcached",
+    "name": "alexeyplodenko/phpmemcachedadmin",
+    "description": "Graphic stand-alone administration for MemcacheD",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
         {
             "name": "Cyrille Mahieux",
             "email": "elijaa@free.fr"
+        },
+        {
+            "name": "Alexey Plodenko",
+            "email": "alexey@plodenko.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "ext-zlib": "*"
+    }
 }

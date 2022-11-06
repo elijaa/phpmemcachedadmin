@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2011 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,11 @@
  * @author cyrille.mahieux@free.fr
  * @since 24/08/2011
  */
-class Library_Data_Version
+namespace App\Library\Data;
+
+use App\Library\Configuration\Loader;
+
+class Version
 {
     # Version file
     protected static $_file = 'latest';
@@ -42,7 +45,7 @@ class Library_Data_Version
     public static function check()
     {
         # Loading ini file
-        $_ini = Library_Configuration_Loader::singleton();
+        $_ini = Loader::singleton();
 
         # Version definition file path
         $path = rtrim($_ini->get('file_path'), '/') . DIRECTORY_SEPARATOR . self::$_file;

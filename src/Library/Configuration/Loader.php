@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,9 @@
  * @author elijaa@free.fr
  * @since 19/05/2010
  */
-class Library_Configuration_Loader
+namespace App\Library\Configuration;
+
+class Loader
 {
     # Singleton
     protected static $_instance = null;
@@ -67,9 +68,9 @@ class Library_Configuration_Loader
     }
 
     /**
-     * Get Library_Configuration_Loader singleton
+     * Get Loader singleton
      *
-     * @return Library_Configuration_Loader
+     * @return Loader
      */
     public static function singleton()
     {

@@ -1,11 +1,14 @@
-<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<?php
+use App\Library\Html\Components;
+
+echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>PHPMemcachedAdmin <?php echo CURRENT_VERSION; ?></title>
-    <link rel="stylesheet" type="text/css" href="Public/Styles/Style.css"/>
-    <script type="text/javascript" src="Public/Scripts/Highcharts/highcharts.js"></script>
-    <script type="text/javascript" src="Public/Scripts/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="public/styles/style.css"/>
+    <script type="text/javascript" src="public/scripts/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="public/scripts/script.js"></script>
 </head>
 <body>
 <div style="margin:0pt auto; width:1000px; clear:both;">
@@ -32,7 +35,7 @@ if(basename($_SERVER['PHP_SELF']) == 'index.php')
 <?php
 }
 # Server HTML select
-echo Library_HTML_Components::serverSelect('server_select', (isset($_REQUEST['server'])) ? $_REQUEST['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
+echo Components::serverSelect('server_select', (isset($_REQUEST['server'])) ? $_REQUEST['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
         |
 <?php
 # Commands view
@@ -60,20 +63,20 @@ if(basename($_SERVER['PHP_SELF']) == 'configure.php')
 if (is_writable($_ini->get('file_path')) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Warning : Temporary directory '<em><?php echo $_ini->get('file_path') ?></em>' is not writable, please fix this error and try again.
+        Warning: Temporary directory '<em><?php echo $_ini->get('file_path') ?></em>' is not writable, please fix this error and try again.
     </div>
 <?php
 }
 if (file_exists($_ini->path()) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Error : Configuration file or folder is missing, please fix this error and try again.
+        Error: Configuration file or folder is missing, please fix this error and try again.
     </div>
 <?php
 } elseif (is_writable($_ini->path()) === false) {
 ?>
     <div class="header corner full-size padding" style="margin-top:10px;">
-        Error : Configuration file or folder is not writable, please fix this error and try again.
+        Error: Configuration file or folder is not writable, please fix this error and try again.
     </div>
 <?php
 } ?>

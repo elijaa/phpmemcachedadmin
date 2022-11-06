@@ -6,8 +6,9 @@ Forked the original implementation from https://github.com/elijaa/phpmemcachedad
 
 ## Configuration
 
-1. Create the file `/.config.php` and put your configuration there:
+1Create the file `/.config.php` and put your configuration there:
    1. For a locally installed MemcacheD server:
+
     ```php
     <?php
     return [
@@ -21,7 +22,9 @@ Forked the original implementation from https://github.com/elijaa/phpmemcachedad
         ],
     ];
     ```
+
    2. For a MemcacheD server installed as Docker service in another project:
+
     ```php
     <?php
     return [
@@ -35,7 +38,10 @@ Forked the original implementation from https://github.com/elijaa/phpmemcachedad
         ],
     ];
     ```
-2. In your console, navigate to the root of the project and execute `docker-compose up`.
+
+2. In your console, navigate to the root of the project...
+   1. ...and execute `composer install`
+   2. ...and execute `docker-compose up`
 
 ### If you need to modify the `docker-compose.yml` configuration
 

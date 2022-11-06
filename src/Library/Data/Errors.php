@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,9 @@
  * @author elijaa@free.fr
  * @since 11/10/2010
  */
-class Library_Data_Error
+namespace App\Library\Data;
+
+class Errors
 {
     private static $_errors = array();
 

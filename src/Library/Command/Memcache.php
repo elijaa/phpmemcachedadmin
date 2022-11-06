@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,12 @@
  * @author elijaa@free.fr
  * @since 20/03/2010
  */
-class Library_Command_Memcache implements Library_Command_Interface
+namespace App\Library\Command;
+
+use App\Library\Configuration\Loader;
+use Exception;
+
+class Memcache implements CommandInterface
 {
     private static $_ini;
     private static $_memcache;
@@ -36,7 +40,7 @@ class Library_Command_Memcache implements Library_Command_Interface
     public function __construct()
     {
         # Importing configuration
-        self::$_ini = Library_Configuration_Loader::singleton();
+        self::$_ini = Loader::singleton();
 
         # Initializing
         self::$_memcache = new Memcache();
@@ -283,9 +287,11 @@ class Library_Command_Memcache implements Library_Command_Interface
      *
      * @param String $server Hostname
      * @param Integer $port Hostname Port
-     * @param String $key Key to search
-     *
+     * @param $search
+     * @param bool $level
+     * @param bool $more
      * @return array
+     * @throws Exception
      */
     function search($server, $port, $search, $level = false, $more = false)
     {
@@ -301,6 +307,7 @@ class Library_Command_Memcache implements Library_Command_Interface
      * @param String $command Command to execute
      *
      * @return String
+     * @throws Exception
      */
     function telnet($server, $port, $command)
     {

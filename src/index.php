@@ -21,7 +21,10 @@
  * @since 20/03/2010
  */
 # Require
-require_once 'Library/Bootstrap.php';
+use App\Library\Command\Factory;
+use App\Library\Data\Analysis;
+
+require_once 'library/bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['show'])) ? $_REQUEST['show'] : null;
@@ -46,11 +49,11 @@ switch ($request) {
 
         # Ask for one server and one slabs items
         if (isset($_REQUEST['server']) && ($server = $_ini->server($_REQUEST['server']))) {
-            $items = Library_Command_Factory::instance('items_api')->items($server['hostname'], $server['port'], $_REQUEST['slab']);
+            $items = Factory::instance('items_api')->items($server['hostname'], $server['port'], $_REQUEST['slab']);
         }
 
         # Getting stats to calculate server boot time
-        $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+        $stats = Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
         $infinite = (isset($stats['time'], $stats['uptime'])) ? ($stats['time'] - $stats['uptime']) : 0;
 
         # Items are well formed
@@ -72,13 +75,13 @@ switch ($request) {
         # Ask for one server slabs
         if (isset($_REQUEST['server']) && ($server = $_ini->server($_REQUEST['server']))) {
             # Spliting server in hostname:port
-            $slabs = Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']);
+            $slabs = Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']);
         }
 
         # Slabs are well formed
         if ($slabs !== false) {
             # Analysis
-            $slabs = Library_Data_Analysis::slabs($slabs);
+            $slabs = Analysis::slabs($slabs);
             include 'View/Stats/Slabs.phtml';
         }         # Slabs are not well formed
         else {
@@ -105,9 +108,9 @@ switch ($request) {
             foreach ($cluster as $name => $server) {
                 # Getting Stats & Slabs stats
                 $data = array();
-                $data['stats'] = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
-                $data['slabs'] = Library_Data_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
-                $stats = Library_Data_Analysis::merge($stats, $data['stats']);
+                $data['stats'] = Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+                $data['slabs'] = Analysis::slabs(Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
+                $stats = Analysis::merge($stats, $data['stats']);
 
                 # Computing stats
                 if (isset($data['slabs']['total_malloced'], $data['slabs']['total_wasted'])) {
@@ -120,15 +123,15 @@ switch ($request) {
         }        # Asking for a server stats
         elseif (isset($_REQUEST['server']) && ($server = $_ini->server($_REQUEST['server']))) {
             # Getting Stats & Slabs stats
-            $stats = Library_Command_Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
-            $slabs = Library_Data_Analysis::slabs(Library_Command_Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
-            $settings = Library_Command_Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
+            $stats = Factory::instance('stats_api')->stats($server['hostname'], $server['port']);
+            $slabs = Analysis::slabs(Factory::instance('slabs_api')->slabs($server['hostname'], $server['port']));
+            $settings = Factory::instance('stats_api')->settings($server['hostname'], $server['port']);
         }
 
         # Stats are well formed
         if (($stats !== false) && ($stats != array())) {
             # Analysis
-            $stats = Library_Data_Analysis::stats($stats);
+            $stats = Analysis::stats($stats);
             include 'View/Stats/Stats.phtml';
         }         # Stats are not well formed
         else {

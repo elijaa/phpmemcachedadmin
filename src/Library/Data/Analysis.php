@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,9 @@
  * @author elijaa@free.fr
  * @since 20/03/2010
  */
-class Library_Data_Analysis
+namespace App\Library\Data;
+
+class Analysis
 {
     private static $_non_additive = array(
         'libevent',

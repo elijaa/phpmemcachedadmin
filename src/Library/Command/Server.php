@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Copyright 2010 Cyrille Mahieux
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +20,12 @@
  * @author elijaa@free.fr
  * @since 20/03/2010
  */
-class Library_Command_Server implements Library_Command_Interface
+namespace App\Library\Command;
+
+use App\Library\Configuration\Loader;
+use App\Library\Data\Errors;
+
+class Server implements CommandInterface
 {
     private static $_ini;
     private static $_log;
@@ -36,7 +40,7 @@ class Library_Command_Server implements Library_Command_Interface
     public function __construct()
     {
         # Importing configuration
-        self::$_ini = Library_Configuration_Loader::singleton();
+        self::$_ini = Loader::singleton();
     }
 
     /**
@@ -60,7 +64,7 @@ class Library_Command_Server implements Library_Command_Interface
         if (! ($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout')))) {
             # Adding error to log
             self::$_log = utf8_encode($errstr);
-            Library_Data_Error::add(utf8_encode($errstr));
+            Errors::add(utf8_encode($errstr));
             return false;
         }
 
@@ -448,7 +452,7 @@ class Library_Command_Server implements Library_Command_Interface
                     } else {
                         # Detail level
                         if ($level == 'full') {
-                            $items[] = $item[1] . ' : [' . trim(Library_Data_Analysis::byteResize($item[2])) . 'b, expire in ' . (($item[3] == $infinite) ? '&#8734;' : Library_Data_Analysis::uptime($item[3] - time(), true)) . ']';
+                            $items[] = $item[1] . ' : [' . trim(Analysis::byteResize($item[2])) . 'b, expire in ' . (($item[3] == $infinite) ? '&#8734;' : Analysis::uptime($item[3] - time(), true)) . ']';
                         } else {
                             $items[] = $item[1];
                         }

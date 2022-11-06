@@ -1,4 +1,6 @@
 <?php
+use App\Library\Data\Errors;
+
 # Server seems down
 if((isset($stats)) && (($stats === false) || ($stats == array())))
 { ?>
@@ -18,7 +20,7 @@ if((isset($stats)) && (($stats === false) || ($stats == array())))
     <div class="container corner full-size padding">
         <span class="left">Error message</span>
         <br/>
-        <?php echo Library_Data_Error::last(); ?>
+        <?php echo Errors::last(); ?>
         <br/>
         <br/>
         Please check above error message, your <a href="configure.php" class="green">configuration</a> or your server status and retry

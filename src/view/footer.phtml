@@ -1,6 +1,8 @@
 <?php
+use App\Library\Data\Version;
+
 # Check for newer version
-if(Library_Data_Version::check())
+if(Version::check())
 { ?>
             <div class="header corner full-size padding" style="float:left; text-align:center; margin-top:10px;">
             A newer version of phpMemcachedAdmin may be available, visit <a href="https://blog.elijaa.org/phpmemcachedadmin-download/" target="_blank">PHPMemcachedAdmin Blog</a> to know more.

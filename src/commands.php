@@ -21,7 +21,10 @@
  * @since 06/04/2010
  */
 # Require
-require_once 'Library/Bootstrap.php';
+use App\Library\Command\Factory;
+use App\Library\Html\Components;
+
+require_once 'library/bootstrap.php';
 
 # Initializing requests & response
 $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
@@ -37,19 +40,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
             }
         }        # Ask for get on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server get command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
         }         # Ask for get on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server get command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->get($server['hostname'], $server['port'], $_REQUEST['request_key']));
                 }
             }
         }
@@ -61,19 +64,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
             }
         }        # Ask for set on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server set command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
         }         # Ask for set on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server set command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->set($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_data'], $_REQUEST['request_duration']));
                 }
             }
         }
@@ -85,19 +88,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
             }
         }        # Ask for delete on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server delete command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
         }         # Ask for delete on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server delete command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->delete($server['hostname'], $server['port'], $_REQUEST['request_key']));
                 }
             }
         }
@@ -114,19 +117,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server increment command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
             }
         }        # Ask for increment on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server increment command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
         }         # Ask for increment on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server increment command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->increment($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
                 }
             }
         }
@@ -143,19 +146,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server decrement command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
             }
         }        # Ask for decrement on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server decrement command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
         }         # Ask for decrement on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server decrement command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->decrement($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_value']));
                 }
             }
         }
@@ -172,19 +175,19 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
             }
         }        # Ask for flush_all on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server flush_all command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
         }         # Ask for flush_all on all servers
         else {
             foreach ($_ini->get('servers') as $cluster => $servers) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server flush_all command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api($_REQUEST['request_api'])->flush_all($server['hostname'], $server['port'], $_REQUEST['request_delay']));
                 }
             }
         }
@@ -196,12 +199,12 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server get command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
             }
         }        # Ask for search on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server search command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
         }         # Ask for search on all servers
         else {
             # Looking into each cluster
@@ -209,7 +212,7 @@ switch ($request) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server search command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->search($server['hostname'], $server['port'], $_REQUEST['request_key'], $_REQUEST['request_level'], $_REQUEST['request_more']));
                 }
             }
         }
@@ -221,12 +224,12 @@ switch ($request) {
         if (isset($_REQUEST['request_server']) && ($cluster = $_ini->cluster($_REQUEST['request_server']))) {
             foreach ($cluster as $server) {
                 # Dumping server telnet command response
-                echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
+                echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
             }
         }        # Ask for a telnet command on one server
         elseif (isset($_REQUEST['request_server']) && ($server = $_ini->server($_REQUEST['request_server']))) {
             # Dumping server telnet command response
-            echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
+            echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
         }         # Ask for a telnet command on all servers
         else {
             # Looking into each cluster
@@ -234,7 +237,7 @@ switch ($request) {
                 # Asking for each server stats
                 foreach ($servers as $server) {
                     # Dumping server telnet command response
-                    echo Library_HTML_Components::serverResponse($server['hostname'], $server['port'], Library_Command_Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
+                    echo Components::serverResponse($server['hostname'], $server['port'], Factory::api('Server')->telnet($server['hostname'], $server['port'], $_REQUEST['request_telnet']));
                 }
             }
         }
@@ -242,13 +245,13 @@ switch ($request) {
     # Default : No command
     default :
         # Showing header
-        include 'View/Header.phtml';
+        include 'view/header.phtml';
 
         # Showing formulary
-        include 'View/Commands/Commands.phtml';
+        include 'view/commands/commands.phtml';
 
         # Showing footer
-        include 'View/Footer.phtml';
+        include 'view/footer.phtml';
         break;
 }
 
