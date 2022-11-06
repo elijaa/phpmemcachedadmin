@@ -46,7 +46,7 @@ class Loader
         'memory_alert' => 80,
         'hit_rate_alert' => 90,
         'eviction_alert' => 0,
-        'temp_dir_path' => '../../temp/',
+        'temp_dir_path' => '/temp/',
         'servers' => [
             'Default' => [
                 '127.0.0.1:11211' => [
@@ -63,9 +63,19 @@ class Loader
     protected $config;
 
     /**
-     * @var
+     * @var string
      */
-    protected $configFilePath = '../../.config.php';
+    protected $configFilePath = '/.config.php';
+
+    /**
+     * @var string
+     */
+    protected $realConfigFilePath;
+
+    /**
+     * @var string
+     */
+    protected $realTempDirPath;
 
     /**
      * Constructor, load configuration file and parse server list
@@ -81,7 +91,8 @@ class Loader
         $this->config = $this->defaultConfig;
 
         if ($this->exists()) {
-            $userConfig = require($this->configFilePath);
+            $configFilePath = $this->configFilePath();
+            $userConfig = require($configFilePath);
             $this->config = array_merge($this->config, $userConfig);
         }
     }
@@ -91,7 +102,7 @@ class Loader
      *
      * @return Loader
      */
-    public static function singleton()
+    public static function singleton(): ?Loader
     {
         if (! isset(self::$_instance)) {
             self::$_instance = new self();
@@ -120,7 +131,11 @@ class Loader
      */
     public function tempDirPath(): string
     {
-        return $this->config['temp_dir_path'];
+        if (!$this->realTempDirPath) {
+            $this->realTempDirPath = realpath(__DIR__ .'/../../..'. $this->config['temp_dir_path']);
+        }
+
+        return $this->realTempDirPath;
     }
 
     /**
@@ -165,14 +180,14 @@ class Loader
      *
      * @return array
      */
-    public function server($server)
+    public function server(string $server): array
     {
         foreach ($this->config['servers'] as $cluster => $servers) {
             if (isset($this->config['servers'][$cluster][$server])) {
                 return $this->config['servers'][$cluster][$server];
             }
         }
-        return array();
+        return [];
     }
 
     /**
@@ -181,9 +196,25 @@ class Loader
      * @param string $key Key to set
      * @param mixed $value Value to set
      */
-    public function set($key, $value)
+    public function set(string $key, $value)
     {
+        if ($key === 'temp_dir_path') {
+            $this->realTempDirPath = null;
+        }
+
         $this->config[$key] = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function configFilePath(): string
+    {
+        if (!$this->realConfigFilePath) {
+            $this->realConfigFilePath = realpath(__DIR__ .'/../../..'. $this->configFilePath);
+        }
+
+        return $this->realConfigFilePath;
     }
 
     /**
@@ -191,7 +222,8 @@ class Loader
      */
     public function exists(): bool
     {
-        return is_file($this->configFilePath);
+        $configFilePath = $this->configFilePath();
+        return is_file($configFilePath);
     }
 
     /**
@@ -199,17 +231,8 @@ class Loader
      */
     public function isWritable(): bool
     {
-        return is_writable($this->configFilePath);
-    }
-
-    /**
-     * Return actual ini file path
-     *
-     * @return string
-     */
-    public function path(): string
-    {
-        return $this->configFilePath;
+        $configFilePath = $this->configFilePath();
+        return is_writable($configFilePath);
     }
 
     /**

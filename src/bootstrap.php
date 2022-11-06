@@ -8,7 +8,7 @@ header('Cache-Control: no-cache, must-revalidate');
 # Constants declaration
 const CURRENT_VERSION = '2.0.0';
 
-require '../../vendor/autoload.php';
+require __DIR__ .'/../vendor/autoload.php';
 
 ob_start();
 

@@ -1,6 +1,6 @@
 body {
 	background-color: #FEFEFE;
-	font-family: Verdana,Tahoma,"Segoe UI", Arial;
+	font-family: Verdana, Tahoma, "Segoe UI", Arial, serif;
 	font-size: 0.8em;
 	margin-top: 10px;
 }
@@ -23,7 +23,7 @@ input,select,textarea {
     border-style: solid;
     border-color: #AAA;
 	width: 298px;
-	font-family: Tahoma;
+	font-family: Tahoma, serif;
 	font-size: 1em;
 }
 

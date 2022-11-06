@@ -24,7 +24,7 @@
 use App\Library\Command\Factory;
 use App\Library\Html\Components;
 
-require_once '../bootstrap.php';
+require_once __DIR__ .'/../../bootstrap.php';
 
 # Initializing requests & response
 $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
@@ -245,13 +245,13 @@ switch ($request) {
     # Default : No command
     default :
         # Showing header
-        include '../view/header.phtml';
+        include __DIR__ .'/../../view/header.phtml';
 
         # Showing formulary
-        include '../view/commands/commands.phtml';
+        include __DIR__ .'/../../view/commands/commands.phtml';
 
         # Showing footer
-        include '../view/footer.phtml';
+        include __DIR__ .'/../../view/footer.phtml';
         break;
 }
 

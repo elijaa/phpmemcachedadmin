@@ -12,55 +12,50 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 </head>
 <body>
 <div style="margin:0pt auto; width:1000px; clear:both;">
-        <div style="font-weight:bold;font-size:1.2em;">PHPMemcachedAdmin <sup><?php echo CURRENT_VERSION; ?></sup>
-        </div>
-        <div class="header corner full-size padding" style="text-align:center;margin-top:5px;">
-<?php if(basename($_SERVER['PHP_SELF']) == 'stats.php') { ?>
-        Live Stats |
-<?php } else { ?>
-        <a href="stats.php">See Live Stats</a> |
-<?php } ?>
+    <div style="font-weight:bold;font-size:1.2em;"><a href="/" style="color: #000;">PHPMemcachedAdmin</a> <sup><?php echo CURRENT_VERSION; ?></sup></div>
 
-<?php  if(basename($_SERVER['PHP_SELF']) == 'index.php') { ?>
-        Actually seeing
-<?php } else { ?>
-        <a href="index.php">See Stats for </a>
-<?php } ?>
-<?php echo Components::serverSelect('server_select', (isset($_REQUEST['server'])) ? $_REQUEST['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
+    <div class="header corner full-size padding" style="text-align:center;margin-top:5px;">
+        <?php if (basename($_SERVER['PHP_SELF']) == 'stats') { ?>
+            Live Stats |
+        <?php } else { ?>
+            <a href="/stats">See Live Stats</a> |
+        <?php } ?>
+<?php //d($_SERVER['PHP_SELF']) ?>
+        <?php if(basename($_SERVER['PHP_SELF']) == 'index.php') { ?>
+            Actually seeing
+        <?php } else { ?>
+            <a href="/">See Stats for </a>
+        <?php } ?>
+
+        <?php echo Components::serverSelect('server_select', (isset($_REQUEST['server'])) ? $_REQUEST['server'] : '', 'list', 'onchange="changeServer(this)"'); ?>
+            |
+        <?php if(basename($_SERVER['PHP_SELF']) == 'commands/index.php') { ?>
+            Executing Commands on Servers
+        <?php } else { ?>
+            <a href="/commands">Execute Commands on Servers</a>
+        <?php } ?>
         |
-<?php if(basename($_SERVER['PHP_SELF']) == 'commands.php') { ?>
-        Executing Commands on Servers
-<?php } else { ?>
-        <a href="commands.php">Execute Commands on Servers</a>
-<?php } ?>
-        |
-<?php if (basename($_SERVER['PHP_SELF']) === 'configure.php') { ?>
-        Editing Configuration
-<?php } else { ?>
-        <a href="configure.php">Edit Configuration</a>
-<?php } ?>
+        <?php if (basename($_SERVER['PHP_SELF']) === 'configure/index.php') { ?>
+            Editing Configuration
+        <?php } else { ?>
+            <a href="/configure">Edit Configuration</a>
+        <?php } ?>
     </div>
-<?php if (!$_ini->isTempDirExists()) { ?>
-    <div class="header corner full-size padding" style="margin-top:10px;">
-        Warning: Temporary directory '<em><?php echo $_ini->tempDirPath() ?></em>' does not exist.
-    </div>
-<?php } elseif (!$_ini->isTempDirWritable()) { ?>
-    <div class="header corner full-size padding" style="margin-top:10px;">
-        Warning: Temporary directory '<em><?php echo $_ini->tempDirPath() ?></em>' is not writable.
-    </div>
-<?php } ?>
-<?php if (!$_ini->exists()) { ?>
-    <div class="header corner full-size padding" style="margin-top:10px;">
-        Error: Configuration file or folder is missing.
-    </div>
-<?php } elseif (!$_ini->isWritable()) { ?>
-    <div class="header corner full-size padding" style="margin-top:10px;">
-        Error: Configuration file or folder is not writable.
-    </div>
-<?php } ?>
+
+    <?php if (!$_ini->isTempDirExists()) { ?>
+        <?php exit('<div class="header corner full-size padding" style="margin-top:10px;">Error: Temporary directory <em>'. $_ini->tempDirPath() .'</em> does not exist.</div>'); ?>
+    <?php } elseif (!$_ini->isTempDirWritable()) { ?>
+        <?php exit('<div class="header corner full-size padding" style="margin-top:10px;">Error: Temporary directory <em>'. $_ini->tempDirPath() .'</em> is not writable.</div>'); ?>
+    <?php } ?>
+
+    <?php if (!$_ini->exists()) { ?>
+        <?php exit('<div class="header corner full-size padding" style="margin-top:10px;">Error: Configuration file <em>'. $_ini->configFilePath() .'</em> is missing.</div>'); ?>
+    <?php } elseif (!$_ini->isWritable()) { ?>
+        <?php exit('<div class="header corner full-size padding" style="margin-top:10px;">Error: Configuration file <em>'. $_ini->configFilePath() .'</em> is not writable.</div>'); ?>
+    <?php } ?>
 
 <!--[if IE]>
-<div class="header corner full-size padding" style="text-align:center;margin-top:10px;">
-Support browsers that contribute to open source, try <a href="http://www.firefox.com" target="_blank">Firefox</a> or <a href="http://www.google.com/chrome" target="_blank">Google Chrome</a>.
-</div>
+    <div class="header corner full-size padding" style="text-align:center;margin-top:10px;">
+    Support browsers that contribute to open source, try <a href="https://www.firefox.com" target="_blank">Firefox</a> or <a href="https://www.google.com/chrome" target="_blank">Google Chrome</a>.
+    </div>
 <![endif]-->

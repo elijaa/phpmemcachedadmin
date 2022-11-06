@@ -26,7 +26,7 @@ use App\Library\Command\Factory;
 use App\Library\Data\Analysis;
 use App\Library\Data\Errors;
 
-require_once '../bootstrap.php';
+require_once __DIR__ .'/../../bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_command'])) ? $_REQUEST['request_command'] : null;
@@ -75,14 +75,14 @@ if (! isset($_COOKIE['live_stats_id' . $hash])) {
 }
 
 # Live stats dump file
-$file_path = rtrim($_ini->tempDirPath(), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
+$filePath = rtrim($_ini->tempDirPath(), '/') . DIRECTORY_SEPARATOR . 'live_stats.' . $live_stats_id;
 
 # Display by request type
 switch ($request) {
     # Ajax ask : stats
     case 'live_stats' :
         # Opening old stats dump
-        $previous = @unserialize(file_get_contents($file_path));
+        $previous = @unserialize(file_get_contents($filePath));
 
         # Initializing variables
         $actual = array();
@@ -127,10 +127,10 @@ switch ($request) {
         }
 
         # Saving new stats dump
-        file_put_contents($file_path, serialize($actual));
+        file_put_contents($filePath, serialize($actual));
 
         # Showing stats
-        include '../view/liveStats/stats.phtml';
+        include __DIR__ .'/../../view/liveStats/stats.phtml';
         break;
 
     # Default : No command
@@ -142,19 +142,22 @@ switch ($request) {
         }
 
         # Saving first stats dump
-        file_put_contents($file_path, serialize($stats));
+        file_put_contents($filePath, serialize($stats));
 
         # Searching for connection error, adding some time to refresh rate to prevent error
-        $refresh_rate = max($_ini->get('refresh_rate'), count($_ini->cluster($cluster)) * 0.25 + (Errors::count() * (0.5 + $_ini->get('connection_timeout'))));
+        $refresh_rate = max(
+            $_ini->get('refresh_rate'),
+            count($_ini->cluster($cluster)) * 0.25 + (Errors::count() * (0.5 + $_ini->get('connection_timeout')))
+        );
 
         # Showing header
-        include '../view/header.phtml';
+        include __DIR__ .'/../../view/header.phtml';
 
         # Showing live stats frame
-        include '../view/livestats/frame.phtml';
+        include __DIR__ .'/../../view/livestats/frame.phtml';
 
         # Showing footer
-        include '../view/footer.phtml';
+        include __DIR__ .'/../../view/footer.phtml';
 
         break;
 }

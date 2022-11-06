@@ -10,32 +10,32 @@ Highcharts.setOptions({
 });
 
 function changeServer(obj) {
-	if (obj.options[obj.selectedIndex].value != '') {
-		window.location = 'index.php?server='
+	if (obj.options[obj.selectedIndex].value !== '') {
+		window.location = '/?server='
 				+ obj.options[obj.selectedIndex].value;
 	} else {
-		window.location = 'index.php';
+		window.location = '/';
 	}
 }
 function changeCluster(obj) {
-	if (obj.options[obj.selectedIndex].value != '') {
-		window.location = 'stats.php?cluster='
+	if (obj.options[obj.selectedIndex].value !== '') {
+		window.location = '/stats?cluster='
 				+ obj.options[obj.selectedIndex].value;
 	} else {
-		window.location = 'stats.php';
+		window.location = '/stats';
 	}
 }
 function show(target)
 {
-	var objects = document.getElementsByClassName(target);
-	for(i = 0 ; i < objects.length ; i++){
+	const objects = document.getElementsByClassName(target);
+	for(let i = 0 ; i < objects.length ; i++){
 		objects[i].style.display = '';
 	}
 }
 function hide(target)
 {
-	var objects = document.getElementsByClassName(target);
-	for(i = 0 ; i < objects.length ; i++){
+	const objects = document.getElementsByClassName(target);
+	for(let i = 0 ; i < objects.length ; i++){
 		objects[i].style.display = 'none';
 	}
 }
@@ -46,31 +46,31 @@ function changeCommand(obj) {
 	document.getElementById('request_data').value = '';
 	document.getElementById('request_delay').value = '';
 	document.getElementById('request_value').value = '';
-	var command = obj.options[obj.selectedIndex].value;
-	var div_key = document.getElementById('div_key');
-	var div_duration = document.getElementById('div_duration');
-	var div_data = document.getElementById('div_data');
-	var div_delay = document.getElementById('div_delay');
-	var div_value = document.getElementById('div_value');
-	if (command == 'get' || command == 'delete') {
+	const command = obj.options[obj.selectedIndex].value;
+	const div_key = document.getElementById('div_key');
+	const div_duration = document.getElementById('div_duration');
+	const div_data = document.getElementById('div_data');
+	const div_delay = document.getElementById('div_delay');
+	const div_value = document.getElementById('div_value');
+	if (command === 'get' || command === 'delete') {
 		div_key.style.display = '';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
 		div_delay.style.display = 'none';
 		div_value.style.display = 'none';
-	} else if (command == 'set') {
+	} else if (command === 'set') {
 		div_key.style.display = '';
 		div_duration.style.display = '';
 		div_data.style.display = '';
 		div_delay.style.display = 'none';
 		div_value.style.display = 'none';
-	} else if (command == 'flush_all') {
+	} else if (command === 'flush_all') {
 		div_key.style.display = 'none';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
 		div_delay.style.display = '';
 		div_value.style.display = 'none';
-	} else if (command == 'increment' || command == 'decrement') {
+	} else if (command === 'increment' || command === 'decrement') {
 		div_key.style.display = '';
 		div_duration.style.display = 'none';
 		div_data.style.display = 'none';
@@ -86,8 +86,8 @@ function changeCommand(obj) {
 }
 function executeHideShow(target, input, force) {
 	var object = document.getElementById(target);
-	var input = document.getElementById(input);
-	if ((object.style.display == "block") && (force != true))  {
+	input = document.getElementById(input);
+	if (object.style.display === "block" && !force)  {
 		input.value = "Show Console";
 		object.style.visibility = "hidden";
 		object.style.display = "none";
@@ -103,12 +103,12 @@ function executeClear(target) {
 }
 function executeCommand(target, params) {
 	if (params != null) {
-		var request_url = 'commands.php?' + params;
+		const request_url = '/commands?' + params;
 		execute(request_url, target, true);
 		return;
 	}
-	if (document.getElementById('request_command').value != '') {
-		var request_url = 'commands.php?request_command='
+	if (document.getElementById('request_command').value !== '') {
+		const request_url = '/commands?request_command='
 				+ document.getElementById('request_command').value
 				+ '&request_key='
 				+ document.getElementById('request_key').value
@@ -125,12 +125,11 @@ function executeCommand(target, params) {
 				+ '&request_api='
 				+ document.getElementById('request_api').value;
 		execute(request_url, target, true);
-		return;
 	}
 }
 function searchKey(target) {
-	if (document.getElementById('search_key').value != '') {
-		var request_url = 'commands.php?request_command=search'
+	if (document.getElementById('search_key').value !== '') {
+		const request_url = '/commands?request_command=search'
 				+ '&request_key=' + document.getElementById('search_key').value
 				+ '&request_level=' + document.getElementById('search_level').value
 				+ '&request_more=' + document.getElementById('search_more').value
@@ -140,8 +139,8 @@ function searchKey(target) {
 	}
 }
 function executeTelnet(target) {
-	if (document.getElementById('request_telnet').value != '') {
-		var request_url = 'commands.php?request_command=telnet'
+	if (document.getElementById('request_telnet').value !== '') {
+		const request_url = '/commands?request_command=telnet'
 				+ '&request_telnet='
 				+ document.getElementById('request_telnet').value
 				+ '&request_server='
@@ -151,35 +150,35 @@ function executeTelnet(target) {
 }
 function execute(url, target, append) {
 	if (window.XMLHttpRequest) {
-		req = new XMLHttpRequest();
+		const req = new XMLHttpRequest();
 		req.onreadystatechange = function() {
-			onExecute(target, append);
+			onExecute(req, target, append);
 		};
 		req.open('GET', url, true);
 		req.send(null);
 	} else if (window.ActiveXObject) {
-		req = new ActiveXObject('Microsoft.XMLHTTP');
+		const req = new ActiveXObject('Microsoft.XMLHTTP');
 		if (req) {
 			req.onreadystatechange = function() {
-				onExecute(target, append);
+				onExecute(req, target, append);
 			};
 			req.open('GET', url, true);
 			req.send();
 		}
 	}
 }
-function onExecute(target, append) {
-	if (req.readyState == 1) {
+function onExecute(req, target, append) {
+	if (req.readyState === 1) {
 		document.getElementById('loading').style.visibility = "visible";
-	} else if (req.readyState == 4) {
+	} else if (req.readyState === 4) {
 		document.getElementById('loading').style.visibility = "hidden";
-		if (req.status == 200 || req.status == 304) {
-			if (append == true) {
-				var object = document.getElementById(target);
+		if (req.status === 200 || req.status === 304) {
+			if (append === true) {
+				const object = document.getElementById(target);
 				object.innerHTML += req.responseText;
 				object.scrollTop = object.scrollHeight;
 			} else {
-				var object = document.getElementById(target);
+				const object = document.getElementById(target);
 				object.innerHTML = req.responseText;
 				object.scrollTop = object.scrollHeight;
 			}
@@ -188,10 +187,10 @@ function onExecute(target, append) {
 		document.getElementById('loading').style.visibility = "hidden";
 	}
 }
-var server_id = 1;
-var cluster_id = 1;
+let server_id = 1;
+let cluster_id = 1;
 function addCluster() {
-	var clusterDiv = document.createElement('div');
+	const clusterDiv = document.createElement('div');
 	cluster_id++;
 	clusterDiv.innerHTML = '<hr/><strong>Cluster <input type="text" style="width:200px;" name="cluster[' + cluster_id + ']" value=""/></strong>'
             + '<div style="margin-left:30px;margin-top:3px;">'
@@ -207,7 +206,7 @@ function addCluster() {
 	addServer(cluster_id);
 }
 function addServer(current_cluster_id) {
-	var serverDiv = document.createElement('div');
+	const serverDiv = document.createElement('div');
 	server_id++;
 	serverDiv.innerHTML = '<div style="margin-left:30px;margin-top:3px;">'
 			+ '<input type="text" style="width:150px;" name="server[' + current_cluster_id + '][' + server_id + '][name]"'
@@ -222,63 +221,63 @@ function addServer(current_cluster_id) {
 	document.getElementById('cluster_' + current_cluster_id).insertBefore(serverDiv, document.getElementById('cluster_' + current_cluster_id + '_commands'));
 }
 function deleteServerOrCluster(divID) {
-	var div = document.getElementById(divID);
+	const div = document.getElementById(divID);
 	div.parentNode.removeChild(div);
 }
+
 function nameOnChange(target) {
-	portObject = document.getElementById('port_' + target);
+	const portObject = document.getElementById('port_' + target);
 	portObject.setAttribute("onchange", "return false;");
-	hostObject = document.getElementById('host_' + target);
+	const hostObject = document.getElementById('host_' + target);
 	hostObject.setAttribute("onchange", "return false;");
 }
 function hostOnFocus(object) {
-	if (object.value == 'hostname') {
+	if (object.value === 'hostname') {
 		object.value = '';
 	}
 }
 function hostOnBlur(object) {
-	if (object.value == '') {
+	if (object.value === '') {
 		object.value = 'hostname';
 	}
 }
 function hostOnChange(target) {
 	document.getElementById(target);
-	if (object.value == '') {
+	if (object.value === '') {
 		object.value = 'port';
 	}
 }
 function portOnFocus(object) {
-	if (object.value == 'port') {
+	if (object.value === 'port') {
 		object.value = '';
 	}
 }
 function portOnBlur(object) {
-	if (object.value == '') {
+	if (object.value === '') {
 		object.value = 'port';
 	}
 }
 function hostOrPortOnChange(target) {
-	
-	nameObject = document.getElementById('name_' + target);
-	hostObject = document.getElementById('host_' + target);
-	portObject = document.getElementById('port_' + target);
-	if ((nameObject.value == '') || ((nameObject.value != hostObject.value + ':' + portObject.value))) {
+	const nameObject = document.getElementById('name_' + target);
+	const hostObject = document.getElementById('host_' + target);
+	const portObject = document.getElementById('port_' + target);
+	if (nameObject.value === '' || nameObject.value !== hostObject.value + ':' + portObject.value) {
 		nameObject.value = hostObject.value + ':' + portObject.value;
 	}
 }
 function ajax(url, target) {
 	if (window.XMLHttpRequest) {
-		req = new XMLHttpRequest();
+		const req = new XMLHttpRequest();
 		req.onreadystatechange = function() {
-			ajaxDone(target);
+			ajaxDone(req, target);
 		};
 		req.open("GET", url, true);
 		req.send(null);
 	} else if (window.ActiveXObject) {
-		req = new ActiveXObject('Microsoft.XMLHTTP');
+		const req = new ActiveXObject('Microsoft.XMLHTTP');
 		if (req) {
 			req.onreadystatechange = function() {
-				ajaxDone(target);
+				ajaxDone(req, target);
 			};
 			req.open("GET", url, true);
 			req.send();
@@ -286,14 +285,12 @@ function ajax(url, target) {
 	}
 	setTimeout("ajax(page, 'stats')", timeout);
 }
-function ajaxDone(target) {
-	if (req.readyState == 4) {
-		if (req.status == 200 || req.status == 304) {
-			results = req.responseText;
-			document.getElementById(target).innerHTML = results;
+function ajaxDone(req, target) {
+	if (req.readyState === 4) {
+		if (req.status === 200 || req.status === 304) {
+			document.getElementById(target).innerHTML = req.responseText;
 		} else {
-			document.getElementById(target).innerHTML = "Loading stats error : "
-					+ req.statusText;
+			document.getElementById(target).innerHTML = "Loading stats error : " + req.statusText;
 		}
 	}
 }

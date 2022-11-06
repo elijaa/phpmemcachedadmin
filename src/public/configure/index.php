@@ -23,7 +23,7 @@
 # Require
 use App\Library\Configuration\Loader;
 
-require_once '../bootstrap.php';
+require_once __DIR__ .'/../../bootstrap.php';
 
 # Initializing requests
 $request = (isset($_REQUEST['request_write'])) ? $_REQUEST['request_write'] : null;
@@ -107,10 +107,10 @@ switch ($request) {
 }
 
 # Showing header
-include '../view/header.phtml';
+include __DIR__ .'/../../view/header.phtml';
 
 # Showing formulary
-include '../view/configure/configure.phtml';
+include __DIR__ .'/../../view/configure/configure.phtml';
 
 # Showing footer
-include '../view/footer.phtml';
+include __DIR__ .'/../../view/footer.phtml';
