@@ -23,8 +23,6 @@
     },
     "require": {
         "php": ">=7.1",
-        "ext-zlib": "*",
-        "symfony/var-dumper": "^5.4",
-        "ext-memcached": "*"
+        "symfony/var-dumper": "^5.4"
     }
 }
