@@ -37,7 +37,8 @@ if (! isset($_REQUEST['server'])) {
 }
 
 # Showing header
-include __DIR__ .'/../view/header.phtml';
+require __DIR__ .'/../view/header.php';
+require __DIR__ .'/../view/server_select.php';
 
 # Display by request type
 switch ($request) {
@@ -59,10 +60,10 @@ switch ($request) {
         # Items are well formed
         if ($items !== false) {
             # Showing items
-            include __DIR__ .'/../view/stats/items.phtml';
+            require __DIR__ .'/../view/stats/items.php';
         }         # Items are not well formed
         else {
-            include __DIR__ .'/../view/stats/error.phtml';
+            require __DIR__ .'/../view/stats/error.php';
         }
         unset($items);
         break;
@@ -82,10 +83,10 @@ switch ($request) {
         if ($slabs !== false) {
             # Analysis
             $slabs = Analysis::slabs($slabs);
-            include __DIR__ .'/../view/stats/slabs.phtml';
+            require __DIR__ .'/../view/stats/slabs.php';
         }         # Slabs are not well formed
         else {
-            include __DIR__ .'/../view/stats/error.phtml';
+            require __DIR__ .'/../view/stats/error.php';
         }
         unset($slabs);
         break;
@@ -132,13 +133,13 @@ switch ($request) {
         if (($stats !== false) && ($stats != array())) {
             # Analysis
             $stats = Analysis::stats($stats);
-            include __DIR__ .'/../view/stats/stats.phtml';
+            require __DIR__ .'/../view/stats/stats.php';
         }         # Stats are not well formed
         else {
-            include __DIR__ .'/../view/stats/error.phtml';
+            require __DIR__ .'/../view/stats/error.php';
         }
         unset($stats);
         break;
 }
 # Showing footer
-include __DIR__ .'/../view/footer.phtml';
+require __DIR__ .'/../view/footer.php';

@@ -22,7 +22,7 @@
  */
 namespace App\Library\Command;
 
-use App\Library\Configuration\Loader;
+use App\Library\App;
 
 class Factory
 {
@@ -55,7 +55,7 @@ class Factory
     public static function instance($command)
     {
         # Importing configuration
-        $_ini = Loader::singleton();
+        $_ini = App::getInstance();
 
         # Instance does not exists
         if (! isset(self::$_object[$_ini->get($command)]) || ($_ini->get($command) != 'Server')) {
@@ -88,7 +88,7 @@ class Factory
      * Accessor to command class instance by type
      *
      * @param $api
-     * @return void
+     * @return Memcache|Memcached|Server
      */
     public static function api($api)
     {

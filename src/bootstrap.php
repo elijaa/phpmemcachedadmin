@@ -1,11 +1,8 @@
 <?php
-use App\Library\Configuration\Loader;
 
-# Headers
-header('Content-type: text/html; charset=utf-8');
-header('Cache-Control: no-cache, must-revalidate');
+use App\Library\App;
 
-# Constants declaration
+# App.'s hard-coded configuration
 const CURRENT_VERSION = '2.0.0';
 
 require __DIR__ .'/../vendor/autoload.php';
@@ -17,8 +14,13 @@ foreach ($_REQUEST as $index => $data) {
     $_REQUEST[$index] = htmlentities($data);
 }
 
-# Loading ini file
-$_ini = Loader::singleton();
+$app = App::getInstance();
+$_ini = $app; // legacy variable
 
 # Date timezone
-date_default_timezone_set('Europe/Paris');
+$timeZone = $app->get('time_zone');
+date_default_timezone_set($timeZone);
+
+# Headers
+header('Content-type: text/html; charset=utf-8');
+header('Cache-Control: no-cache, must-revalidate');

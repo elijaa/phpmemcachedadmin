@@ -22,7 +22,7 @@
  */
 namespace App\Library\Data;
 
-use App\Library\Configuration\Loader;
+use App\Library\App;
 
 class Version
 {
@@ -51,7 +51,7 @@ class Version
     public static function check()
     {
         # Loading ini file
-        $_ini = Loader::singleton();
+        $_ini = App::getInstance();
 
         # Version definition file path
         $path = rtrim($_ini->tempDirPath(), '/') . DIRECTORY_SEPARATOR . self::$_file;

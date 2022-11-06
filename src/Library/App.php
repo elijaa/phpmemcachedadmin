@@ -20,9 +20,9 @@
  * @author elijaa@free.fr
  * @since 19/05/2010
  */
-namespace App\Library\Configuration;
+namespace App\Library;
 
-class Loader
+class App
 {
     /**
      * @var null Singleton
@@ -47,6 +47,7 @@ class Loader
         'hit_rate_alert' => 90,
         'eviction_alert' => 0,
         'temp_dir_path' => '/temp/',
+        'time_zone' => 'UTC',
         'servers' => [
             'Default' => [
                 '127.0.0.1:11211' => [
@@ -98,11 +99,11 @@ class Loader
     }
 
     /**
-     * Get Loader singleton
+     * Get App singleton
      *
-     * @return Loader
+     * @return App
      */
-    public static function singleton(): ?Loader
+    public static function getInstance(): self
     {
         if (! isset(self::$_instance)) {
             self::$_instance = new self();
@@ -132,7 +133,7 @@ class Loader
     public function tempDirPath(): string
     {
         if (!$this->realTempDirPath) {
-            $this->realTempDirPath = realpath(__DIR__ .'/../../..'. $this->config['temp_dir_path']);
+            $this->realTempDirPath = realpath(__DIR__ .'/../..'. $this->config['temp_dir_path']);
         }
 
         return $this->realTempDirPath;
@@ -164,12 +165,12 @@ class Loader
      *
      * @return array
      */
-    public function cluster($cluster)
+    public function cluster(string $cluster): array
     {
         if (isset($this->config['servers'][$cluster])) {
             return $this->config['servers'][$cluster];
         }
-        return array();
+        return [];
     }
 
     /**
@@ -211,7 +212,7 @@ class Loader
     public function configFilePath(): string
     {
         if (!$this->realConfigFilePath) {
-            $this->realConfigFilePath = realpath(__DIR__ .'/../../..'. $this->configFilePath);
+            $this->realConfigFilePath = realpath(__DIR__ .'/../..'. $this->configFilePath);
         }
 
         return $this->realConfigFilePath;
@@ -262,7 +263,9 @@ class Loader
     public function write(): bool
     {
         if ($this->check()) {
-            return is_numeric(file_put_contents($this->configFilePath, '<?php' . PHP_EOL . 'return ' . var_export($this->config, true) . ';'));
+            $php = '<?php' . PHP_EOL . 'return ' . var_export($this->config, true) . ';';
+            $res = file_put_contents($this->configFilePath, $php);
+            return is_numeric($res);
         }
         return false;
     }

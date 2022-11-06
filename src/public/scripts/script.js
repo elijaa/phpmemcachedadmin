@@ -9,22 +9,20 @@ Highcharts.setOptions({
 	}
 });
 
-function changeServer(obj) {
-	if (obj.options[obj.selectedIndex].value !== '') {
-		window.location = '/?server='
-				+ obj.options[obj.selectedIndex].value;
-	} else {
-		window.location = '/';
-	}
+/**
+ * @param {HTMLSelectElement} select
+ */
+function changeServer(select) {
+	location.search = '?server=' + select.options[select.selectedIndex].value;
 }
-function changeCluster(obj) {
-	if (obj.options[obj.selectedIndex].value !== '') {
-		window.location = '/stats?cluster='
-				+ obj.options[obj.selectedIndex].value;
-	} else {
-		window.location = '/stats';
-	}
+
+/**
+ * @param {HTMLSelectElement} select
+ */
+function changeCluster(select) {
+	location.search = '?cluster=' + select.options[select.selectedIndex].value;
 }
+
 function show(target)
 {
 	const objects = document.getElementsByClassName(target);

@@ -48,7 +48,7 @@ switch ($request) {
         $_ini->tempDirPath($_POST['file_path']);
 
         # Writing configuration file
-        $write = Loader::singleton()->write();
+        $write = Loader::getInstance()->write();
         break;
 
     # Commands configuration save
@@ -63,7 +63,7 @@ switch ($request) {
         $_ini->set('flush_all_api', $_POST['flush_all_api']);
 
         # Writing configuration file
-        $write = Loader::singleton()->write();
+        $write = Loader::getInstance()->write();
         break;
 
     # Server configuration save
@@ -88,7 +88,7 @@ switch ($request) {
         $_ini->set('servers', $array);
 
         # Writing configuration file
-        $write = Loader::singleton()->write();
+        $write = Loader::getInstance()->write();
         break;
 
     # Miscellaneous configuration save
@@ -98,7 +98,7 @@ switch ($request) {
         $_ini->set('max_item_dump', $_POST['max_item_dump']);
 
         # Writing configuration file
-        $write = Loader::singleton()->write();
+        $write = Loader::getInstance()->write();
         break;
 
     # Default : No command
@@ -107,10 +107,10 @@ switch ($request) {
 }
 
 # Showing header
-include __DIR__ .'/../../view/header.phtml';
+require __DIR__ .'/../../view/header.php';
 
 # Showing formulary
-include __DIR__ .'/../../view/configure/configure.phtml';
+require __DIR__ .'/../../view/configure/configure.php';
 
 # Showing footer
-include __DIR__ .'/../../view/footer.phtml';
+require __DIR__ .'/../../view/footer.php';

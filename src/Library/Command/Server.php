@@ -22,14 +22,14 @@
  */
 namespace App\Library\Command;
 
-use App\Library\Configuration\Loader;
+use App\Library\App;
 use App\Library\Data\Analysis;
 use App\Library\Data\Errors;
 
 class Server implements CommandInterface
 {
     /**
-     * @var Loader|null
+     * @var App|null
      */
     private static $_ini;
 
@@ -43,11 +43,19 @@ class Server implements CommandInterface
      */
     public function __construct()
     {
-        self::$_ini = Loader::singleton();
+        self::$_ini = App::getInstance();
     }
 
     /**
-     * Executing a Command on a MemCache Server
+     * @return string
+     */
+    public function getLog(): ?string
+    {
+        return static::$_log;
+    }
+
+    /**
+     * Executing a Command on a MemcacheD Server
      * With the help of http://github.com/memcached/memcached/blob/master/doc/protocol.txt
      * Return the response, or false otherwise
      *
@@ -55,14 +63,10 @@ class Server implements CommandInterface
      * @param string $server Server Hostname
      * @param integer $port Server Port
      *
-     * @return string|Boolean
+     * @return string|boolean
      */
-    public function exec($command, $server, $port)
+    public function exec(string $command, string $server, int $port)
     {
-        # Variables
-        $buffer = '';
-        $handle = null;
-
         # Socket Opening
         if (! ($handle = @fsockopen($server, $port, $errno, $errstr, self::$_ini->get('connection_timeout')))) {
             # Adding error to log
@@ -89,10 +93,9 @@ class Server implements CommandInterface
         }
 
         # Reading Results
-        while ((! feof($handle))) {
+        while (! feof($handle)) {
             # Getting line
             $line = fgets($handle);
-
             $buffer .= $line;
 
             # Checking for end of MemCache command
@@ -115,7 +118,7 @@ class Server implements CommandInterface
      *
      * @return boolean
      */
-    private function end($buffer, $command)
+    private function end(string $buffer, string $command): bool
     {
         # incr or decr also return integer
         if ((preg_match('/^(incr|decr)/', $command))) {
@@ -134,23 +137,23 @@ class Server implements CommandInterface
     /**
      * Parse result to make an array
      *
-     * @param boolean $string (optional) Parsing stats ?
+     * @param string $string (optional) Parsing stats ?
      * @param bool $stats
      * @return array
      */
-    public function parse($string, $stats = true)
+    public function parse(string $string, bool $stats = true): array
     {
         # Variable
         $return = array();
 
         # Exploding by \r\n
-        $lines = preg_split('/\r\n/', $string);
+        $lines = explode("\r\n", $string);
 
         # Stats
         if ($stats) {
             # Browsing each line
             foreach ($lines as $line) {
-                $data = preg_split('/ /', $line);
+                $data = explode(' ', $line);
                 if (isset($data[2])) {
                     $return[$data[1]] = $data[2];
                 }
@@ -159,7 +162,7 @@ class Server implements CommandInterface
         else {
             # Browsing each line
             foreach ($lines as $line) {
-                $data = preg_split('/ /', $line);
+                $data = explode(' ', $line);
                 if (isset($data[1])) {
                     $return[$data[1]] = array(substr($data[2], 1), $data[4]);
                 }
@@ -223,6 +226,8 @@ class Server implements CommandInterface
         $slabs['uptime'] = $stats['uptime'];
         unset($stats);
 
+        $slabs['classes'] = [];
+
         # Executing command : slabs stats
         if (($result = $this->exec('stats slabs', $server, $port))) {
             # Parsing result
@@ -234,8 +239,9 @@ class Server implements CommandInterface
 
             # Indexing by slabs
             foreach ($result as $key => $value) {
-                $key = preg_split('/:/', $key);
+                $key = explode(':', $key);
                 $slabs[$key[0]][$key[1]] = $value;
+                $slabs['classes'][$key[0]] = $key[0];
             }
 
             # Executing command : items stats
@@ -245,7 +251,7 @@ class Server implements CommandInterface
 
                 # Indexing by slabs
                 foreach ($result as $key => $value) {
-                    $key = preg_split('/:/', $key);
+                    $key = explode(':', $key);
                     $slabs[$key[1]]['items:' . $key[2]] = $value;
                 }
 
@@ -253,6 +259,39 @@ class Server implements CommandInterface
             }
         }
         return false;
+    }
+
+    /**
+     * @param string $hostname
+     * @param string $port
+     * @return array
+     */
+    public function keys(string $hostname, string $port): array
+    {
+        $slabs = $this->slabs($hostname, $port);
+
+        $res = [];
+        foreach ($slabs['classes'] as $class) {
+            $slabKeys = $this->items($hostname, $port, $class);
+            if ($slabKeys) {
+                foreach ($slabKeys as $slabKey => $meta) {
+                    $res[] = [
+                        'name' => $slabKey,
+                        'size' => $meta[0],
+                        'ttl' => $meta[1]
+                    ];
+                }
+            }
+        }
+
+        usort($res, function(array $a, array $b): int {
+            if ($a['name'] === $b['name']) {
+                return 0;
+            }
+            return strcmp($a['name'], $b['name']) <= 0 ? -1 : 1;
+        });
+
+        return $res;
     }
 
     /**
@@ -288,7 +327,7 @@ class Server implements CommandInterface
      *
      * @return string
      */
-    public function get($server, $port, $key)
+    public function get($server, $port, $key): string
     {
         # Executing command : get
         if (($string = $this->exec('get ' . $key, $server, $port))) {
@@ -415,13 +454,13 @@ class Server implements CommandInterface
      *
      * @return array
      */
-    function search($server, $port, $search, $level = false, $more = false)
+    function search($server, $port, $search, $level = false, $more = false): array
     {
         $slabs = array();
         $items = false;
 
         # Executing command : stats
-        if (($level == 'full') && ($result = $this->exec('stats', $server, $port))) {
+        if ($level === 'full' && ($result = $this->exec('stats', $server, $port))) {
             # Parsing result
             $result = $this->parse($result);
             $infinite = (isset($result['time'], $result['uptime'])) ? ($result['time'] - $result['uptime']) : 0;
@@ -435,7 +474,7 @@ class Server implements CommandInterface
             unset($result['total_malloced']);
             # Indexing by slabs
             foreach ($result as $key => $value) {
-                $key = preg_split('/:/', $key);
+                $key = explode(':', $key);
                 $slabs[$key[0]] = true;
             }
         }
@@ -445,8 +484,13 @@ class Server implements CommandInterface
             # Executing command : stats cachedump
             if (($result = $this->exec('stats cachedump ' . $slab . ' 0', $server, $port))) {
                 # Parsing result
-                preg_match_all('/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[([0-9]*) b; ([0-9]*) s\]\r\n/imU', $result, $matchs, PREG_SET_ORDER);
-                foreach ($matchs as $item) {
+                preg_match_all(
+                    '/^ITEM ((?:.*)' . preg_quote($search, '/') . '(?:.*)) \[([0-9]*) b; ([0-9]*) s\]\r\n/imU',
+                    $result,
+                    $matches,
+                    PREG_SET_ORDER
+                );
+                foreach ($matches as $item) {
                     # Search & Delete
                     if ($more == 'delete') {
                         $items[] = $item[1] . ' : ' . $this->delete($server, $port, $item[1]);
@@ -484,7 +528,8 @@ class Server implements CommandInterface
     function telnet($server, $port, $command)
     {
         # Executing command
-        if (($result = $this->exec($command, $server, $port))) {
+        $result = $this->exec($command, $server, $port);
+        if ($result) {
             return $result;
         }
         return self::$_log;

@@ -130,7 +130,7 @@ switch ($request) {
         file_put_contents($filePath, serialize($actual));
 
         # Showing stats
-        include __DIR__ .'/../../view/liveStats/stats.phtml';
+        require __DIR__ .'/../../view/liveStats/stats.php';
         break;
 
     # Default : No command
@@ -151,13 +151,13 @@ switch ($request) {
         );
 
         # Showing header
-        include __DIR__ .'/../../view/header.phtml';
+        require __DIR__ .'/../../view/header.php';
 
         # Showing live stats frame
-        include __DIR__ .'/../../view/livestats/frame.phtml';
+        require __DIR__ .'/../../view/livestats/frame.php';
 
         # Showing footer
-        include __DIR__ .'/../../view/footer.phtml';
+        require __DIR__ .'/../../view/footer.php';
 
         break;
 }

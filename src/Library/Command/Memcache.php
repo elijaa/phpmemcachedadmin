@@ -22,13 +22,13 @@
  */
 namespace App\Library\Command;
 
-use App\Library\Configuration\Loader;
+use App\Library\App;
 use Exception;
 
 class Memcache implements CommandInterface
 {
     /**
-     * @var Loader|null
+     * @var App|null
      */
     private static $_ini;
 
@@ -43,7 +43,7 @@ class Memcache implements CommandInterface
     public function __construct()
     {
         # Importing configuration
-        self::$_ini = Loader::singleton();
+        self::$_ini = App::getInstance();
 
         # Initializing
         self::$_memcache = new Memcache();

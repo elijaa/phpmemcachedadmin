@@ -245,13 +245,13 @@ switch ($request) {
     # Default : No command
     default :
         # Showing header
-        include __DIR__ .'/../../view/header.phtml';
+        require __DIR__ .'/../../view/header.php';
 
         # Showing formulary
-        include __DIR__ .'/../../view/commands/commands.phtml';
+        require __DIR__ .'/../../view/commands/commands.php';
 
         # Showing footer
-        include __DIR__ .'/../../view/footer.phtml';
+        require __DIR__ .'/../../view/footer.php';
         break;
 }
 

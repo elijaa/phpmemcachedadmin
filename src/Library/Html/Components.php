@@ -22,40 +22,48 @@
  */
 namespace App\Library\Html;
 
-use App\Library\Configuration\Loader;
+use App\Library\App;
 
 class Components
 {
     /**
      * Dump server list in an HTML select
      *
+     * @param $name
+     * @param string|null $selected
+     * @param string|null $class
+     * @param string|null $events
      * @return string
      */
-    public static function serverSelect($name, $selected = '', $class = '', $events = '')
+    public static function serverSelect($name, ?string $selected = '', ?string $class = '', ?string $events = ''): string
     {
         # Loading ini file
-        $_ini = Loader::singleton();
+        $_ini = App::getInstance();
 
         # Select Name
-        $serverList = '<select id="' . $name . '" ';
+        $serverList = '<select id="'. htmlspecialchars($name, ENT_QUOTES) .'" ';
 
         # CSS Class
-        $serverList .= ($class != '') ? 'class="' . $class . '"' : '';
+        if ($class) {
+            $serverList .= 'class="'. $class .'"';
+        }
 
         # Javascript Events
-        $serverList .= ' ' . $events . '>';
+        if ($events) {
+            $serverList .= ' ' . $events . '>';
+        }
 
         foreach ($_ini->get('servers') as $cluster => $servers) {
             # Cluster
-            $serverList .= '<option value="' . $cluster . '" ';
-            $serverList .= ($selected == $cluster) ? 'selected="selected"' : '';
-            $serverList .= '>' . $cluster . ' cluster</option>';
+            $serverList .= '<option value="' . htmlspecialchars($cluster, ENT_QUOTES) . '"';
+            $serverList .= ($selected == $cluster) ? ' selected="selected"' : null;
+            $serverList .= '>' . htmlspecialchars($cluster) . ' cluster</option>';
 
             # Cluster server
-            foreach ($servers as $name => $servers) {
-                $serverList .= '<option value="' . $name . '" ';
-                $serverList .= ($selected == $name) ? 'selected="selected"' : '';
-                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . ((strlen($name) > 38) ? substr($name, 0, 38) . ' [...]' : $name) . '</option>';
+            foreach ($servers as $name => $servers2) {
+                $serverList .= '<option value="' . $name . '"';
+                $serverList .= ($selected === $name) ? ' selected="selected"' : null;
+                $serverList .= '>&nbsp;&nbsp;-&nbsp;' . (mb_strlen($name) > 38 ? mb_substr($name, 0, 38) .' [...]' : $name) .'</option>';
             }
         }
         return $serverList . '</select>';
@@ -64,29 +72,37 @@ class Components
     /**
      * Dump cluster list in an HTML select
      *
+     * @param $name
+     * @param string $selected
+     * @param string $class
+     * @param string $events
      * @return string
      */
-    public static function clusterSelect($name, $selected = '', $class = '', $events = '')
+    public static function clusterSelect($name, string $selected = '', string $class = '', string $events = ''): string
     {
         # Loading ini file
-        $_ini = Loader::singleton();
+        $_ini = App::getInstance();
 
         # Select Name
-        $clusterList = '<select id="' . $name . '" ';
+        $clusterList = '<select id="'. htmlspecialchars($name, ENT_QUOTES) .'" ';
 
         # CSS Class
-        $clusterList .= ($class != '') ? 'class="' . $class . '"' : '';
+        if ($class) {
+            $clusterList .= 'class="'. $class .'"';
+        }
 
         # Javascript Events
-        $clusterList .= ' ' . $events . '>';
+        if ($events) {
+            $clusterList .= ' ' . $events . '>';
+        }
 
         foreach ($_ini->get('servers') as $cluster => $servers) {
             # Option value and selected case
-            $clusterList .= '<option value="' . $cluster . '" ';
-            $clusterList .= ($selected == $cluster) ? 'selected="selected"' : '';
-            $clusterList .= '>' . $cluster . ' cluster</option>';
+            $clusterList .= '<option value="'. htmlspecialchars($cluster, ENT_QUOTES) .'"';
+            $clusterList .= ($selected == $cluster) ? ' selected="selected"' : null;
+            $clusterList .= '>'. htmlspecialchars($cluster) .' cluster</option>';
         }
-        return $clusterList . '</select>';
+        return $clusterList .'</select>';
     }
 
     /**
@@ -94,13 +110,13 @@ class Components
      *
      * @param string $hostname Hostname
      * @param string $port Port
-     * @param mixed $data Data (reponse)
+     * @param mixed $data Data (response)
      *
      * @return string
      */
-    public static function serverResponse($hostname, $port, $data)
+    public static function serverResponse(string $hostname, string $port, $data): string
     {
-        $header = '<span class="red">Server ' . $hostname . ':' . $port . "</span>\r\n";
+        $header = '<span class="red">Server '. $hostname .':'. $port ."</span>\r\n";
         $return = '';
         if (is_array($data)) {
             foreach ($data as $string) {
@@ -115,16 +131,16 @@ class Components
      * Dump api list un HTML select with select name
      *
      * @param string $iniAPI API Name from ini file
-     * @param string $id Select ID
+     * @param string|null $id Select ID
      *
      * @return string
      */
-    public static function apiList($iniAPI = '', $id = null)
+    public static function apiList(string $iniAPI = '', string $id = null): string
     {
-        return '<select id="' . $id . '" name="' . $id . '">
-                <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
-                <option value="Memcache" ' . self::selected('Memcache', $iniAPI) . '>Memcache API</option>
-                <option value="Memcached" ' . self::selected('Memcached', $iniAPI) . '>Memcached API</option>
+        return '<select id="' . htmlspecialchars($id, ENT_QUOTES) . '" name="' . htmlspecialchars($id, ENT_QUOTES) . '">
+                <option value="Server"'. self::selected('Server', $iniAPI) .'>Server API</option>
+                <option value="Memcache"'. self::selected('Memcache', $iniAPI) .'>Memcache API</option>
+                <option value="Memcached"'. self::selected('Memcached', $iniAPI) .'>Memcached API</option>
                 </select>';
     }
 
@@ -134,12 +150,13 @@ class Components
      * @param string $actual Actual value
      * @param string $selected Selected value
      *
-     * @return string
+     * @return string|null
      */
-    private static function selected($actual, $selected)
+    private static function selected(string $actual, string $selected): ?string
     {
-        if ($actual == $selected) {
-            return 'selected="selected"';
+        if ($actual === $selected) {
+            return ' selected="selected"';
         }
+        return null;
     }
 }
