@@ -1,0 +1,8 @@
+version: "3"
+services:
+    phpmemcachedadmin:
+        image: "alphayax/phpmemcachedadmin"
+        volumes:
+            - "./:/var/www/html/"
+        ports:
+            - "80:80"

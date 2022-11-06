@@ -16,16 +16,14 @@ return array_merge(
         'hit_rate_alert' => '90',
         'eviction_alert' => '0',
         'file_path' => 'Temp/',
-        'servers' =>
-            array (
-                'Default' =>
-                    array (
-                        '127.0.0.1:11211' => array (
-                            'hostname' => '127.0.0.1',
-                            'port' => '11211',
-                        ),
-                    ),
-            ),
+        'servers' => [
+            'Default' => [
+                '127.0.0.1:11211' => [
+                    'hostname' => '127.0.0.1',
+                    'port' => '11211',
+                ],
+            ],
+        ],
     ],
-    require('../.config.php')
+    require('./.config.php')
 );
