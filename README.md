@@ -6,7 +6,7 @@ Forked the original implementation from https://github.com/elijaa/phpmemcachedad
 
 ## Configuration
 
-1Create the file `/.config.php` and put your configuration there:
+1. Create the file `/.config.php` and put your configuration there:
    1. For a locally installed MemcacheD server:
 
     ```php
@@ -83,12 +83,3 @@ Another part can execute commands to any memcached server : get, set, delete, fl
 ## Security ##
 
 phpMemcachedAdmin does not provide any security system, you need to add this feature by yourself.
-
-## Installation ##
-
-Download latest release
-Unzip/Untar & Give files permissions
-
-You have to give **Read & Execute right to all files**, and **Read, Write & Execute to configuration files and temporary directory**.
-
-More information in https://blog.elijaa.org/phpmemcachedadmin-installation-guide/
