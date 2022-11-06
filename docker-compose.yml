@@ -3,6 +3,7 @@ services:
     phpmemcachedadmin:
         image: "alphayax/phpmemcachedadmin"
         volumes:
-            - "./:/var/www/html/"
+            - "./:/var/www/"
+            - "./src:/var/www/html"
         ports:
             - "80:80"

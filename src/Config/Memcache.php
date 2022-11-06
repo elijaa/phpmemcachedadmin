@@ -1,5 +1,4 @@
 <?php
-
 return array_merge(
     [
         'stats_api' => 'Server',
@@ -25,5 +24,5 @@ return array_merge(
             ],
         ],
     ],
-    require('./.config.php')
+    require('../.config.php')
 );
