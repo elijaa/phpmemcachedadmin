@@ -1,8 +1,55 @@
 # PHPMemcachedAdmin #
 
-### Graphic stand-alone administration for memcached to monitor and debug purpose ###
+## Fork
 
-This program allows to see in **real-time** (top-like) or from the start of the server, **stats for get, set, delete, increment, decrement, evictions, reclaimed, cas command**, as well as **server stats** (network, items, server version) with googlecharts and  **server internal configuration**
+Forked the original implementation from https://github.com/elijaa/phpmemcachedadmin to provide additional features, like key search and listing.
+
+## Configuration
+
+1Create the file `/.config.php` and put your configuration there:
+   1. For a locally installed MemcacheD server:
+
+    ```php
+    <?php
+    return [
+        'servers' =>[
+            'Default' => [
+                'localhost-server' => [
+                    'hostname' => '127.0.0.1',
+                    'port' => '11211',
+                ],
+            ],
+        ],
+    ];
+    ```
+
+   2. For a MemcacheD server installed as Docker service in another project:
+
+    ```php
+    <?php
+    return [
+        'servers' =>[
+            'Default' => [
+                'docker-server' => [
+                    'hostname' => 'host.docker.internal',
+                    'port' => '11211',
+                ],
+            ],
+        ],
+    ];
+    ```
+
+2. In your console, navigate to the root of the project...
+   1. ...and execute `composer install`
+   2. ...and execute `docker-compose up`
+
+### If you need to modify the `docker-compose.yml` configuration
+
+Do not edit the original file, but rather create `/docker-compose.override.yml` and put your configuration there. That is the official Docker way.
+
+### Graphic stand-alone administration for MemcacheD to monitor and debug purpose ###
+
+This program allows to see in **real-time** (top-like) or from the start of the server, **stats for get, set, delete, increment, decrement, evictions, reclaimed, cas command**, as well as **server stats** (network, items, server version) with Google Charts and  **server internal configuration**
 
 You can go further to **see each server slabs, occupation, memory wasted and items** (**key & value**).
 
@@ -27,7 +74,6 @@ Another part can execute commands to any memcached server : get, set, delete, fl
 
 <h4>Live Stats</h4>
 <ul><li>Top-like real time stats with configurable alerts</li></ul>
-
 
 <h4>Configuration</h4>
 <ul><li>Edit configuration directly from web page<br>

@@ -1,2 +1,6 @@
+/.idea/
 /vendor/
-/Config/Memcache.php
+/.config.php
+/docker-compose.override.yml
+/temp/*
+/html/
