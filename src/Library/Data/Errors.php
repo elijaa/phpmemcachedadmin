@@ -24,15 +24,18 @@ namespace App\Library\Data;
 
 class Errors
 {
+    /**
+     * @var array
+     */
     private static $_errors = array();
 
     /**
      * Add an error to the container
      * Return true if successful, false otherwise
      *
-     * @param String $error Error message
+     * @param string $error Error message
      *
-     * @return Boolean
+     * @return int
      */
     public static function add($error)
     {
@@ -42,7 +45,7 @@ class Errors
     /**
      * Return last Error message
      *
-     * @return Mixed
+     * @return mixed
      */
     public static function last()
     {
@@ -52,7 +55,7 @@ class Errors
     /**
      * Return errors count
      *
-     * @return Integer
+     * @return integer
      */
     public static function count()
     {

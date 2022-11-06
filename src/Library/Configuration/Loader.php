@@ -24,14 +24,21 @@ namespace App\Library\Configuration;
 
 class Loader
 {
-    # Singleton
+    /**
+     * @var null Singleton
+     */
     protected static $_instance = null;
 
-    # Configuration file
+    /**
+     * @var string Configuration file
+     */
     protected static $_iniPath = './Config/Memcache.php';
 
-    # Configuration needed keys and default values
-    protected static $_iniKeys = array('stats_api' => 'Server',
+    /**
+     * @var array Configuration needed keys and default values
+     */
+    protected static $_iniKeys = [
+        'stats_api' => 'Server',
         'slabs_api' => 'Server',
         'items_api' => 'Server',
         'get_api' => 'Server',
@@ -45,9 +52,19 @@ class Loader
         'hit_rate_alert' => 90,
         'eviction_alert' => 0,
         'file_path' => 'Temp/',
-        'servers' => array('Default' => array('127.0.0.1:11211' => array('hostname' => '127.0.0.1', 'port' => 11211))));
+        'servers' => [
+            'Default' => [
+                '127.0.0.1:11211' => [
+                    'hostname' => '127.0.0.1',
+                    'port' => 11211
+                ]
+            ]
+        ]
+    ];
 
-    # Storage
+    /**
+     * @var array|mixed Storage
+     */
     protected static $_ini = array();
 
     /**
@@ -84,9 +101,9 @@ class Loader
      * Config key to retrieve
      * Return the value, or false if does not exists
      *
-     * @param String $key Key to get
+     * @param string $key Key to get
      *
-     * @return Mixed
+     * @return mixed
      */
     public function get($key)
     {
@@ -100,9 +117,9 @@ class Loader
      * Servers to retrieve from cluster
      * Return the value, or false if does not exists
      *
-     * @param String $cluster Cluster to retreive
+     * @param string $cluster Cluster to retreive
      *
-     * @return Array
+     * @return array
      */
     public function cluster($cluster)
     {
@@ -116,9 +133,9 @@ class Loader
      * Check and return server data
      * Return the value, or false if does not exists
      *
-     * @param String $server Server to retreive
+     * @param string $server Server to retreive
      *
-     * @return Array
+     * @return array
      */
     public function server($server)
     {
@@ -133,10 +150,10 @@ class Loader
     /**
      * Config key to set
      *
-     * @param String $key Key to set
-     * @param Mixed $value Value to set
+     * @param string $key Key to set
+     * @param mixed $value Value to set
      *
-     * @return Boolean
+     * @return boolean
      */
     public function set($key, $value)
     {
@@ -146,7 +163,7 @@ class Loader
     /**
      * Return actual ini file path
      *
-     * @return String
+     * @return string
      */
     public function path()
     {
@@ -157,7 +174,7 @@ class Loader
      * Check if every ini keys are set
      * Return true if ini is correct, false otherwise
      *
-     * @return Boolean
+     * @return boolean
      */
     public function check()
     {
@@ -175,7 +192,7 @@ class Loader
      * Write ini file
      * Return true if written, false otherwise
      *
-     * @return Boolean
+     * @return boolean
      */
     public function write()
     {

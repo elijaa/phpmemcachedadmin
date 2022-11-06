@@ -27,15 +27,18 @@ use Exception;
 
 class Memcache implements CommandInterface
 {
+    /**
+     * @var Loader|null
+     */
     private static $_ini;
+
+    /**
+     * @var Memcache
+     */
     private static $_memcache;
 
     /**
      * Constructor
-     *
-     * @param Array $ini Array from ini_parse
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -50,10 +53,10 @@ class Memcache implements CommandInterface
      * Send stats command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return array|boolean
      */
     public function stats($server, $port)
     {
@@ -73,10 +76,10 @@ class Memcache implements CommandInterface
      * Send stats settings command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return boolean
      */
     public function settings($server, $port)
     {
@@ -87,10 +90,10 @@ class Memcache implements CommandInterface
      * Send stats items command to server to retrieve slabs stats
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return array|boolean
      */
     public function slabs($server, $port)
     {
@@ -125,11 +128,11 @@ class Memcache implements CommandInterface
      * Send stats cachedump command to server to retrieve slabs items
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Interger $slab Slab ID
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param integer $slab Slab ID
      *
-     * @return Array|Boolean
+     * @return array|boolean
      */
     public function items($server, $port, $slab)
     {
@@ -150,11 +153,11 @@ class Memcache implements CommandInterface
      * Send get command to server to retrieve an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to retrieve
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to retrieve
      *
-     * @return String
+     * @return string
      */
     public function get($server, $port, $key)
     {
@@ -172,13 +175,13 @@ class Memcache implements CommandInterface
      * Set an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to store
-     * @param Mixed $data Data to store
-     * @param Integer $duration Duration
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to store
+     * @param mixed $data Data to store
+     * @param integer $duration Duration
      *
-     * @return String
+     * @return string
      */
     function set($server, $port, $key, $data, $duration)
     {
@@ -196,11 +199,11 @@ class Memcache implements CommandInterface
      * Delete an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to delete
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to delete
      *
-     * @return String
+     * @return string
      */
     public function delete($server, $port, $key)
     {
@@ -218,12 +221,12 @@ class Memcache implements CommandInterface
      * Increment the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to increment
-     * @param Integer $value Value to increment
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to increment
+     * @param integer $value Value to increment
      *
-     * @return String
+     * @return string
      */
     function increment($server, $port, $key, $value)
     {
@@ -241,12 +244,12 @@ class Memcache implements CommandInterface
      * Decrement the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to decrement
-     * @param Integer $value Value to decrement
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to decrement
+     * @param integer $value Value to decrement
      *
-     * @return String
+     * @return string
      */
     function decrement($server, $port, $key, $value)
     {
@@ -265,11 +268,11 @@ class Memcache implements CommandInterface
      * Warning, delay won't work with Memcache API
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Integer $delay Delay before flushing server
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param integer $delay Delay before flushing server
      *
-     * @return String
+     * @return string
      */
     function flush_all($server, $port, $delay)
     {
@@ -285,8 +288,8 @@ class Memcache implements CommandInterface
      * Search for item
      * Return all the items matching parameters if successful, false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      * @param $search
      * @param bool $level
      * @param bool $more
@@ -302,11 +305,11 @@ class Memcache implements CommandInterface
      * Execute a telnet command on a server
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $command Command to execute
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $command Command to execute
      *
-     * @return String
+     * @return string
      * @throws Exception
      */
     function telnet($server, $port, $command)

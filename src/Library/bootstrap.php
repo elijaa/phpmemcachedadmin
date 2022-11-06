@@ -1,5 +1,4 @@
 <?php
-
 use App\Library\Configuration\Loader;
 
 # Headers

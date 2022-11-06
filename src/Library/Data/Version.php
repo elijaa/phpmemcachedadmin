@@ -26,13 +26,19 @@ use App\Library\Configuration\Loader;
 
 class Version
 {
-    # Version file
+    /**
+     * @var string Version file
+     */
     protected static $_file = 'latest';
 
-    # Google Code latest version data file
+    /**
+     * @var string Google Code latest version data file
+     */
     protected static $_latest = 'https://blog.elijaa.org/public/latest';
 
-    # Time between HTTP check
+    /**
+     * @var int Time between HTTP check
+     */
     protected static $_time = 1296000; # 15 days
 
 
@@ -40,7 +46,7 @@ class Version
      * Check for the latest version, from local cache or via http
      * Return true if a newer version is available, false otherwise
      *
-     * @return Boolean
+     * @return boolean
      */
     public static function check()
     {
@@ -71,5 +77,7 @@ class Version
                 }
             }
         }
+
+        return false;
     }
 }

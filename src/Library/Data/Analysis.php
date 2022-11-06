@@ -24,6 +24,9 @@ namespace App\Library\Data;
 
 class Analysis
 {
+    /**
+     * @var string[]
+     */
     private static $_non_additive = array(
         'libevent',
         'pid',
@@ -36,10 +39,10 @@ class Analysis
     /**
      * Merge two arrays of stats from Command_XX::stats()
      *
-     * @param Array $array Statistic from Command_XX::stats()
-     * @param Array $stats Statistic from Command_XX::stats()
+     * @param array $array Statistic from Command_XX::stats()
+     * @param array $stats Statistic from Command_XX::stats()
      *
-     * @return Array
+     * @return array
      */
     public static function merge($array, $stats)
     {
@@ -64,10 +67,10 @@ class Analysis
     /**
      * Diff two arrays of stats from Command_XX::stats()
      *
-     * @param Array $array Statistic from Command_XX::stats()
-     * @param Array $stats Statistic from Command_XX::stats()
+     * @param array $array Statistic from Command_XX::stats()
+     * @param array $stats Statistic from Command_XX::stats()
      *
-     * @return Array
+     * @return array
      */
     public static function diff($array, $stats)
     {
@@ -91,9 +94,9 @@ class Analysis
     /**
      * Analyse and return memcache stats command
      *
-     * @param Array $stats Statistic from Command_XX::stats()
+     * @param array $stats Statistic from Command_XX::stats()
      *
-     * @return Array
+     * @return array|bool
      */
     public static function stats($stats)
     {
@@ -202,9 +205,9 @@ class Analysis
     /**
      * Analyse and return memcache slabs command
      *
-     * @param Array $slabs Statistic from Command_XX::slabs()
+     * @param array $slabs Statistic from Command_XX::slabs()
      *
-     * @return Array
+     * @return array
      */
     public static function slabs($slabs)
     {
@@ -242,10 +245,10 @@ class Analysis
     /**
      * Calculate Uptime
      *
-     * @param Integer $uptime Uptime timestamp
-     * @param Boolean $compact Compact Mode
+     * @param integer $uptime Uptime timestamp
+     * @param boolean $compact Compact Mode
      *
-     * @return String
+     * @return string
      */
     public static function uptime($uptime, $compact = false)
     {
@@ -268,9 +271,9 @@ class Analysis
     /**
      * Resize a byte value
      *
-     * @param Integer $value Value to resize
+     * @param integer $value Value to resize
      *
-     * @return String
+     * @return string
      */
     public static function byteResize($value)
     {
@@ -290,9 +293,9 @@ class Analysis
     /**
      * Resize a value
      *
-     * @param Integer $value Value to resize
+     * @param integer $value Value to resize
      *
-     * @return String
+     * @return string
      */
     public static function valueResize($value)
     {
@@ -312,9 +315,9 @@ class Analysis
     /**
      * Resize a hit value
      *
-     * @param Integer $value Hit value to resize
+     * @param integer $value Hit value to resize
      *
-     * @return String
+     * @return string
      */
     public static function hitResize($value)
     {

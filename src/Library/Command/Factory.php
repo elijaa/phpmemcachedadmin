@@ -26,20 +26,29 @@ use App\Library\Configuration\Loader;
 
 class Factory
 {
+    /**
+     * @var array
+     */
     private static $_object = array();
 
-    # No explicit call of constructor
+    /**
+     * No explicit call of constructor
+     */
     private function __construct()
     {}
 
-    # No explicit call of clone()
+    /**
+     * No explicit call of clone()
+     *
+     * @return void
+     */
     private function __clone()
     {}
 
     /**
      * Accessor to command class instance by command type
      *
-     * @param String $command Type of command
+     * @param string $command Type of command
      *
      * @return void
      */
@@ -78,8 +87,7 @@ class Factory
     /**
      * Accessor to command class instance by type
      *
-     * @param String $command Type of command
-     *
+     * @param $api
      * @return void
      */
     public static function api($api)

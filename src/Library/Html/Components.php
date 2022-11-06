@@ -26,11 +26,10 @@ use App\Library\Configuration\Loader;
 
 class Components
 {
-
     /**
      * Dump server list in an HTML select
      *
-     * @return String
+     * @return string
      */
     public static function serverSelect($name, $selected = '', $class = '', $events = '')
     {
@@ -65,7 +64,7 @@ class Components
     /**
      * Dump cluster list in an HTML select
      *
-     * @return String
+     * @return string
      */
     public static function clusterSelect($name, $selected = '', $class = '', $events = '')
     {
@@ -93,11 +92,11 @@ class Components
     /**
      * Dump server response in proper formatting
      *
-     * @param String $hostname Hostname
-     * @param String $port Port
-     * @param Mixed $data Data (reponse)
+     * @param string $hostname Hostname
+     * @param string $port Port
+     * @param mixed $data Data (reponse)
      *
-     * @return String
+     * @return string
      */
     public static function serverResponse($hostname, $port, $data)
     {
@@ -115,12 +114,12 @@ class Components
     /**
      * Dump api list un HTML select with select name
      *
-     * @param String $iniAPI API Name from ini file
-     * @param String $id Select ID
+     * @param string $iniAPI API Name from ini file
+     * @param string $id Select ID
      *
-     * @return String
+     * @return string
      */
-    public static function apiList($iniAPI = '', $id)
+    public static function apiList($iniAPI = '', $id = null)
     {
         return '<select id="' . $id . '" name="' . $id . '">
                 <option value="Server" ' . self::selected('Server', $iniAPI) . '>Server API</option>
@@ -132,10 +131,10 @@ class Components
     /**
      * Used to see if an option is selected
      *
-     * @param String $actual Actual value
-     * @param String $selected Selected value
+     * @param string $actual Actual value
+     * @param string $selected Selected value
      *
-     * @return String
+     * @return string
      */
     private static function selected($actual, $selected)
     {

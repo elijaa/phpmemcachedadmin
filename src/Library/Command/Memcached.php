@@ -26,21 +26,16 @@ use Exception;
 
 class Memcached implements CommandInterface
 {
-    private static $_ini;
+    /**
+     * @var Memcached
+     */
     private static $_memcache;
 
     /**
      * Constructor
-     *
-     * @param Array $ini Array from ini_parse
-     *
-     * @return void
      */
     public function __construct()
     {
-        # Importing configuration
-        self::$_ini = Loader::singleton();
-
         # Initializing
         self::$_memcache = new Memcached();
     }
@@ -49,10 +44,10 @@ class Memcached implements CommandInterface
      * Send stats command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return array|boolean
      */
     public function stats($server, $port)
     {
@@ -84,10 +79,10 @@ class Memcached implements CommandInterface
      * Send stats settings command to server
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return boolean
      */
     public function settings($server, $port)
     {
@@ -98,10 +93,11 @@ class Memcached implements CommandInterface
      * Send stats items command to server to retrieve slabs stats
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
      *
-     * @return Array|Boolean
+     * @return array|boolean
+     * @throws Exception
      */
     public function slabs($server, $port)
     {
@@ -112,11 +108,12 @@ class Memcached implements CommandInterface
      * Send stats cachedump command to server to retrieve slabs items
      * Return the result if successful or false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Interger $slab Slab ID
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param integer $slab Slab ID
      *
-     * @return Array|Boolean
+     * @return array|boolean
+     * @throws Exception
      */
     public function items($server, $port, $slab)
     {
@@ -127,11 +124,11 @@ class Memcached implements CommandInterface
      * Send get command to server to retrieve an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to retrieve
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to retrieve
      *
-     * @return String
+     * @return string
      */
     public function get($server, $port, $key)
     {
@@ -149,13 +146,13 @@ class Memcached implements CommandInterface
      * Set an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to store
-     * @param Mixed $data Data to store
-     * @param Integer $duration Duration
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to store
+     * @param mixed $data Data to store
+     * @param integer $duration Duration
      *
-     * @return String
+     * @return string
      */
     function set($server, $port, $key, $data, $duration)
     {
@@ -176,11 +173,11 @@ class Memcached implements CommandInterface
      * Delete an item
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to delete
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to delete
      *
-     * @return String
+     * @return string
      */
     public function delete($server, $port, $key)
     {
@@ -196,12 +193,12 @@ class Memcached implements CommandInterface
      * Increment the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to increment
-     * @param Integer $value Value to increment
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to increment
+     * @param integer $value Value to increment
      *
-     * @return String
+     * @return string
      */
     function increment($server, $port, $key, $value)
     {
@@ -219,12 +216,12 @@ class Memcached implements CommandInterface
      * Decrement the key by value
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to decrement
-     * @param Integer $value Value to decrement
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $key Key to decrement
+     * @param integer $value Value to decrement
      *
-     * @return String
+     * @return string
      */
     function decrement($server, $port, $key, $value)
     {
@@ -242,11 +239,11 @@ class Memcached implements CommandInterface
      * Flush all items on a server
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param Integer $delay Delay before flushing server
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param integer $delay Delay before flushing server
      *
-     * @return String
+     * @return string
      */
     public function flush_all($server, $port, $delay)
     {
@@ -262,11 +259,13 @@ class Memcached implements CommandInterface
      * Search for item
      * Return all the items matching parameters if successful, false otherwise
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $key Key to search
-     *
-     * @return Array
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param $search
+     * @param bool $level
+     * @param bool $more
+     * @return array
+     * @throws Exception
      */
     function search($server, $port, $search, $level = false, $more = false)
     {
@@ -277,11 +276,12 @@ class Memcached implements CommandInterface
      * Execute a telnet command on a server
      * Return the result
      *
-     * @param String $server Hostname
-     * @param Integer $port Hostname Port
-     * @param String $command Command to execute
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     * @param string $command Command to execute
      *
-     * @return String
+     * @return string
+     * @throws Exception
      */
     function telnet($server, $port, $command)
     {
