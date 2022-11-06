@@ -1,5 +1,9 @@
 # PHPMemcachedAdmin #
 
+# Fork
+
+Forked the original implementation from https://github.com/elijaa/phpmemcachedadmin to provide additional features, like key search and listing.
+
 ### Graphic stand-alone administration for memcached to monitor and debug purpose ###
 
 This program allows to see in **real-time** (top-like) or from the start of the server, **stats for get, set, delete, increment, decrement, evictions, reclaimed, cas command**, as well as **server stats** (network, items, server version) with googlecharts and  **server internal configuration**
