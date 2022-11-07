@@ -16,7 +16,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
     <div style="font-weight:bold;font-size:1.2em;"><a href="/" style="color: #000;">PHPMemcachedAdmin</a> <sup><?php echo CURRENT_VERSION; ?></sup></div>
 
     <div class="header corner full-size padding" style="margin-top:5px;">
-        <a href="/">See Stats</a> | <a href="/stats">See Live Stats</a> | <a href="/commands">Execute Commands</a> | <a href="/configure">Edit Configuration</a> | <a href="/show">Show data</a>
+        <a href="/">See Stats</a> | <a href="/stats">See Live Stats</a> | <a href="/commands">Execute Commands</a> | <a href="/configure">Edit Configuration</a> | <a href="/data">data</a>
     </div>
 
     <?php if (!App::getInstance()->isTempDirExists()) { ?>
