@@ -7,7 +7,7 @@
         </tr>
         <?php foreach ($keys as $key) : ?>
             <tr>
-                <td><?= htmlspecialchars($key['name']) ?></td>
+                <td><a href="/key?name=<?= htmlspecialchars($key['name'], ENT_QUOTES) ?>&server=<?= htmlspecialchars($requestServer, ENT_QUOTES) ?>"><?= htmlspecialchars($key['name']) ?></a></td>
                 <td align="right"><?= $key['size'] ?></td>
                 <td>
                     <?php if ($key['ttl']) : ?>

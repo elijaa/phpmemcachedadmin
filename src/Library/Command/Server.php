@@ -229,7 +229,51 @@ class Server implements CommandInterface
         $slabs['classes'] = [];
 
         # Executing command : slabs stats
-        if (($result = $this->exec('stats slabs', $server, $port))) {
+        $result = $this->exec('stats slabs', $server, $port);
+        if ($result) {
+            # Parsing result
+            $result = $this->parse($result);
+            $slabs['active_slabs'] = $result['active_slabs'];
+            $slabs['total_malloced'] = $result['total_malloced'];
+            unset($result['active_slabs']);
+            unset($result['total_malloced']);
+
+            # Indexing by slabs
+            foreach ($result as $key => $value) {
+                $key = explode(':', $key);
+                $slabs[$key[0]][$key[1]] = $value;
+                $slabs['classes'][$key[0]] = $key[0];
+            }
+
+            return $slabs;
+        }
+        return false;
+    }
+
+    /**
+     * Send stats items command to server to retrieve slabs stats
+     * Return the result if successful or false otherwise
+     *
+     * @param string $server Hostname
+     * @param integer $port Hostname Port
+     *
+     * @return array|boolean
+     */
+    public function slabsWithItems(string $server, int $port)
+    {
+        # Initializing
+        $slabs = array();
+
+        # Finding uptime
+        $stats = $this->stats($server, $port);
+        $slabs['uptime'] = $stats['uptime'];
+        unset($stats);
+
+        $slabs['classes'] = [];
+
+        # Executing command : slabs stats
+        $result = $this->exec('stats slabs', $server, $port);
+        if ($result) {
             # Parsing result
             $result = $this->parse($result);
             $slabs['active_slabs'] = $result['active_slabs'];
@@ -245,7 +289,8 @@ class Server implements CommandInterface
             }
 
             # Executing command : items stats
-            if (($result = $this->exec('stats items', $server, $port))) {
+            $result = $this->exec('stats items', $server, $port);
+            if ($result) {
                 # Parsing result
                 $result = $this->parse($result);
 
@@ -268,28 +313,30 @@ class Server implements CommandInterface
      */
     public function keys(string $hostname, string $port): array
     {
-        $slabs = $this->slabs($hostname, $port);
-
         $res = [];
-        foreach ($slabs['classes'] as $class) {
-            $slabKeys = $this->items($hostname, $port, $class);
-            if ($slabKeys) {
-                foreach ($slabKeys as $slabKey => $meta) {
-                    $res[] = [
-                        'name' => $slabKey,
-                        'size' => $meta[0],
-                        'ttl' => $meta[1]
-                    ];
+
+        $slabs = $this->slabs($hostname, $port);
+        if ($slabs) {
+            foreach ($slabs['classes'] as $class) {
+                $slabKeys = $this->items($hostname, $port, $class);
+                if ($slabKeys) {
+                    foreach ($slabKeys as $slabKey => $meta) {
+                        $res[] = [
+                            'name' => $slabKey,
+                            'size' => $meta[0],
+                            'ttl' => $meta[1]
+                        ];
+                    }
                 }
             }
-        }
 
-        usort($res, function(array $a, array $b): int {
-            if ($a['name'] === $b['name']) {
-                return 0;
-            }
-            return strcmp($a['name'], $b['name']) <= 0 ? -1 : 1;
-        });
+            usort($res, function (array $a, array $b): int {
+                if ($a['name'] === $b['name']) {
+                    return 0;
+                }
+                return strcmp($a['name'], $b['name']) <= 0 ? -1 : 1;
+            });
+        }
 
         return $res;
     }
@@ -325,19 +372,20 @@ class Server implements CommandInterface
      * @param integer $port Hostname Port
      * @param string $key Key to retrieve
      *
-     * @return string
+     * @return string|null
      */
-    public function get($server, $port, $key): string
+    public function get($server, $port, $key): ?string
     {
         # Executing command : get
-        if (($string = $this->exec('get ' . $key, $server, $port))) {
-            $string = preg_replace('/^VALUE ' . preg_quote($key, '/') . '[0-9 ]*\r\n/', '', $string);
-            if (ord($string[0]) == 0x78 && in_array(ord($string[1]), array(0x01, 0x5e, 0x9c, 0xda))) {
+        $string = $this->exec("get $key", $server, $port);
+        if ($string) {
+            $string = preg_replace('/^VALUE '. preg_quote($key, '/') .'[0-9 ]*\r\n/', null, $string);
+            if (ord($string[0]) === 0x78 && in_array(ord($string[1]), [0x01, 0x5e, 0x9c, 0xda])) {
                 return gzuncompress($string);
             }
-            return $string;
+            return preg_replace("/\r\nEND$/", null, rtrim($string));
         }
-        return self::$_log;
+        return null;
     }
 
     /**
@@ -355,7 +403,7 @@ class Server implements CommandInterface
     function set($server, $port, $key, $data, $duration)
     {
         # Formatting data
-        $data = preg_replace('/\r/', '', $data);
+        $data = preg_replace('/\r/', null, $data);
 
         # Executing command : set
         if (($result = $this->exec('set ' . $key . ' 0 ' . $duration . ' ' . strlen($data) . "\r\n" . $data, $server, $port))) {

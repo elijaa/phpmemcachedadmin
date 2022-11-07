@@ -5,14 +5,13 @@ body {
 	margin-top: 10px;
 }
 
-a {
+.header a {
 	color: #EEE;
 	text-decoration: none;
 	cursor: pointer;
 }
-
-a:hover {
-	color: #A00
+.header a:hover {
+	color: #33c;
 }
 
 input,select,textarea {
@@ -66,6 +65,10 @@ hr {
     border-color: #a0312a;
 	color: #eee;
 	width: 198px;
+}
+
+.breadcrumbs {
+	margin: 10px 0;
 }
 
 .item {

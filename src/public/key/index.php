@@ -28,21 +28,21 @@ use App\Library\Command\Server;
 
 require_once __DIR__ .'/../../bootstrap.php';
 
+$key = $_GET['name'] ? trim($_GET['name']) : null;
 $requestServer = $_GET['server'] ?? null;
-if ($requestServer) {
+if ($key && $requestServer) {
     $app = App::getInstance();
     $serverConfig = $app->server($requestServer);
 
     if ($serverConfig) {
         /** @var Server $memcachedServer */
         $memcachedServer = Factory::api('Server');
-        $keys = $memcachedServer->keys($serverConfig['hostname'], $serverConfig['port']);
+        $data = $memcachedServer->get($serverConfig['hostname'], $serverConfig['port'], $key);
     }
 }
 
 require __DIR__ .'/../../view/header.php';
-require __DIR__ .'/../../view/server_select.php';
-if (isset($keys)) {
-    require __DIR__ . '/../../view/show/data.php';
+if (isset($data)) {
+    require __DIR__ . '/../../view/data/key.php';
 }
 require __DIR__ .'/../../view/footer.php';
