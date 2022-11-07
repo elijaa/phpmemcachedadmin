@@ -1,5 +1,5 @@
 <div class="breadcrumbs">
-    <a href="/">Home</a> > <a href="/show/?server=<?= htmlspecialchars($requestServer, ENT_QUOTES) ?>">Data</a> > <?= htmlspecialchars($key) ?>
+    <a href="/">Home</a> > <a href="/data/?server=<?= htmlspecialchars($requestServer, ENT_QUOTES) ?>">Data</a> > <?= htmlspecialchars($key) ?>
 </div>
 
 <?php if (isset($data)) : ?>

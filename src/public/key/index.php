@@ -43,6 +43,6 @@ if ($key && $requestServer) {
 
 require __DIR__ .'/../../view/header.php';
 if (isset($data)) {
-    require __DIR__ . '/../../view/key/view.php';
+    require __DIR__ . '/../../view/data/key.php';
 }
 require __DIR__ .'/../../view/footer.php';
