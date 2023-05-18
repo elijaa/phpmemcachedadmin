@@ -250,8 +250,8 @@ class Library_Data_Analysis
     {
         if ($uptime > 0) {
             $days = floor($uptime / 60 / 60 / 24);
-            $hours = $uptime / 60 / 60 % 24;
-            $mins = $uptime / 60 % 60;
+            $hours = floor($uptime / 60 / 60) % 24;
+            $mins = floor($uptime / 60) % 60;
             if (($days + $hours + $mins) == 0) {
                 return ' less than 1 min';
             }
